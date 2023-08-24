@@ -1,20 +1,21 @@
-package com.kopo.hanaglobal.hana_global.web.vo;
+package com.kopo.hanaglobal.hana_global.web.entity;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
-import java.util.Date;
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class MemberDTO {
-    private int user_seq;
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Member {
+    private int userSeq;
     private String email;
     private String passwd;
     private String name;
     private String registNo;
-    private Date signupDate;
+    private String signupDate;
+    private String passportNo;
     private String visaNo;
     private String countrySP;
     private String nationality;
@@ -22,5 +23,7 @@ public class MemberDTO {
     private String gender;
     private String contact;
     private String address;
+    private String address2;
+    private String status;
 
 }

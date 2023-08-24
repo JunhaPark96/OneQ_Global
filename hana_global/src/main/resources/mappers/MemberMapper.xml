@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kopo.hanaglobal.hana_global.web.dto.mapper.MemberMapper">
-    <select id="getCnt2" resultType="Integer">
-        select count(*) from member
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--<mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.MemberRepository">
+&lt;!&ndash;<resultMap type="com.kopo.hanaglobal.hana_global.web.entity.Member" id="memberMap">
+    <result column="user_seq" property="userSeq" />
+    <result column="email" property="email" />
+    <result column="passwd" property="passwd" />
+    <result column="name" property="name" />
+    <result column="regist_no" property="registNo" />
+    <result column="signup_date" property="signupDate" />
+    <result column="passport_no" property="passportNo" />
+    <result column="visa_no" property="visaNo" />
+    <result column="country_sp" property="countrySP" />
+    <result column="nationality" property="nationality" />
+    <result column="birth_date" property="birthDate" />
+    <result column="gender" property="gender" />
+    <result column="contact" property="contact" />
+    <result column="address" property="address" />
+    <result column="address2" property="address2" />
+    <result column="status" property="status" />
+</resultMap>&ndash;&gt;
+
+    <select id="selectMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+        select * from member
     </select>
+
+
+</mapper>-->
+
+<mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.MemberRepository">
+<select id="getMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+    SELECT * FROM member  <!-- 여기에 실제 테이블 이름을 써주세요 -->
+</select>
 </mapper>

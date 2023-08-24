@@ -8,6 +8,6 @@
 </head>
 <body>
 전체 게시판<br>
-${boardList}
+${memberList}
 </body>
 </html>

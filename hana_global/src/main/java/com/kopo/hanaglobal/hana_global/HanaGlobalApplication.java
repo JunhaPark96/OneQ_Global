@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@MapperScan(value = {"com.kopo.hanaglobal.hana_global.web.repository"})
+@MapperScan("com.kopo.hanaglobal.hana_global.web.repository")
 @SpringBootApplication
 public class HanaGlobalApplication extends SpringBootServletInitializer{
 

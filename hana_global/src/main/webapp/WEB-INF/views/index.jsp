@@ -1,4 +1,4 @@
-<%@ page import="com.kopo.hanaglobal.hana_global.web.vo.MemberDTO" %>
+<%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@
 </head>
 <body>
 <%
-    MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+    Member loginUser = (Member) session.getAttribute("loginUser");
     String redirectURL = (loginUser == null) ? "/signUp" : "";
 %>
 
@@ -104,7 +104,7 @@
         </div>
     </div>
     <footer>
-        게시판 링크: <a href="${pageContext.request.contextPath}/board"> 게시판 </a>
+        게시판 링크: <a href="${pageContext.request.contextPath}/boardlist"> 게시판 </a>
     </footer>
 </div>
 

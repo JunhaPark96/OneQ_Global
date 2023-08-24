@@ -1,0 +1,125 @@
+/*전체 폼 시작*/
+.iptWrap .ipt {
+    width: 55%;
+    padding: 10px;
+    font-size: 1.1rem;
+    border: 1px solid gray;
+    border-width: 1px;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+.account-password-section .iptWrap .ipt {
+    width: 10%;  /* 원하는 너비로 설정하세요. */
+}
+
+.txt{
+    padding-top: 10px;
+}
+.titArea {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.formTbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.formTbl th, .formTbl td {
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.formTbl .th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: left;
+}
+/* 전체 폼 끝*/
+
+/* 주소 css 시작*/
+.postcodeContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 55%;
+}
+
+.ipt {
+    flex: 1;
+}
+
+.valiButton {
+    position: absolute;
+    right: 5px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+/* 주소 css 끝*/
+
+/*버튼*/
+.btnArea {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn_p {
+    background-color: #018085;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_p:hover {
+    background-color: #016f73;
+    color: white;
+}
+.btn_s {
+    background-color: #e9ecef;
+    color: #333;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_s:hover {
+    background-color: #cfd4da;
+    color: black;
+}
+
+
+/* asterisk 클래스 오른쪽 정렬 */
+.infor .asterisk {
+    float: right;  /* 오른쪽으로 정렬 */
+}
+
+.genderBtn {
+    padding: 5px 15px;
+    margin-right: 10px;
+    background-color: #E0E0E0; /* 초기 배경색 설정 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select.ipt.mini, .setPhone select.ipt {
+    padding-right: 25px;
+    background-color: transparent;
+}
+.setPhone select.ipt {
+    width: 95px;
+}
+.setPhone .ipt {
+    width: 200px;
+    max-width: 100%;
+}
+

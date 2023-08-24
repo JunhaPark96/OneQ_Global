@@ -1,0 +1,77 @@
+/* 헤더 --------------------------------------*/
+.header {
+    grid-area: header;
+    height: 20vh;
+    border-radius: 15px;
+    max-height: 150px;
+    /* overflow: hidden; */
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "logo . language"
+      "logo . login-box"
+;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.logo {
+    display: grid;
+    grid-area: logo;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.hana_logo {
+    width: 400px;
+    min-width: 400px;
+    align-self: center;
+}
+
+.login-box {
+    grid-area: login-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.signin {
+    padding-right: 10px;
+    font-size: xx-large;
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+.signup {
+    padding-left: 10px;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.language {
+    grid-area: language;
+    font-size: x-large;
+    text-align: right;
+    transform: translate(0%, 20%);
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    max-height: 40px;
+    max-width: 180px;
+    text-align: center;
+    align-items:center;
+    position: relative;
+    left: 40px;
+}
+
+#language-select {
+    border: none;
+    outline: none;
+    background-color: white;
+    font-size: x-large;
+    border-radius: 15px;
+    padding: 5px 10px;
+}

@@ -1,0 +1,217 @@
+/* 전체 레이아웃 ------------------------------------------*/
+.main-body {
+    display: grid;
+    margin-bottom: 0;
+    grid-template-rows: 0.4fr 0.7fr 0.3fr 0.7fr;
+}
+
+.justify-content-center{
+    margin-right: 5%;
+    min-width: 700px;
+    /*min-height: 500px;*/
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.h2-account{
+    font-size: calc(1.325rem + .9vw);
+    margin-bottom: 0px;
+    margin-top: 0px;
+    max-height: 0px;
+    height: 0px;
+}
+
+.p-account{
+    margin-bottom: 0;
+    max-height: 0;
+    font-family: Hana-light;
+}
+
+/*계좌 조회*/
+.account_transaction{
+    /*border: 1px solid gray;*/
+    border-radius: 20px;
+    /*box-shadow: 1px 1px 8px 8px rgba(0, 0, 0, 0.2);*/
+    max-height: 400px;
+}
+.col-md-8{
+    border: 1px solid gray;
+    border-radius: 20px;
+    /*box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);*/
+}
+
+.mb-3{
+    margin-bottom: 0px;
+}
+.card-body {
+    padding: 20px;
+}
+/* Card 구역의 입체감과 색상 조절 */
+/* 출금 Card */
+.withdraw-card {
+    background-color: #f2f8fa; /* 밝은 푸른색의 배경 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+}
+
+/* 입금 대상 Card */
+.deposit-card {
+    background-color: #e8f4ee; /* 밝은 녹색의 배경 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 170, 107, 0.1) inset; /* 입체감 부각 */
+}
+/* card 내부 요소들 -------------------------------------- */
+.card h4,
+.card h5,
+.card p {
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.card p {
+    font-size: 18px;
+    color: #666;
+}
+p {
+    margin-top: 17px;
+}
+
+/* input 스타일링 */
+input[type="password"], input[type="text"] {
+    border: 1px solid #c0c0c0;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+
+    /* 그라데이션 배경을 추가하여 금융 분위기를 더합니다. */
+    background: linear-gradient(to top, #f5f5f5, #ffffff);
+}
+
+input[type="password"]:focus, input[type="text"]:focus {
+    border-color: #018085;  /* 표준색상에 맞게 변경 */
+    box-shadow: 0 0 5px rgba(1, 128, 133, 0.3);
+}
+/*테이블 ----------------------------------------------*/
+.table{
+    --bs-table-bg: rgba(255, 255, 255, 0.3);
+    --bs-table-hover-color: var(--bs-body-color);
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+}
+
+tbody{
+    border-color: #8080806b;
+}
+
+tbody tr td p{
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+tbody tr td input{
+    height: 35px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+/* 버튼 -------------------------------------------------*/
+.btnArea {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    /*margin-top: 0.5rem;*/
+}
+.btnArea a {
+    text-decoration: none;
+    height: 36px;
+}
+
+.btn_p {
+    background-color: #018085;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+    line-height: 20px; /* 버튼의 높이와 동일하게 설정 */
+    vertical-align: middle;
+}
+
+.btn_p:hover {
+    background-color: #016f73;
+}
+.btn_s {
+    background-color: #e9ecef;
+    color: #333;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_s:hover {
+    background-color: #cfd4da;
+}
+
+.btn-primary{
+    --bs-btn-bg: #018085;
+}
+.btn-primary:hover {
+    background-color: #016f73;
+}
+
+/*계좌 내역 테이블*/
+.transaction_history {
+    margin-top: 30px;
+}
+
+.transaction_history table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+}
+
+.transaction_history th, .transaction_history td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+}
+
+.transaction_history th {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.transaction_history tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* 입력 값  ---------------------------------------------*/
+#selectAccountForm{
+    bottom: 10px;
+}
+
+.btn{
+    border: 1px solid gray;
+}
+
+
+/* 화살표 */
+.arrow-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.arrow-div::before {
+    content: url("/images/down2.png");
+    display: block;
+    width: 50px;
+    height: 50px;
+}

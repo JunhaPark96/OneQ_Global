@@ -1,0 +1,199 @@
+/* 회원가입 메인 바디*/
+.content {
+    grid-area: main-area;
+    display: grid;
+    justify-content: center;
+    max-height: 850px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 3%;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px #018085;
+}
+/* 설명 박스 */
+.description-box{
+    color: #000;
+    margin: 0;
+    font-size: 25px;
+    margin-bottom: 30px;
+    /*border: 1px solid #e5e5e5;*/
+    padding: 30px 170px 30px 50px;
+    overflow: hidden;
+}
+.desc-1 {
+    margin-bottom: 12px;
+}
+
+.description-box dt {
+    font-size: 25px;
+    font-weight: bold;
+    color: #018085;
+    letter-spacing: -2px;
+    vertical-align: middle;
+}
+.description-box dd {
+    font-size: 20px;
+    line-height: 22px;
+    color: #555;
+    letter-spacing: -0.85pt;
+    font-family: "Hana-light", sans-serif;
+}
+/* 스텝 박스 */
+.step-box{
+    align-content: center;
+    padding-right: 40px;
+}
+
+.round-box {
+    position: relative;
+    /* min-height: 62px; */
+    border: 1px solid #d8d8d8;
+    border-radius: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 2px #f5f5f5;
+    max-width: 1000px;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+ul, ol {
+    list-style: none;
+}
+.round-box .step-num {
+    position: absolute;
+    left: 34px;
+    text-align: center;
+    height: 70px;
+    top: 5px;
+    width: 43px;
+    height: 50px;
+}
+.round-box .step-num .step {
+    display: block;
+    font-size: 17px;
+    color: #018085;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+}
+.step-box .round-box .step-num .num {
+    display: block;
+    font-size: 35px;
+    color: #505050;
+    font-family: Arial;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 32px;
+}
+
+.step-box .round-box .txt-box {
+    padding-left: 103px;
+    padding-right: 30px;
+}
+.step-box .round-box .txt-box dt {
+    font-size: 22px;
+    color: #018085;
+    vertical-align: top;
+    padding-bottom: 8px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 20px;
+    padding-top: 8px;
+}
+.step-box .round-box .txt-box dd {
+    font-size: 20px;
+    color: #000;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    font-family: "Hana-light", sans-serif;
+    line-height: 25px;
+}
+.round-box .bg_lt {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    /*background: url(/img/section/ct/bg_roundbox_lt.gif) no-repeat left;*/
+    width: 6px;
+    height: 6px;
+}
+
+.round-box .bg_rt {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    /*background: url(/img/section/ct/bg_roundbox_rt.gif) no-repeat left bottom;*/
+    width: 6px;
+    height: 6px;
+}
+.round-box .bg_lb {
+    position: absolute;
+    left: -1px;
+    bottom: -3px;
+    /*background: url(/img/section/ct/bg_roundbox_lb.gif) no-repeat right;*/
+    width: 6px;
+    height: 6px;
+}
+.round-box .bg_rb {
+    position: absolute;
+    right: -1px;
+    bottom: -3px;
+    /*background: url(/img/section/ct/bg_roundbox_rb.gif) no-repeat right bottom;*/
+    width: 6px;
+    height: 6px;
+}
+.round-box .bg_next {
+    position: absolute;
+    left: 58px;
+    bottom: -18px;
+    background: no-repeat left bottom;
+    /*background: url(/img/section/ct/bg_round_next.gif) no-repeat left bottom;*/
+    width: 30px;
+    height: 18px;
+}
+/* 제출 버튼*/
+.mt10{
+    color: #000;
+    font-size: 12px;
+    margin-top: 10px !important;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.btn-pack {
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    /*background: url(/img/common/etc/bg_btn/common.gif) no-repeat;*/
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.btn-pack > a{
+    text-decoration: none;
+    color: white;
+}
+.btn-pack.btn-type-3c {
+    height: 34px;
+    font-weight: bold !important;
+    font-size: 21px !important;
+    line-height: 34px !important;
+    vertical-align: middle;
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    min-width: 63px;
+    border: 1px solid #059196;
+    border-radius: 30px;
+    /*box-shadow: inset 0 0 10px #059196;*/
+    background-color: #059196;
+    padding: 10px 25px 10px 25px;
+    margin-bottom: 25px;
+}
+.btn-pack.ui-set-btn-pack {
+    visibility: inherit;
+}

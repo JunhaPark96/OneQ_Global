@@ -1,0 +1,125 @@
+/* 메인 바디 */
+.content {
+    grid-area: main-area;
+    display: grid;
+    max-height: 850px;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 5px;
+    margin-top: 75px
+}
+.fleft {
+    float: left !important;
+    font-size: 20px;
+}
+.title-area {
+    clear: both;
+}
+.clearfix:before {
+    display: block;
+    clear: both;
+    content: " ";
+}
+.title-area:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+/* 약관 헤더 */
+h3 {
+    color: #008080;
+    position: relative;
+    font-size: 23px;
+    line-height: 27px;
+    vertical-align: middle;
+    height: 23px;
+    overflow: hidden;
+    font-weight: normal;
+    padding-bottom: 6px !important;
+}
+/* 약관박스 */
+.agree-box {
+    padding: 18px 30px 10px;
+    height: 250px;
+    overflow: auto;
+    overflow-x: hidden;
+    font-size: 18px;
+    border: 1px groove gray;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+.agree-txt h4 {
+    position: static !important;
+    clear: both;
+    font-size: 16px;
+    padding: 0 0 15px;
+    text-align: left;
+}
+
+/* 약관 동의 체크 박스*/
+
+/* 확인 & 취소 */
+.btn-area {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.mb30 {
+    margin-bottom: 30px;
+}
+.mt15 {
+    margin-top: 25px;
+}
+/* 버튼 공통 */
+.btn-pack, .btn-pack * {
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    /*background: url(/img/common/etc/bg_btn/common.gif) no-repeat;*/
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+/* 확인 버튼 span */
+.btn-pack.btn-type-3c{
+    height: 34px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 34px;
+    vertical-align: middle;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: #018085;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white; !important;
+}
+.btn-pack.btn-type-3c button{
+    color: white; !important;
+}
+/* 취소 버튼 span */
+.btn-pack.btn-type-3{
+    height: 34px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 34px;
+    vertical-align: middle;
+}
+/* 버튼 간격 */
+.btn-pack.btn-type-3c button, .btn-pack.btn-type-3c input {
+    min-width: 100px;
+}
+/* 하이퍼링크 스타일 삭제 */
+.btn-pack.btn-type-3c a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.btn-pack.btn-type-3 a {
+    min-width: 63px;
+    text-decoration: none;
+    color: #000;
+}

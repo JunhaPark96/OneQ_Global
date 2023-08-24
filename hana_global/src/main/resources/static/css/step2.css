@@ -1,0 +1,142 @@
+.iptWrap .ipt {
+    width: 55%;
+    padding: 10px;
+    font-size: 1.1rem;
+    border: 1px solid #8785A2;
+    border-width: 1px;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+.uniformImg {
+    overflow: hidden;  /* 이미지가 이 컨테이너를 벗어나지 않도록 합니다. */
+    max-height: 200px; /* 적절한 높이를 설정합니다. 필요에 따라 값을 조절해주세요. */
+    max-width: 400px;
+    padding-bottom: 20px;
+}
+
+.uniformImg img {
+    display: block;
+    max-width: 100%;   /* 이미지의 최대 너비를 부모 요소의 100%로 제한합니다. */
+    height: auto;      /* 이미지의 높이를 자동으로 조절하여 원본 비율을 유지합니다. */
+}
+
+.txt{
+    padding-top: 10px;
+}
+.titArea {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.formTbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.formTbl th, .formTbl td {
+    padding: 1.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.formTbl .th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: left;
+}
+/* 업로드 섹션 */
+/* 기본 스타일 초기화 */
+.uploadArea,
+.uploadField {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* 업로드 섹션 스타일 */
+.uploadArea {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* 각 업로드 필드 스타일 */
+.uploadField {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    position: relative;
+}
+
+.uploadField label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.uploadField input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.uploadField .txt {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #777;
+}
+
+/* 마지막 업로드 필드 마진 제거 */
+.uploadField:last-child {
+    margin-bottom: 0;
+}
+
+/*버튼*/
+.btnArea {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.btnArea a {
+    text-decoration: none;
+}
+.btn_p {
+    background-color: #018085;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_p:hover {
+    background-color: #016f73;
+}
+.btn_s {
+    background-color: #e9ecef;
+    color: #333;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_s:hover {
+    background-color: #cfd4da;
+}
+btn_p{
+    background-color: #018085;
+}
+

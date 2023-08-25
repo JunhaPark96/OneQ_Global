@@ -10,12 +10,20 @@
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
       "logo . language"
-      "logo . login-box"
+      "logo menubar login-box"
+      "logo . ."
 ;
     margin-left: 10%;
     margin-right: 10%;
+    align-items: start;
 }
 
+.menubar{
+    display: grid;
+    grid-area: menubar;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+}
 .logo {
     display: grid;
     grid-area: logo;
@@ -40,27 +48,26 @@
 
 .signin {
     padding-right: 10px;
-    font-size: xx-large;
+    font-size: large;
     border-right: 1px solid black;
     text-align: center;
 }
 
 .signup {
     padding-left: 10px;
-    font-size: xx-large;
+    font-size: large;
     text-align: center;
 }
 
 .language {
     grid-area: language;
-    font-size: x-large;
     text-align: right;
     transform: translate(0%, 20%);
     background-color: white;
     border: 1px solid black;
-    border-radius: 15px;
-    max-height: 40px;
-    max-width: 180px;
+    border-radius: 20px;
+    max-height: 20px;
+    max-width: 100px;
     text-align: center;
     align-items:center;
     position: relative;
@@ -71,7 +78,7 @@
     border: none;
     outline: none;
     background-color: white;
-    font-size: x-large;
+    font-size: 14px;
     border-radius: 15px;
-    padding: 5px 10px;
 }
+

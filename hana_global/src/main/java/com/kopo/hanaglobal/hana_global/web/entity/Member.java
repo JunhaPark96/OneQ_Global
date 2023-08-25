@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class Member {
     private int userSeq;
     private String email;
+    private String id;
     private String passwd;
     private String name;
     private String registNo;

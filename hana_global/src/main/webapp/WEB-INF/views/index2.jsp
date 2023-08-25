@@ -15,12 +15,12 @@
 <body>
 <%
     Member loginUser = (Member) session.getAttribute("loginUser");
-    String redirectURL = (loginUser == null) ? "/signup" : "";
+    String redirectURL = (loginUser == null) ? "/signUp" : "";
 %>
 
 <div class="main-container">
-    <%@ include file="/WEB-INF/views/includes/header.jsp" %>
-   <%-- <div class="header">
+<%--    <%@ include file="/WEB-INF/views/includes/header.jsp" %>--%>
+    <div class="header">
         <div class="logo">
             <a href="/">
                 <img src="./images/hana_logo.png" class="hana_logo" alt="하나로고">
@@ -37,7 +37,7 @@
                 <!-- 기타 필요한 언어를 여기에 추가 -->
             </select>
         </div>
-    </div>--%>
+    </div>
     <div class="main-area">
         <div class="main-left">
             <div class="card card1">

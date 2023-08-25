@@ -50,22 +50,22 @@ public class MainController {
         return "transfer";
     }
 
-    @GetMapping("/signUp")
-    public String signUp() {
-        System.out.println("signUp 페이지");
-        return "signUp";
-    }
+//    @GetMapping("/signUp")
+//    public String signUp() {
+//        System.out.println("signUp 페이지");
+//        return "member/signUp";
+//    }
 
     @GetMapping("/signUp_STEP1")
     public String signUp1() {
         System.out.println("signUp step1 get 페이지");
-        return "signUp_STEP1";
+        return "member/signUp_STEP1";
     }
 
     @GetMapping("/signUp_STEP2")
     public String signUp2() {
         System.out.println("signUp step2 get 페이지");
-        return "signUp_STEP2";
+        return "member/signUp_STEP2";
     }
 
     @PostMapping("/signUp_STEP2")
@@ -73,16 +73,16 @@ public class MainController {
         System.out.println("signUp step2 post 페이지");
 
         if ("Y".equals(agreeYN)) {
-            return "signUp_STEP2";
+            return "member/signUp_STEP2";
         } else {
-            return "signUp"; // 약관에 동의하지 않은 경우 다시 초기 페이지로 리다이렉트
+            return "member/signUp"; // 약관에 동의하지 않은 경우 다시 초기 페이지로 리다이렉트
         }
     }
 
     @GetMapping("/signUp_STEP3")
     public String signUp3() {
         System.out.println("signUp step3 get 페이지");
-        return "signUp_STEP3";
+        return "member/signUp_STEP3";
     }
 
     @PostMapping("/signUp_STEP3")
@@ -92,13 +92,13 @@ public class MainController {
             @RequestParam("visaImage") MultipartFile visaImage,
             @RequestParam("passportImage") MultipartFile passportImage) {
         System.out.println("Processing signUp step3 post");
-        return "signUp_STEP3";
+        return "member/signUp_STEP3";
     }
 
     @GetMapping("/signUp_STEP4")
     public String signUp4() {
         System.out.println("signUp step4 페이지");
-        return "signUp_STEP4";
+        return "member/signUp_STEP4";
     }
 
     @PostMapping("/signUp_STEP4")
@@ -121,13 +121,13 @@ public class MainController {
 
         // 여기서 form으로부터 받은 데이터를 처리할 수 있습니다.
 
-        return "signUp_STEP4";
+        return "member/signUp_STEP4";
     }
 
     @GetMapping("/signUp_STEP5")
     public String signUp5() {
         System.out.println("signUp step5 get 페이지");
-        return "signUp_STEP5";
+        return "member/signUp_STEP5";
     }
 
 }

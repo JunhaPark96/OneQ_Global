@@ -31,6 +31,9 @@
 
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.MemberRepository">
 <select id="getMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
-    SELECT * FROM member  <!-- 여기에 실제 테이블 이름을 써주세요 -->
+    SELECT * FROM member
+</select>
+    <select id="getAccountAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account">
+    SELECT * FROM CHECKING_ACCOUNT
 </select>
 </mapper>

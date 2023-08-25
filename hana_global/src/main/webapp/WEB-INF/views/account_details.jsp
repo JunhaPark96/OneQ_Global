@@ -1,4 +1,3 @@
-<%@ page import="com.kopo.hanaglobal.hana_global.web.vo.Account" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
@@ -57,11 +56,11 @@
                                             id="selectAccountForm"
                                             onchange="changeBallance()" style="height: 55px;">
                                         <option value="" selected disabled>계좌를 선택하세요.</option>
-                                        <c:forEach items="${accountList}" var="account">
+                                        <%--<c:forEach items="${accountList}" var="account">
                                             <option value="${account.accountNo}">
                                                     ${account.alias} (${account.accountNo})
                                             </option>
-                                        </c:forEach>
+                                        </c:forEach>--%>
                                     </select>
                                 </td>
                             </tr>

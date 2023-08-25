@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.kopo.hanaglobal.hana_global.web.vo.Account" %><%--
-  Created by IntelliJ IDEA.
+<%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Account" %>
+Created by IntelliJ IDEA.
   User: JUNHA
   Date: 2023-08-19
   Time: 오후 3:47
@@ -33,14 +33,15 @@
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
-            <%
+            <c:forEach items="${accountList}" var="account" varStatus="loop">
+
+            </c:forEach>
+            <%--<%
                 List<Account> accounts = new ArrayList<>();
-                accounts.add(new Account("저축계좌", "1234-5678-9012", "2021-01-01", "1,000,000원"));
-                accounts.add(new Account("주계좌", "2345-6789-0123", "2021-01-01", "1,000,000원"));
-                accounts.add(new Account("대출계좌", "4125-5231-5161", "2021-01-01", "1,000,000원"));
-                accounts.add(new Account("보험계좌", "1622-3141-1212", "2021-01-01", "1,000,000원"));
+                accounts.add(new Account("1234-5678-9012", 1, "주계좌", "1234", "1,000,000", "2021-01-01", 1));
+                accounts.add(new Account("2515-5678-9012", 1, "저축계좌", "1514", "2,000,000", "2021-01-01", 1));
                 // ... 계좌 정보 추가
-            %>
+            %>--%>
 
             <!-- 슬라이드 페이지 -->
             <div id="carouselExample" class="carousel slide">
@@ -75,13 +76,13 @@
                                             <h4>예금주명</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 박준하
-                                                ${account.getAccountName()} </p>
+                                                ${account.getUserSeq()} </p>
                                         </div>
                                         <div class="col-6">
                                             <h4>계좌종류</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 주거래 통장
-                                                ${account.getAccountType()}</p>
+                                                ${account.getAcName()}</p>
                                         </div>
                                     </div>
 
@@ -90,7 +91,7 @@
                                             <h4>계좌번호</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 1111-2222-3333-4444
-                                                ${account.getAccountNumber()}</p>
+                                                ${account.getAcNo()}</p>
                                         </div>
                                         <div class="col-6">
                                             <h4>잔액</h4>
@@ -110,13 +111,13 @@
                                             <h4>계좌개설날짜</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 2023-05-12
-                                                ${account.getOpenAccountDate()} </p>
+                                                ${account.getOpenDate()} </p>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <h4>마지막 거래 날짜</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 2023-08-19
-                                                ${account.getLastTransactionDate()}</p>
+                                                <%--${account.getLastTransactionDate()}--%></p>
                                         </div>
                                     </div>
                                     <hr>

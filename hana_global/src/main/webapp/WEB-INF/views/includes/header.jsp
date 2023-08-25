@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap 5 CSS -->
 </head>
 <body>
 <%--<%
@@ -38,11 +39,14 @@
         <%--<a href="${pageContext.request.contextPath}/logout">SignOut--</a><br>--%>
     </c:if>
     <c:if test="${empty currentMember}">
-        <div class="signin">
+        <%--<div class="signin">
             <a href="${pageContext.request.contextPath}/signin"> Signin </a>
-        </div>
+        </div>--%>
+<%--        <div class="signin" id="openLoginModal" onclick="openModal()">Signin</div>--%>
+        <button id="signInBtn" onclick="openModal()">Sign In</button>
+
         <div class="signup">
-            <a href="${pageContext.request.contextPath}/signup"> Signup </a>
+            <a href="${pageContext.request.contextPath}/signup"> Sign Up </a>
         </div>
     </c:if>
     </div>
@@ -56,5 +60,42 @@
 
     </div>
 </div>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <%--<span class="close">&times;</span>
+        <div class="loginHeader">Login</div>--%>
+            <div class="modal-header">
+                <div class="loginHeader">Login</div>
+                <span class="close">&times;</span>
+            </div>
+        <form action="/signinAction" method="post" class="loginInput">
+            <div class="loginField loginId">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+            </div>
+            <div class="loginField loginPw">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="loginButton">
+                <input type="submit" value="Login" class="loginBtn">
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var closeButton = document.querySelector(".close");
+        var modal = document.getElementById("loginModal");
+
+        closeButton.addEventListener("click", closeModal);
+        window.addEventListener("click", outsideModalClick);
+    });
+
+</script>
 </body>
 </html>

@@ -71,3 +71,56 @@ function selectGender(gender) {
         document.getElementById('maleBtn').style.color = 'black';
     }
 }
+
+// 로그인 모달
+
+// function initializeModal() {
+//     // Get the modal
+//     var modal = document.getElementById("loginModal");
+//
+//     // Get the button that opens the modal
+//     var btn = document.getElementById("openLoginModal");
+//
+//     // Get the <span> element that closes the modal
+//     var span = document.getElementsByClassName("close")[0];
+//
+//     // When the user clicks on the button, open the modal
+//     btn.onclick = function () {
+//         modal.style.display = "block";
+//     }
+//
+//     // When the user clicks on <span> (x), close the modal
+//     span.onclick = function () {
+//         modal.style.display = "none";
+//     }
+//
+//     // When the user clicks anywhere outside of the modal, close it
+//     window.onclick = function (event) {
+//         if (event.target == modal) {
+//             modal.style.display = "none";
+//         }
+//     }
+// }
+//
+// // 페이지 로딩이 완료되면 initializeModal 함수를 호출
+// window.onload = initializeModal;
+
+// 모달 창을 열기 위한 함수
+function openModal() {
+    var modal = document.getElementById("loginModal");
+    modal.style.display = "block";
+}
+
+// 모달 창을 닫기 위한 함수
+function closeModal() {
+    var modal = document.getElementById("loginModal");
+    modal.style.display = "none";
+}
+
+// 모달 창 바깥을 클릭했을 때 닫기 위한 함수
+function outsideModalClick(event) {
+    var modal = document.getElementById("loginModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

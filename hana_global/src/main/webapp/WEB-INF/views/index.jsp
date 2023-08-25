@@ -11,6 +11,8 @@
     <link href="css/header.css" rel="stylesheet" />
     <link href="css/TTF.css" rel="stylesheet" />
     <link href="css/main.css" rel="stylesheet">
+
+    <script src="./js/main.js"></script>
 </head>
 <body>
 <%
@@ -108,6 +110,8 @@
         게시판 링크: <a href="${pageContext.request.contextPath}/boardlist"> 게시판 </a>
     </footer>
 </div>
+
+
 
 </body>
 

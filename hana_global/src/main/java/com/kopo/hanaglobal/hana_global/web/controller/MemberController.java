@@ -24,17 +24,18 @@ public class MemberController {
         return mav;
     }
 
+    // 회원가입 페이지
     @GetMapping("/signup")
     public String signUp(Model model){
         model.addAttribute("Member", new Member());
         System.out.println("회원가입 페이지 이동");
         return "member/signUp";
     }
-
-    @GetMapping("/signin")
+    // 로그인 모달
+    /*@GetMapping("/signin")
     public String signIn(Model model){
         model.addAttribute("Member", new Member());
         System.out.println("회원가입 페이지 이동");
-        return "member/signUp";
-    }
+        return "member/signIn";
+    }*/
 }

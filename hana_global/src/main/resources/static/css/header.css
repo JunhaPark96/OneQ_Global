@@ -46,18 +46,54 @@
     align-items: center;
 }
 
-.signin {
-    padding-right: 10px;
-    font-size: large;
-    border-right: 1px solid black;
-    text-align: center;
+/*.signin {*/
+/*    padding-right: 10px;*/
+/*    font-size: large;*/
+/*    border-right: 1px solid black;*/
+/*    text-align: center;*/
+/*}*/
+#signInBtn {
+    background-color: #3FC1C9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
 }
 
-.signup {
-    padding-left: 10px;
-    font-size: large;
-    text-align: center;
+#signInBtn:hover {
+    background-color: #016f73; /* 버튼 호버 색상 변경 */
 }
+
+
+/*.signup {*/
+/*    padding-left: 10px;*/
+/*    font-size: large;*/
+/*    text-align: center;*/
+/*}*/
+
+.signup {
+    background-color: #3FC1C9;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    margin-left: 10px; /* SignIn 버튼과 간격 주기 */
+}
+
+.signup a {
+    text-decoration: none;
+    color: white;
+}
+
+.signup:hover {
+    background-color: #016f73;
+}
+
 
 .language {
     grid-area: language;
@@ -71,7 +107,7 @@
     text-align: center;
     align-items:center;
     position: relative;
-    left: 40px;
+    left: 150px;
 }
 
 #language-select {
@@ -80,5 +116,135 @@
     background-color: white;
     font-size: 14px;
     border-radius: 15px;
+}
+
+/* 로그인 모달 */
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 9999;
+}
+.modal-header {
+    display: grid;
+    grid-template-columns: 1fr auto; /* 1fr for the header, auto for the close button */
+    width: 100%;
+    height: 90px;
+}
+/* Close Button */
+.close {
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-bottom: 25px;  /* Increase this value to move the close button up */
+    align-self: start;    /* This will align the close button to the top */
+}
+.loginHeader {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;  /* Increase or decrease as required to adjust vertical position */
+    margin-top: 15px;     /* Add this to move the Login text down a bit */
+}
+/* Modal Content */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /*justify-content: center;*/
+    border-radius: 15px;
+    padding: 15px;
+    width: 30%; /* You can adjust this as per requirement */
+    margin: 10% auto;
+    border: 5px solid #3FC1C9;
+    background-color: #f5f5f5; /* Adjust as per user-info */
+}
+
+.loginHeader {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.loginInput {
+    display: grid;
+    align-items: center;
+    gap: 10px;
+}
+
+/*.loginField {*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    margin-right: 40px;*/
+/*}*/
+
+.loginField label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 40px;
+    font-size: x-large;
+}
+
+.loginField input {
+    width: 300px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+.loginField input:focus {
+    border: 2px solid blue;
+}
+
+.loginButton {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin-top: 20px;
+}
+
+.loginBtn {
+    border: none;
+    color: white;
+    background-color: #3FC1C9;
+    padding: 40px 30px; /* Reduced padding as per modal */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-decoration: none; /* For <a> tags */
+}
+
+.loginBtn:hover {
+    background-color: #016f73;
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    background-color: #e6e6e6;
 }
 

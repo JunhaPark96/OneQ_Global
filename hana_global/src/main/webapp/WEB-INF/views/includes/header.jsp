@@ -57,7 +57,14 @@
         <div class="st">Hana Wallet</div>
         <div class="st">Exchange</div>
         <div class="st">Transfer</div>
+    </div>
 
+    <div class="blank">
+        <hr>
+        <hr>
+    </div>
+    <div class="blank">
+        <hr>
     </div>
 </div>
 

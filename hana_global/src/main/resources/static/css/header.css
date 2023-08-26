@@ -11,11 +11,15 @@
     grid-template-areas:
       "logo . language"
       "logo menubar login-box"
-      "logo . ."
+      "logo blank blank"
 ;
     margin-left: 10%;
     margin-right: 10%;
-    align-items: start;
+    align-items: center;
+}
+.blank{
+    display: grid;
+    grid-area: blank;
 }
 
 .menubar{
@@ -107,7 +111,7 @@
     text-align: center;
     align-items:center;
     position: relative;
-    left: 150px;
+    left: 112px;
 }
 
 #language-select {

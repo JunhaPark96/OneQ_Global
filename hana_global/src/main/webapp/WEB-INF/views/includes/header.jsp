@@ -1,5 +1,5 @@
 <%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,15 +8,13 @@
     <!-- Bootstrap 5 CSS -->
 </head>
 <body>
-<%--<%
-    Member loginUser = (Member) session.getAttribute("loginUser");
-%>--%>
 <div class="header">
     <div class="logo">
         <a href="/">
             <img src="./images/hana_logo.png" class="hana_logo" alt="하나로고">
         </a>
     </div>
+    <%--언어 설정--%>
     <div class="language">
         <select id="language-select">
             <option value="en">English</option>
@@ -24,31 +22,23 @@
             <!-- 기타 필요한 언어를 여기에 추가 -->
         </select>
     </div>
-    <%--<div class="login-box">
-        <div class="signin">Signin</div>
-        <div class="signup">
-            <a href="${pageContext.request.contextPath}/signup"> Signup </a>
-        </div>
-        <div class="signin">MyProfile</div>
-        <div class="signup">SignOut</div>
-    </div>--%>
+    <%--로그인 구역--%>
     <div class="login-box">
-    <c:if test="${not empty currentMember}">
-        <div class="signin">MyProfile</div>
-        <div class="signup">SignOut</div>
-        <%--<a href="${pageContext.request.contextPath}/logout">SignOut--</a><br>--%>
-    </c:if>
-    <c:if test="${empty currentMember}">
-        <%--<div class="signin">
-            <a href="${pageContext.request.contextPath}/signin"> Signin </a>
-        </div>--%>
-<%--        <div class="signin" id="openLoginModal" onclick="openModal()">Signin</div>--%>
-        <button id="signInBtn" onclick="openModal()">Sign In</button>
-
-        <div class="signup">
-            <a href="${pageContext.request.contextPath}/signup"> Sign Up </a>
-        </div>
-    </c:if>
+        <c:if test="${not empty currentMember}">
+            <%--TODO: 마이페이지 구현--%>
+            <div class="signin">MyProfile</div>
+            <div class="signup">
+                <a href="${pageContext.request.contextPath}/signout"> Sign Out </a>
+            </div>
+        </c:if>
+        <c:if test="${empty currentMember}">
+            <div class="signin">
+                <a href="${pageContext.request.contextPath}/signin"> Sign In</a>
+            </div>
+            <div class="signup">
+                <a href="${pageContext.request.contextPath}/signup"> Sign Up </a>
+            </div>
+        </c:if>
     </div>
 
 
@@ -69,10 +59,10 @@
 </div>
 
 <!-- Login Modal -->
-<div id="loginModal" class="modal">
+<%--<div id="loginModal" class="modal">
     <div class="modal-content">
-        <%--<span class="close">&times;</span>
-        <div class="loginHeader">Login</div>--%>
+        &lt;%&ndash;<span class="close">&times;</span>
+        <div class="loginHeader">Login</div>&ndash;%&gt;
             <div class="modal-header">
                 <div class="loginHeader">Login</div>
                 <span class="close">&times;</span>
@@ -103,6 +93,6 @@
         window.addEventListener("click", outsideModalClick);
     });
 
-</script>
+</script>--%>
 </body>
 </html>

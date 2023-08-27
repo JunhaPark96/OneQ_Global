@@ -56,27 +56,21 @@
 /*    border-right: 1px solid black;*/
 /*    text-align: center;*/
 /*}*/
-#signInBtn {
+.signin {
     background-color: #3FC1C9;
-    color: white;
     border: none;
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
     border-radius: 5px;
+    text-align: center;
+    margin-left: 10px;
 }
 
-#signInBtn:hover {
+.signin:hover {
     background-color: #016f73; /* 버튼 호버 색상 변경 */
 }
-
-
-/*.signup {*/
-/*    padding-left: 10px;*/
-/*    font-size: large;*/
-/*    text-align: center;*/
-/*}*/
 
 .signup {
     background-color: #3FC1C9;
@@ -89,7 +83,7 @@
     margin-left: 10px; /* SignIn 버튼과 간격 주기 */
 }
 
-.signup a {
+.signup a, .signin a {
     text-decoration: none;
     color: white;
 }
@@ -98,6 +92,11 @@
     background-color: #016f73;
 }
 
+/*.signup {*/
+/*    padding-left: 10px;*/
+/*    font-size: large;*/
+/*    text-align: center;*/
+/*}*/
 
 .language {
     grid-area: language;

@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.repository;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,16 @@ public class MemberRepositoryImpl implements MemberRepository{
 //        List<Member> memberList = sqlSessionTemplate.selectList("selectMemberAll");
         return memberList;
     }
+
+    @Override
+    public Member signIn(LoginDTO loginDTO) {
+        Member member = sqlSessionTemplate.selectOne("com.kopo.hanaglobal.hana_global.web.repository.MemberRepository.signIn", loginDTO);
+        return member;
+    }
+
+    @Override
+    public void signUp(Member member) {
+
+    }
+
 }

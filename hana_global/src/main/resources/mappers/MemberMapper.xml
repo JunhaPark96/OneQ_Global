@@ -30,10 +30,15 @@
 </mapper>-->
 
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.MemberRepository">
-<select id="getMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
-    SELECT * FROM member
-</select>
+    <select id="getMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+        SELECT *
+        FROM member
+    </select>
     <select id="getAccountAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account">
-    SELECT * FROM CHECKING_ACCOUNT
-</select>
+        SELECT *
+        FROM CHECKING_ACCOUNT
+    </select>
+    <select id="signIn" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO">
+        select * from member where id = #{id} and passwd = #{passwd}
+    </select>
 </mapper>

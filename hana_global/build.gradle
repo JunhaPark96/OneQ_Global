@@ -43,6 +43,8 @@ dependencies {
 	implementation 'com.oracle.database.security:osdt_core'
 
 	implementation 'org.slf4j:slf4j-api:1.7.32'
+	// 유효성 검사
+	implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
 }
 
 tasks.named('test') {

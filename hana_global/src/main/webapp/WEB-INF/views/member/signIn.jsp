@@ -1,99 +1,61 @@
-<%--
-&lt;%&ndash;
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-25
-  Time: 오후 5:03
-  To change this template use File | Settings | File Templates.
-&ndash;%&gt;
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-    <title>로그인 모달</title>
-    <style>
-        .modal {
-            /* 여기에 모달에 대한 CSS를 작성하십시오. */
+    <link href="css/header.css" rel="stylesheet"/>
+    <link href="css/TTF.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet">
+
+    <script src="./js/main.js"></script>
+
+    <script type="text/javascript">
+        if ('${loginMsg}') {
+            alert('${loginMsg}');
         }
-        .loginModal {
-            /* 여기에 loginModal에 대한 CSS를 작성하십시오. */
-        }
-        .close {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-title {
-            font-family: "Hana2-Heavy";
-            font-size: 22px;
-            color: black;
-        }
-        .modalContents {
-            margin-top: 10px;
-        }
-        .input-form {
-            /* 여기에 input-form에 대한 CSS를 작성하십시오. */
-        }
-        .loginBtn {
-            /* 여기에 loginBtn에 대한 CSS를 작성하십시오. */
-        }
-        .link-text-container {
-            width: 350px;
-            text-align: right;
-            padding-right: 20px;
-        }
-        .link-to-register {
-            /* 여기에 link-to-register에 대한 CSS를 작성하십시오. */
-            cursor: pointer;
-        }
-    </style>
+    </script>
 </head>
 <body>
-<div class="modal">
-    <div class="loginModal">
-        <div class="close">
-            <img src="path_to_CloseBtn_image" alt="close button" width="20" height="20" onclick="closeModal()">
+<div class="main-container">
+    <%@ include file="/WEB-INF/views/includes/header.jsp" %>
+    <div class="main-area">
+        <div class="main-left">
+            ㅇㅇ
         </div>
-        <div class="login-title">로그인</div>
 
-        <div class="modalContents">
-            <input name="id" class="input-form" type="text" placeholder="아이디" id="idInput">
-            <input name="password" class="input-form" type="password" placeholder="비밀번호" id="passwordInput">
-            <button class="loginBtn" onclick="loginFunction()">로그인</button>
-            <div class="link-text-container">
-                <div onclick="openSignUp()" class="link-to-register">회원가입</div>
-            </div>
+        <div class="main-right">
+            <div class="loginHeader">Login</div>
+            <form:form action="${pageContext.request.contextPath}/signin" method="post" class="loginInput"
+                       modelAttribute="loginDTO">
+                <div class="loginField loginId">
+                    <label for="id">User ID</label>
+                    <form:input path="id"/>
+                    <form:errors path="id"/>
+                </div>
+                <div class="loginField loginPw">
+                    <%--<label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" required>--%>
+                        <label for="passwd">Password</label>
+                        <form:input path="passwd"/>
+                        <form:errors path="passwd"/>
+                </div>
+                <div class="loginButton">
+                    <input type="submit" value="Login" class="loginBtn">
+                </div>
+            </form:form>
         </div>
     </div>
+    <footer>
+    </footer>
 </div>
-<!-- SignIn 모달을 HTML 형식으로 여기에 추가하십시오. -->
 
-<script>
-    const modal = document.getElementById("modal");
-    const openModalBtn = document.getElementById("open-modal");
-    const closeModalBtn = document.getElementById("close-modal");
-    // 이 곳에 closeModal, loginFunction, openSignUp 등의 자바스크립트 함수를 정의하십시오.
-    function closeModal() {
-        // 모달 닫기 로직
-    }
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto"; // 스크롤바 보이기
-    });
 
-    function loginFunction() {
-        var email = document.getElementById('idInput').value;
-        var password = document.getElementById('passwordInput').value;
-        // 로그인 처리 로직 (JSP와의 통신 등)
-    }
-
-    function openSignUp() {
-        // 회원가입 모달을 여는 로직
-    }
-</script>
 </body>
+
 </html>
---%>

@@ -24,18 +24,11 @@
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
         <div class="main-top">
-            <hr>
-            <h1>All-In-One Banking System</h1>
-            <p>
+            <%--<h1>All-In-One Banking System</h1>
+            <p style=" margin-top: 0px; margin-bottom: 0px;">
             <h3>Global Digital Lounge</h3>
             An extensive global network reaching the world market
-            <%--<ul>
-                <li> Simple Register</li>
-                <li> Simple Transfer</li>
-                <li> Simple Exchange</li>
-                <li> Simple Remittance</li>
-            </ul>--%>
-            </p>
+            </p>--%>
         </div>
         <div class="main-body">
 
@@ -49,12 +42,12 @@
                 <div class="card card1">
                     <a href="<%= redirectURL != "" ? redirectURL : "/account" %>">
                         <div class="card-area">
-                        <div class="card-text-area">
-                            <p class="text-header">Account</p>
-                            <p class="card-text">Easy-One Pack <br>
-                                Account</p>
-                        </div>
-                        <div class="card-image card-image1" alt="계좌"></div>
+                            <div class="card-text-area">
+                                <p class="text-header">Account</p>
+                                <p class="card-text">Easy-One Pack <br>
+                                    Account</p>
+                            </div>
+                            <div class="card-image card-image1" alt="계좌"></div>
                         </div>
                         <%--<div class="card-text-border">
                             <p class="card-text">
@@ -71,10 +64,9 @@
                                 <p class="card-text">
                                     Enjoy excellent <br>
                                     exchange rates <br>
-                                    for 29 currencies <br>
-                                    Account</p>
+                                    for 29 currencies</p>
                             </div>
-                        <div class="card-image card-image2" alt="환전"></div>
+                            <div class="card-image card-image2" alt="환전"></div>
                         </div>
                         <%--<div class="card-text-border">
                             <p class="card-text">
@@ -88,7 +80,7 @@
             <div class="main-right">
 
                 <div class="card card3">
-                    <a href="<%= redirectURL != "" ? redirectURL : "/pay" %>">
+                    <a href="<%= redirectURL != "" ? redirectURL : "/wallet" %>">
                         <div class="card-image card-image3" alt="페이"></div>
                         <div class="card-area">
                             <div class="card-text-area">
@@ -97,7 +89,7 @@
                                     Experience an easier <br>
                                     banking system <br>
                                     with Hana Wallet
-                                    </p>
+                                </p>
                             </div>
                             <div class="card-image card-image3" alt="하나월렛"></div>
                         </div>
@@ -109,14 +101,13 @@
                             <div class="card-text-area">
                                 <p class="text-header">Transfer</p>
                                 <p class="card-text">
-                                     Hana Bank supports<br>
-                                     your overseas<br>
+                                    Hana Bank supports<br>
+                                    your overseas<br>
                                     remittance
                                 </p>
                             </div>
-                            <div class="card-image card-image3" alt="하나월렛"></div>
+                            <div class="card-image card-image4" alt="송금"></div>
                         </div>
-                        <div class="card-image card-image4" alt="송금"></div>
 
                     </a>
                 </div>
@@ -138,9 +129,10 @@
                      </div>
                  </div>--%>
                 <div class="main-info">
-                    <div class="main-image"></div>
-                    <div class="main-text">
-                        <h3>All-In-One Banking System</h3> <br>
+                    <div class="user-image"></div>
+                    <div class="user-text">
+                        <h3>Banking Guide</h3>
+                        for Foreign Customer
                     </div>
                 </div>
             </div>

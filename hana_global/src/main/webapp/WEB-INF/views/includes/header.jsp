@@ -41,20 +41,16 @@
         </c:if>
     </div>
 
-
     <div class="menubar">
-        <div class="st">Account</div>
-        <div class="st">Hana Wallet</div>
-        <div class="st">Exchange</div>
-        <div class="st">Transfer</div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/account</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Account</a></div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/hanawallet</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Hana Wallet</a></div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/exchange</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Exchange</a></div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/transfer</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Transfer</a></div>
     </div>
 
     <div class="blank">
-        <hr>
-        <hr>
     </div>
     <div class="blank">
-        <hr>
     </div>
 </div>
 

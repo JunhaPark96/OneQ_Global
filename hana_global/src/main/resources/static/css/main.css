@@ -29,8 +29,17 @@ body {
     margin-right: 10%;
     column-gap: 40px;
 }
+.main-top{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
 .main-top h1{
     margin-top: 0px;
+    margin-bottom: 15px;
+}
+.main-top h3{
+    margin-top: 0px;
+    margin-bottom: 7px;
 }
 /* 기능 메인 바디 */
 .main-body{
@@ -79,6 +88,7 @@ body {
     width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
     border-radius: 20px;
+    min-height: 290px;
 }
 
 .card {
@@ -103,33 +113,37 @@ body {
 
 .card1 {
     grid-area: card1;
-    background: linear-gradient(60deg, #FFC7C7, #8785A2);
+    background-color: #016f73;
+    /*background: linear-gradient( #FFC7C7, #8785A2);*/
     z-index: 2;
-    /* border: 3px solid #6F61C0; */
+    border: 1px solid white;
     border-radius: 20px;
 }
 
 .card2 {
     grid-area: card2;
-    background: linear-gradient(60deg, #E3FDFD, #71C9CE);
+    /*background: linear-gradient( #E3FDFD, #71C9CE);*/
     z-index: 2;
     /* border: 3px solid #A084E8; */
+    border: 1px solid #059196;
     border-radius: 20px;
 }
 
 .card3 {
     grid-area: card3;
-    background: linear-gradient(60deg, #F9ED69, #B83B5E);
+    /*background: linear-gradient( #F9ED69, #B83B5E);*/
+    background-color: #016f73;
     z-index: 2;
-    /* border: 3px solid #8BE8E5; */
+    border: 1px solid white;
     border-radius: 20px;
 }
 
 .card4 {
     grid-area: card4;
-    background: linear-gradient(60deg, #AD8B73, #FFFBE9);
+    /*background: linear-gradient( #AD8B73, #FFFBE9);*/
     z-index: 2;
     /* border: 3px solid #D5FFE4; */
+    border: 1px solid #059196;
     border-radius: 20px;
 }
 .card-area{
@@ -139,11 +153,11 @@ body {
 
 .card-image {
     /* 배경 이미지 설정 */
-    background-size: 90%;
+    background-size: 95%;
     /* 이미지가 div를 꽉 채우도록 설정 */
     background-position: bottom;
     width: 100%;
-    height: 90%;
+    height: 100%;
     position: absolute;
     /* 위치를 상위 요소(main-info)에 상대적으로 배치 */
     z-index: 0;
@@ -153,19 +167,22 @@ body {
 }
 
 .card-image1 {
-    background-image: url('../images/banking-laptop.png');
+    background-image: url('../images/moneybox-table.png');
+    background-color: transparent;
 }
 
 .card-image2 {
-    /*background-image: url('../images/exchange.png');*/
+    background-size: 130%;
+    background-image: url('../images/exchange2.png');
 }
 
 .card-image3 {
-    /*background-image: url('../images/account.png');*/
+    background-image: url('../images/wallet2.png');
+    background-size: 110%;
 }
 
 .card-image4 {
-    /*background-image: url('../images/transfer.png');*/
+    background-image: url('../images/remittance.png');
 }
 
 .card-text-border {
@@ -200,17 +217,23 @@ body {
     text-align: left;
     max-width: 250px;
     width: 100%;
-    padding-left: 40px;
+    padding-left: 35px;
     padding-top: 15px;
-    color: white;
-    text-shadow: 2px 2px 2px #000000;
+    color: black;
+    /*text-shadow: 2px 2px 2px #000000;*/
 }
 .card-text-area .text-header{
     font-size: 0.7em;
 }
 
 .card-text{
-    font-size: 1em;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.card1 .card-text-area, .card3 .card-text-area{
+    color: white;
 }
 
 /* 본문 우측--------------------------------------*/
@@ -234,6 +257,56 @@ body {
     border-radius: 20px;
 }
 
+.main-text {
+    position: absolute;
+    left: 5%;
+    /* 가로 중앙에 배치 */
+    transform: translate(-50%, -50%);
+    /* 정확한 중앙 정렬을 위한 보정 */
+    z-index: 1;
+    /* z-index를 1로 설정하여 배경 이미지 위에 위치시킴 */
+    font-size: 1.5em;
+
+    animation: slideIn 1s linear forwards;
+    opacity: 0; /* 애니메이션이 시작하기 전에 텍스트를 숨기기 */
+    white-space: nowrap; /* 한 줄로 표시 */
+    overflow: hidden; /* 텍스트가 박스 밖으로 나가지 않게 함 */
+    text-align: left;
+}
+
+.user-image {
+    background-image: url('https://img.freepik.com/free-photo/close-up-portrait-beautiful-young-brunette-woman_273609-37281.jpg?w=1060&t=st=1693132252~exp=1693132852~hmac=66052b02abd633e8ae20ad7226d3c9490ca8b78781cd828c7c49eca12b7dfdf3');
+    /* 배경 이미지 설정 */
+    background-size: cover;
+    /* 이미지가 div를 꽉 채우도록 설정 */
+    background-position: unset;
+    /* 이미지를 중앙에 배치 */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* 위치를 상위 요소(main-info)에 상대적으로 배치 */
+    z-index: 0;
+    /* z-index를 0으로 설정하여 텍스트 아래에 위치시킴 */
+    opacity: 0.75;
+    border-radius: 20px;
+}
+
+.user-text {
+    position: absolute;
+    left: 58%;
+    /* 가로 중앙에 배치 */
+    /*transform: translate(-50%, -50%);*/
+    /* 정확한 중앙 정렬을 위한 보정 */
+    z-index: 1;
+    /* z-index를 1로 설정하여 배경 이미지 위에 위치시킴 */
+    font-size: 1.5em;
+    /*animation: slideIn 2s linear forwards;*/
+    /*opacity: 0; !* 애니메이션이 시작하기 전에 텍스트를 숨기기 *!*/
+    white-space: nowrap; /* 한 줄로 표시 */
+    overflow: hidden; /* 텍스트가 박스 밖으로 나가지 않게 함 */
+    text-align: right;
+}
+
 /* 키 프레임 정의 */
 @keyframes slideIn {
     0% {
@@ -246,22 +319,7 @@ body {
     }
 }
 
-.main-text {
-    position: absolute;
-    left: 5%;
-    /* 가로 중앙에 배치 */
-    transform: translate(-50%, -50%);
-    /* 정확한 중앙 정렬을 위한 보정 */
-    z-index: 1;
-    /* z-index를 1로 설정하여 배경 이미지 위에 위치시킴 */
-    font-size: 1.5em;
 
-    animation: slideIn 2s linear forwards;
-    opacity: 0; /* 애니메이션이 시작하기 전에 텍스트를 숨기기 */
-    white-space: nowrap; /* 한 줄로 표시 */
-    overflow: hidden; /* 텍스트가 박스 밖으로 나가지 않게 함 */
-    text-align: left;
-}
 
 
 .user-info {

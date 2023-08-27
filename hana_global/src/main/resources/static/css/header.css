@@ -2,20 +2,21 @@
 .header {
     grid-area: header;
     height: 20vh;
-    border-radius: 15px;
-    max-height: 150px;
+    max-height: 120px;
     /* overflow: hidden; */
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr;
     grid-template-areas:
-      "logo . language"
+      "blank blank language"
       "logo menubar login-box"
-      ". blank blank"
+      "logo menubar login-box"
 ;
     margin-left: 10%;
     margin-right: 10%;
     align-items: center;
+    /*border-bottom: 1px solid rgba(51, 51, 51, 0.49);*/
+
 }
 .blank{
     display: grid;
@@ -27,7 +28,11 @@
     display: grid;
     grid-area: menubar;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    align-items: center;
+    justify-items: center;
+}
+.menubar a {
+    text-decoration: none;
+    color: black;
 }
 .logo {
     display: grid;
@@ -38,8 +43,8 @@
 }
 
 .hana_logo {
-    width: 400px;
-    min-width: 400px;
+    width: 300px;
+    min-width: 250px;
     align-self: center;
 }
 
@@ -82,6 +87,7 @@
     transition: background-color 0.3s;
     border-radius: 5px;
     margin-left: 10px; /* SignIn 버튼과 간격 주기 */
+    text-align: center;
 }
 
 .signup a, .signin a {

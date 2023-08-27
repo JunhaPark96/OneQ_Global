@@ -79,8 +79,8 @@ public class MemberController {
 
     // 로그아웃
     @GetMapping("/signout")
-    public String signOut(SessionStatus status){
-        status.setComplete();
+    public String signOut(HttpSession session){
+        session.invalidate();
         System.out.println("로그아웃 완료");
         return "redirect:/";
     }

@@ -11,7 +11,7 @@
     grid-template-areas:
       "logo . language"
       "logo menubar login-box"
-      "logo blank blank"
+      ". blank blank"
 ;
     margin-left: 10%;
     margin-right: 10%;
@@ -20,6 +20,7 @@
 .blank{
     display: grid;
     grid-area: blank;
+    height: 10px;
 }
 
 .menubar{

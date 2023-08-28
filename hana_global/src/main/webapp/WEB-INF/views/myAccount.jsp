@@ -7,7 +7,6 @@ Created by IntelliJ IDEA.
   Time: 오후 3:47
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -33,25 +32,13 @@ Created by IntelliJ IDEA.
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
-            <c:forEach items="${accountList}" var="account" varStatus="loop">
-
-            </c:forEach>
-            <%--<%
-                List<Account> accounts = new ArrayList<>();
-                accounts.add(new Account("1234-5678-9012", 1, "주계좌", "1234", "1,000,000", "2021-01-01", 1));
-                accounts.add(new Account("2515-5678-9012", 1, "저축계좌", "1514", "2,000,000", "2021-01-01", 1));
-                // ... 계좌 정보 추가
-            %>--%>
 
             <!-- 슬라이드 페이지 -->
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
-                    <% for(int i = 0; i < accounts.size(); i++) {
-                        Account account = accounts.get(i);
-                        boolean isActive = (i == 0);
-                    %>
-                    <div class="carousel-item <%= isActive ? "active" : "" %>">
-<%--                        계좌구역--%>
+<%--            <c:forEach items="${memberAccDTO}" var="account" varStatus="loop">--%>
+<%--                <div class="carousel-item <%= loop.index == 0 ? "active" : "" %>">--%>
+                <%--                        계좌구역--%>
                         <div class="row justify-content-center">
 <%--                            왼블럭--%>
                             <div class="col-md-4 gradient-custom text-center text-black">
@@ -76,13 +63,13 @@ Created by IntelliJ IDEA.
                                             <h4>예금주명</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 박준하
-                                                ${account.getUserSeq()} </p>
+<%--                                                ${account.name} </p>--%>
                                         </div>
                                         <div class="col-6">
                                             <h4>계좌종류</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 주거래 통장
-                                                ${account.getAcName()}</p>
+<%--                                                ${account.acName}</p>--%>
                                         </div>
                                     </div>
 
@@ -91,13 +78,13 @@ Created by IntelliJ IDEA.
                                             <h4>계좌번호</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 1111-2222-3333-4444
-                                                ${account.getAcNo()}</p>
+<%--                                                ${account.acNo}</p>--%>
                                         </div>
                                         <div class="col-6">
                                             <h4>잔액</h4>
                                             <p class="text-muted" style="font-size:20px">
                                                 10,000,000
-                                                ${account.getBalance()}원</p>
+<%--                                                ${account.balance}원</p>--%>
                                         </div>
                                         <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
 <%--                                            <input style="margin-top:-30px;margin-left: 30px !important;"--%>
@@ -111,7 +98,7 @@ Created by IntelliJ IDEA.
                                             <h4>계좌개설날짜</h4>
                                             <p class="text-muted" style="font-size:22px">
                                                 2023-05-12
-                                                ${account.getOpenDate()} </p>
+<%--                                                ${account.openDate} </p>--%>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <h4>마지막 거래 날짜</h4>
@@ -132,7 +119,7 @@ Created by IntelliJ IDEA.
                             </div>
                         </div>
                     </div>
-                    <% } %>
+<%--            </c:forEach>--%>
                 </div>
 
                 <!-- 컨트롤 버튼 -->

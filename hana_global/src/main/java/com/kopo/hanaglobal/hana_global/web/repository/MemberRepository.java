@@ -11,4 +11,6 @@ public interface MemberRepository {
     public Member signIn(LoginDTO loginDTO);
 
     public void signUp(Member member);
+
+    public Member findMemberById(int memberId);
 }

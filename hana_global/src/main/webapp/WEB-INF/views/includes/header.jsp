@@ -54,41 +54,5 @@
     </div>
 </div>
 
-<!-- Login Modal -->
-<%--<div id="loginModal" class="modal">
-    <div class="modal-content">
-        &lt;%&ndash;<span class="close">&times;</span>
-        <div class="loginHeader">Login</div>&ndash;%&gt;
-            <div class="modal-header">
-                <div class="loginHeader">Login</div>
-                <span class="close">&times;</span>
-            </div>
-        <form action="/signinAction" method="post" class="loginInput">
-            <div class="loginField loginId">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="Username" required>
-            </div>
-            <div class="loginField loginPw">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-            </div>
-            <div class="loginButton">
-                <input type="submit" value="Login" class="loginBtn">
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var closeButton = document.querySelector(".close");
-        var modal = document.getElementById("loginModal");
-
-        closeButton.addEventListener("click", closeModal);
-        window.addEventListener("click", outsideModalClick);
-    });
-
-</script>--%>
 </body>
 </html>

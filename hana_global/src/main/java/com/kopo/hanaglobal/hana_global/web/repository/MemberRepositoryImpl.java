@@ -16,7 +16,6 @@ public class MemberRepositoryImpl implements MemberRepository{
     @Override
     public List<Member> getMemberAll() {
         List<Member> memberList = sqlSessionTemplate.selectList("com.kopo.hanaglobal.hana_global.web.repository.MemberRepository.selectMemberAll");
-//        List<Member> memberList = sqlSessionTemplate.selectList("selectMemberAll");
         return memberList;
     }
 
@@ -29,6 +28,12 @@ public class MemberRepositoryImpl implements MemberRepository{
     @Override
     public void signUp(Member member) {
 
+    }
+
+    @Override
+    public Member findMemberById(int memberId) {
+        Member member = sqlSessionTemplate.selectOne("com.kopo.hanaglobal.hana_global.web.repository.MemberRepository.findMemberById", memberId);
+        return member;
     }
 
 }

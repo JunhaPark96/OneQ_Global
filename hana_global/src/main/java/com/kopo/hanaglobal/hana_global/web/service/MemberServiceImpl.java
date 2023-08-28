@@ -33,4 +33,9 @@ public class MemberServiceImpl implements MemberService{
     public void signUp(Member member) {
 
     }
+
+    @Override
+    public Member findMemberById(int memberId) {
+        return memberRepository.findMemberById(memberId);
+    }
 }

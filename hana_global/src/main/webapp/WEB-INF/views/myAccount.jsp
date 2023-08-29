@@ -38,6 +38,81 @@
 
             <!-- 슬라이드 페이지 -->
             <div id="carouselExample" class="carousel slide">
+                <%--                <div class="carousel-inner">--%>
+                <%--                    <c:forEach items="${memberAccDTO}" var="account" varStatus="loop" begin="0">--%>
+                <%--                        <div class="carousel-item <c:if test="${loop.index == 0}">active</c:if>">--%>
+                <%--                                &lt;%&ndash;                        계좌구역&ndash;%&gt;--%>
+                <%--                            <div class="row justify-content-center">--%>
+                <%--                                    &lt;%&ndash;                            왼블럭&ndash;%&gt;--%>
+                <%--                                <div class="col-md-4 gradient-custom text-center text-black">--%>
+                <%--                                    <!-- TODO: 왼쪽 파트 -->--%>
+                <%--&lt;%&ndash;                                    <h5 style="font-size:20px;"> ${account.name} <br/>고객님</h5>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;                                    <p>반갑습니다!</p>&ndash;%&gt;--%>
+                <%--                                </div>--%>
+                <%--                                    &lt;%&ndash;                            오른쪽 블럭&ndash;%&gt;--%>
+                <%--                                <div class="col-md-8 ">--%>
+                <%--                                    <div class="card-body pe-5">--%>
+                <%--                                        <h4>View Account Information</h4>--%>
+                <%--                                        <hr class="mt-0 mb-4">--%>
+
+                <%--                                        <div class="row pt-1">--%>
+                <%--                                            <div class="col-6">--%>
+                <%--                                                <h4>예금주명</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                <%--                                                        ${account.name} </p>--%>
+                <%--                                            </div>--%>
+                <%--                                            <div class="col-6">--%>
+                <%--                                                <h4>계좌종류</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                <%--                                                        ${account.acName}</p>--%>
+                <%--                                            </div>--%>
+                <%--                                        </div>--%>
+
+                <%--                                        <div class="row pt-1">--%>
+                <%--                                            <div class="col-12">--%>
+                <%--                                                <h4>계좌번호</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                <%--                                                        ${account.acNo}</p>--%>
+                <%--                                            </div>--%>
+                <%--                                            <div class="col-6">--%>
+                <%--                                                <h4>잔액</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:20px">--%>
+                <%--                                                        ${account.balance}원</p>--%>
+                <%--                                            </div>--%>
+                <%--                                            <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">--%>
+                <%--                                                    &lt;%&ndash;                                            <input style="margin-top:-30px;margin-left: 30px !important;"&ndash;%&gt;--%>
+                <%--                                                    &lt;%&ndash;                                                   class="form-check-input ms-auto" type="checkbox" id="navbarFixed"&ndash;%&gt;--%>
+                <%--                                                    &lt;%&ndash;                                                   onclick="navbarFixed(this)" checked="checked">&ndash;%&gt;--%>
+                <%--                                            </div>--%>
+                <%--                                        </div>--%>
+
+                <%--                                        <div class="row pt-1">--%>
+                <%--                                            <div class="col-6 mb-3">--%>
+                <%--                                                <h4>계좌개설날짜</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                <%--                                                        ${account.signupDate} </p>--%>
+                <%--                                            </div>--%>
+                <%--                                            <div class="col-6 mb-3">--%>
+                <%--                                                <h4>마지막 거래 날짜</h4>--%>
+                <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                <%--                                                    2023-08-19--%>
+                <%--                                                        &lt;%&ndash;${account.getLastTransactionDate()}&ndash;%&gt;</p>--%>
+                <%--                                            </div>--%>
+                <%--                                        </div>--%>
+                <%--                                        <hr>--%>
+
+                <%--                                        <section class="certContain">--%>
+                <%--                                            <div class="btnArea" id="btnFclArea">--%>
+                <%--                                                <a href="/account_details" id="btnCancel" class="btn_s">거래 내역</a>--%>
+                <%--                                                <a href="/account_transfer" id="btnNext" class="btn_p">계좌 이체</a>--%>
+                <%--                                            </div>--%>
+                <%--                                        </section>--%>
+                <%--                                    </div>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                    </c:forEach>--%>
+                <%--                </div>--%>
                 <div class="carousel-inner">
                     <c:forEach items="${memberAccDTO}" var="account" varStatus="loop" begin="0">
                         <div class="carousel-item <c:if test="${loop.index == 0}">active</c:if>">
@@ -46,43 +121,74 @@
                                     <%--                            왼블럭--%>
                                 <div class="col-md-4 gradient-custom text-center text-black">
                                     <!-- TODO: 왼쪽 파트 -->
-                                    <img src="./images/myAccount.png"
-                                         alt="Avatar" class="img-fluid my-5" style="width: 130px;"/>
-                                    <div class="myAccount"></div>
-                                    <h5 style="font-size:20px;"> ${account.name} <br/>고객님</h5>
-                                    <p>반갑습니다!</p>
-                                    <div class="circle">
-
-                                    </div>
+                                        <%--                                    <h5 style="font-size:20px;"> ${account.name} <br/>고객님</h5>--%>
+                                        <%--                                    <p>반갑습니다!</p>--%>
                                 </div>
                                     <%--                            오른쪽 블럭--%>
                                 <div class="col-md-8 ">
                                     <div class="card-body pe-5">
-                                        <h4>View Account Information</h4>
-                                        <hr class="mt-0 mb-4">
-
                                         <div class="row pt-1">
                                             <div class="col-6">
-                                                <h4>예금주명</h4>
-                                                <p class="text-muted" style="font-size:22px">
-                                                        ${account.name} </p>
+                                                <h4>View Account Information</h4>
                                             </div>
                                             <div class="col-6">
-                                                <h4>계좌종류</h4>
-                                                <p class="text-muted" style="font-size:22px">
-                                                        ${account.acName}</p>
+                                                <h5><string>계좌종류</string> &nbsp;&nbsp;
+                                                        <span class="text-bold">
+                                                        ${account.acName}</span>
+                                                </h5>
+
+<%--                                                <p class="text-muted" style="font-size:22px">--%>
+<%--                                                        ${account.acName}</p>--%>
                                             </div>
                                         </div>
+                                        <hr class="mt-0 mb-3">
+<%--                                        <div class="col pt-1 text-end ">--%>
+<%--                                            <div class="col-6">--%>
+<%--                                            </div>--%>
+<%--                                            <div class="col-6 text-end">--%>
+<%--                                                <h4 class="text-start">마지막 거래 날짜</h4>--%>
+<%--                                                <p class="text-muted p-border" style="font-size:22px">--%>
+<%--                                                    2023-08-19--%>
+<%--                                                        &lt;%&ndash;${account.getLastTransactionDate()}&ndash;%&gt;</p>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+                                        <div class="col-grid">
+                                            <div class="grid-left">
+                                                <div class="row pt-1" style="height: 50px">
+                                                    <div class="col d-flex align-items-center">
+                                                        <h3>예금주명 &nbsp;&nbsp;
+                                                            <span class="text-bold"> ${account.name}</span>
+                                                        </h3>
+<%--                                                        <p class="text-muted" style="font-size:22px">--%>
+<%--                                                                ${account.name}--%>
+<%--                                                        </p>--%>
+                                                    </div>
+                                                </div>
+                                                <div class="account-image">
+                                                <div class="myAccount"></div>
+                                                </div>
 
-                                        <div class="row pt-1">
-                                            <div class="col-12">
-                                                <h4>계좌번호</h4>
-                                                <p class="text-muted" style="font-size:22px">
+                                            </div>
+                                        <div class="col pt-1 grid-right">
+                                            <div class="col">
+                                                <h4 class="test-start">계좌개설날짜</h4>
+                                                <p class="text-muted text-end p-border" style="font-size:22px">
+                                                        ${account.signupDate} </p>
+                                            </div>
+                                            <div class="col text-end">
+                                                <h4 class="text-start">마지막 거래 날짜</h4>
+                                                <p class="text-muted p-border" style="font-size:22px">
+                                                    2023-08-19
+                                                        <%--${account.getLastTransactionDate()}--%></p>
+                                            </div>
+                                            <div class="col text-end">
+                                                <h4 class="text-start">계좌번호</h4>
+                                                <p class="text-muted p-border" style="font-size:22px">
                                                         ${account.acNo}</p>
                                             </div>
-                                            <div class="col-6">
-                                                <h4>잔액</h4>
-                                                <p class="text-muted" style="font-size:20px">
+                                            <div class="col">
+                                                <h4 class="text-start">잔액</h4>
+                                                <p class="text-muted text-end p-border" style="font-size:20px">
                                                         ${account.balance}원</p>
                                             </div>
                                             <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
@@ -91,20 +197,7 @@
                                                     <%--                                                   onclick="navbarFixed(this)" checked="checked">--%>
                                             </div>
                                         </div>
-
-                                        <div class="row pt-1">
-                                            <div class="col-6 mb-3">
-                                                <h4>계좌개설날짜</h4>
-                                                <p class="text-muted" style="font-size:22px">
-                                                        ${account.signupDate} </p>
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <h4>마지막 거래 날짜</h4>
-                                                <p class="text-muted" style="font-size:22px">
-                                                    2023-08-19
-                                                        <%--${account.getLastTransactionDate()}--%></p>
-                                            </div>
-                                        </div>
+                                    </div>
                                         <hr>
 
                                         <section class="certContain">
@@ -119,7 +212,6 @@
                         </div>
                     </c:forEach>
                 </div>
-
                 <!-- 컨트롤 버튼 -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
                         data-bs-slide="prev">

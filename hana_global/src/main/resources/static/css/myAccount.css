@@ -1,76 +1,127 @@
-.carousel{
+.carousel {
 }
-.carousel-item{
+
+.carousel-item {
 
 }
+
 /* main-body 아래의 내용을 상하로 가운데 정렬 */
 .main-body {
     display: grid;
     align-content: center;
 }
 
-.justify-content-center{
+.justify-content-center {
     margin-right: 5%;
     min-width: 700px;
-    min-height: 500px;
+    min-height: 400px;
     margin-right: 0;
     margin-left: 0;
 }
+
 /*왼블럭*/
-.col-md-4{
-    border-bottom: 1px solid rgba(255,204,92,0.8);
-    border-top: 1px solid rgba(255,204,92,0.8);
-    border-left: 1px solid rgba(255,204,92,0.8);
-    margin-top: 20px;
-    margin-bottom: 20px;
+/*.col-md-4{*/
+/*    border-bottom: 1px solid rgba(255,204,92,0.8);*/
+/*    border-top: 1px solid rgba(255,204,92,0.8);*/
+/*    border-left: 1px solid rgba(255,204,92,0.8);*/
+/*    margin-top: 20px;*/
+/*    margin-bottom: 20px;*/
+/*    border-top-left-radius: 15px;*/
+/*    border-bottom-left-radius: 15px;*/
+
+/*    max-width: 150px;*/
+/*    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; !* 입체감 부각 *!*/
+/*    !*background-color: rgba(255,204,92,0.8);*!*/
+/*    background-color: rgba(255, 107, 107, 0.7);*/
+/*}*/
+
+.col-md-4 {
+    border-bottom: 1px solid rgba(1, 128, 133, 0.54);
+    border-top: 1px solid rgba(1, 128, 133, 0.54);
+    border-left: 1px solid rgba(1, 128, 133, 0.54);
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 
-    max-width: 150px;
+    max-width: 25px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
     /*background-color: rgba(255,204,92,0.8);*/
-    background-color: rgba(255, 107, 107, 0.7);
-}
-
-.myAccount{
-    content: url("/images/myAccount.png");
-    display: block;
-    width: 50px;
-    height: 50px;
-}
-
-.circle{
-    content: url("/images/circle.png");
-    display: block;
-    width: 50px;
-    height: 50px;
-    opacity: 0.7;
-    margin-left: 39px;
-    margin-top: 150px;
+    background-color: #016f73;
 }
 
 /*오른쪽블럭*/
-.col-md-8{
-    border-radius: 20px;
+.col-md-8 {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
     /*background-color: rgba(255,227,157,0.8);*/
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
+    min-width: 700px;
 }
 
-.pt-1{
+.account-image {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.myAccount {
+    content: url("/images/kang.png");
+    display: block;
+    width: 210px;
+    height: 210px;
+    margin-right: 20px;
+}
+
+/*.circle{*/
+/*    content: url("/images/circle.png");*/
+/*    display: block;*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    opacity: 0.7;*/
+/*    margin-left: 39px;*/
+/*    margin-top: 150px;*/
+/*}*/
+
+.col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "left-card right-card";
+}
+
+.grid-right {
+    display: grid;
+    grid-area: right-card;
+    margin-left: 12px;
+}
+
+.grid-left {
+    display: grid;
+    grid-area: left-card;
+    grid-template-rows: 0.2fr 1fr;
+}
+
+.pt-1 {
     /*border-bottom: 1px outset #989898;*/
 }
 
-.pt-1 h4{
-    border-bottom: 1px outset gray;
-
+.pt-1 h4 {
+    /*border-bottom: 1px outset gray;*/
 }
 
-.mb-3{
+.pt-1 h5 {
+    text-align: right;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.mb-3 {
     margin-bottom: 0px;
 }
+
 .card-body {
-    margin-top:3%;
+    margin-top: 3%;
     /*border: 1px solid brown;*/
     padding: 20px;
 }
@@ -89,6 +140,13 @@
     color: #666;
 }
 
+.p-border {
+    /*border: 1px solid black;*/
+    border-radius: 15px;
+    background-color: aliceblue;
+    padding-right: 20px;
+}
+
 /*컨트롤 버튼*/
 .carousel-control-prev,
 .carousel-control-next {
@@ -98,6 +156,7 @@
     background-color: transparent;
     border: none;
 }
+
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
     color: #000;
@@ -110,6 +169,7 @@
     gap: 1rem;
     margin-top: 1.5rem;
 }
+
 .btnArea a {
     text-decoration: none;
 }
@@ -127,6 +187,7 @@
 .btn_p:hover {
     background-color: #016f73;
 }
+
 .btn_s {
     background-color: #e9ecef;
     color: #333;
@@ -140,6 +201,7 @@
 .btn_s:hover {
     background-color: #cfd4da;
 }
-btn_p{
+
+btn_p {
     background-color: #018085;
 }

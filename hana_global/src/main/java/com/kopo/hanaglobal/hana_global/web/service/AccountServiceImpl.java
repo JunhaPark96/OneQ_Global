@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
@@ -54,5 +55,14 @@ public class AccountServiceImpl implements AccountService{
             memberAccDTOList.add(memberAccDTO);
         }
         return memberAccDTOList;
+    }
+
+    @Override
+    public List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(String acNo) {
+        List<AccountHistoryResponseDTO> accHistoryList = accountRepository.getTransactionHistoryByAcNo(acNo);
+        for (AccountHistoryResponseDTO a : accHistoryList){
+            System.out.println(a.toString());
+        }
+        return accHistoryList;
     }
 }

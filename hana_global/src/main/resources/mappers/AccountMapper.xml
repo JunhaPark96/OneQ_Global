@@ -35,6 +35,11 @@
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
         FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
     </select>
+    
+    <select id="getTransactionHistoryByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO">
+        SELECT ac_no, trade_date, balance, transaction_amount, transaction_type, target, target_account
+        FROM ACCOUNT_HISTORY where ac_no = #{ac_no}
+    </select>
 
     <!--<select id="findMemberAccounts" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO">
         SELECT

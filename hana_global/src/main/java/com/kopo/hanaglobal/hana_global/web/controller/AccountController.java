@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,4 +51,37 @@ public class AccountController {
         model.addAttribute("accountList", accountList);
         return "account_details";
     }
+
+    @PostMapping("/accountDetail")
+    @ResponseBody
+    public List<AccountHistoryResponseDTO> getAccountDetail(
+            @RequestParam("inqStrDt") String inqStrDt,
+            @RequestParam("inqEndDt") String inqEndDt,
+            @RequestParam("transactionType") String transactionType,
+            @RequestParam("withdrawAccountNo") String withdrawAccountNo) {
+
+        // Get the transaction history
+        List<AccountHistoryResponseDTO> accHistoryList = accountService.getTransactionHistoryByAcNo(withdrawAccountNo);
+
+        // Filter the transaction history by inqStrDt, inqEndDt and transactionType
+        List<AccountHistoryResponseDTO> filteredList = new ArrayList<>();
+//        System.out.println(inqStrDt);
+//        System.out.println(inqEndDt);
+        for (AccountHistoryResponseDTO a : accHistoryList) {
+            System.out.println("시작날짜" + a.getTradeDate().compareTo(inqStrDt));
+            System.out.println("종료날짜" + a.getTradeDate().compareTo(inqEndDt));
+            System.out.println(transactionType);
+            if (a.getTradeDate().compareTo(inqStrDt) >= 0 && a.getTradeDate().compareTo(inqEndDt) <= 0) {
+                if (transactionType.equals("ALL") || a.getTransactionType().equals(transactionType)) {
+                    System.out.println("필터링된 거래내역" + a.toString());
+                    filteredList.add(a);
+                }
+            }
+        }
+
+        // Return the filtered transaction history
+        return filteredList;
+    }
+
+
 }

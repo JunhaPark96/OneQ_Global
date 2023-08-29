@@ -117,8 +117,9 @@ tbody tr td input{
 .btn_s:hover {
     background-color: #cfd4da;
 }
-btn_p{
+.btnArea .btn_p{
     background-color: #018085;
+    max-height: 36px;
 }
 
 /*계좌 내역 테이블*/

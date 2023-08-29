@@ -98,13 +98,13 @@
                                 <td>
                                     <input type="hidden" name="transaction_type" id="transaction_type" value="">
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('all')">전체
+                                            onclick="selectTransType('ALL')">전체
                                     </button>
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('withdrawal')">출금
+                                            onclick="selectTransType('1')">출금
                                     </button>
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('deposit')">입금
+                                            onclick="selectTransType('0')">입금
                                     </button>
                                 </td>
                             </tr>
@@ -124,17 +124,20 @@
                             </tbody>
                         </table>
 
-                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">
-                            <%--                TODO: 계좌 거래내역 조회 기능--%>
-                            <a href="${pageContext.request.contextPath}/account_details" id="btnNext" class="btn_p">조회</a>
+<%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
+<%--                            <a href="${pageContext.request.contextPath}/account_details" id="btnNext" class="btn_p">조회</a>--%>
+<%--                        </div>--%>
+                        <div class="btnArea justify-content-center" id="acc_trans_inquiry">
+                            <input type="button" id="btnNext" class="btn_p" value="조회">
                         </div>
+
                     </div>
                 </div>
 
             </div>
 
             <div class="transaction_history mt-5">
-                <table class="table table-striped table-hover table-bordered">
+                <table id="transactionHistoryTable" class="table table-striped table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>
                         <th>거래일시</th>
@@ -147,7 +150,7 @@
                     </thead>
                     <tbody>
                     <%-- Example Transaction Data --%>
-                    <tr>
+                    <%--<tr>
                         <td>2023-08-20 10:30:15</td>
                         <td>1,000,000원</td>
                         <td>입금</td>
@@ -162,7 +165,7 @@
                         <td>9,500,000원</td>
                         <td>이영희</td>
                         <td>1234-5678-91</td>
-                    </tr>
+                    </tr>--%>
                     </tbody>
                 </table>
             </div>
@@ -178,10 +181,10 @@
     $(document).ready(function () {
         $('#btnNext').click(function () {
 
-            var inqStrDt = document.getElementById('inqStrDt').value;
-            var inqEndDt = document.getElementById('inqEndDt').value;
-            var transactionType = document.getElementById('transaction_type').value;
-            var withdrawAccountNo = document.getElementById('selectAccountForm').value;
+            let inqStrDt = document.getElementById('inqStrDt').value;
+            let inqEndDt = document.getElementById('inqEndDt').value;
+            let transactionType = document.getElementById('transaction_type').value;
+            let withdrawAccountNo = document.getElementById('selectAccountForm').value;
 
             $.ajax({
                 url: '${pageContext.request.contextPath}/accountDetail',
@@ -193,9 +196,22 @@
                     withdrawAccountNo: withdrawAccountNo
                 },
                 success: function (data) {
-                    // Update the transaction history table with the response data
-                    // e.g. $('#transactionHistoryTable').html(data);
+                    // Empty the table body
+                    $('#transactionHistoryTable tbody').empty();
+
+                    // Fill the table with response data
+                    for (let i = 0; i < data.length; i++) {
+                        $('#transactionHistoryTable tbody').append('<tr>' +
+                            '<td>' + data[i].tradeDate + '</td>' +
+                            '<td>' + data[i].transactionAmount + '원</td>' +
+                            '<td>' + data[i].transactionType + '</td>' +
+                            '<td>' + data[i].balance + '원</td>' +
+                            '<td>' + data[i].target + '</td>' +
+                            '<td>' + data[i].targetAccount + '</td>' +
+                            '</tr>');
+                    }
                 },
+
                 error: function () {
                     alert('Error retrieving transaction history.');
                 }

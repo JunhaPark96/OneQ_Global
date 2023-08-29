@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 
@@ -10,4 +11,5 @@ public interface AccountService {
 
     public List<MemberAccDTO> findMemberAccounts(int memberId);
 
+    List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(String acNo);
 }

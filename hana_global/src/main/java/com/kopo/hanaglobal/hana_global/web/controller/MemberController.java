@@ -59,7 +59,7 @@ public class MemberController {
             return "member/signIn";
         } else {    // 로그인 성공 시
             Member member = memberService.signIn(loginDTO);
-            System.out.println(member);
+//            System.out.println(member);
             // 멤버가 없는 경우
             if (member == null){
                 System.out.println("id와 비밀번호를 확인해 주세요");
@@ -67,11 +67,9 @@ public class MemberController {
                 return "member/signIn";
             } else { // 멤버가 있고, 로그인 입력을 제대로 한 경우
                 System.out.println("로그인 성공");
-                System.out.println(member);
+//                System.out.println(member);
                 session.setAttribute("currentMember", member);
                 model.addAttribute("currentMember", member);
-
-
                 return "redirect:/"; // 메인페이지로
             }
         }

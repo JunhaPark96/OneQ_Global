@@ -28,11 +28,11 @@ public class MainController {
         System.out.println("account 페이지");
         return "account";
     }
-    @GetMapping("/myAccount")
-    public String myAccount() {
-        System.out.println("myAccount 페이지");
-        return "myAccount";
-    }
+//    @GetMapping("/myAccount")
+//    public String myAccount() {
+//        System.out.println("myAccount 페이지");
+//        return "myAccount";
+//    }
     @GetMapping("/account_details")
     public String accountDetails() {
         System.out.println("account_details 페이지");

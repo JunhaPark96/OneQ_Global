@@ -33,7 +33,7 @@
     <select id="findAccountByMemberId" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account"
         parameterType="int">
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
-        FROM CHECKING_ACCOUNT where user_seq = #{userSeq};
+        FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
     </select>
 
     <!--<select id="findMemberAccounts" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO">

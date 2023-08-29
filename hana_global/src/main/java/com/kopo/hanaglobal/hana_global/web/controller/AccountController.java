@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,13 +34,25 @@ public class AccountController {
 //        return accountService.findAccountByMemberId(memberId);
 //    }
 
-    @GetMapping("/account/accountInfo")
-    public String getAccountInfo(HttpSession session, Model model) {
+//    @PostMapping("/myAccount")
+//    public String getAccountInfo(HttpSession session, Model model) {
+//        Member member = (Member)session.getAttribute("currentMember");
+//        System.out.println("현재 멤버는 " + member.toString());
+//        List<MemberAccDTO> memberAccDTOList = accountService.findMemberAccounts(member.getUserSeq());
+//        for (MemberAccDTO memberAccDTO : memberAccDTOList){
+//            System.out.println(memberAccDTO.toString());
+//        }
+//        model.addAttribute("memberAccDTO", memberAccDTOList);
+//        return "myAccount";
+//    }
+
+    @GetMapping("/accountInfo")
+    public String AccountInfo(HttpSession session, Model model) {
         Member member = (Member)session.getAttribute("currentMember");
         System.out.println("현재 멤버는 " + member.toString());
         List<MemberAccDTO> memberAccDTOList = accountService.findMemberAccounts(member.getUserSeq());
         for (MemberAccDTO memberAccDTO : memberAccDTOList){
-            System.out.println(memberAccDTO.toString());
+            System.out.println("멤버의 계좌 정보는 " + memberAccDTO.toString());
         }
         model.addAttribute("memberAccDTO", memberAccDTOList);
         return "myAccount";

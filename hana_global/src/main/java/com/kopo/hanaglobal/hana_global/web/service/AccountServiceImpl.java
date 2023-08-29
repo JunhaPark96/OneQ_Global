@@ -35,9 +35,9 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public List<MemberAccDTO> findMemberAccounts(int memberId) {
         Member member = memberRepository.findMemberById(memberId);
-        System.out.println(member.getUserSeq());
+//        System.out.println(member.getUserSeq());
         int userSeq = member.getUserSeq();
-        System.out.println("유저번호 " + userSeq);
+//        System.out.println("유저번호 " + userSeq);
         List<Account> accountList = accountRepository.findAccountByMemberId(userSeq);
         for (Account acc : accountList){
             System.out.println("계좌는 " + acc.toString());

@@ -5,19 +5,13 @@
   Time: 오후 8:07
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ page language="java"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
 <div class="navbar">
@@ -25,7 +19,7 @@
     <li>
         <a href="/account">계좌관리</a>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/account/accountInfo"> 내 계좌</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountInfo"> myAccount</a></li>
             <li><a href="/account_details">계좌 내역</a></li>
             <li><a href="/account_transfer">계좌 이체</a></li>
         </ul>

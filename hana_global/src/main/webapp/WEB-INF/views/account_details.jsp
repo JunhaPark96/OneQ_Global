@@ -16,12 +16,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="./js/account.js"></script>
 
     <link href="./css/service-main.css" rel="stylesheet"/>
     <link href="./css/nav.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/account_details.css" rel="stylesheet"/>
+
+    <%--    캘린더--%>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
 
     <title>내 계좌 확인</title>
 </head>
@@ -54,55 +62,48 @@
                                 <td>
                                     <select class="form-select border-3 w-50" name="withdrawAccountNo"
                                             id="selectAccountForm"
-                                            onchange="changeBallance()" style="height: 55px;">
+                                            onchange="changeBalance()" style="height: 55px;">
                                         <option value="" selected disabled>계좌를 선택하세요.</option>
-                                        <%--<c:forEach items="${accountList}" var="account">
-                                            <option value="${account.accountNo}">
-                                                    ${account.alias} (${account.accountNo})
+                                        <c:forEach items="${accountList}" var="account">
+                                            <option value="${account.acNo}" data-balance="${account.balance}">
+                                                (${account.acNo})
                                             </option>
-                                        </c:forEach>--%>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
+<%--                            기간 조회--%>
                             <tr>
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;조회기간</th>
-                                <%--                                <td>--%>
-                                <%--                                    <input class="form-control" type="text" id="demo" name="demo" value=""/>--%>
-                                <%--                                </td>--%>
                                 <td class="tbl_left">
                                     <div class="tbl_in">
-                                        <input type="text" id="inqStrDt" name="inqStrDt" data-nice-class="cal"
-                                               value="2023-08-09" title="Enter Start Date of Inquiry Period"
-                                               maxlength="10" isinit="true">
+                                        <input type="text" id="inqStrDt" name="inqStrDt" readonly>
+                                        <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
+                                             alt="Start Date Calendar Tab" onclick="openCalendar('inqStrDt')">
 
-                                        <a href="#//HanaBank"
-                                           onclick="opb.util.calendar.openCalendar_fnc('inqStrDt',this,'Y-m-d');"><img
-                                                src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
-                                                alt="Start Date Calendar Tab"></a>
                                         ~
-                                        <input type="text" id="inqEndDt" name="inqEndDt" data-nice-class="cal"
-                                               value="2023-08-22" title="Enter End Date of Inquiry Period"
-                                               maxlength="10" isinit="true">
-                                        <a href="#//HanaBank"
-                                           onclick="opb.util.calendar.openCalendar_fnc('inqEndDt',this,'Y-m-d');"><img
-                                                src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
-                                                alt="End Date Calendar Tab"></a><br>
+
+                                        <input type="text" id="inqEndDt" name="inqEndDt" readonly>
+                                        <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
+                                             alt="End Date Calendar Tab" onclick="openCalendar('inqEndDt')">
+
+                                        <br>
                                         <span class="ml5">(Enter 8-digit date in YYYYMMDD format. e.g. 20120101)</span>
                                     </div>
                                 </td>
                             </tr>
+<%--                            거래 유형 선택--%>
                             <tr>
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;거래유형</th>
                                 <td>
-                                    <%--                                    TODO: 입출금 타입 클릭 버튼 구현--%>
                                     <input type="hidden" name="transaction_type" id="transaction_type" value="">
-                                    <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
+                                    <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
                                             onclick="selectTransType('all')">전체
                                     </button>
-                                    <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
+                                    <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
                                             onclick="selectTransType('withdrawal')">출금
                                     </button>
-                                    <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
+                                    <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
                                             onclick="selectTransType('deposit')">입금
                                     </button>
                                 </td>
@@ -112,8 +113,8 @@
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
                                 <td>
                                     <div class="btnArea" id="btnFclArea">
-                                        <p class="text-center align-middle">
-                                            10,000,000
+                                        <p class="text-center align-middle" id="accountBalance">
+                                            <%--                                            10,000,000--%>
                                         </p>
                                         <a href="/account_transfer" class="btn_p">계좌 이체</a>
                                     </div>
@@ -125,7 +126,7 @@
 
                         <div class="btnArea justify-content-center " id="acc_trans_inquiry">
                             <%--                TODO: 계좌 거래내역 조회 기능--%>
-                            <a href="#//hana_bank" id="btnNext" class="btn_p">조회</a>
+                            <a href="${pageContext.request.contextPath}/account_details" id="btnNext" class="btn_p">조회</a>
                         </div>
                     </div>
                 </div>
@@ -172,6 +173,37 @@
 <footer>
 </footer>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnNext').click(function () {
+
+            var inqStrDt = document.getElementById('inqStrDt').value;
+            var inqEndDt = document.getElementById('inqEndDt').value;
+            var transactionType = document.getElementById('transaction_type').value;
+            var withdrawAccountNo = document.getElementById('selectAccountForm').value;
+
+            $.ajax({
+                url: '${pageContext.request.contextPath}/accountDetail',
+                method: 'post',
+                data: {
+                    inqStrDt: inqStrDt,
+                    inqEndDt: inqEndDt,
+                    transactionType: transactionType,
+                    withdrawAccountNo: withdrawAccountNo
+                },
+                success: function (data) {
+                    // Update the transaction history table with the response data
+                    // e.g. $('#transactionHistoryTable').html(data);
+                },
+                error: function () {
+                    alert('Error retrieving transaction history.');
+                }
+            });
+        });
+    });
+
+</script>
 </body>
 
 </html>

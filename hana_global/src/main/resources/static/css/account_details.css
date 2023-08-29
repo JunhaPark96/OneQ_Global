@@ -156,3 +156,6 @@ btn_p{
     border: 1px solid gray;
 }
 
+.pushButton:active{
+    border: 2px solid #007BFF;
+}

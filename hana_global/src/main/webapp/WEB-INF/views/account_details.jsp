@@ -179,7 +179,10 @@
 
 <script>
     $(document).ready(function () {
+        $('#transactionHistoryTable thead').hide(); // 처음엔 숨기기
+
         $('#btnNext').click(function () {
+            $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
 
             let inqStrDt = document.getElementById('inqStrDt').value;
             let inqEndDt = document.getElementById('inqEndDt').value;
@@ -201,10 +204,11 @@
 
                     // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
+                        let transactionTypeText = data[i].transactionType == '0' ? '입금' : '출금';
                         $('#transactionHistoryTable tbody').append('<tr>' +
                             '<td>' + data[i].tradeDate + '</td>' +
                             '<td>' + data[i].transactionAmount + '원</td>' +
-                            '<td>' + data[i].transactionType + '</td>' +
+                            '<td>' + transactionTypeText + '</td>' +
                             '<td>' + data[i].balance + '원</td>' +
                             '<td>' + data[i].target + '</td>' +
                             '<td>' + data[i].targetAccount + '</td>' +

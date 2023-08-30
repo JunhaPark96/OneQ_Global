@@ -109,7 +109,7 @@
                             <tr>
                                 <td class="th">비자 번호</td>
                                 <td>
-                                    <div class="uniformImg"><img src="./images/visaEx.jpg" alt=""></div>
+                                    <div class="uniformImg"><img src="./images/visaEx.jpg" style="max-height: 190px;" alt="비자이미지"></div>
                                     <div class="iptWrap">
                                         <input type="text" class="ipt uiAct" placeholder="비자 번호를 입력해주세요." title="비자 번호 입력" id="visaNumber" name="visaNumber">
                                     </div>

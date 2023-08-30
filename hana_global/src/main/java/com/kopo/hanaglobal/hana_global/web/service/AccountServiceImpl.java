@@ -108,4 +108,5 @@ public class AccountServiceImpl implements AccountService{
         // 6. 받는 사람의 계좌 내역에 입금 내역 추가
         insertAccHistTransaction(toAcNo, toBalance, amount, 0, fromName, fromAcNo);
     }
+
 }

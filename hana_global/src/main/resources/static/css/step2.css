@@ -6,6 +6,7 @@
     border-width: 1px;
     border-radius: 5px;
     transition: border-color 0.3s;
+    margin-bottom: 10px;
 }
 .uniformImg {
     overflow: hidden;  /* 이미지가 이 컨테이너를 벗어나지 않도록 합니다. */
@@ -48,11 +49,11 @@
 /* 기본 스타일 초기화 */
 .uploadArea,
 .uploadField {
-    margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     vertical-align: baseline;
+    margin-top: 10px;
 }
 
 /* 업로드 섹션 스타일 */

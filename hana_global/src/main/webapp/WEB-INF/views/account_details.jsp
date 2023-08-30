@@ -162,7 +162,6 @@
         $('#transactionHistoryTable thead').hide(); // 처음엔 숨기기
 
         $('#btnNext').click(function () {
-            $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
 
             let inqStrDt = document.getElementById('inqStrDt').value;
             let inqEndDt = document.getElementById('inqEndDt').value;
@@ -180,6 +179,7 @@
                 },
                 success: function (data) {
                     // Empty the table body
+            $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
                     $('#transactionHistoryTable tbody').empty();
 
                     // Fill the table with response data
@@ -190,8 +190,8 @@
                             '<td>' + data[i].transactionAmount + '원</td>' +
                             '<td>' + transactionTypeText + '</td>' +
                             '<td>' + data[i].balance + '원</td>' +
-                            '<td>' + data[i].target + '</td>' +
-                            '<td>' + data[i].targetAccount + '</td>' +
+                            '<td>' + data[i].participant + '</td>' +
+                            '<td>' + data[i].participantAccount + '</td>' +
                             '</tr>');
                     }
                 },

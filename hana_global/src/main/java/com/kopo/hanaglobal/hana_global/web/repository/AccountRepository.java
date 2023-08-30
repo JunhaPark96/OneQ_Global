@@ -12,7 +12,7 @@ import java.util.List;
 public interface AccountRepository {
     public List<Account> findAccountByMemberId(int memberId);
 
-    public List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(String acNo);
+    public List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(@Param("ac_no") String acNo);
 
     public Account getAccountByAcNo(String acNo);
 

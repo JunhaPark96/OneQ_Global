@@ -65,15 +65,17 @@ public class AccountController {
 
         // Filter the transaction history by inqStrDt, inqEndDt and transactionType
         List<AccountHistoryResponseDTO> filteredList = new ArrayList<>();
-//        System.out.println(inqStrDt);
-//        System.out.println(inqEndDt);
+        System.out.println(inqStrDt);
+        System.out.println(inqEndDt);
         for (AccountHistoryResponseDTO a : accHistoryList) {
-//            System.out.println("시작날짜" + a.getTradeDate().compareTo(inqStrDt));
-//            System.out.println("종료날짜" + a.getTradeDate().compareTo(inqEndDt));
+            System.out.println("거래날짜: " + a.getTradeDate());
+            System.out.println("시작날짜: " + inqStrDt);
+            System.out.println("시작날짜" + a.getTradeDate().compareTo(inqStrDt));
+            System.out.println("종료날짜" + a.getTradeDate().compareTo(inqEndDt));
             System.out.println(transactionType);
             if (a.getTradeDate().compareTo(inqStrDt) >= 0 && a.getTradeDate().compareTo(inqEndDt) <= 0) {
                 if (transactionType.equals("ALL") || a.getTransactionType().equals(transactionType)) {
-//                    System.out.println("필터링된 거래내역" + a.toString());
+                    System.out.println("필터링된 거래내역" + a.toString());
                     filteredList.add(a);
                 }
             }

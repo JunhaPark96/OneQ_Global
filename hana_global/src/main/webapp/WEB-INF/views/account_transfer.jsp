@@ -31,7 +31,6 @@
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
-            <form action="${pageContext.request.contextPath}/accountTransfer" method="post">
             <h2 class="h2-account">Account Transfer</h2>
 
             <%--                        송금구역--%>
@@ -39,76 +38,83 @@
                 <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
                     <div class="card-body pe-5">
                         <table class="table table-hover mb-3 border-light">
-                            <tr>
-                                <th scope="col" class="h5 text-black-50 border-light" style="width: 15%"></th>
-                                <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="text border-light">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;계좌선택</th>
-                                <td>
-                                    <select class="form-select border-3 w-50" name="senderAccountNo"
-                                            id="selectAccountForm"
-                                            onchange="changeBalance()" style="height: 45px;">
-                                        <option value="" selected disabled>계좌를 선택하세요.</option>
-                                        <c:forEach items="${accountList}" var="account">
-                                            <option value="${account.acNo}" data-balance="${account.balance}">
-                                                (${account.acNo})
-                                            </option>
-                                        </c:forEach>
-<%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
-                                        <!-- 임의의 계좌 추가 -->
-                                    </select>
-                                </td>
-                            </tr>
+                            <form action="${pageContext.request.contextPath}/accountTransfer" method="post">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="h5 text-black-50 border-light" style="width: 15%"></th>
+                                    <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="text border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;계좌선택</th>
+                                    <td>
+                                        <select class="form-select border-3 w-50" name="senderAccountNo"
+                                                id="selectAccountForm"
+                                                onchange="changeBalance()" style="height: 45px;">
+                                            <option value="" selected disabled>계좌를 선택하세요.</option>
+                                            <c:forEach items="${accountList}" var="account">
+                                                <option value="${account.acNo}" data-balance="${account.balance}">
+                                                    (${account.acNo})
+                                                </option>
+                                            </c:forEach>
+                                            <%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
+                                            <!-- 임의의 계좌 추가 -->
+                                        </select>
+                                    </td>
+                                </tr>
 
-                            <tr class="border-light">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
-                                <td>
-                                    <div class="btnArea" id="btnFclArea">
-                                        <p class="text-center align-middle" id="accountBalance">
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr class="border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
+                                    <td>
+                                        <div class="btnArea" id="btnFclArea">
+                                            <p class="text-center align-middle" id="accountBalance">
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                            <tr class="border-light">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;비밀번호</th>
-                                <td>
-                                    <input type="password" name="account_password" id="account_password"
-                                           placeholder="계좌 비밀번호" maxlength="4"/>
-                                </td>
-                            </tr>
+                                <tr class="border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;비밀번호</th>
+                                    <td>
+                                        <input type="password" name="account_password" id="account_password"
+                                               placeholder="계좌 비밀번호" maxlength="4"/>
+                                    </td>
+                                </tr>
 
-                            <tr class="border-light">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;송금 금액</th>
-                                <td>
-                                    <%--                                    TODO: 계좌 연결, 금액 입력 받기--%>
-                                    <%--                                    <input type="hidden" name="transfer_amount" id="transfer_amount" value="">--%>
-                                    <div class="btn-amount">
+                                <tr class="border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;송금 금액</th>
+                                    <td>
+                                        <%--                                    TODO: 계좌 연결, 금액 입력 받기--%>
+                                        <%--                                    <input type="hidden" name="transfer_amount" id="transfer_amount" value="">--%>
+                                        <div class="btn-amount">
 
-                                        <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
-                                                onclick="selectAmount('10000')">10,000
-                                        </button>
-                                        <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
-                                                onclick="selectAmount('50000')">50,000
-                                        </button>
-                                        <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
-                                                onclick="selectAmount('100000')">100,000
-                                        </button>
-                                        <button type="button" class="btn bg-white  border-1  me-2 pushButton border-2"
-                                                onclick="selectAmount('1000000')">1,000,000
-                                        </button>
-                                    </div>
-                                    <div class="input-amount">
-                                        <input type="text" name="transfer_amount" id="transfer_amount" value="10000"/>
-                                        KRW
+                                            <button type="button"
+                                                    class="btn bg-white  border-1  me-2 pushButton border-2"
+                                                    onclick="selectAmount('10000')">10,000
+                                            </button>
+                                            <button type="button"
+                                                    class="btn bg-white  border-1  me-2 pushButton border-2"
+                                                    onclick="selectAmount('50000')">50,000
+                                            </button>
+                                            <button type="button"
+                                                    class="btn bg-white  border-1  me-2 pushButton border-2"
+                                                    onclick="selectAmount('100000')">100,000
+                                            </button>
+                                            <button type="button"
+                                                    class="btn bg-white  border-1  me-2 pushButton border-2"
+                                                    onclick="selectAmount('1000000')">1,000,000
+                                            </button>
+                                        </div>
+                                        <div class="input-amount">
+                                            <input type="text" name="transfer_amount" id="transfer_amount"
+                                                   value="10000"/>
+                                            KRW
 
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
                         </table>
                     </div>
                 </div>
@@ -209,7 +215,8 @@
                                         <%--                                        <p class="text-center align-middle">--%>
                                         <%--                                            690-11-028690--%>
                                         <%--                                        </p>--%>
-                                        <input type="text" name="recipientAccountNo" id="recipientAccountNo" placeholder="계좌번호 입력"/>
+                                        <input type="text" name="recipientAccountNo" id="recipientAccountNo"
+                                               placeholder="계좌번호 입력"/>
                                         <input type="button" class="btn btn-primary" id="checkReceiverBtn" value="조회"
                                                onclick="fetchReceiverName()">
                                     </div>
@@ -225,16 +232,16 @@
                             </tbody>
                         </table>
 
-<%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
-<%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
-<%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
-<%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
-<%--                        </div>--%>
+                        <%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
+                        <%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
+                        <%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
+                        <%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
+                        <%--                        </div>--%>
 
-                            <!-- ... 기타 입력 필드 ... -->
-                            <div class="btnArea justify-content-center " id="acc_trans_inquiry">
-                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">
-                            </div>
+                        <!-- ... 기타 입력 필드 ... -->
+                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">
+                            <input type="submit" id="btnNext" class="btn_p" value="송금 하기">
+                        </div>
                         </form>
                     </div>
                 </div>

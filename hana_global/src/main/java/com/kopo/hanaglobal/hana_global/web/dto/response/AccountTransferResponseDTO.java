@@ -7,12 +7,14 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AccountHistoryResponseDTO {
+public class AccountTransferResponseDTO {
+    private Integer accHistNo;
     private String acNo;
     private String tradeDate;
-    private Integer transactionAmount;
-    private String transactionType;
     private Integer balance;
-    private String target;
-    private String targetAccount;
+    private Integer transactionAmount;
+    private Integer transactionType;
+    private String participant;
+    private String participantAccount;
+
 }

@@ -36,22 +36,23 @@
         FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
     </select>
     
+    <select id="getAccountByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account" parameterType="String">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT where ac_no = #{ac_no}
+    </select>
+    
     <select id="getTransactionHistoryByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO">
-        SELECT ac_no, trade_date, balance, transaction_amount, transaction_type, target, target_account
+        SELECT ac_no, trade_date, balance, transaction_amount, transaction_type, PARTICIPANT, PARTICIPANT_ACCOUNT
         FROM ACCOUNT_HISTORY where ac_no = #{ac_no}
     </select>
 
-    <!--<select id="findMemberAccounts" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO">
-        SELECT
-            m.name,
-            m.signup_date as signupDate,
-            a.ac_no as acNo,
-            a.balance,
-            a.ac_name as acName
-        FROM
-            member m
-                JOIN
-            checking_account a ON m.user_seq = a.user_seq
-    </select>-->
+    <update id="updateAccountBalance">
+        UPDATE CHECKING_ACCOUNT SET balance = #{amount} WHERE ac_no = #{acNo}
+    </update>
 
+
+    <insert id="insertAccHistTransaction">
+        INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)
+        VALUES (ACCOUNT_HISTORY_SEQ.NEXTVAL, #{ac_no}, #{balance}, #{transaction_amount}, #{transaction_type}, #{participant}, #{participant_account})
+    </insert>
 </mapper>

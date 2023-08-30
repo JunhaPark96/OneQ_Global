@@ -21,7 +21,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/accountInfo"> myAccount</a></li>
             <li><a href="${pageContext.request.contextPath}/accountDetail">계좌 내역</a></li>
-            <li><a href="/account_transfer">계좌 이체</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountTransfer">계좌 이체</a></li>
         </ul>
     </li>
     <li>

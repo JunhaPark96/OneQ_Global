@@ -43,7 +43,7 @@ public class AccountController {
     @GetMapping("/accountDetail")
     public String AccountDetail(@ModelAttribute("currentMember") Member member, Model model) {
 //        Member member = (Member)session.getAttribute("currentMember");
-        System.out.println("현재 멤버는 " + member.toString());
+//        System.out.println("현재 멤버는 " + member.toString());
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
         for (Account account : accountList){
             System.out.println(account.toString());
@@ -68,12 +68,12 @@ public class AccountController {
 //        System.out.println(inqStrDt);
 //        System.out.println(inqEndDt);
         for (AccountHistoryResponseDTO a : accHistoryList) {
-            System.out.println("시작날짜" + a.getTradeDate().compareTo(inqStrDt));
-            System.out.println("종료날짜" + a.getTradeDate().compareTo(inqEndDt));
+//            System.out.println("시작날짜" + a.getTradeDate().compareTo(inqStrDt));
+//            System.out.println("종료날짜" + a.getTradeDate().compareTo(inqEndDt));
             System.out.println(transactionType);
             if (a.getTradeDate().compareTo(inqStrDt) >= 0 && a.getTradeDate().compareTo(inqEndDt) <= 0) {
                 if (transactionType.equals("ALL") || a.getTransactionType().equals(transactionType)) {
-                    System.out.println("필터링된 거래내역" + a.toString());
+//                    System.out.println("필터링된 거래내역" + a.toString());
                     filteredList.add(a);
                 }
             }
@@ -83,5 +83,37 @@ public class AccountController {
         return filteredList;
     }
 
+    @GetMapping("/accountTransfer")
+    public String AccountTransfer(@ModelAttribute("currentMember") Member member, Model model) {
+        System.out.println("현재 멤버는 " + member.toString());
+        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
+        for (Account account : accountList){
+            System.out.println(account.toString());
+        }
+        model.addAttribute("accountList", accountList);
+        return "account_transfer";
+    }
 
+    @PostMapping("/accountTransfer")
+    @ResponseBody
+    public String transferProcess(
+            @RequestParam("senderAccountNo") String senderAccountNo,
+            @RequestParam("recipientAccountNo") String recipientAccountNo,
+            @RequestParam("transfer_amount") Integer transfer_amount){
+
+//        이체 기능
+        try {
+            accountService.accountTransfer(senderAccountNo, recipientAccountNo, transfer_amount);
+            return "redirect:/transferComplete";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "이체 실패: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/transferComplete")
+    public String transferComplete() {
+        System.out.println("transfer완료 페이지");
+        return "transferComplete";
+    }
 }

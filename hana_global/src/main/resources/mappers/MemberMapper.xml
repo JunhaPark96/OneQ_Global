@@ -45,4 +45,8 @@
     <select id="signIn" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO">
         select * from member where id = #{id} and passwd = #{passwd}
     </select>
+    
+   <!-- <select id="findMemberByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+        select * from member where ac_no =
+    </select>-->
 </mapper>

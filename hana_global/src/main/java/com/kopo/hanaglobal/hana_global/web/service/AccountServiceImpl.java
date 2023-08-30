@@ -6,8 +6,10 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,5 +66,46 @@ public class AccountServiceImpl implements AccountService{
             System.out.println(a.toString());
         }
         return accHistoryList;
+    }
+    @Override
+    public void updateAccountBalance(@Param("acNo") String acNo, @Param("amount") Integer amount){
+        accountRepository.updateAccountBalance(acNo, amount);
+    }
+    @Override
+    public void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount){
+        accountRepository.insertAccHistTransaction(acNo, balance, transactionAmount, transactionType, participant, participantAccount);
+    }
+    @Transactional
+    @Override
+    public void accountTransfer(String fromAcNo, String toAcNo, Integer amount){
+        // 1. 보내는 계좌의 잔액 감소
+        Account fromAccount = accountRepository.getAccountByAcNo(fromAcNo);
+        System.out.println(fromAccount.toString());
+        Integer fromBalance = fromAccount.getBalance() - amount;
+        updateAccountBalance(fromAcNo, fromBalance);
+        System.out.println(fromAccount.toString());
+
+        // 2. 받는 계좌의 잔액 증가
+        Account toAccount = accountRepository.getAccountByAcNo(toAcNo);
+        System.out.println(toAccount.toString());
+        Integer toBalance = toAccount.getBalance() + amount;
+        updateAccountBalance(toAcNo, toBalance);
+        System.out.println(toAccount.toString());
+
+        // 3. 보내는 사람의 이름 가져오기
+        Member fromMember = memberRepository.findMemberById(fromAccount.getUserSeq());
+        String fromName = fromMember.getName();
+        System.out.println(fromMember.toString());
+
+        // 4. 받는 사람의 이름 가져오기
+        Member toMember = memberRepository.findMemberById(toAccount.getUserSeq());
+        String toName = toMember.getName();
+        System.out.println(toMember.toString());
+
+        // 5. 보내는 사람의 계좌 내역에 출금 내역 추가
+        insertAccHistTransaction(fromAcNo, fromBalance, amount, 1, toName, toAcNo);
+
+        // 6. 받는 사람의 계좌 내역에 입금 내역 추가
+        insertAccHistTransaction(toAcNo, toBalance, amount, 0, fromName, fromAcNo);
     }
 }

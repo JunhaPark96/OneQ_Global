@@ -1,15 +1,24 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AccountTransferRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.response.AccountTransferResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 
 import java.util.List;
 
 public interface AccountService {
-    public List<Account> findAccountByMemberId(int memberId);
+    List<Account> findAccountByMemberId(int memberId);
 
-    public List<MemberAccDTO> findMemberAccounts(int memberId);
+    List<MemberAccDTO> findMemberAccounts(int memberId);
 
     List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(String acNo);
+    
+    
+    void updateAccountBalance(String acNo, Integer amount);
+
+    void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount);
+
+    void accountTransfer(String fromAcNo, String toAcNo, Integer amount);
 }

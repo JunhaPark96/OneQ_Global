@@ -13,4 +13,5 @@ public interface MemberRepository {
     public void signUp(Member member);
 
     public Member findMemberById(int memberId);
+
 }

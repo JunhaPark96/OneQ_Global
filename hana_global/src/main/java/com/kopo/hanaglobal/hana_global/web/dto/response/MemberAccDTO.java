@@ -11,7 +11,7 @@ public class MemberAccDTO {
     private String name;
     private String signupDate;
     private String acNo;
-    private String balance;
+    private Integer balance;
     private String acName;
 }
 // 회원 계좌 조회

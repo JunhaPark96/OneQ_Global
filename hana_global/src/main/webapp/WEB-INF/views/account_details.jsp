@@ -124,9 +124,6 @@
                             </tbody>
                         </table>
 
-<%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
-<%--                            <a href="${pageContext.request.contextPath}/account_details" id="btnNext" class="btn_p">조회</a>--%>
-<%--                        </div>--%>
                         <div class="btnArea justify-content-center" id="acc_trans_inquiry">
                             <input type="button" id="btnNext" class="btn_p" value="조회">
                         </div>
@@ -149,23 +146,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <%-- Example Transaction Data --%>
-                    <%--<tr>
-                        <td>2023-08-20 10:30:15</td>
-                        <td>1,000,000원</td>
-                        <td>입금</td>
-                        <td>10,500,000원</td>
-                        <td>김철수</td>
-                        <td>1234-5678-90</td>
-                    </tr>
-                    <tr>
-                        <td>2023-08-19 15:05:30</td>
-                        <td>500,000원</td>
-                        <td>출금</td>
-                        <td>9,500,000원</td>
-                        <td>이영희</td>
-                        <td>1234-5678-91</td>
-                    </tr>--%>
                     </tbody>
                 </table>
             </div>

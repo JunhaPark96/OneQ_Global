@@ -12,7 +12,7 @@ public class Account {
     private int userSeq;
     private String acName;
     private String acPasswd;
-    private String balance;
+    private Integer balance;
     private String openDate;
     private int status;
 

@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
+    <script src="./js/account.js"></script>
 
     <link href="./css/service-main.css" rel="stylesheet"/>
     <link href="./css/nav.css" rel="stylesheet"/>
@@ -30,6 +31,7 @@
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
+            <form action="${pageContext.request.contextPath}/accountTransfer" method="post">
             <h2 class="h2-account">Account Transfer</h2>
 
             <%--                        송금구역--%>
@@ -46,16 +48,16 @@
                             <tr class="text border-light">
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;계좌선택</th>
                                 <td>
-                                    <select class="form-select border-3 w-50" name="withdrawAccountNo"
-                                            id="selectSenderAccount"
-                                            onchange="changeBallance()" style="height: 45px;">
+                                    <select class="form-select border-3 w-50" name="senderAccountNo"
+                                            id="selectAccountForm"
+                                            onchange="changeBalance()" style="height: 45px;">
                                         <option value="" selected disabled>계좌를 선택하세요.</option>
                                         <c:forEach items="${accountList}" var="account">
-                                            <option value="${account.accountNo}">
-                                                    ${account.alias} (${account.accountNo})
+                                            <option value="${account.acNo}" data-balance="${account.balance}">
+                                                (${account.acNo})
                                             </option>
                                         </c:forEach>
-                                        <option value="123456789">1234-5678-9 (Example Account)</option>
+<%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
                                         <!-- 임의의 계좌 추가 -->
                                     </select>
                                 </td>
@@ -65,8 +67,7 @@
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
                                 <td>
                                     <div class="btnArea" id="btnFclArea">
-                                        <p class="text-center align-middle" id="balanceDisplay">
-                                            0
+                                        <p class="text-center align-middle" id="accountBalance">
                                         </p>
                                     </div>
                                 </td>
@@ -208,7 +209,7 @@
                                         <%--                                        <p class="text-center align-middle">--%>
                                         <%--                                            690-11-028690--%>
                                         <%--                                        </p>--%>
-                                        <input type="text" id="receiverAccountNumber" placeholder="계좌번호 입력"/>
+                                        <input type="text" name="recipientAccountNo" id="recipientAccountNo" placeholder="계좌번호 입력"/>
                                         <input type="button" class="btn btn-primary" id="checkReceiverBtn" value="조회"
                                                onclick="fetchReceiverName()">
                                     </div>
@@ -224,10 +225,17 @@
                             </tbody>
                         </table>
 
-                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">
-                            <%--                TODO: 계좌 거래내역 조회 기능--%>
-                            <a href="#//hana_bank" id="btnNext" class="btn_p">송금 하기</a>
-                        </div>
+<%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
+<%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
+<%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
+<%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
+<%--                        </div>--%>
+
+                            <!-- ... 기타 입력 필드 ... -->
+                            <div class="btnArea justify-content-center " id="acc_trans_inquiry">
+                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -248,16 +256,7 @@
     }
 </script>
 <script>
-    function changeBallance() {
-        let selectedAccount = document.getElementById('selectSenderAccount').value;
-        let balance = document.getElementById('balanceDisplay');
 
-        if (selectedAccount === "123456789") {
-            balance.textContent = "1,500,000"; // 임의의 잔액
-        } else {
-            balance.textContent = "0"; // 기타 계좌들에 대한 잔액, 실제 시나리오에서는 서버에서 가져올 데이터입니다.
-        }
-    }
 
     function selectAmount(amount) {
         document.getElementById('transfer_amount').value = amount;

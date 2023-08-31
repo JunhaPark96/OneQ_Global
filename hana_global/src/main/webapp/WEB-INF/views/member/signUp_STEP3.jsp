@@ -46,7 +46,7 @@
                         <div class="title-area clearfix">
                             <h3 class="fleft">고객정보</h3>
                             <div class="infor mt4">
-                                <span class="asterisk">필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
+                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
                             </div>
                         </div>
                     </div>

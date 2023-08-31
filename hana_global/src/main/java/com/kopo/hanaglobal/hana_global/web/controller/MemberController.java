@@ -2,23 +2,30 @@ package com.kopo.hanaglobal.hana_global.web.controller;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.ocr.ClovaOCRTemplate;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MemberController {
@@ -43,6 +50,53 @@ public class MemberController {
         System.out.println("회원가입 페이지 이동");
         return "member/signUp";
     }
+
+    @PostMapping("/authenticateAction")
+    public ResponseEntity<Map<String, String>> authenticate(@RequestParam("image") MultipartFile imageFile) {
+        // 업로드된 파일을 임시 파일에 저장
+        File tempFile = new File("temp.png");
+        try (OutputStream os = new FileOutputStream(tempFile)) {
+            os.write(imageFile.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        // Call the Clova OCR API and get the response
+        Map<String, String> extractedData = ClovaOCRTemplate.extractText(tempFile.getAbsolutePath());
+        System.out.println("Extracted Data: " + extractedData);
+        // Delete the temporary file
+        tempFile.delete();
+
+        return ResponseEntity.ok(extractedData);
+    }
+
+
+    // Extract the necessary information from the OCR API response
+    private Map<String, String> processResponse(String response) {
+        Map<String, String> extractedData = new HashMap<>();
+        // TODO: Extract the necessary information from the response and populate the extractedData map
+        // For example:
+        // extractedData.put("name", ...);
+        // extractedData.put("id", ...);
+        // extractedData.put("status", ...);
+        // extractedData.put("issueDate", ...);
+        return extractedData;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // 로그인 페이지
     @GetMapping("/signin")
     public String signIn(Model model){

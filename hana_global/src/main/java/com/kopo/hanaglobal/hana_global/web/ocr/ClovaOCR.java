@@ -1,4 +1,4 @@
-package com.kopo.hanaglobal.hana_global.web;
+package com.kopo.hanaglobal.hana_global.web.ocr;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

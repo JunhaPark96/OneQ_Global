@@ -194,11 +194,11 @@
     gap: 10px;
 }
 
-/*.loginField {*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    margin-right: 40px;*/
-/*}*/
+.loginField {
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+}
 
 .loginField label {
     font-weight: bold;

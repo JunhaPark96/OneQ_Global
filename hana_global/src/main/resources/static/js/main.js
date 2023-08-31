@@ -107,19 +107,19 @@ function selectGender(gender) {
 
 // 모달 창을 열기 위한 함수
 function openModal() {
-    var modal = document.getElementById("loginModal");
+    let modal = document.getElementById("certificateModal");
     modal.style.display = "block";
 }
 
 // 모달 창을 닫기 위한 함수
 function closeModal() {
-    var modal = document.getElementById("loginModal");
+    let modal = document.getElementById("certificateModal");
     modal.style.display = "none";
 }
 
 // 모달 창 바깥을 클릭했을 때 닫기 위한 함수
 function outsideModalClick(event) {
-    var modal = document.getElementById("loginModal");
+    let modal = document.getElementById("certificateModal");
     if (event.target == modal) {
         modal.style.display = "none";
     }

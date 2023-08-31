@@ -142,11 +142,19 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
             <div class="submitButton">
                 <input type="submit" value="Authenticate" class="submitBtn" id="ocrCheck">
             </div>
-
             <div class="submitButton">
                 <input type="submit" value="Submit" class="submitBtn" id="submitOCR">
+                <div id="loadingScreen" class="spinner-border text-success" role="status">
+                    <span class="sr-only"></span>
+                </div>
             </div>
         </div>
+        </form>
+        <form id="registrationForm" action="/nextStep" method="post">
+            <input type="hidden" id="hiddenName" name="hiddenName">
+            <input type="hidden" id="hiddenID" name="hiddenID">
+            <input type="hidden" id="hiddenStatus" name="hiddenStatus">
+            <input type="hidden" id="hiddenIssueDate" name="hiddenIssueDate">
         </form>
     </div>
 </div>
@@ -168,7 +176,7 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
         }
         reader.readAsDataURL(event.target.files[0]);
     }
-
+    // ocr 추출 값 받아오기
     document.querySelector("#ocrCheck").addEventListener("click", function (event) {
         event.preventDefault();
 
@@ -193,6 +201,34 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
                 console.error(error);
             }
         });
+    });
+    // 제출
+    document.querySelector("#submitOCR").addEventListener("click", function(event) {
+        event.preventDefault();
+
+        // Show loading screen
+        document.getElementById("loadingScreen").style.display = "inline-block";
+
+        setTimeout(function() {
+            // Hide loading screen
+            document.getElementById("loadingScreen").style.display = "none";
+
+            // Alert user
+            alert('인증이 완료되었습니다');
+
+            // Store input values in hidden fields
+            document.getElementById("hiddenName").value = document.getElementById("registerName").value;
+            document.getElementById("hiddenID").value = document.getElementById("registerID").value;
+            document.getElementById("hiddenStatus").value = document.getElementById("registerAuthentication").value;
+            document.getElementById("hiddenIssueDate").value = document.getElementById("registerDate").value;
+
+            // Redirect to signUp_STEP2
+            window.location.href = '/signUp_STEP2';
+        }, 2000);  // 2 seconds delay
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loadingScreen").style.display = "none";
     });
 </script>
 </body>

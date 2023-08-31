@@ -265,6 +265,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    align-items: center;
 
 }
 .submitButton {
@@ -305,6 +306,12 @@
 .close:hover, .close:focus {
     color: black;
     background-color: #e6e6e6;
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 /*.mdiptWrap .mdipt {*/

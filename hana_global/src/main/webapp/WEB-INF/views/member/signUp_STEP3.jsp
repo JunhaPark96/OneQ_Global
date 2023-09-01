@@ -18,13 +18,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
             crossorigin="anonymous"></script>
-<%--    주소 api 링크--%>
+    <%--    주소 api 링크--%>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="./js/main.js"></script>
 
     <link href="./css/main.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
+    <link href="./css/flag-icons.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>본인 확인</title>
 
@@ -38,7 +39,7 @@
         <%@ include file="/WEB-INF/views/includes/stepper.jsp" %>
         <div class="content">
             <%--    1002962104821--%>
-            <form name="frm" action="/signUp_STEP4" method="post" id="frm">
+            <form name="frm" action="${pageContext.request.contextPath}/signUp_STEP4" method="post" id="frm">
                 <section>
                     <div class="titArea">
                         <h2>고객정보 변경을 위한 기본 정보 입력</h2>
@@ -57,23 +58,24 @@
                             <col style="width:auto">
                         </colgroup>
                         <tbody>
-<%--                        성명 입력--%>
+                        <%--                        성명 입력--%>
                         <tr>
                             <td class="th">성명</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" title="성명 입력" id="userName"
-                                           name="userName">
+                                           name="userName" value="${sessionScope.name}">
                                 </div>
                             </td>
                         </tr>
-<%--                        외국인 등록번호 입력--%>
+                        <%--                        외국인 등록번호 입력--%>
                         <tr>
                             <td class="th">외국인등록번호</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" placeholder="예) 123456-1234567"
-                                           title="주민등록번호 입력" id="registerNo" name="registerNo">
+                                           title="주민등록번호 입력" id="registerNo" name="registerNo"
+                                           value="${sessionScope.foreignRegNo}">
                                 </div>
                                 <p class="fieldMsg error" id="psno_msg" style="display:none"></p>
                             </td>
@@ -95,9 +97,19 @@
                             <td class="th">국가코드</td>
                             <td>
                                 <div class="iptWrap">
-                                    <input type="text" class="ipt uiAct" title="국가코드 입력" id="countryCode"
-                                           name="countryCode">
-                                    <img src="path_to_image" alt="국가코드 이미지"> <!-- 이미지 경로를 적절하게 수정하세요 -->
+                                    <%--                                    <input type="text" class="ipt uiAct" title="국가코드 입력" id="countryCode"--%>
+                                    <%--                                           name="countryCode">--%>
+                                    <%--                                    <option value="KR">KR</option>--%>
+                                    <%--                                    <option value="US">US</option>--%>
+                                    <select class="ipt uiAct" title="국가코드 선택" id="countryCode" name="countryCode"
+                                            onchange="changeCountryCode()">
+                                        <option value="KR">KR</option>
+                                    <span class="fi-kr"></span> <!-- 국기 아이콘 -->
+                                        <option value="US">US</option>
+                                        <!-- 다른 국가코드 추가 -->
+                                    </select>
+                                    <span class="fi-kr fis"></span>
+                                    <%--                                    <img src="path_to_image" alt="국가코드 이미지"> <!-- 이미지 경로를 적절하게 수정하세요 -->--%>
                                 </div>
                             </td>
                         </tr>
@@ -118,21 +130,26 @@
                                 <div class="iptWrap">
                                     <!-- 숨겨진 입력 필드 추가 -->
                                     <input type="hidden" name="gender" id="gender" value="">
-                                    <button type="button" id="maleBtn" class="genderBtn" onclick="selectGender('male')">M</button>
-                                    <button type="button" id="femaleBtn" class="genderBtn" onclick="selectGender('female')">F</button>
+                                    <button type="button" id="maleBtn" class="genderBtn" onclick="selectGender('male')">
+                                        M
+                                    </button>
+                                    <button type="button" id="femaleBtn" class="genderBtn"
+                                            onclick="selectGender('female')">F
+                                    </button>
                                 </div>
                             </td>
                         </tr>
                         <!-- 성별 끝 -->
 
-<%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
-<%--                        휴대폰 번호 시작--%>
+                        <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
+                        <%--                        휴대폰 번호 시작--%>
                         <tr>
                             <td class="th">휴대폰 번호</td>
-<%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
+                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
-                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobile01" name="mobilePrefix">
+                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobile01"
+                                            name="mobilePrefix">
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="016">016</option>
@@ -140,11 +157,12 @@
                                         <option value="018">018</option>
                                         <option value="019">019</option>
                                     </select> -
-                                <input type="text" id="mobileSuffix" name="mobileSuffix" class="ipt notDel uiAct" maxlength="8" title="휴대전화 국번 입력">
+                                    <input type="text" id="mobileSuffix" name="mobileSuffix" class="ipt notDel uiAct"
+                                           maxlength="8" title="휴대전화 국번 입력">
                                 </div>
                             </td>
                         </tr>
-<%--                        휴대폰 번호 끝--%>
+                        <%--                        휴대폰 번호 끝--%>
 
                         <%--이메일 시작--%>
                         <tr>
@@ -152,17 +170,23 @@
                             <td>
                                 <div class="iptWrap">
                                     <div class="postcodeContainer">
-                                        <input type="text" class="ipt uiAct" id="postcode" name="sample4_postcode" placeholder="우편번호">
+                                        <input type="text" class="ipt uiAct" id="postcode" name="sample4_postcode"
+                                               placeholder="우편번호">
                                         <button class="valiButton" onclick="sample4_execDaumPostcode(event)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                             </svg>
                                         </button>
                                     </div>
-                                    <input type="text" class="ipt uiAct" id="roadAddress" name="roadAddress" placeholder="도로명주소"><br>
-                                    <input type="text" class="ipt uiAct" id="jibunAddress" name="jibunAddress" placeholder="지번주소"><br>
-                                    <input type="text" class="ipt uiAct" id="detailAddress" name="detailAddress" placeholder="상세주소"><br>
-                                    <input type="text" class="ipt uiAct" id="extraAddress" name="extraAddress" placeholder="참고항목">
+                                    <input type="text" class="ipt uiAct" id="roadAddress" name="roadAddress"
+                                           placeholder="도로명주소"><br>
+                                    <input type="text" class="ipt uiAct" id="jibunAddress" name="jibunAddress"
+                                           placeholder="지번주소"><br>
+                                    <input type="text" class="ipt uiAct" id="detailAddress" name="detailAddress"
+                                           placeholder="상세주소"><br>
+                                    <input type="text" class="ipt uiAct" id="extraAddress" name="extraAddress"
+                                           placeholder="참고항목">
                                 </div>
                             </td>
                         </tr>

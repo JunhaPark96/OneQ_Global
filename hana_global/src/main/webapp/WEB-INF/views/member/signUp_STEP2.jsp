@@ -59,8 +59,6 @@
                                             <%--                                            <a id="certificateModalOpener">인증하기</a>--%>
                                         </div>
                                         <br/>
-
-
                                         <%--                                            <span class="txt">주민등록증 하단의 발급일자를 입력해주세요.</span>--%>
                                     </div>
                                 </div>
@@ -70,23 +68,22 @@
                     </table>
                 </section>
 
-                <section class="certContain">
-                    <div class="btnArea" id="btnFclArea">
-                        <a href="/signUp_STEP1" id="btnCancel" class="btn_s">취소</a>
-                        <button type="submit" id="btnNext" class="btn_p">다음</button>
-                    </div>
-                </section>
+                <%--                <section class="certContain">--%>
+                <%--                    <div class="btnArea" id="btnFclArea">--%>
+                <%--                        <a href="/signUp_STEP1" id="btnCancel" class="btn_s">취소</a>--%>
+                <%--                        <button type="submit" id="btnNext" class="btn_p">다음</button>--%>
+                <%--                        <input type="submit" id="btnNext" class="btn_p">다음</input>--%>
+                <%--                    </div>--%>
+                <%--                </section>--%>
             </form>
         </div>
     </main>
 </div>
 
 <%--
-OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면, 서버에 이미지를 전송하고 OCR API를 호출하여 이미지에서 텍스트를 추출합니다.
-
-텍스트 처리: OCR API의 응답에서 텍스트를 처리하고 필요한 정보를 추출합니다.
-
-응답 표시: 추출된 텍스트를 모달의 입력 필드에 표시합니다.
+OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면, 서버에 이미지를 전송하고 OCR API를 호출하여 이미지에서 텍스트를 추출
+텍스트 처리: OCR API의 응답에서 텍스트를 처리하고 필요한 정보를 추출
+응답 표시: 추출된 텍스트를 모달의 입력 필드에 표시
 --%>
 <%-- 인증 페이지 --%>
 <div id="certificateModal" class="modal">
@@ -138,25 +135,24 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
             </form>
 
         </div>
-        <div class="btnWrap">
-            <div class="submitButton">
-                <input type="submit" value="Authenticate" class="submitBtn" id="ocrCheck">
-            </div>
-            <div class="submitButton">
-                <input type="submit" value="Submit" class="submitBtn" id="submitOCR">
-                <div id="loadingScreen" class="spinner-border text-success" role="status">
-                    <span class="sr-only"></span>
+        <form id="registrationForm" action="${pageContext.request.contextPath}/signUp_STEP3" method="post">
+            <div class="btnWrap">
+                <div class="submitButton">
+                    <input type="submit" value="Authenticate" class="submitBtn" id="ocrCheck">
+                </div>
+
+                <input type="hidden" id="hiddenName" name="hiddenName">
+                <input type="hidden" id="hiddenID" name="hiddenID">
+                <div class="submitButton">
+                    <input type="submit" value="Submit" class="submitBtn" id="submitOCR">
+                    <div id="loadingScreen" class="spinner-border text-success" role="status">
+                        <span class="sr-only"></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        </form>
-        <form id="registrationForm" action="/nextStep" method="post">
-            <input type="hidden" id="hiddenName" name="hiddenName">
-            <input type="hidden" id="hiddenID" name="hiddenID">
-            <input type="hidden" id="hiddenStatus" name="hiddenStatus">
-            <input type="hidden" id="hiddenIssueDate" name="hiddenIssueDate">
         </form>
     </div>
+</div>
 </div>
 
 <script>
@@ -168,6 +164,7 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
         window.addEventListener("click", outsideModalClick);
     });
 
+    // 첨부한 이미지 받아오기
     function previewImage(event) {
         let reader = new FileReader();
         reader.onload = function () {
@@ -176,6 +173,7 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+
     // ocr 추출 값 받아오기
     document.querySelector("#ocrCheck").addEventListener("click", function (event) {
         event.preventDefault();
@@ -203,27 +201,22 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
         });
     });
     // 제출
-    document.querySelector("#submitOCR").addEventListener("click", function(event) {
+    document.querySelector("#submitOCR").addEventListener("click", function (event) {
         event.preventDefault();
-
         // Show loading screen
         document.getElementById("loadingScreen").style.display = "inline-block";
 
-        setTimeout(function() {
+        document.getElementById("hiddenName").value = document.getElementById("registerName").value;
+        document.getElementById("hiddenID").value = document.getElementById("registerID").value;
+
+        setTimeout(function () {
             // Hide loading screen
             document.getElementById("loadingScreen").style.display = "none";
 
             // Alert user
             alert('인증이 완료되었습니다');
-
+            document.getElementById("registrationForm").submit();
             // Store input values in hidden fields
-            document.getElementById("hiddenName").value = document.getElementById("registerName").value;
-            document.getElementById("hiddenID").value = document.getElementById("registerID").value;
-            document.getElementById("hiddenStatus").value = document.getElementById("registerAuthentication").value;
-            document.getElementById("hiddenIssueDate").value = document.getElementById("registerDate").value;
-
-            // Redirect to signUp_STEP2
-            window.location.href = '/signUp_STEP2';
         }, 2000);  // 2 seconds delay
     });
 

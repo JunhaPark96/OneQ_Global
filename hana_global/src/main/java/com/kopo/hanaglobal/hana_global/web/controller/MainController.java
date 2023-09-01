@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -87,11 +88,13 @@ public class MainController {
 
     @PostMapping("/signUp_STEP3")
     public String processSignUp3(
-            @RequestParam Map<String, String> params,
-            @RequestParam("idCardImage") MultipartFile idCardImage,
-            @RequestParam("visaImage") MultipartFile visaImage,
-            @RequestParam("passportImage") MultipartFile passportImage) {
+            @RequestParam("hiddenName") String name,
+            @RequestParam("hiddenID") String foreignRegNo,
+            HttpSession session
+    ) {
         System.out.println("Processing signUp step3 post");
+        session.setAttribute("name", name);
+        session.setAttribute("foreignRegNo", foreignRegNo);
         return "member/signUp_STEP3";
     }
 

@@ -108,20 +108,33 @@ public class MainController {
     public String processSignUp4(
             @RequestParam("userName") String name,
             @RequestParam("registerNo") String foreignRegNo,
-            @RequestParam("birthdate") String birthdate,
-            @RequestParam("countryCode") String countryCode,
+            @RequestParam("birthdate") String birthDate,
             @RequestParam("nationality") String nationality,
+            @RequestParam("countryCode") String countryCode,
             @RequestParam("gender") String gender,
             @RequestParam("mobilePrefix") String mobilePrefix,
             @RequestParam("mobileSuffix") String mobileSuffix,
-            @RequestParam("postcode") String postcode,
             @RequestParam("roadAddress") String roadAddress,
             @RequestParam("jibunAddress") String jibunAddress,
             @RequestParam("detailAddress") String detailAddress,
-            @RequestParam("extraAddress") String extraAddress
+            HttpSession session
     ) {
         System.out.println("Processing signUp step4");
+        System.out.println("birthdate: " + birthDate);
+        System.out.println("birthdate: " + birthDate);
+        System.out.println("birthdate: " + birthDate);
 
+        session.setAttribute("name", name);
+        session.setAttribute("foreignRegNo", foreignRegNo);
+        session.setAttribute("birthDate", birthDate);
+        session.setAttribute("nationality", nationality);
+        session.setAttribute("countryCode", countryCode);
+        session.setAttribute("gender", gender);
+        session.setAttribute("mobilePrefix", mobilePrefix);
+        session.setAttribute("mobileSuffix", mobileSuffix);
+        session.setAttribute("roadAddress", roadAddress);
+        session.setAttribute("jibunAddress", jibunAddress);
+        session.setAttribute("detailAddress", detailAddress);
         // 여기서 form으로부터 받은 데이터를 처리할 수 있습니다.
 
         return "member/signUp_STEP4";

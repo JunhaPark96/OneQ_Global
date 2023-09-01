@@ -91,35 +91,54 @@
                                 <span class="txt">만 19세 미만은 계좌 개설이 제한됩니다</span>
                             </td>
                         </tr>
+                        <!-- 국적 -->
+                        <tr>
+                            <td class="th">국적</td>
+                            <td>
+                                <div class="iptWrap">
+                                    <select class="ipt uiAct" title="국가선택" id="nationality" name="nationality"
+                                            onchange="changeCountryCode()">
+                                        <option value="KOR">대한민국 (Republic of Korea)</option>
+                                        <option value="CHN">中国 (China)</option>
+                                        <option value="TWN">台灣 (Taiwan)</option>
+                                        <option value="JPN">日本 (Japan)</option>
+                                        <option value="THA">ประเทศไทย (Thailand)</option>
+                                        <option value="BGR">България (Bulgaria)</option>
+                                        <option value="CZE">Česko (Czech Republic)</option>
+                                        <option value="DNK">Danmark (Denmark)</option>
+                                        <option value="DEU">Deutschland (Germany)</option>
+                                        <option value="ESP">España (Spain)</option>
+                                        <option value="LAM">América Latina (Latin America)</option>
+                                        <option value="GRC">Ελλάδα (Greece)</option>
+                                        <option value="FRA">France (France)</option>
+                                        <option value="ITA">Italia (Italy)</option>
+                                        <option value="IDN">Indonesia (Indonesia)</option>
+                                        <option value="HUN">Magyarország (Hungary)</option>
+                                        <option value="NLD">Nederland (Netherlands)</option>
+                                        <option value="NOR">Norge (Norway)</option>
+                                        <option value="POL">Polska (Poland)</option>
+                                        <option value="PRT">Portugal (Portugal)</option>
+                                        <option value="BRA">Brasil (Brazil)</option>
+                                        <option value="ROU">România (Romania)</option>
+                                        <option value="RUS">Россия (Russia)</option>
+                                        <option value="FIN">Suomi (Finland)</option>
+                                        <option value="SWE">Sverige (Sweden)</option>
+                                        <option value="TUR">Türkiye (Turkey)</option>
+                                        <option value="VNM">Việt Nam (Vietnam)</option>
+                                        <option value="UKR">Україна (Ukraine)</option>
+
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
 
                         <!-- 국가코드 -->
                         <tr>
                             <td class="th">국가코드</td>
                             <td>
                                 <div class="iptWrap">
-                                    <%--                                    <input type="text" class="ipt uiAct" title="국가코드 입력" id="countryCode"--%>
-                                    <%--                                           name="countryCode">--%>
-                                    <%--                                    <option value="KR">KR</option>--%>
-                                    <%--                                    <option value="US">US</option>--%>
-                                    <select class="ipt uiAct" title="국가코드 선택" id="countryCode" name="countryCode"
-                                            onchange="changeCountryCode()">
-                                        <option value="KR">KR</option>
-                                    <span class="fi-kr"></span> <!-- 국기 아이콘 -->
-                                        <option value="US">US</option>
-                                        <!-- 다른 국가코드 추가 -->
-                                    </select>
-                                    <span class="fi-kr fis"></span>
-                                    <%--                                    <img src="path_to_image" alt="국가코드 이미지"> <!-- 이미지 경로를 적절하게 수정하세요 -->--%>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- 국적 -->
-                        <tr>
-                            <td class="th">국적</td>
-                            <td>
-                                <div class="iptWrap">
-                                    <input type="text" class="ipt uiAct" title="국적 입력" id="nationality"
-                                           name="nationality">
+                                    <input type="text" class="ipt uiAct" title="국가코드" id="countryCode"
+                                           name="countryCode" readonly>
                                 </div>
                             </td>
                         </tr>
@@ -140,7 +159,6 @@
                             </td>
                         </tr>
                         <!-- 성별 끝 -->
-
                         <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
                         <%--                        휴대폰 번호 시작--%>
                         <tr>
@@ -148,7 +166,7 @@
                             <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
-                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobile01"
+                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobilePrefix"
                                             name="mobilePrefix">
                                         <option value="010">010</option>
                                         <option value="011">011</option>
@@ -158,7 +176,7 @@
                                         <option value="019">019</option>
                                     </select> -
                                     <input type="text" id="mobileSuffix" name="mobileSuffix" class="ipt notDel uiAct"
-                                           maxlength="8" title="휴대전화 국번 입력">
+                                           maxlength="9" title="휴대전화 국번 입력">
                                 </div>
                             </td>
                         </tr>
@@ -206,6 +224,42 @@
     </main>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 페이지가 로드될 때 기본으로 한국어와 한국 코드를 선택
+        document.getElementById('nationality').value = 'KOR';
+        document.getElementById('countryCode').value = 'KOR';
+    });
+    // 국적과 국가코드 연결
+    function changeCountryCode() {
+        let nationality = document.getElementById('nationality').value;
+        document.getElementById('countryCode').value = nationality;
+    }
+    // 국적 선택 시 국가코드 자동 연결
+    function changeCountryCode() {
+        let nationality = document.getElementById("nationality");
+        let countryCode = document.getElementById("countryCode");
+        let selectedNationality = nationality.value;
 
+        // 선택된 국적에 따라 국가 코드 변경
+        countryCode.value = selectedNationality;
+    }
+
+    // step4로 데이터 전달
+    // document.querySelector("#btnNext").addEventListener("click", function(event){
+    //     document.getElementById("name").value = document.getElementById("userName").value;
+    //     document.getElementById("foreignRegNo").value = document.getElementById("registerNo").value;
+    //     document.getElementById("birthDate").value = document.getElementById("birthdate").value;
+    //     document.getElementById("nationality").value = document.getElementById("nationality").value;
+    //     document.getElementById("countryCode").value = document.getElementById("countryCode").value;
+    //     document.getElementById("gender").value = document.getElementById("gender").value;
+    //     document.getElementById("mobilePrefix").value = document.getElementById("mobilePrefix").value;
+    //     document.getElementById("mobileSuffix").value = document.getElementById("mobileSuffix").value;
+    //     document.getElementById("roadAddress").value = document.getElementById("roadAddress").value;
+    //     document.getElementById("jibunAddress").value = document.getElementById("jibunAddress").value;
+    //     document.getElementById("detailAddress").value = document.getElementById("detailAddress").value;
+    // });
+
+</script>
 </body>
 </html>

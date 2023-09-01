@@ -34,11 +34,21 @@
     <%@ include file="/WEB-INF/views/includes/stepper.jsp" %>
     <div class="content">
       <%--    1002962104821--%>
-      <form name="frm" action="/signUp_STEP5" method="post" id="frm">
+      <form name="frm" action="${pageContext.request.contextPath}/signUp_STEP5" method="post" id="frm">
+        <input type="hidden" name="name" value="${sessionScope.name}">
+        <input type="hidden" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
+        <input type="hidden" name="birthDate" value="${sessionScope.birthDate}">
+        <input type="hidden" name="nationality" value="${sessionScope.nationality}">
+        <input type="hidden" name="countryCode" value="${sessionScope.countryCode}">
+        <input type="hidden" name="gender" value="${sessionScope.gender}">
+        <input type="hidden" name="mobilePrefix" value="${sessionScope.mobilePrefix}">
+        <input type="hidden" name="mobileSuffix" value="${sessionScope.mobileSuffix}">
+        <input type="hidden" name="roadAddress" value="${sessionScope.roadAddress}">
+        <input type="hidden" name="jibunAddress" value="${sessionScope.jibunAddress}">
+        <input type="hidden" name="detailAddress" value="${sessionScope.detailAddress}">
         <section>
           <div class="titArea">
             <h2>로그인 정보 입력</h2>
-<%--            <h3 class="titH3">신청인 정보</h3>--%>
             <div class="title-area clearfix">
               <h3 class="fleft">이메일 패스워드</h3>
               <div class="infor mt4">
@@ -52,16 +62,18 @@
               <col style="width:185px">
               <col style="width:auto">
             </colgroup>
+
             <tbody>
             <tr>
-              <td class="th">이메일</td>
+              <td class="th">아이디</td>
               <td>
                 <div class="iptWrap">
-                  <input type="email" class="ipt uiAct" title="이메일 입력" id="email"
-                         name="email" placeholder="hanaGlobal@gmail.com">
+                  <input type="text" class="ipt uiAct" title="아이디 입력" id="userId"
+                         name="userId" placeholder="">
                 </div>
               </td>
             </tr>
+
             <tr>
               <td class="th">비밀번호</td>
               <td>
@@ -71,6 +83,7 @@
                 </div>
               </td>
             </tr>
+
             <tr>
               <td class="th">비밀번호 확인</td>
               <td>
@@ -82,11 +95,11 @@
             </tr>
             </tbody>
           </table>
+
         </section>
         <section class="account-password-section">
           <div class="titArea">
             <h2>계좌 비밀번호 설정</h2>
-<%--            <h3 class="titH3">신청인 정보</h3>--%>
             <div class="title-area clearfix">
               <h3 class="fleft">계좌 정보</h3>
               <div class="infor mt4">
@@ -101,6 +114,7 @@
               <col style="width:auto">
             </colgroup>
             <tbody>
+
             <tr>
               <td class="th">계좌 비밀번호</td>
               <td>
@@ -110,11 +124,12 @@
                 </div>
               </td>
             </tr>
+
             <tr>
               <td class="th">비밀번호 확인</td>
               <td>
                 <div class="iptWrap" >
-                  <input type="text" class="ipt uiAct" title="국적 입력" id="acPasswdConfirm"
+                  <input type="password" class="ipt uiAct" title="국적 입력" id="acPasswdConfirm"
                          name="acPasswdConfirm" maxlength="4">
                 </div>
               </td>
@@ -123,9 +138,10 @@
             </tbody>
           </table>
         </section>
+
         <section class="certContain">
           <div class="btnArea" id="btnFclArea">
-            <a href="/signUp_STEP2" id="btnCancel" class="btn_s">이전</a>
+            <a href="/signUp_STEP3" id="btnCancel" class="btn_s">이전</a>
             <button type="submit" id="btnNext" class="btn_p">다음</button>
           </div>
         </section>

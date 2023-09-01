@@ -35,7 +35,7 @@
         FROM member
     </select>
     <select id="findMemberById" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member" parameterType="int">
-        SELECT user_seq as userSeq, email, id, passwd, name, regist_no as registNo, signup_date as signupDate, passport_no as passportNo, visa_no as visaNo, country_sp as countrySP, nationality, birth_date as birthDate, gender, contact, address, address2, status
+        SELECT user_seq as userSeq, email, id, passwd, name, regist_no as registNo, signup_date as signupDate, country_sp as countrySP, nationality, birth_date as birthDate, gender, contact, ROAD_ADDRESS as roadAddress, JIBUN_ADDRESS as jibunAddress, status
         FROM member where user_seq = #{user_seq}
     </select>
     <select id="getAccountAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account">

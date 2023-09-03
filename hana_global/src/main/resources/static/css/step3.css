@@ -116,10 +116,29 @@ select.ipt.mini, .setPhone select.ipt {
     background-color: transparent;
 }
 .setPhone select.ipt {
-    width: 95px;
+    width: 160px;
 }
 .setPhone .ipt {
     width: 200px;
     max-width: 100%;
 }
 
+.iptWrap input {
+    border: none;
+    border-bottom: 1px solid #000;
+    margin-right: 5px;
+}
+.iptWrap input:focus {
+    outline: none;
+}
+.iptWrap span {
+    border-bottom: 1px solid #000;
+    padding: 0 3px;
+}
+
+.iptWrap .ipt.uiAct#gender {
+    max-width: 27px;
+    border: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0px;
+}

@@ -62,7 +62,7 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
-        // Call the Clova OCR API and get the response
+        // Clova OCR API 호출하여 response get
         Map<String, String> extractedData = ClovaOCRTemplate.extractText(tempFile.getAbsolutePath());
         System.out.println("Extracted Data: " + extractedData);
         // Delete the temporary file
@@ -83,19 +83,6 @@ public class MemberController {
         // extractedData.put("issueDate", ...);
         return extractedData;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // 로그인 페이지
     @GetMapping("/signin")

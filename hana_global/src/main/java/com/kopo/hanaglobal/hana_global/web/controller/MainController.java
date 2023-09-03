@@ -29,7 +29,8 @@ public class MainController {
         System.out.println("account 페이지");
         return "account";
     }
-//    @GetMapping("/myAccount")
+
+    //    @GetMapping("/myAccount")
 //    public String myAccount() {
 //        System.out.println("myAccount 페이지");
 //        return "myAccount";
@@ -107,36 +108,35 @@ public class MainController {
     @PostMapping("/signUp_STEP4")
     public String processSignUp4(
             @RequestParam("userName") String name,
-            @RequestParam("registerNo") String foreignRegNo,
-            @RequestParam("birthdate") String birthDate,
+            @RequestParam("foreignRegNo") String foreignRegNo,
+            @RequestParam("gender") String gender,
+            @RequestParam("mobileDigit") String mobileDigit,
+            @RequestParam("emailId") String emailId,
             @RequestParam("nationality") String nationality,
             @RequestParam("countryCode") String countryCode,
-            @RequestParam("gender") String gender,
-            @RequestParam("mobilePrefix") String mobilePrefix,
-            @RequestParam("mobileSuffix") String mobileSuffix,
             @RequestParam("roadAddress") String roadAddress,
             @RequestParam("jibunAddress") String jibunAddress,
             @RequestParam("detailAddress") String detailAddress,
             HttpSession session
     ) {
         System.out.println("Processing signUp step4");
-        System.out.println("birthdate: " + birthDate);
-        System.out.println("birthdate: " + birthDate);
-        System.out.println("birthdate: " + birthDate);
+        System.out.println("name = " + name + ", foreignRegNo = " + foreignRegNo + ", gender = " + gender + ", mobileDigit = " + mobileDigit + ", emailId = " + emailId + ", nationality = " + nationality + ", countryCode = " + countryCode + ", roadAddress = " + roadAddress + ", jibunAddress = " + jibunAddress + ", detailAddress = " + detailAddress + ", session = " + session);
+        String determinedGender = Integer.parseInt(gender) % 2 == 0 ? "F" : "M";
+
 
         session.setAttribute("name", name);
         session.setAttribute("foreignRegNo", foreignRegNo);
-        session.setAttribute("birthDate", birthDate);
+        session.setAttribute("gender", determinedGender);
+        session.setAttribute("mobileDigit", mobileDigit);
+        session.setAttribute("emailId", emailId);
         session.setAttribute("nationality", nationality);
         session.setAttribute("countryCode", countryCode);
-        session.setAttribute("gender", gender);
-        session.setAttribute("mobilePrefix", mobilePrefix);
-        session.setAttribute("mobileSuffix", mobileSuffix);
         session.setAttribute("roadAddress", roadAddress);
         session.setAttribute("jibunAddress", jibunAddress);
         session.setAttribute("detailAddress", detailAddress);
         // 여기서 form으로부터 받은 데이터를 처리할 수 있습니다.
 
+        System.out.println("성별: " + session.getAttribute("gender"));
         return "member/signUp_STEP4";
     }
 

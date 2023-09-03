@@ -37,17 +37,17 @@
     <main>
         <%--  단계 --%>
         <%@ include file="/WEB-INF/views/includes/stepper.jsp" %>
+
         <div class="content">
             <%--    1002962104821--%>
             <form name="frm" action="${pageContext.request.contextPath}/signUp_STEP4" method="post" id="frm">
+        <input type="hidden" id="foreignRegNo" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
                 <section>
                     <div class="titArea">
-                        <h2>고객정보 변경을 위한 기본 정보 입력</h2>
-                        <h3 class="titH3">신청인 정보</h3>
+                        <h2>휴대폰 본인확인</h2>
                         <div class="title-area clearfix">
                             <h3 class="fleft">고객정보</h3>
                             <div class="infor mt4">
-                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
                             </div>
                         </div>
                     </div>
@@ -64,33 +64,91 @@
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" title="성명 입력" id="userName"
-                                           name="userName" value="${sessionScope.name}">
+                                           name="userName" <%--value="${sessionScope.name}"--%>>
                                 </div>
                             </td>
                         </tr>
                         <%--                        외국인 등록번호 입력--%>
                         <tr>
-                            <td class="th">외국인등록번호</td>
+                            <td class="th">생년월일/성별</td>
                             <td>
                                 <div class="iptWrap">
-                                    <input type="text" class="ipt uiAct" placeholder="예) 123456-1234567"
-                                           title="주민등록번호 입력" id="registerNo" name="registerNo"
-                                           value="${sessionScope.foreignRegNo}">
+                                    <input type="text" class="ipt uiAct" style="max-width: 120px" maxlength="6"
+                                           title="주민등록번호 입력" id="birthDate"/>
+                                    -
+                                    <input type="text" class="ipt uiAct" maxlength="1"
+                                           title="주민등록번호 입력" id="gender" name="gender"/> ●●●●●●
                                 </div>
-                                <p class="fieldMsg error" id="psno_msg" style="display:none"></p>
                             </td>
                         </tr>
-                        <!-- 생년월일 -->
+
+                        <%--                        휴대폰 번호 시작--%>
                         <tr>
-                            <td class="th">생년월일</td>
+                            <td class="th">통신사 선택</td>
+                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
-                                <div class="iptWrap">
-                                    <input type="date" class="ipt uiAct" title="생년월일 입력" id="birthdate"
-                                           name="birthdate">
+                                <div class="iptWrap setPhone">
+                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobile_carrier"
+                                            name="mobile_carrier">
+                                        <option value="SKT">SKT</option>
+                                        <option value="KT">KT</option>
+                                        <option value="LG">LG U+</option>
+                                        <option value="SKT_MVNO">SKT 알뜰폰</option>
+                                        <option value="KT_MVNO">KT 알뜰폰</option>
+                                        <option value="LG_MVNO">LG U+ 알뜰폰</option>
+                                    </select>
                                 </div>
-                                <span class="txt">만 19세 미만은 계좌 개설이 제한됩니다</span>
                             </td>
                         </tr>
+
+                        <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
+                        <%--                        휴대폰 번호 시작--%>
+                        <tr>
+                            <td class="th">휴대폰 번호</td>
+                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
+                            <td>
+                                <div class="iptWrap setPhone">
+                                    <input type="text" id="mobileDigit" name="mobileDigit" class="ipt notDel uiAct"
+                                           maxlength="11" title="휴대전화 국번 입력">
+                                    <button id="mobileAuth" name="mobileAuth" class="btn_p">인증요청</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <%--                        휴대폰 번호 끝--%>
+
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <div class="titArea">
+                        <h2>고객정보 변경을 위한 기본 정보 입력</h2>
+                        <h3 class="titH3">신청인 정보</h3>
+                        <div class="title-area clearfix">
+                            <div class="infor mt4">
+                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="tableY formTbl">
+                        <colgroup>
+                            <col style="width:185px">
+                            <col style="width:auto">
+                        </colgroup>
+                        <tbody>
+<%--                        이메일 시작--%>
+                        <tr>
+                            <td class="th">이메일</td>
+                            <td>
+                                <div class="iptWrap">
+                                    <input type="email" class="ipt uiAct" title="이메일 입력" id="emailId"
+                                           name="emailId" placeholder="hanaglobal@kopo.ac.kr">
+                                </div>
+                            </td>
+                        </tr>
+<%--                        이메일 끝--%>
+
                         <!-- 국적 -->
                         <tr>
                             <td class="th">국적</td>
@@ -143,46 +201,24 @@
                             </td>
                         </tr>
                         <!-- 성별 시작 -->
-                        <tr>
-                            <td class="th">성별</td>
-                            <td>
-                                <div class="iptWrap">
-                                    <!-- 숨겨진 입력 필드 추가 -->
-                                    <input type="hidden" name="gender" id="gender" value="">
-                                    <button type="button" id="maleBtn" class="genderBtn" onclick="selectGender('male')">
-                                        M
-                                    </button>
-                                    <button type="button" id="femaleBtn" class="genderBtn"
-                                            onclick="selectGender('female')">F
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+<%--                        <tr>--%>
+<%--                            <td class="th">성별</td>--%>
+<%--                            <td>--%>
+<%--                                <div class="iptWrap">--%>
+<%--                                    <!-- 숨겨진 입력 필드 추가 -->--%>
+<%--                                    <input type="hidden" name="gender" id="gender" value="">--%>
+<%--                                    <button type="button" id="maleBtn" class="genderBtn" onclick="selectGender('male')">--%>
+<%--                                        M--%>
+<%--                                    </button>--%>
+<%--                                    <button type="button" id="femaleBtn" class="genderBtn"--%>
+<%--                                            onclick="selectGender('female')">F--%>
+<%--                                    </button>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
                         <!-- 성별 끝 -->
-                        <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
-                        <%--                        휴대폰 번호 시작--%>
-                        <tr>
-                            <td class="th">휴대폰 번호</td>
-                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
-                            <td>
-                                <div class="iptWrap setPhone">
-                                    <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobilePrefix"
-                                            name="mobilePrefix">
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="018">018</option>
-                                        <option value="019">019</option>
-                                    </select> -
-                                    <input type="text" id="mobileSuffix" name="mobileSuffix" class="ipt notDel uiAct"
-                                           maxlength="9" title="휴대전화 국번 입력">
-                                </div>
-                            </td>
-                        </tr>
-                        <%--                        휴대폰 번호 끝--%>
 
-                        <%--이메일 시작--%>
+                        <%--주소 시작--%>
                         <tr>
                             <td class="th"><b>주소</b></td>
                             <td>
@@ -208,11 +244,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <%--이메일 끝--%>
+                        <%--주소 끝--%>
 
                         </tbody>
                     </table>
                 </section>
+
                 <section class="certContain">
                     <div class="btnArea" id="btnFclArea">
                         <a href="/signUp_STEP2" id="btnCancel" class="btn_s">이전</a>
@@ -230,11 +267,13 @@
         document.getElementById('nationality').value = 'KOR';
         document.getElementById('countryCode').value = 'KOR';
     });
+
     // 국적과 국가코드 연결
     function changeCountryCode() {
         let nationality = document.getElementById('nationality').value;
         document.getElementById('countryCode').value = nationality;
     }
+
     // 국적 선택 시 국가코드 자동 연결
     function changeCountryCode() {
         let nationality = document.getElementById("nationality");
@@ -244,21 +283,6 @@
         // 선택된 국적에 따라 국가 코드 변경
         countryCode.value = selectedNationality;
     }
-
-    // step4로 데이터 전달
-    // document.querySelector("#btnNext").addEventListener("click", function(event){
-    //     document.getElementById("name").value = document.getElementById("userName").value;
-    //     document.getElementById("foreignRegNo").value = document.getElementById("registerNo").value;
-    //     document.getElementById("birthDate").value = document.getElementById("birthdate").value;
-    //     document.getElementById("nationality").value = document.getElementById("nationality").value;
-    //     document.getElementById("countryCode").value = document.getElementById("countryCode").value;
-    //     document.getElementById("gender").value = document.getElementById("gender").value;
-    //     document.getElementById("mobilePrefix").value = document.getElementById("mobilePrefix").value;
-    //     document.getElementById("mobileSuffix").value = document.getElementById("mobileSuffix").value;
-    //     document.getElementById("roadAddress").value = document.getElementById("roadAddress").value;
-    //     document.getElementById("jibunAddress").value = document.getElementById("jibunAddress").value;
-    //     document.getElementById("detailAddress").value = document.getElementById("detailAddress").value;
-    // });
 
 </script>
 </body>

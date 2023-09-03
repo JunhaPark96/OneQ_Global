@@ -74,7 +74,7 @@
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" style="max-width: 120px" maxlength="6"
-                                           title="주민등록번호 입력" id="birthDate"/>
+                                           title="주민등록번호 입력" id="birthDate" name="birthDate"/>
                                     -
                                     <input type="text" class="ipt uiAct" maxlength="1"
                                            title="주민등록번호 입력" id="gender" name="gender"/> ●●●●●●

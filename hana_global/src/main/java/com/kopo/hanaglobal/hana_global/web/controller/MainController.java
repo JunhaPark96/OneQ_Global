@@ -1,5 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +13,11 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-
+    private MemberService memberService;
+    @Autowired
+    public MainController(MemberService memberService){
+        this.memberService = memberService;
+    }
     @GetMapping("/")
     public String index() {
         System.out.println("index페이지");
@@ -109,6 +115,7 @@ public class MainController {
     public String processSignUp4(
             @RequestParam("userName") String name,
             @RequestParam("foreignRegNo") String foreignRegNo,
+            @RequestParam("birthDate") String birthDate,
             @RequestParam("gender") String gender,
             @RequestParam("mobileDigit") String mobileDigit,
             @RequestParam("emailId") String emailId,
@@ -122,10 +129,12 @@ public class MainController {
         System.out.println("Processing signUp step4");
         System.out.println("name = " + name + ", foreignRegNo = " + foreignRegNo + ", gender = " + gender + ", mobileDigit = " + mobileDigit + ", emailId = " + emailId + ", nationality = " + nationality + ", countryCode = " + countryCode + ", roadAddress = " + roadAddress + ", jibunAddress = " + jibunAddress + ", detailAddress = " + detailAddress + ", session = " + session);
         String determinedGender = Integer.parseInt(gender) % 2 == 0 ? "F" : "M";
-
+        String fullYear = birthDate.substring(0, 1).equals("0") ? "20" + birthDate : "19" + birthDate;
+        String formattedDate = fullYear.substring(0, 4) + "-" + fullYear.substring(4, 6) + "-" + fullYear.substring(6);
 
         session.setAttribute("name", name);
         session.setAttribute("foreignRegNo", foreignRegNo);
+        session.setAttribute("birthDate", formattedDate);
         session.setAttribute("gender", determinedGender);
         session.setAttribute("mobileDigit", mobileDigit);
         session.setAttribute("emailId", emailId);
@@ -137,6 +146,7 @@ public class MainController {
         // 여기서 form으로부터 받은 데이터를 처리할 수 있습니다.
 
         System.out.println("성별: " + session.getAttribute("gender"));
+        System.out.println("생년월일: " + session.getAttribute("birthDate"));
         return "member/signUp_STEP4";
     }
 
@@ -146,4 +156,33 @@ public class MainController {
         return "member/signUp_STEP5";
     }
 
+    @PostMapping("/signUp_STEP5")
+    public String processSignUp5(
+            @RequestParam("userId") String userId,
+            @RequestParam("userPasswd") String userPasswd,
+            @RequestParam("acPasswd") String acPasswd,
+            HttpSession session
+    ) {
+        System.out.println("Processing signUp step5");
+
+        // Retrieve all attributes from session
+        String emailId = (String) session.getAttribute("emailId");
+        String name = (String) session.getAttribute("name");
+        String foreignRegNo = (String) session.getAttribute("foreignRegNo");
+        String birthDate = (String) session.getAttribute("birthDate");
+        String gender = (String) session.getAttribute("gender");
+        String mobileDigit = (String) session.getAttribute("mobileDigit");
+        String nationality = (String) session.getAttribute("nationality");
+        String countryCode = (String) session.getAttribute("countryCode");
+        String roadAddress = (String) session.getAttribute("roadAddress");
+        String jibunAddress = (String) session.getAttribute("jibunAddress");
+        String detailAddress = (String) session.getAttribute("detailAddress");
+
+        memberService.signUp(emailId, userId, userPasswd, name, foreignRegNo, birthDate, gender, mobileDigit, roadAddress, jibunAddress, detailAddress, nationality, countryCode);
+        System.out.println("회원정보: " + memberService.toString());
+
+
+
+        return "member/signUp_STEP5";
+    }
 }

@@ -35,17 +35,17 @@
     <div class="content">
       <%--    1002962104821--%>
       <form name="frm" action="${pageContext.request.contextPath}/signUp_STEP5" method="post" id="frm">
-        <input type="hidden" name="name" value="${sessionScope.name}">
-        <input type="hidden" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
-        <input type="hidden" name="birthDate" value="${sessionScope.birthDate}">
-        <input type="hidden" name="nationality" value="${sessionScope.nationality}">
-        <input type="hidden" name="countryCode" value="${sessionScope.countryCode}">
-        <input type="hidden" name="gender" value="${sessionScope.gender}">
-        <input type="hidden" name="mobilePrefix" value="${sessionScope.mobilePrefix}">
-        <input type="hidden" name="mobileSuffix" value="${sessionScope.mobileSuffix}">
-        <input type="hidden" name="roadAddress" value="${sessionScope.roadAddress}">
-        <input type="hidden" name="jibunAddress" value="${sessionScope.jibunAddress}">
-        <input type="hidden" name="detailAddress" value="${sessionScope.detailAddress}">
+        <input type="hidden" id="name" name="name" value="${sessionScope.name}">
+        <input type="hidden" id="foreignRegNo" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
+        <input type="hidden" id="birthDate" name="birthDate" value="${sessionScope.birthDate}">
+        <input type="hidden" id="gender" name="gender" value="${sessionScope.gender}">
+        <input type="hidden" id="mobileDigit" name="mobileDigit" value="${sessionScope.mobileDigit}">
+        <input type="hidden" id="emailId" name="emailId" value="${sessionScope.emailId}">
+        <input type="hidden" id="nationality" name="nationality" value="${sessionScope.nationality}">
+        <input type="hidden" id="countryCode" name="countryCode" value="${sessionScope.countryCode}">
+        <input type="hidden" id="roadAddress" name="roadAddress" value="${sessionScope.roadAddress}">
+        <input type="hidden" id="jibunAddress" name="jibunAddress" value="${sessionScope.jibunAddress}">
+        <input type="hidden" id="detailAddress" name="detailAddress" value="${sessionScope.detailAddress}">
         <section>
           <div class="titArea">
             <h2>로그인 정보 입력</h2>

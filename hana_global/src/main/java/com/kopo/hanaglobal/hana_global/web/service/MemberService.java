@@ -11,7 +11,7 @@ public interface MemberService {
 
     public Member signIn(LoginDTO loginDTO);
 
-    public void signUp(Member member);
-
+//    public void signUp(Member member);
+    public void signUp(String email, String userId, String userPasswd, String name, String foreignRegNo, String birthDate, String gender, String mobileDigit, String roadAddress, String detailAddress, String jibunAddress, String nationality, String countryCode);
     public Member findMemberById(int memberId);
 }

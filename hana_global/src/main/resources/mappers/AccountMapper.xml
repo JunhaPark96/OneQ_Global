@@ -30,6 +30,12 @@
 </mapper>-->
 
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.AccountRepository">
+    <insert id="accountOpen" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Account">
+        INSERT INTO CHECKING_ACCOUNT(AC_NO, AC_NAME, USER_SEQ, AC_PASSWD, STATUS)
+        VALUES (?, '주계좌', ?, #{acPasswd}, #{status})
+    </insert>
+
+
     <select id="findAccountByMemberId" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account"
         parameterType="int">
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status

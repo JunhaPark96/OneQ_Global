@@ -5,16 +5,17 @@ import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
-    
+
     // 생성자 주입
     @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository){
+    public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
@@ -29,10 +30,36 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.signIn(loginDTO);
     }
 
+    @Transactional
     @Override
-    public void signUp(Member member) {
+    public void signUp(String email, String userId, String userPasswd,
+                       String name, String foreignRegNo, String birthDate,
+                       String gender, String mobileDigit, String roadAddress,
+                       String jibunAddress, String detailAddress,
+                       String nationality, String countryCode) {
+        Member member = new Member();
 
+        member.setEmail(email);
+        member.setId(userId);
+        member.setPasswd(userPasswd);
+        member.setName(name);
+        member.setRegistNo(foreignRegNo);
+        member.setCountrySP(countryCode);
+        member.setNationality(nationality);
+        member.setBirthDate(birthDate);
+        member.setGender(gender);
+        member.setContact(mobileDigit);
+        member.setRoadAddress(roadAddress + " " + detailAddress);
+        member.setJibunAddress(jibunAddress + " " + detailAddress);
+        member.setStatus("Y");
+
+        memberRepository.signUp(member);
     }
+
+//    @Override
+//    public void signUp(Member member) {
+//        memberRepository.signUp(member);
+//    }
 
     @Override
     public Member findMemberById(int memberId) {

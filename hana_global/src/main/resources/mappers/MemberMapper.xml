@@ -45,8 +45,14 @@
     <select id="signIn" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO">
         select * from member where id = #{id} and passwd = #{passwd}
     </select>
-    
-   <!-- <select id="findMemberByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
-        select * from member where ac_no =
-    </select>-->
+
+    <insert id="signUp" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+        INSERT INTO member (user_seq, email, id, passwd, name, regist_no, country_sp, nationality, birth_date, gender, contact, road_address, jibun_address, status)
+        VALUES (MEMBER_SEQ.NEXTVAL, #{email}, #{id}, #{passwd}, #{name}, #{registNo}, #{countrySP}, #{nationality}, #{birthDate}, #{gender}, #{contact}, #{roadAddress}, #{jibunAddress}, #{status})
+    </insert>
+
+
+    <!-- <select id="findMemberByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+         select * from member where ac_no =
+     </select>-->
 </mapper>

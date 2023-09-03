@@ -29,6 +29,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>본인 확인</title>
 
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+        function authorize() {
+
+            event.preventDefault();
+            let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
+                +"response_type=code"
+                +"&client_id=53b902d1-c485-49ec-bfaa-034c00aeb53e"
+                +"&redirect_uri=http://localhost:8080/signUp_STEP3"
+                +"&scope=login inquiry transfer"
+                +"&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY"
+                +"&auth_type=0";
+
+            window.open(url, "width=1200,height=900,scrollbars=yes,resizable=yes");
+
+        }
+
+        $(document).on("ready", function(){
+            callbackURL = window.parent.document.URL;
+            //alert(callbackURL)
+            console.log(callbackURL)
+
+            if(callbackURL.indexOf('callback') == -1){
+                window.close();
+            }
+
+        });
+    </script>
 </head>
 <body>
 <div class="main-container">
@@ -110,7 +138,7 @@
                                 <div class="iptWrap setPhone">
                                     <input type="text" id="mobileDigit" name="mobileDigit" class="ipt notDel uiAct"
                                            maxlength="11" title="휴대전화 국번 입력">
-                                    <button id="mobileAuth" name="mobileAuth" class="btn_p">인증요청</button>
+                                    <button id="mobileAuth" name="mobileAuth" class="btn_p" onclick="authorize()">인증요청</button>
                                 </div>
                             </td>
                         </tr>
@@ -274,14 +302,25 @@
         document.getElementById('countryCode').value = nationality;
     }
 
+    // function changeCountryCode() {
+    //     let nationality = document.getElementById("nationality");
+    //     let countryCode = document.getElementById("countryCode");
+    //     let selectedNationality = nationality.value;
+    //
+    //     countryCode.value = selectedNationality;
+    // }
     // 국적 선택 시 국가코드 자동 연결
     function changeCountryCode() {
-        let nationality = document.getElementById("nationality");
+        let nationalitySelect = document.getElementById("nationality");
         let countryCode = document.getElementById("countryCode");
-        let selectedNationality = nationality.value;
+        let selectedNationalityValue = nationalitySelect.value;
+        // let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.split(" ")[0];
+        // 괄호안에 텍스트 가져오기
+        let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.match(/\(([^)]+)\)/)[1];
 
         // 선택된 국적에 따라 국가 코드 변경
-        countryCode.value = selectedNationality;
+        countryCode.value = selectedNationalityValue;
+        nationalitySelect.value = selectedNationalityText;
     }
 
 </script>

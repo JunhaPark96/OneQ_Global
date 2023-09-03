@@ -1,8 +1,12 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
+import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,9 +18,11 @@ import java.util.Map;
 @Controller
 public class MainController {
     private MemberService memberService;
+    private AccountService accountService;
     @Autowired
-    public MainController(MemberService memberService){
+    public MainController(MemberService memberService, AccountService accountService){
         this.memberService = memberService;
+        this.accountService = accountService;
     }
     @GetMapping("/")
     public String index() {
@@ -156,6 +162,7 @@ public class MainController {
         return "member/signUp_STEP5";
     }
 
+    @Transactional
     @PostMapping("/signUp_STEP5")
     public String processSignUp5(
             @RequestParam("userId") String userId,
@@ -165,10 +172,10 @@ public class MainController {
     ) {
         System.out.println("Processing signUp step5");
 
-        // Retrieve all attributes from session
         String emailId = (String) session.getAttribute("emailId");
         String name = (String) session.getAttribute("name");
         String foreignRegNo = (String) session.getAttribute("foreignRegNo");
+        foreignRegNo = foreignRegNo.replace("-", "");
         String birthDate = (String) session.getAttribute("birthDate");
         String gender = (String) session.getAttribute("gender");
         String mobileDigit = (String) session.getAttribute("mobileDigit");
@@ -178,11 +185,15 @@ public class MainController {
         String jibunAddress = (String) session.getAttribute("jibunAddress");
         String detailAddress = (String) session.getAttribute("detailAddress");
 
+        // 회원 생성
         memberService.signUp(emailId, userId, userPasswd, name, foreignRegNo, birthDate, gender, mobileDigit, roadAddress, jibunAddress, detailAddress, nationality, countryCode);
         System.out.println("회원정보: " + memberService.toString());
-
-
-
+        // 계좌 생성
+        int userSeq = memberService.findUserSeqByID(userId);
+        System.out.println("userSeq: " + userSeq);
+        accountService.createNewAccount(acPasswd, userSeq);
+        System.out.println(accountService.toString());
+        
         return "member/signUp_STEP5";
     }
 }

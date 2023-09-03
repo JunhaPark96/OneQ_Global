@@ -43,7 +43,7 @@
     </div>
 
     <div class="menubar">
-        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/account</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">계좌</a></div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/account</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Account</a></div>
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/hanawallet</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Hana Wallet</a></div>
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/exchange</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Exchange</a></div>
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/transfer</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Transfer</a></div>

@@ -16,4 +16,6 @@ public interface MemberRepository {
 
     public Member findMemberById(int memberId);
 
+    public Member findUserSeqByID(String id);
+
 }

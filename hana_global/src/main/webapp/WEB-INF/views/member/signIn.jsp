@@ -11,7 +11,8 @@
 
     <link href="css/header.css" rel="stylesheet"/>
     <link href="css/TTF.css" rel="stylesheet"/>
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/service-main.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 
     <script src="./js/main.js"></script>
 
@@ -26,13 +27,12 @@
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
         <div class="main-left">
-            ㅇㅇ
         </div>
 
-        <div class="main-right">
-            <div class="loginHeader">Login</div>
+        <div class="main-body">
             <form:form action="${pageContext.request.contextPath}/signin" method="post" class="loginInput"
                        modelAttribute="loginDTO">
+            <div class="loginHeader">Login</div>
                 <div class="loginField loginId">
                     <label for="id">User ID</label>
                     <form:input path="id"/>

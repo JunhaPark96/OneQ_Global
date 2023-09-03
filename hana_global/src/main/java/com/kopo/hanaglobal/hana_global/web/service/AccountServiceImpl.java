@@ -6,6 +6,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,16 @@ public class AccountServiceImpl implements AccountService{
         this.accountRepository = accountRepository;
         this.memberRepository = memberRepository;
     }
+    public void createNewAccount(String acPasswd, int userSeq) {
+        Account newAccount = new Account();
+        newAccount.setAcNo("CA" + RandomStringUtils.randomNumeric(8)); // CA + random 8 digit number
+        newAccount.setUserSeq(userSeq); // Set the user sequence number
+        newAccount.setAcName("주계좌");
+        newAccount.setAcPasswd(acPasswd);
+        newAccount.setStatus(1);
 
+        accountRepository.createNewAccount(newAccount);
+    }
 
     @Override
     public List<Account> findAccountByMemberId(int memberId) {

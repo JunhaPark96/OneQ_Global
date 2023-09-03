@@ -9,6 +9,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import java.util.List;
 
 public interface AccountService {
+    public void createNewAccount(String acPasswd, int userSeq);
     List<Account> findAccountByMemberId(int memberId);
 
     List<MemberAccDTO> findMemberAccounts(int memberId);

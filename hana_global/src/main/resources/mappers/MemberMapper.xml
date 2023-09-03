@@ -38,6 +38,12 @@
         SELECT user_seq as userSeq, email, id, passwd, name, regist_no as registNo, signup_date as signupDate, country_sp as countrySP, nationality, birth_date as birthDate, gender, contact, ROAD_ADDRESS as roadAddress, JIBUN_ADDRESS as jibunAddress, status
         FROM member where user_seq = #{user_seq}
     </select>
+    
+    <select id="findUserSeqByID" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
+        SELECT user_seq as userSeq
+        FROM member where id = #{id}
+    </select>
+    
     <select id="getAccountAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account">
         SELECT *
         FROM CHECKING_ACCOUNT

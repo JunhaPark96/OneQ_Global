@@ -65,4 +65,10 @@ public class MemberServiceImpl implements MemberService {
     public Member findMemberById(int memberId) {
         return memberRepository.findMemberById(memberId);
     }
+
+    @Override
+    public Integer findUserSeqByID(String id) {
+        Member member = memberRepository.findUserSeqByID(id);
+        return member.getUserSeq();
+    }
 }

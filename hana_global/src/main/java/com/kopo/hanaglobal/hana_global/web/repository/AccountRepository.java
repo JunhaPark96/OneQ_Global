@@ -10,6 +10,8 @@ import java.util.List;
 
 @Mapper
 public interface AccountRepository {
+    public void createNewAccount(Account account);
+
     public List<Account> findAccountByMemberId(int memberId);
 
     public List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(@Param("ac_no") String acNo);

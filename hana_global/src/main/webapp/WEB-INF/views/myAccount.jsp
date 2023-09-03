@@ -156,7 +156,7 @@
                                             <div class="grid-left">
                                                 <div class="row pt-1" style="height: 50px">
                                                     <div class="col d-flex align-items-center">
-                                                        <h3>예금주명 &nbsp;&nbsp;
+                                                        <h3>예금주명 <br/>
                                                             <span class="text-bold"> ${account.name}</span>
                                                         </h3>
 <%--                                                        <p class="text-muted" style="font-size:22px">--%>

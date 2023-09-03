@@ -46,6 +46,8 @@ dependencies {
 	// 유효성 검사
 	implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final'
 	implementation 'org.json:json:20211205'
+	// 랜덤 스트링
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {

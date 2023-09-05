@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kopo.hanaglobal.openBank.repository.AccountRepository">
+    <insert id="createNewAccount" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Account">
+        INSERT INTO CHECKING_ACCOUNT(AC_NO, AC_NAME, USER_SEQ, AC_PASSWD, STATUS)
+        VALUES (#{acNo}, '주계좌', #{userSeq}, #{acPasswd}, #{status})
+    </insert>
+
+    <select id="findAccountByMemberId" resultType="com.kopo.hanaglobal.openBank.entity.Account"
+            parameterType="int">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
+    </select>
+
+    <select id="getAccountByAcNo" resultType="com.kopo.hanaglobal.openBank.entity.Account" parameterType="String">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT where ac_no = #{ac_no}
+    </select>
+
+    <select id="getTransactionHistoryByAcNo" resultType="com.kopo.hanaglobal.openBank.dto.AccountHistoryResponseDTO">
+        SELECT ac_no, to_char(trade_date, 'YYYY-MM-DD') as tradeDate, balance, transaction_amount, transaction_type, PARTICIPANT, PARTICIPANT_ACCOUNT
+        FROM ACCOUNT_HISTORY where ac_no = #{ac_no}
+    </select>
+
+    <update id="updateAccountBalance">
+        UPDATE CHECKING_ACCOUNT SET balance = #{amount} WHERE ac_no = #{acNo}
+    </update>
+
+
+    <insert id="insertAccHistTransaction">
+        INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)
+        VALUES (ACCOUNT_HISTORY_SEQ.NEXTVAL, #{ac_no}, #{balance}, #{transaction_amount}, #{transaction_type}, #{participant}, #{participant_account})
+    </insert>
+</mapper>

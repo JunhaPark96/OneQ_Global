@@ -1,7 +1,6 @@
-package com.kopo.hanaglobal.hana_global.web.entity;
+package com.kopo.hanaglobal.openBank.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 @Getter
 @Setter

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.WalletRepository">
+<!--    계좌개설/회원가입 시 wallet 자동 생성-->
+    <insert id="createNewWallet" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Wallet">
+        INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ as userSeq, AC_NO as acNo, WALLET_PW as walletPw)
+        VALUES (HANA_WALLET_SEQ.NEXTVAL,  #{userSeq}, #{acNo}, #{walletPw})
+    </insert>
+
+    <select id="findWalletByMemberId" resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet"
+            parameterType="int">
+        SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
+        FROM HANA_WALLET where user_seq = #{userSeq}
+    </select>
+
+    <select id="findWalletByAccountNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet"
+            parameterType="int">
+        SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
+        FROM HANA_WALLET where ac_no = #{acNo}
+    </select>
+</mapper>

@@ -17,7 +17,7 @@
 <div class="navbar">
 <ul>
     <li>
-        <a href="/account">Accounts</a>
+        <a href="/account" style="padding-left: 15px">Accounts</a>
         <ul>
             <li><a href="${pageContext.request.contextPath}/accountInfo"> My Accounts</a></li>
             <li><a href="${pageContext.request.contextPath}/accountDetail">Transaction Details</a></li>
@@ -25,7 +25,7 @@
         </ul>
     </li>
     <li>
-        <a href="${pageContext.request.contextPath}/walletInfo">Hana Wallet</a>
+        <a href="${pageContext.request.contextPath}/walletInfo" style="padding-left: 15px">Hana Wallet</a>
         <ul>
             <li><a href="${pageContext.request.contextPath}/walletInfo"> My Wallet </a></li>
             <li><a href="${pageContext.request.contextPath}/accountDetail">Top up</a></li>
@@ -33,7 +33,7 @@
         </ul>
     </li>
     <li>
-        <a href="/exchange">Foreign Exchange</a>
+        <a href="/exchange" style="padding-left: 15px">Foreign Exchange</a>
         <ul>
             <li><a href="/exchange">Exchange Rate</a></li>
             <li><a href="/exchange">Currency Exchange</a></li>
@@ -42,7 +42,7 @@
         </ul>
     </li>
     <li>
-        <a href="/transfer">Overseas Remittance</a>
+        <a href="/transfer" style="padding-left: 15px">Overseas Remittance</a>
         <ul>
             <li><a href="/transfer">Immediate Remittance</a></li>
             <li><a href="/transfer">Remittance history</a></li>

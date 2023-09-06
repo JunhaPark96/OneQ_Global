@@ -507,7 +507,7 @@ Chrome: 설정→ 고급 → 개인정보 및 보안 → 사이트 설정 → �
 
             <div class="agree-check clearfix mt7 mb15">
 	<span class="fleft"> <input type="checkbox" id="p6" value="">
-		<label for="p6"><em>위 약관의 내용을 확인하고 동의합니다.</em></label>
+		<label for="p6"><em>I have read and agree to the terms and conditions</em></label>
 	</span>
             </div>
 

@@ -28,9 +28,11 @@
             <h2>View Wallets</h2>
 
             <div class="walletCell">
-                <div class="wallet">
+                <div class="walletCard ">
+                    <div class="">
 
 
+                    </div>
                 </div>
                 들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
                             [잔액]

@@ -11,6 +11,34 @@
     font-size: 17px;
     align-items: flex-start;
 }
+/* --------------------스크롤 시작 */
+.navbar::-webkit-scrollbar{
+    display: none;
+}
+
+/*!* 스크롤 트랙 (스크롤바의 전체 배경) *!*/
+/*.navbar::-webkit-scrollbar-track {*/
+/*    border-radius: 10px;*/
+/*    background-color: #f5f5f5;*/
+/*}*/
+
+/*!* 스크롤바 핸들 (실제로 움직이는 부분) *!*/
+/*.navbar::-webkit-scrollbar-thumb {*/
+/*    border-radius: 10px;*/
+/*    background-color: #46E4D1;  !* 스크롤바 핸들의 기본 색상 *!*/
+/*    transition: background-color 0.3s;  !* 부드러운 색상 전환 효과 *!*/
+/*}*/
+
+/*!* 스크롤바 핸들 호버 효과 *!*/
+/*.navbar::-webkit-scrollbar-thumb:hover {*/
+/*    background-color: #249c88;  !* 스크롤바 핸들의 호버 색상 *!*/
+/*}*/
+
+/*!* 스크롤바의 너비 *!*/
+/*.navbar::-webkit-scrollbar {*/
+/*    width: 10px;*/
+/*}*/
+/* -------------- 스크롤 끝*/
 
 .navbar ul {
     list-style: none;

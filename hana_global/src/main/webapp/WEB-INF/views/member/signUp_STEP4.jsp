@@ -99,7 +99,7 @@
         </section>
         <section class="account-password-section">
           <div class="titArea">
-            <h2>계좌 비밀번호 설정</h2>
+            <h2>간편 비밀번호 설정</h2>
             <div class="title-area clearfix">
               <h3 class="fleft">계좌 정보</h3>
               <div class="infor mt4">
@@ -116,10 +116,10 @@
             <tbody>
 
             <tr>
-              <td class="th">계좌 비밀번호</td>
+              <td class="th">간편 비밀번호</td>
               <td>
                 <div class="iptWrap">
-                  <input type="text" class="ipt uiAct" title="계좌비밀번호 설정" id="acPasswd"
+                  <input type="text" class="ipt uiAct" title="간편비밀번호 설정" id="acPasswd"
                          name="acPasswd" maxlength="4">
                 </div>
               </td>

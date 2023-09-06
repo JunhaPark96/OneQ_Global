@@ -11,7 +11,6 @@
 
     <link href="css/header.css" rel="stylesheet"/>
     <link href="css/TTF.css" rel="stylesheet"/>
-    <link href="css/service-main.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
 
     <script src="./js/main.js"></script>
@@ -26,27 +25,44 @@
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
-        <div class="main-left">
-        </div>
 
         <div class="main-body">
             <form:form action="${pageContext.request.contextPath}/signin" method="post" class="loginInput"
                        modelAttribute="loginDTO">
             <div class="loginHeader">Login</div>
-                <div class="loginField loginId">
-                    <label for="id">User ID</label>
-                    <form:input path="id"/>
-                    <form:errors path="id"/>
-                </div>
-                <div class="loginField loginPw">
-                    <%--<label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required>--%>
+                <div class="loginField">
+                    <div class="loginLabel1">
+                        <label for="id">User ID</label>
+                    </div>
+                    <div class="loginInputField1">
+                        <form:input path="id"/>
+                        <form:errors path="id"/>
+                    </div>
+                    <div class="loginLabel2">
                         <label for="passwd">Password</label>
+                    </div>
+                    <div class="loginInputField2">
                         <form:input path="passwd"/>
                         <form:errors path="passwd"/>
-                </div>
-                <div class="loginButton">
-                    <input type="submit" value="Login" class="loginBtn">
+                    </div>
+                    <div class="loginButton">
+                        <input type="submit" value="Login" class="loginBtn">
+                    </div>
+<%--                <div class="loginId">--%>
+<%--                    <label for="id">User ID</label>--%>
+<%--                    <form:input path="id"/>--%>
+<%--                    <form:errors path="id"/>--%>
+<%--                </div>--%>
+<%--                <div class="loginPw">--%>
+<%--                    &lt;%&ndash;<label for="password">Password</label>--%>
+<%--                    <input type="password" name="password" id="password" placeholder="Password" required>&ndash;%&gt;--%>
+<%--                        <label for="passwd">Password</label>--%>
+<%--                        <form:input path="passwd"/>--%>
+<%--                        <form:errors path="passwd"/>--%>
+<%--                </div>--%>
+<%--                <div class="loginButton">--%>
+<%--                    <input type="submit" value="Login" class="loginBtn">--%>
+<%--                </div>--%>
                 </div>
             </form:form>
         </div>

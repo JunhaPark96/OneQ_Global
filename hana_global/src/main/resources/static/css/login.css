@@ -1,3 +1,40 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    font-family: "Pretendard-Regular", sans-serif;
+}
+
+.main-container {
+    display: grid;
+    grid-template-areas:
+    "header"
+    "main-area"
+    "footer"
+;
+    grid-template-rows: 0.5fr 3fr 0.5fr;
+    width: 100%;
+    height: 100%;
+    /*background: linear-gradient(-60deg, #67E6A2, #FFFFFF, #DEF4C6, #46E4D1);*/
+    border-radius: 15px;
+}
+
+.main-area {
+    grid-area: main-area;
+    display: grid;
+    min-height: 500px;
+    max-height: 850px;
+    margin-left: 15%;
+    margin-right: 15%;
+    column-gap: 40px;
+}
+
+.main-body{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
 .loginHeader {
     font-size: 2rem;
     font-weight: bold;
@@ -30,12 +67,44 @@
     display: grid;
     align-items: center;
     gap: 10px;
+    border-bottom: 10px solid #016f73;
+    border-top: 10px solid #016f73;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .loginField {
-    align-items: center;
-    justify-content: center;
-    margin-right: 40px;
+    display: grid;
+    grid-template-areas:
+        "loginLabel1 loginInputField1 loginButton"
+        "loginLabel2 loginInputField2 loginButton";
+    grid-template-columns: 0.5fr 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 25px;
+}
+
+.loginLabel1, .loginLabel2{
+    display: grid;
+}
+
+.loginInputField1, .loginInputField2 {
+    display: grid;
+}
+
+.loginLabel1 {
+    grid-area: loginLabel1;
+}
+
+.loginLabel2 {
+    grid-area: loginLabel2;
+}
+
+.loginInputField1 {
+    grid-area: loginInputField1;
+}
+
+.loginInputField2 {
+    grid-area: loginInputField2;
 }
 
 .loginField label {
@@ -46,7 +115,7 @@
 }
 
 .loginField input {
-    width: 300px;
+    width: 250px;
     padding: 15px;
     border: 2px solid #ccc;
     border-radius: 5px;
@@ -58,20 +127,20 @@
 }
 
 .loginButton {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    margin-top: 20px;
+    display: grid;
+    grid-area: loginButton;
+    margin-left: 50px;
 }
 
-.loginBtn {
+.loginButton .loginBtn {
     border: none;
     color: white;
     background-color: #3FC1C9;
-    padding: 40px 30px; /* Reduced padding as per modal */
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s;
     text-decoration: none; /* For <a> tags */
+    max-width: 150px;
 }
 
 .loginBtn:hover {

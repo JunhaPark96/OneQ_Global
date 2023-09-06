@@ -17,27 +17,35 @@
 <div class="navbar">
 <ul>
     <li>
-        <a href="/account">계좌관리</a>
+        <a href="/account">Accounts</a>
         <ul>
-            <li><a href="${pageContext.request.contextPath}/accountInfo"> myAccount</a></li>
-            <li><a href="${pageContext.request.contextPath}/accountDetail">계좌 내역</a></li>
-            <li><a href="${pageContext.request.contextPath}/accountTransfer">계좌 이체</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountInfo"> My Accounts</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountDetail">Transaction Details</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountTransfer">Account Transfer</a></li>
         </ul>
     </li>
     <li>
-        <a href="/exchange">환전관리</a>
+        <a href="${pageContext.request.contextPath}/walletInfo">Hana Wallet</a>
         <ul>
-            <li><a href="/exchange">환율조회</a></li>
-            <li><a href="/exchange">환전하기</a></li>
-            <li><a href="/exchange">환전거래내역</a></li>
-            <li><a href="/exchange">월별자동환전</a></li>
+            <li><a href="${pageContext.request.contextPath}/walletInfo"> My Wallet </a></li>
+            <li><a href="${pageContext.request.contextPath}/accountDetail">Top up</a></li>
+            <li><a href="${pageContext.request.contextPath}/accountTransfer">Wallet Transaction Details</a></li>
         </ul>
     </li>
     <li>
-        <a href="/transfer">송금관리</a>
+        <a href="/exchange">Foreign Exchange</a>
         <ul>
-            <li><a href="/transfer">송금하기</a></li>
-            <li><a href="/transfer">송금거래내역</a></li>
+            <li><a href="/exchange">Exchange Rate</a></li>
+            <li><a href="/exchange">Currency Exchange</a></li>
+            <li><a href="/exchange">Exchange history</a></li>
+            <li><a href="/exchange">Recurring Exchange</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/transfer">Overseas Remittance</a>
+        <ul>
+            <li><a href="/transfer">Immediate Remittance</a></li>
+            <li><a href="/transfer">Remittance history</a></li>
         </ul>
     </li>
 </ul>

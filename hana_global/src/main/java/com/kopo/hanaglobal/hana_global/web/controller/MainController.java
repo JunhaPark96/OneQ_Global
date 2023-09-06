@@ -42,6 +42,12 @@ public class MainController {
         return "account";
     }
 
+    @GetMapping("/walletInfo")
+    public String getWalletInfo(){
+        System.out.println("wallet 조회 페이지입니다");
+        return "/wallet/walletInfo";
+    }
+
     //    @GetMapping("/myAccount")
 //    public String myAccount() {
 //        System.out.println("myAccount 페이지");

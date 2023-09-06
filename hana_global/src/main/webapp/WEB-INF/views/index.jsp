@@ -80,7 +80,7 @@
             <div class="main-right">
 
                 <div class="card card3">
-                    <a href="<%= redirectURL != "" ? redirectURL : "/wallet" %>">
+                    <a href="<%= redirectURL != "" ? redirectURL : "/walletInfo" %>">
                         <div class="card-image card-image3" alt="페이"></div>
                         <div class="card-area">
                             <div class="card-text-area">

@@ -63,7 +63,7 @@
                                     <select class="form-select border-3 w-50" name="withdrawAccountNo"
                                             id="selectAccountForm"
                                             onchange="changeBalance()" style="height: 55px;">
-                                        <option value="" selected disabled>계좌를 선택하세요.</option>
+                                        <option value="" selected disabled>Select Account</option>
                                         <c:forEach items="${accountList}" var="account">
                                             <option value="${account.acNo}" data-balance="${account.balance}">
                                                 (${account.acNo})

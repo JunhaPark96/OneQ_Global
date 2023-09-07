@@ -29,18 +29,23 @@
 
             <div class="walletCell">
                 <div class="walletCard ">
-                들어갈 정보:
                     <div class="cardHeader">
-                        [월렛아이콘, 통화별아이콘], [Hana Wallet, 국가이름] / Top up
+                        <h4>Hana Wallet</h4>
+                        <span><a href="topUp.jsp">Load</a></span>
                     </div>
                     <div class="cardElem1">
-                        [잔액]
-                    </div>
-                    <div>
-                        <a href="${pageContext.request.contextPath}/accountInfo"> 자동충전 탭 이동 </a>
+                        <a href="${pageContext.request.contextPath}/accountInfo"> 잔액 > 얼마 Won 연결해야함</a>
                     </div>
                     <div class="cardElem2">
-                        Exchange, Remittance
+                        <a href="${pageContext.request.contextPath}/accountInfo"> recurring exchange ></a>
+                    </div>
+                    <div class="cardElem3">
+                        <div class="btn_p">
+                            <a href="/curExchange">Exchange</a>
+                        </div>
+                        <div class="btn_s">
+                            <a href="/overseaRemittance">Remittance</a>
+                        </div>
                     </div>
                 </div>
             </div>

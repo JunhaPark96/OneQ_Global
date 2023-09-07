@@ -29,15 +29,20 @@
 
             <div class="walletCell">
                 <div class="walletCard ">
-                    <div class="">
-
-
+                들어갈 정보:
+                    <div class="cardHeader">
+                        [월렛아이콘, 통화별아이콘], [Hana Wallet, 국가이름] / Top up
+                    </div>
+                    <div class="cardElem1">
+                        [잔액]
+                    </div>
+                    <div>
+                        <a href="${pageContext.request.contextPath}/accountInfo"> 자동충전 탭 이동 </a>
+                    </div>
+                    <div class="cardElem2">
+                        Exchange, Remittance
                     </div>
                 </div>
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                            [잔액]
-                            [충전] [환전]
-                            [환전] [자동환전]
             </div>
 
             <div class="walletCell">

@@ -13,6 +13,7 @@
             parameterType="int">
         SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
         FROM HANA_WALLET where user_seq = #{userSeq}
+        ORDER BY CASE WHEN currency_code = 'KRW' THEN 0 ELSE 1 END, currency_code
     </select>
 
     <select id="findWalletByAccountNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet"

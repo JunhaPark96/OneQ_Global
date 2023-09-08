@@ -182,38 +182,39 @@
                             <td class="th">국적</td>
                             <td>
                                 <div class="iptWrap">
-                                    <select class="ipt uiAct" title="국가선택" id="nationality" name="nationality"
-                                            onchange="changeCountryCode()">
-                                        <option value="KOR">대한민국 (Republic of Korea)</option>
-                                        <option value="CHN">中国 (China)</option>
-                                        <option value="TWN">台灣 (Taiwan)</option>
-                                        <option value="JPN">日本 (Japan)</option>
-                                        <option value="THA">ประเทศไทย (Thailand)</option>
-                                        <option value="BGR">България (Bulgaria)</option>
-                                        <option value="CZE">Česko (Czech Republic)</option>
-                                        <option value="DNK">Danmark (Denmark)</option>
-                                        <option value="DEU">Deutschland (Germany)</option>
-                                        <option value="ESP">España (Spain)</option>
-                                        <option value="LAM">América Latina (Latin America)</option>
-                                        <option value="GRC">Ελλάδα (Greece)</option>
-                                        <option value="FRA">France (France)</option>
-                                        <option value="ITA">Italia (Italy)</option>
-                                        <option value="IDN">Indonesia (Indonesia)</option>
-                                        <option value="HUN">Magyarország (Hungary)</option>
-                                        <option value="NLD">Nederland (Netherlands)</option>
-                                        <option value="NOR">Norge (Norway)</option>
-                                        <option value="POL">Polska (Poland)</option>
-                                        <option value="PRT">Portugal (Portugal)</option>
-                                        <option value="BRA">Brasil (Brazil)</option>
-                                        <option value="ROU">România (Romania)</option>
-                                        <option value="RUS">Россия (Russia)</option>
-                                        <option value="FIN">Suomi (Finland)</option>
-                                        <option value="SWE">Sverige (Sweden)</option>
-                                        <option value="TUR">Türkiye (Turkey)</option>
-                                        <option value="VNM">Việt Nam (Vietnam)</option>
-                                        <option value="UKR">Україна (Ukraine)</option>
+<%--                                    <select class="ipt uiAct" title="국가선택" id="nationality" name="nationality"--%>
+<%--                                            onchange="changeCountryCode()">--%>
+<%--                                        <option value="KOR">대한민국 (Republic of Korea)</option>--%>
+<%--                                        <option value="CHN">中国 (China)</option>--%>
+<%--                                        <option value="TWN">台灣 (Taiwan)</option>--%>
+<%--                                        <option value="JPN">日本 (Japan)</option>--%>
+<%--                                        <option value="THA">ประเทศไทย (Thailand)</option>--%>
+<%--                                        <option value="BGR">България (Bulgaria)</option>--%>
+<%--                                        <option value="CZE">Česko (Czech Republic)</option>--%>
+<%--                                        <option value="DNK">Danmark (Denmark)</option>--%>
+<%--                                        <option value="DEU">Deutschland (Germany)</option>--%>
+<%--                                        <option value="ESP">España (Spain)</option>--%>
+<%--                                        <option value="LAM">América Latina (Latin America)</option>--%>
+<%--                                        <option value="GRC">Ελλάδα (Greece)</option>--%>
+<%--                                        <option value="FRA">France (France)</option>--%>
+<%--                                        <option value="ITA">Italia (Italy)</option>--%>
+<%--                                        <option value="IDN">Indonesia (Indonesia)</option>--%>
+<%--                                        <option value="HUN">Magyarország (Hungary)</option>--%>
+<%--                                        <option value="NLD">Nederland (Netherlands)</option>--%>
+<%--                                        <option value="NOR">Norge (Norway)</option>--%>
+<%--                                        <option value="POL">Polska (Poland)</option>--%>
+<%--                                        <option value="PRT">Portugal (Portugal)</option>--%>
+<%--                                        <option value="BRA">Brasil (Brazil)</option>--%>
+<%--                                        <option value="ROU">România (Romania)</option>--%>
+<%--                                        <option value="RUS">Россия (Russia)</option>--%>
+<%--                                        <option value="FIN">Suomi (Finland)</option>--%>
+<%--                                        <option value="SWE">Sverige (Sweden)</option>--%>
+<%--                                        <option value="TUR">Türkiye (Turkey)</option>--%>
+<%--                                        <option value="VNM">Việt Nam (Vietnam)</option>--%>
+<%--                                        <option value="UKR">Україна (Ukraine)</option>--%>
 
-                                    </select>
+<%--                                    </select>--%>
+    <input type="text" value="${sessionScope.country}" class="ipt uiAct" title="국적" id="nationality" name="nationality" readonly>
                                 </div>
                             </td>
                         </tr>
@@ -290,38 +291,84 @@
 </div>
 
 <script>
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     // 페이지가 로드될 때 기본으로 한국어와 한국 코드를 선택
+    //     document.getElementById('nationality').value = 'KOR';
+    //     document.getElementById('countryCode').value = 'KOR';
+    // });
+    //
+    // // 국적과 국가코드 연결
+    // function changeCountryCode() {
+    //     let nationality = document.getElementById('nationality').value;
+    //     document.getElementById('countryCode').value = nationality;
+    // }
+    //
+    // // function changeCountryCode() {
+    // //     let nationality = document.getElementById("nationality");
+    // //     let countryCode = document.getElementById("countryCode");
+    // //     let selectedNationality = nationality.value;
+    // //
+    // //     countryCode.value = selectedNationality;
+    // // }
+    // // 국적 선택 시 국가코드 자동 연결
+    // function changeCountryCode() {
+    //     let nationalitySelect = document.getElementById("nationality");
+    //     let countryCode = document.getElementById("countryCode");
+    //     let selectedNationalityValue = nationalitySelect.value;
+    //     // let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.split(" ")[0];
+    //     // 괄호안에 텍스트 가져오기
+    //     let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.match(/\(([^)]+)\)/)[1];
+    //
+    //     // 선택된 국적에 따라 국가 코드 변경
+    //     countryCode.value = selectedNationalityValue;
+    //     nationalitySelect.value = selectedNationalityText;
+    // }
+
+
+    // 국적과 국가코드 자동 입력
     document.addEventListener('DOMContentLoaded', function () {
-        // 페이지가 로드될 때 기본으로 한국어와 한국 코드를 선택
-        document.getElementById('nationality').value = 'KOR';
-        document.getElementById('countryCode').value = 'KOR';
+        const countryFromSession = "${sessionScope.country}";  // 여기서 세션의 'country' 값을 가져와야 합니다.
+        setCountryAndCodeBasedOnName(countryFromSession);
     });
 
-    // 국적과 국가코드 연결
-    function changeCountryCode() {
-        let nationality = document.getElementById('nationality').value;
-        document.getElementById('countryCode').value = nationality;
+    function setCountryAndCodeBasedOnName(countryName) {
+        const countries = {
+            "Dominion of Canada": "CAN",
+            "대한민국 (Republic of Korea)": "KOR",
+            "中国 (China)": "CHN",
+            "台灣 (Taiwan)": "TWN",
+            "日本 (Japan)": "JPN",
+            "ประเทศไทย (Thailand)": "THA",
+            "България (Bulgaria)": "BGR",
+            "Česko (Czech Republic)": "CZE",
+            "Danmark (Denmark)": "DNK",
+            "Deutschland (Germany)": "DEU",
+            "España (Spain)": "ESP",
+            "América Latina (Latin America)": "LAM",
+            "Ελλάδα (Greece)": "GRC",
+            "France (France)": "FRA",
+            "Italia (Italy)": "ITA",
+            "Indonesia (Indonesia)": "IDN",
+            "Magyarország (Hungary)": "HUN",
+            "Nederland (Netherlands)": "NLD",
+            "Norge (Norway)": "NOR",
+            "Polska (Poland)": "POL",
+            "Portugal (Portugal)": "PRT",
+            "Brasil (Brazil)": "BRA",
+            "România (Romania)": "ROU",
+            "Россия (Russia)": "RUS",
+            "Suomi (Finland)": "FIN",
+            "Sverige (Sweden)": "SWE",
+            "Türkiye (Turkey)": "TUR",
+            "Việt Nam (Vietnam)": "VNM",
+            "Україна (Ukraine)": "UKR"
+        };
+
+        document.getElementById('nationality').value = countryName;
+        document.getElementById('countryCode').value = countries[countryName] || "Unknown"; // 국가코드가 존재하지 않을 경우 "Unknown" 출력
     }
 
-    // function changeCountryCode() {
-    //     let nationality = document.getElementById("nationality");
-    //     let countryCode = document.getElementById("countryCode");
-    //     let selectedNationality = nationality.value;
-    //
-    //     countryCode.value = selectedNationality;
-    // }
-    // 국적 선택 시 국가코드 자동 연결
-    function changeCountryCode() {
-        let nationalitySelect = document.getElementById("nationality");
-        let countryCode = document.getElementById("countryCode");
-        let selectedNationalityValue = nationalitySelect.value;
-        // let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.split(" ")[0];
-        // 괄호안에 텍스트 가져오기
-        let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.match(/\(([^)]+)\)/)[1];
 
-        // 선택된 국적에 따라 국가 코드 변경
-        countryCode.value = selectedNationalityValue;
-        nationalitySelect.value = selectedNationalityText;
-    }
 
 </script>
 </body>

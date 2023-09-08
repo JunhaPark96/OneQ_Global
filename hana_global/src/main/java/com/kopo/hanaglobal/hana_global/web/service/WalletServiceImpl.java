@@ -18,7 +18,6 @@ public class WalletServiceImpl implements WalletService{
 
     @Override
     public void createNewWallet(int userSeq, String acNo, String walletPw) {
-        // TODO: wallet 생성
         Wallet newWallet = new Wallet();
         newWallet.setUserSeq(userSeq);
         newWallet.setAcNo(acNo);

@@ -1,0 +1,40 @@
+.walletCell[data-currency="KRW"]::before {
+    background-image: url("/images/walletIcon.png");
+}
+.walletCell[data-currency="USD"]::before {
+    background-image: url("/images/walletIcon_USA.png");
+}
+.walletCell[data-currency="JPY"]::before {
+    background-image: url("/images/walletIcon_Japan.png");
+}
+.walletCell[data-currency="EUR"]::before {
+    background-image: url("/images/walletIcon_EU.png");
+}
+
+.walletCell[data-currency="GBP"]::before {
+    background-image: url("/images/walletIcon_UK.png");
+}
+
+.walletCell[data-currency="AUD"]::before {
+    background-image: url("/images/walletIcon_Australia.png");
+}
+
+.walletCell[data-currency="CAD"]::before {
+    background-image: url("/images/walletIcon_Canada.png");
+}
+
+.walletCell[data-currency="CNY"]::before {
+    background-image: url("/images/walletIcon_China.png");
+}
+
+.walletCell[data-currency="INR"]::before {
+    background-image: url("/images/walletIcon_India.png");
+}
+
+.walletCell[data-currency="BRL"]::before {
+    background-image: url("/images/walletIcon_Brazil.png");
+}
+
+.walletCell[data-currency="RUB"]::before {
+    background-image: url("/images/walletIcon_Russia.png");
+}

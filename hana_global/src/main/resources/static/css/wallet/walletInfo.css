@@ -2,16 +2,17 @@
     /*border: 1px solid black;*/
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 0.2fr 1fr 1fr;
+    grid-auto-rows: 0.1fr auto;
     row-gap: 30px;
     column-gap: 20px;
-    max-height: 800px;
+    /*grid-auto-flow: column;*/
 }
 
 /*h2:nth-child(1) {}*/
 h2 {
     font-size: calc(1.325rem + .9vw);
-    grid-column: auto / span 3; /* 3칸 영역 차지 */
+    grid-column: 1 / span 3; /* 3칸 영역 차지 */
+    grid-row: 1;
 }
 .walletCell {
     position: relative;
@@ -23,6 +24,8 @@ h2 {
     background-size:  auto;
     flex-direction: column;
     justify-content: space-around;
+    max-width: 262px;
+    max-height: 336px;
 }
 .walletCard{
     display: flex;
@@ -38,14 +41,13 @@ h2 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("/images/walletIcon.png");
+    /*background-image: url("/images/walletIcon.png");*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: 200px 200px;
-    opacity: 0.35;  /* 여기에서 이미지의 투명도를 조정합니다. */
+    opacity: 0.65;  /* 여기에서 이미지의 투명도를 조정합니다. */
     z-index: -1;  /* 그라데이션 아래에 이미지가 위치하도록 합니다. */
 }
-
 
 /* 카드 내부 시작-----------------*/
 .cardHeader{

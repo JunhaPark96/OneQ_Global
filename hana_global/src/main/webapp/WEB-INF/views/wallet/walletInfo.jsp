@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page language="java"  pageEncoding="UTF-8" %>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -16,25 +16,28 @@
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/wallet/walletInfo.css" rel="stylesheet"/>
+    <link href="./css/wallet/flags.css" rel="stylesheet"/>
 
     <title>월렛 확인</title>
 </head>
 <body>
-    <div class="main-container">
+<div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>View Wallets</h2>
+            <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
 
-            <div class="walletCell">
-                <div class="walletCard ">
+            <div class="walletCell" data-currency="${wallet.currencyCode}">
+                <div class="walletCard">
                     <div class="cardHeader">
                         <h4>Hana Wallet</h4>
-                        <span><a href="topUp.jsp">Load</a></span>
+                        <span><a href="${pageContext.request.contextPath}/topUp">Load</a></span>
                     </div>
                     <div class="cardElem1">
-                        <a href="${pageContext.request.contextPath}/accountInfo"> 잔액 > 얼마 Won 연결해야함</a>
+                        <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
+                            &nbsp; ${wallet.currency} </a>
                     </div>
                     <div class="cardElem2">
                         <a href="${pageContext.request.contextPath}/accountInfo"> recurring exchange ></a>
@@ -50,45 +53,20 @@
                 </div>
             </div>
 
-            <div class="walletCell">
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                [잔액]
-                [충전] [환전]
-                [환전] [자동환전]
-            </div>
-
-            <div class="walletCell">
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                [잔액]
-                [충전] [환전]
-                [환전] [자동환전]
-            </div>
-
-            <div class="walletCell">
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                [잔액]
-                [충전] [환전]
-                [환전] [자동환전]
-            </div>
-
-            <div class="walletCell">
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                [잔액]
-                [충전] [환전]
-                [환전] [자동환전]
-            </div>
-
-            <div class="walletCell">
-                들어갈 정보: [월렛아이콘, 통화별아이콘], [하나머니, 국가이름]
-                [잔액]
-                [충전] [환전]
-                [환전] [자동환전]
-            </div>
-
-        </div>
+        </c:forEach>
     </div>
     <footer>
     </footer>
 </div>
+<%--    모달 창 구역 --%>
+        <div class="modalContainer">
+            <div class="">
+
+
+            </div>
+
+        </div>
+
+
 </body>
 </html>

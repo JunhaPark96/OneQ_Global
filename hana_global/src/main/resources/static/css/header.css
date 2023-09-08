@@ -52,7 +52,7 @@
     grid-area: login-box;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-right: 80px;
+    /*margin-right: 80px;*/
     align-items: center;
 }
 

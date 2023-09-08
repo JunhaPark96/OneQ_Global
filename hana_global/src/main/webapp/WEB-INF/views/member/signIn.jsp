@@ -42,7 +42,7 @@
                         <label for="passwd">Password</label>
                     </div>
                     <div class="loginInputField2">
-                        <form:input path="passwd"/>
+                        <form:input path="passwd" type="password"/>
                         <form:errors path="passwd"/>
                     </div>
                     <div class="loginButton">

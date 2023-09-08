@@ -135,6 +135,11 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
 
                 <input type="hidden" id="hiddenName" name="hiddenName">
                 <input type="hidden" id="hiddenID" name="hiddenID">
+                <input type="hidden" id="hiddenIssueDate" name="hiddenIssueDate">
+                <input type="hidden" id="hiddenStatus" name="hiddenStatus">
+                <input type="hidden" id="hiddenLocKor" name="hiddenLocKor">
+                <input type="hidden" id="hiddenLocEng" name="hiddenLocEng">
+                <input type="hidden" id="hiddenCountry" name="hiddenCountry">
                 <div class="submitButton">
                     <input type="submit" value="Submit" class="submitBtn" id="submitOCR">
                     <div id="loadingScreen" class="spinner-border text-success" role="status">
@@ -185,7 +190,14 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
                 document.getElementById("registerID").value = data.registerNo;
                 document.getElementById("registerAuthentication").value = data.status;
                 document.getElementById("registerDate").value = data.issueDate;
-                console.log("클라이언트사이드: " + data.name + " " + data.registerNo + " " + data.status + " " + data.issueDate)
+
+                document.getElementById("hiddenLocKor").value = data.loc_kor;
+                document.getElementById("hiddenLocEng").value = data.loc_eng;
+                document.getElementById("hiddenCountry").value = data.Country;
+
+                console.log("클라이언트사이드: " + data.name + " " + data.registerNo + " "
+                    + data.status + " " + data.issueDate + data.loc_kor + " " + data.loc_eng
+                    + data.Country)
             },
             error: function (error) {
                 console.error(error);
@@ -200,6 +212,8 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
 
         document.getElementById("hiddenName").value = document.getElementById("registerName").value;
         document.getElementById("hiddenID").value = document.getElementById("registerID").value;
+        document.getElementById("hiddenIssueDate").value = document.getElementById("registerDate").value;
+        document.getElementById("hiddenStatus").value = document.getElementById("registerAuthentication").value;
 
         setTimeout(function () {
             // Hide loading screen

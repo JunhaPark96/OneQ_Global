@@ -39,7 +39,7 @@ public class ClovaOCRTemplate {
             image.put("format", "png");
             image.put("name", "demo");
             JSONArray templateIds = new JSONArray();
-            templateIds.put(26211);
+            templateIds.put(26298);
             image.put("templateIds", templateIds);
 
             JSONArray images = new JSONArray();
@@ -126,7 +126,9 @@ public class ClovaOCRTemplate {
             for (int i = 0; i < fields.length(); i++) {
                 JSONObject field = fields.getJSONObject(i);
                 String name = field.getString("name");
-                if (name.equals("name") || name.equals("registerNo") || name.equals("status") || name.equals("issueDate")) {
+                if (name.equals("name") || name.equals("registerNo") || name.equals("Country")
+                        || name.equals("status") || name.equals("issueDate") || name.equals("loc_eng")
+                        || name.equals("loc_kor")) {
                     String inferText = field.getString("inferText");
                     extractedData.put(name, inferText);
                 }

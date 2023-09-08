@@ -42,11 +42,6 @@ public class MainController {
         return "account";
     }
 
-    @GetMapping("/walletInfo")
-    public String getWalletInfo(){
-        System.out.println("wallet 조회 페이지입니다");
-        return "/wallet/walletInfo";
-    }
 
     //    @GetMapping("/myAccount")
 //    public String myAccount() {
@@ -109,11 +104,30 @@ public class MainController {
     public String processSignUp3(
             @RequestParam("hiddenName") String name,
             @RequestParam("hiddenID") String foreignRegNo,
+            @RequestParam("hiddenIssueDate") String issueDate,
+            @RequestParam("hiddenStatus") String status,
+            @RequestParam("hiddenLocKor") String locKor,
+            @RequestParam("hiddenLocEng") String locEng,
+            @RequestParam("hiddenCountry") String country,
             HttpSession session
     ) {
         System.out.println("Processing signUp step3 post");
         session.setAttribute("name", name);
         session.setAttribute("foreignRegNo", foreignRegNo);
+        session.setAttribute("issueDate", issueDate);
+        session.setAttribute("status", status);
+        session.setAttribute("locKor", locKor);
+        session.setAttribute("locEng", locEng);
+        session.setAttribute("country", country);
+
+        System.out.println("Name: " + session.getAttribute("name"));
+        System.out.println("Foreign Registration Number: " + session.getAttribute("foreignRegNo"));
+        System.out.println("Issue Date: " + session.getAttribute("issueDate"));
+        System.out.println("Status: " + session.getAttribute("status"));
+        System.out.println("Location (Korean): " + session.getAttribute("locKor"));
+        System.out.println("Location (English): " + session.getAttribute("locEng"));
+        System.out.println("Country: " + session.getAttribute("country"));
+
         return "member/signUp_STEP3";
     }
 

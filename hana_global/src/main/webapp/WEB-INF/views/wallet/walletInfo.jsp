@@ -27,46 +27,101 @@
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>View Wallets</h2>
-            <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
-
-            <div class="walletCell" data-currency="${wallet.currencyCode}">
-                <div class="walletCard">
-                    <div class="cardHeader">
-                        <h4>Hana Wallet</h4>
-                        <span><a href="${pageContext.request.contextPath}/topUp">Load</a></span>
+            <div class="account">
+                <div class="accountWrap">
+                    <div class="account-header">
+                        연결계좌
                     </div>
-                    <div class="cardElem1">
-                        <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
-                            &nbsp; ${wallet.currency} </a>
+                    <div class="account-content">
+                        <h4>하나은행</h4>
                     </div>
-                    <div class="cardElem2">
-                        <a href="${pageContext.request.contextPath}/accountInfo"> recurring exchange ></a>
-                    </div>
-                    <div class="cardElem3">
-                        <div class="btn_p">
-                            <a href="/curExchange">Exchange</a>
+                    <div class="account-footer">
+                        <div class="accountNo">
+                            ${walletList[0].acNo}
                         </div>
-                        <div class="btn_s">
-                            <a href="/overseaRemittance">Remittance</a>
+                        <div class="locRight">
+                            변경
                         </div>
                     </div>
                 </div>
             </div>
+            <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
 
-        </c:forEach>
+                <div class="walletCell" data-currency="${wallet.currencyCode}">
+                    <div class="walletCard">
+                        <div class="cardHeader">
+                            <h4>Hana Wallet</h4>
+<%--                            <span onclick="openModal()"><a>Load</a></span>--%>
+<%--                            <span><button class="loadBtn" onclick="openModal()">Load</button></span>--%>
+                            <button class="loadBtn" onclick="openModal()">Load</button>
+                        </div>
+                        <div class="cardElem1">
+                            <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
+                                &nbsp; ${wallet.currency} </a>
+                        </div>
+                        <div class="cardElem2">
+                            <a href="${pageContext.request.contextPath}/accountInfo"> recurring exchange ></a>
+                        </div>
+                        <div class="cardElem3">
+                            <div class="btn_p">
+                                <a href="/curExchange">Exchange</a>
+                            </div>
+                            <div class="btn_s">
+                                <a href="/overseaRemittance">Remittance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </c:forEach>
+        </div>
+        <footer>
+        </footer>
     </div>
-    <footer>
-    </footer>
-</div>
-<%--    모달 창 구역 --%>
-        <div class="modalContainer">
-            <div class="">
-
-
+    <%--    모달 창 구역 --%>
+    <div id="myModal" class="modalContainer">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="authenticateHeader">충전하기</div>
+                <span class="close" onclick="closeModal()">&times;</span>
             </div>
 
+            <div class="modal-main">
+                        <div class="mdiptWrap">
+                            <div class="input-group">
+                                <label>금액 </label>
+                                </div>
+                                <div>
+                                <input type="text" class="" maxlength="20"
+                                       placeholder="Name" title="Name" id="loadAmount" value=""
+                                       name="loadAmount">
+                            </div>
+                            <div class="input-group">
+                                <label>간편 비밀번호 </label>
+                                </div>
+                                <div>
+                                <input type="password" class="" maxlength="6"
+                                       placeholder="000000" title="간편 비밀번호 입력"
+                                       id="walletAuthentication" value=""
+                                       name="walletAuthentication">
+                                </div>
+                                <h6>최소 1000원 ~ 최대 2000원</h6>
+                        </div>
+<%--                    <div class="modal-main-right">--%>
+<%--                    </div>--%>
+            </div>
         </div>
-
-
+    </div>
+</div>
+<script>
+    // 모달 열기 함수
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+    // 모달 닫기 함수
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+</script>
 </body>
 </html>

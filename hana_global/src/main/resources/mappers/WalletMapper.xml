@@ -29,7 +29,7 @@
     </select>
 
     <insert id="insertWithdrawWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
-        INSERT INTO HANA_WALLET_HIST(WALLET_TRNAS_NO, WALLET_SEQ as walletSeq, balance,
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ as walletSeq, balance,
                                      transaction_amount as transactionAmount, currency_code as currencyCode,
                                      currency, transaction_type as transactionType,
                                      withdraw_cur as withdrawCur, withdraw_name as withdrawName)
@@ -38,13 +38,24 @@
     </insert>
 
     <insert id="insertDepositWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
-        INSERT INTO HANA_WALLET_HIST(WALLET_TRNAS_NO as walletTransNo, WALLET_SEQ as walletSeq, balance,
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO as walletTransNo, WALLET_SEQ as walletSeq, balance,
                                      transaction_amount as transactionAmount, currency_code as currencyCode,
                                      currency, transaction_type as transactionType,
                                      deposit_cur as depositCur, deposit_name as depositName)
         VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
                 #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})
     </insert>
+
+    <select id="getBalanceByWalletSeq" resultType="BigDecimal">
+        SELECT balance
+        FROM HANA_WALLET where wallet_seq = #{walletSeq}
+    </select>
+
+    <update id="addWalletBalance">
+        UPDATE HANA_WALLET
+        SET balance = balance + #{deposit}
+        WHERE user_seq = #{userSeq} AND currency_code = #{currencyCode}
+    </update>
 
 
 </mapper>

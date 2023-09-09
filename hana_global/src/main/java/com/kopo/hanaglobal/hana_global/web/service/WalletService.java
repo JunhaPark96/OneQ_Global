@@ -11,4 +11,5 @@ public interface WalletService {
 
     public List<Wallet> findWalletByAccountNo(String acNo);
 
+    public void loadWallet(int userSeq, Integer amount, String password);
 }

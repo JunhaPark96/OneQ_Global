@@ -29,4 +29,5 @@ public interface AccountRepository {
             @Param("transaction_type") int transactionType,
             @Param("participant") String participant,
             @Param("participant_account") String participantAccount);
+    public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO);
 }

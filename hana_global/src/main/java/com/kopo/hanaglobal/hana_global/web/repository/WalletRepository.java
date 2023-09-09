@@ -22,15 +22,16 @@ public interface WalletRepository {
     public void addWalletBalance(@Param("userSeq") int userSeq,
                                  @Param("deposit") Integer deposit,
                                  @Param("currencyCode") String currencyCode);
-
+    public BigDecimal getBalanceByWalletSeq(int walletSeq);
     public void insertWithdrawWalletHist();
-    public void insertDepositWalletHist(@Param("walletTransNo") int walletTransNo,
-                                        @Param("walletSeq") int walletSeq,
-                                        @Param("balance") BigDecimal balance,
-                                        @Param("transactionAmount") BigDecimal transactionAmount,
-                                        @Param("currencyCode") String currencyCode,
-                                        @Param("currency") String currency,
-                                        @Param("transactionType") String transactionType,
-                                        @Param("depositCur") String depositCur,
-                                        @Param("depositName") String depositName);
+//    public void insertDepositWalletHist(@Param("walletTransNo") int walletTransNo,
+//                                        @Param("walletSeq") int walletSeq,
+//                                        @Param("balance") BigDecimal balance,
+//                                        @Param("transactionAmount") BigDecimal transactionAmount,
+//                                        @Param("currencyCode") String currencyCode,
+//                                        @Param("currency") String currency,
+//                                        @Param("transactionType") String transactionType,
+//                                        @Param("depositCur") String depositCur,
+//                                        @Param("depositName") String depositName);
+    public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
 }

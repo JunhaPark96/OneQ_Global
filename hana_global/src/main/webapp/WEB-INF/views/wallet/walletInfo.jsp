@@ -10,7 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script src="./js/wallet.js"></script>
     <link href="./css/service-main.css" rel="stylesheet"/>
     <link href="./css/nav.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
@@ -120,12 +122,12 @@
                     <div>
                         <input type="password" class="" maxlength="6"
                                placeholder="000000" title="간편 비밀번호 입력"
-                               id="walletAuthentication" value=""
-                               name="walletAuthentication">
+                               id="walletPasswd" value=""
+                               name="walletPasswd">
                     </div>
                 </div>
                 <div class="modal-footer">
-                        <button id="loadWallet" class="loadWallet" onclick="제출해야함">
+                        <button id="loadWallet" class="loadWallet" >
                             충전
                         </button>
                 </div>
@@ -148,53 +150,85 @@
         document.getElementById('loadAmount').value = amount;
     }
     // 원화 충전
-    document.getElementById("loadWallet").addEventListener("click", function() {
-        const loadAmount = document.getElementById('loadAmount').value;
-        const walletAuthentication = document.getElementById('walletAuthentication').value;
+    // document.getElementById("loadWallet").addEventListener("click", function() {
+    //     const loadAmount = document.getElementById('loadAmount').value;
+    //     const walletPasswd = document.getElementById('walletPasswd').value;
+    //
+    //     // 잔액 확인
+    //     fetch("/loadWallet", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             loadAmount: loadAmount,
+    //             walletAuthentication: walletPasswd
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.success) { // 잔액 확인 성공시
+    //                 if (data.isEnough) { // 잔액이 충분할 경우
+    //                     // 지갑 충전 API 호출
+    //                     fetch("/loadWallet", {
+    //                         method: "POST",
+    //                         headers: {
+    //                             "Content-Type": "application/json"
+    //                         },
+    //                         body: JSON.stringify({
+    //                             loadAmount: loadAmount,
+    //                             walletAuthentication: walletPasswd
+    //                         })
+    //                     })
+    //                         .then(response => response.json())
+    //                         .then(data => {
+    //                             if (data.success) {
+    //                                 alert("충전이 완료되었습니다.");
+    //                                 closeModal(); // 모달 닫기
+    //                             } else {
+    //                                 alert("충전 중 오류가 발생했습니다.");
+    //                             }
+    //                         })
+    //                 } else {
+    //                     alert("계좌 잔액이 충분하지 않습니다.");
+    //                 }
+    //             } else {
+    //                 alert("잔액 확인 중 오류가 발생했습니다.");
+    //             }
+    //         });
+    // });
 
-        // 잔액 확인
-        fetch("/checkBalance", {
+
+    document.getElementById("loadWallet").addEventListener("click", function() {
+        let loadAmount = document.getElementById('loadAmount').value;
+        const walletPasswd = document.getElementById('walletPasswd').value;
+
+        // loadAmount를 정수로 변환
+        loadAmount = parseInt(loadAmount, 10);
+
+        // NaN 확인 (parseInt에서 유효하지 않은 값이 입력되면 NaN을 반환합니다)
+        if (isNaN(loadAmount)) {
+            alert("loadAmount 값을 확인해주세요.");
+            return;
+        }
+
+        $.ajax({
+            url: "/loadWallet",
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            data: {
+                loadAmount: loadAmount, // 이제 loadAmount는 정수입니다.
+                walletPasswd: walletPasswd
             },
-            body: JSON.stringify({
-                loadAmount: loadAmount,
-                walletAuthentication: walletAuthentication
-            })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) { // 잔액 확인 성공시
-                    if (data.isEnough) { // 잔액이 충분할 경우
-                        // 지갑 충전 API 호출
-                        fetch("/loadWallet", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                loadAmount: loadAmount,
-                                walletAuthentication: walletAuthentication
-                            })
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    alert("충전이 완료되었습니다.");
-                                    closeModal(); // 모달 닫기
-                                } else {
-                                    alert("충전 중 오류가 발생했습니다.");
-                                }
-                            })
-                    } else {
-                        alert("계좌 잔액이 충분하지 않습니다.");
-                    }
-                } else {
-                    alert("잔액 확인 중 오류가 발생했습니다.");
-                }
-            });
+            success: function(data) {
+                alert(data);
+                closeModal();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(jqXHR.responseText || errorThrown);
+            }
+        });
     });
+
 
 
 </script>

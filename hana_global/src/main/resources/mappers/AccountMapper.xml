@@ -63,4 +63,9 @@
         INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)
         VALUES (ACCOUNT_HISTORY_SEQ.NEXTVAL, #{ac_no}, #{balance}, #{transaction_amount}, #{transaction_type}, #{participant}, #{participant_account})
     </insert>
+
+    <insert id="insertAccHistByWallet">
+        INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)
+        VALUES (ACCOUNT_HISTORY_SEQ.NEXTVAL, #{ac_no}, #{balance}, #{transaction_amount}, #{transaction_type}, #{participant}, #{participant_account})
+    </insert>
 </mapper>

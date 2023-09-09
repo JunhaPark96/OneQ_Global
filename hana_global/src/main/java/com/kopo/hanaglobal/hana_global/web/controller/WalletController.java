@@ -6,11 +6,11 @@ import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +44,14 @@ public class WalletController {
         model.addAttribute("walletList", walletList);
         return "/wallet/walletInfo";
     }
-
+    @PostMapping("loadWallet")
+    @ResponseBody
+    public ResponseEntity loadWallet(@ModelAttribute("currentMember") Member member, @RequestParam("loadAmount") Integer loadAmount, @RequestParam("walletPasswd") String walletPasswd){
+        try {
+            walletService.loadWallet(member.getUserSeq(), loadAmount, walletPasswd);
+            return ResponseEntity.ok().body("충전 성공!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 }

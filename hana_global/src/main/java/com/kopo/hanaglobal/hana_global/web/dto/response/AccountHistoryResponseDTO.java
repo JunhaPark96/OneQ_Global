@@ -12,7 +12,7 @@ public class AccountHistoryResponseDTO {
     private String tradeDate;
     private Integer transactionAmount;
     private String transactionType;
-    private String balance;
+    private Integer balance;
     private String participant;
     private String participantAccount;
 }

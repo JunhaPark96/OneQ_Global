@@ -20,6 +20,8 @@ public interface AccountRepository {
 
     public void updateAccountBalance(@Param("acNo") String acNo, @Param("amount") Integer amount);
 
+    public void deductAccountBalance(@Param("acNo") String acNo, @Param("amount") Integer amount);
+
     public void insertAccHistTransaction(
             @Param("ac_no") String acNo,
             @Param("balance") Integer balance,

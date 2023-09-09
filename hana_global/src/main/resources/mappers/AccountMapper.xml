@@ -55,6 +55,9 @@
         UPDATE CHECKING_ACCOUNT SET balance = #{amount} WHERE ac_no = #{acNo}
     </update>
 
+    <update id="deductAccountBalance">
+        UPDATE CHECKING_ACCOUNT SET balance = balance - #{amount} WHERE ac_no = #{acNo}
+    </update>
 
     <insert id="insertAccHistTransaction">
         INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)

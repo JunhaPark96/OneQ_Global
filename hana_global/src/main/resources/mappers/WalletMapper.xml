@@ -21,4 +21,30 @@
         SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
         FROM HANA_WALLET where ac_no = #{acNo}
     </select>
+
+    <select id="findWalletByUserSeqAndCurrencyCode"
+            resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet">
+        SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
+        FROM HANA_WALLET where user_seq = #{userSeq} and currency_code = #{currencyCode}
+    </select>
+
+    <insert id="insertWithdrawWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRNAS_NO, WALLET_SEQ as walletSeq, balance,
+                                     transaction_amount as transactionAmount, currency_code as currencyCode,
+                                     currency, transaction_type as transactionType,
+                                     withdraw_cur as withdrawCur, withdraw_name as withdrawName)
+        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
+                #{currencyCode}, #{currency}, #{transactionType}, #{withdrawCur}, #{withdrawName})
+    </insert>
+
+    <insert id="insertDepositWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRNAS_NO as walletTransNo, WALLET_SEQ as walletSeq, balance,
+                                     transaction_amount as transactionAmount, currency_code as currencyCode,
+                                     currency, transaction_type as transactionType,
+                                     deposit_cur as depositCur, deposit_name as depositName)
+        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
+                #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})
+    </insert>
+
+
 </mapper>

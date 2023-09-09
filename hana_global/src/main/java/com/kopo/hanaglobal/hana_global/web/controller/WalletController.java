@@ -30,7 +30,7 @@ public class WalletController {
 
     @GetMapping("/topUp")
     public String getWalletInfo(){
-        System.out.println("wallet 충전 페이지입니다");
+        System.out.println("wallet 자동 충전 페이지입니다");
         return "/wallet/topUp";
     }
 

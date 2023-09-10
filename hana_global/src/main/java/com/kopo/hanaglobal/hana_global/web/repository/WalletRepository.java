@@ -23,6 +23,8 @@ public interface WalletRepository {
                                  @Param("deposit") Integer deposit,
                                  @Param("currencyCode") String currencyCode);
     public BigDecimal getBalanceByWalletSeq(int walletSeq);
+
+    public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
     public void insertWithdrawWalletHist();
 //    public void insertDepositWalletHist(@Param("walletTransNo") int walletTransNo,
 //                                        @Param("walletSeq") int walletSeq,
@@ -33,5 +35,4 @@ public interface WalletRepository {
 //                                        @Param("transactionType") String transactionType,
 //                                        @Param("depositCur") String depositCur,
 //                                        @Param("depositName") String depositName);
-    public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
 }

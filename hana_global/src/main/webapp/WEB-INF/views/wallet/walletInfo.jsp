@@ -224,6 +224,9 @@
                 closeModal();
             },
             error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(errorThrown);
                 alert(jqXHR.responseText || errorThrown);
             }
         });

@@ -37,11 +37,20 @@
                 #{currencyCode}, #{currency}, #{transactionType}, #{withdrawCur}, #{withdrawName})
     </insert>
 
+<!--    <insert id="insertDepositWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">-->
+<!--        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO as walletTransNo, WALLET_SEQ as walletSeq, balance,-->
+<!--                                     transaction_amount as transactionAmount, currency_code as currencyCode,-->
+<!--                                     currency, transaction_type as transactionType,-->
+<!--                                     deposit_cur as depositCur, deposit_name as depositName)-->
+<!--        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},-->
+<!--                #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})-->
+<!--    </insert>-->
+
     <insert id="insertDepositWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
-        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO as walletTransNo, WALLET_SEQ as walletSeq, balance,
-                                     transaction_amount as transactionAmount, currency_code as currencyCode,
-                                     currency, transaction_type as transactionType,
-                                     deposit_cur as depositCur, deposit_name as depositName)
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ, balance,
+                                     transaction_amount, currency_code,
+                                     currency, transaction_type,
+                                     deposit_cur, deposit_name)
         VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
                 #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})
     </insert>

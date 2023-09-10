@@ -53,7 +53,7 @@
                     <div class="walletCard">
                         <div class="cardHeader">
                             <h4>Hana Wallet</h4>
-                            <button class="loadBtn" onclick="openModal()">Load</button>
+                            <button class="loadBtn" onclick="openModal(${wallet.walletSeq})">Load</button>
                         </div>
                         <div class="cardElem1">
                             <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
@@ -136,70 +136,80 @@
     </div>
 </div>
 <script>
+    <%--// 모달 열기 함수--%>
+    <%--function openModal(walletSeq) {--%>
+    <%--    document.getElementById("myModal").setAttribute("data-wallet-id", walletSeq); // 월렛 지정--%>
+    <%--    document.getElementById("myModal").style.display = "block";--%>
+    <%--    document.getElementById('loadAmount').value = null;--%>
+    <%--    document.getElementById('walletPasswd').value = null;--%>
+    <%--}--%>
+
+
+    <%--// 모달 닫기 함수--%>
+    <%--function closeModal() {--%>
+    <%--    document.getElementById("myModal").style.display = "none";--%>
+    <%--}--%>
+    <%--// 금액 선택--%>
+    <%--function selectAmount(amount) {--%>
+    <%--    document.getElementById('loadAmount').value = amount;--%>
+    <%--}--%>
+
+    <%--let walletSeq = document.getElementById("myModal").getAttribute("data-wallet-id");--%>
+    <%--document.getElementById("loadWallet").addEventListener("click", function() {--%>
+    <%--    let loadAmount = document.getElementById('loadAmount').value;--%>
+    <%--    const walletPasswd = document.getElementById('walletPasswd').value;--%>
+
+    <%--    // loadAmount를 정수로 변환--%>
+    <%--    loadAmount = parseInt(loadAmount, 10);--%>
+
+    <%--    // NaN 확인 (parseInt에서 유효하지 않은 값이 입력되면 NaN을 반환합니다)--%>
+    <%--    if (isNaN(loadAmount)) {--%>
+    <%--        alert("loadAmount 값을 확인해주세요.");--%>
+    <%--        return;--%>
+    <%--    }--%>
+
+    <%--    $.ajax({--%>
+    <%--        url: "/loadWallet",--%>
+    <%--        method: "POST",--%>
+    <%--        data: {--%>
+    <%--            loadAmount: loadAmount, // 이제 loadAmount는 정수--%>
+    <%--            walletPasswd: walletPasswd,--%>
+    <%--            walletSeq: walletSeq  // 추가된 월렛 ID--%>
+    <%--        },--%>
+    <%--        success: function(data) {--%>
+    <%--            alert(data);--%>
+    <%--            closeModal();--%>
+    <%--            let walletElem = document.querySelector(".cardElem1 a");--%>
+    <%--            walletElem.textContent = `${data.newBalance} KRW`; // 잔액을 "KRW"와 함께 표시합니다. 필요에 따라 화폐 단위를 변경하십시오.--%>
+    <%--            console.log(`${data.newBalance}`);--%>
+    <%--        },--%>
+    <%--        error: function(jqXHR, textStatus, errorThrown) {--%>
+    <%--            alert(jqXHR.responseText || errorThrown);--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--});--%>
     // 모달 열기 함수
-    function openModal() {
+    function openModal(walletSeq) {
+        document.getElementById("myModal").setAttribute("data-wallet-id", walletSeq); // 월렛 지정
         document.getElementById("myModal").style.display = "block";
+        document.getElementById('loadAmount').value = null;
+        document.getElementById('walletPasswd').value = null;
     }
 
     // 모달 닫기 함수
     function closeModal() {
         document.getElementById("myModal").style.display = "none";
     }
+
     // 금액 선택
     function selectAmount(amount) {
         document.getElementById('loadAmount').value = amount;
     }
-    // 원화 충전
-    // document.getElementById("loadWallet").addEventListener("click", function() {
-    //     const loadAmount = document.getElementById('loadAmount').value;
-    //     const walletPasswd = document.getElementById('walletPasswd').value;
-    //
-    //     // 잔액 확인
-    //     fetch("/loadWallet", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             loadAmount: loadAmount,
-    //             walletAuthentication: walletPasswd
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.success) { // 잔액 확인 성공시
-    //                 if (data.isEnough) { // 잔액이 충분할 경우
-    //                     // 지갑 충전 API 호출
-    //                     fetch("/loadWallet", {
-    //                         method: "POST",
-    //                         headers: {
-    //                             "Content-Type": "application/json"
-    //                         },
-    //                         body: JSON.stringify({
-    //                             loadAmount: loadAmount,
-    //                             walletAuthentication: walletPasswd
-    //                         })
-    //                     })
-    //                         .then(response => response.json())
-    //                         .then(data => {
-    //                             if (data.success) {
-    //                                 alert("충전이 완료되었습니다.");
-    //                                 closeModal(); // 모달 닫기
-    //                             } else {
-    //                                 alert("충전 중 오류가 발생했습니다.");
-    //                             }
-    //                         })
-    //                 } else {
-    //                     alert("계좌 잔액이 충분하지 않습니다.");
-    //                 }
-    //             } else {
-    //                 alert("잔액 확인 중 오류가 발생했습니다.");
-    //             }
-    //         });
-    // });
-
 
     document.getElementById("loadWallet").addEventListener("click", function() {
+        // 이 위치에서 walletSeq 값을 다시 가져옵니다.
+        let walletSeq = document.getElementById("myModal").getAttribute("data-wallet-id");
+
         let loadAmount = document.getElementById('loadAmount').value;
         const walletPasswd = document.getElementById('walletPasswd').value;
 
@@ -216,23 +226,22 @@
             url: "/loadWallet",
             method: "POST",
             data: {
-                loadAmount: loadAmount, // 이제 loadAmount는 정수입니다.
-                walletPasswd: walletPasswd
+                loadAmount: loadAmount, // 이제 loadAmount는 정수
+                walletPasswd: walletPasswd,
+                walletSeq: walletSeq  // 추가된 월렛 ID
             },
             success: function(data) {
-                alert(data);
+                alert(data.message); // 서버로부터 메시지를 반환받을 경우 사용
                 closeModal();
+                // 해당 월렛의 잔액을 업데이트
+                let walletElem = document.querySelector(`[data-currency="${data.currencyCode}"] .cardElem1 a`);
+                walletElem.textContent = `${data.newBalance} KRW`; // 잔액을 "KRW"와 함께 표시합니다. 필요에 따라 화폐 단위를 변경하십시오.
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
                 alert(jqXHR.responseText || errorThrown);
             }
         });
     });
-
-
 
 </script>
 </body>

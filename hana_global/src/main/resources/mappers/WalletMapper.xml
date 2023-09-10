@@ -56,8 +56,7 @@
     </insert>
 
     <select id="getBalanceByWalletSeq" resultType="BigDecimal">
-        SELECT balance
-        FROM HANA_WALLET where wallet_seq = #{walletSeq}
+        SELECT balance FROM HANA_WALLET where wallet_seq = #{walletSeq}
     </select>
 
     <update id="addWalletBalance">

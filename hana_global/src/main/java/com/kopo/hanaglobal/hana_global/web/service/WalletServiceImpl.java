@@ -116,10 +116,10 @@ public class WalletServiceImpl implements WalletService {
         Account account = validateAccountAndRetrieve(wallet, amount);
         // 계좌 잔액 차감
         deductFromAccount(account, amount);
-        // 월렛에 충전
-        addToWallet(wallet, amount);
         // 계좌 내역 추가
         addAccountHistory(account, amount);
+        // 월렛에 충전
+        addToWallet(wallet, amount);
         // 월렛 내역 추가
         addWalletHistory(wallet, amount);
     }
@@ -167,11 +167,9 @@ public class WalletServiceImpl implements WalletService {
 
     private void addWalletHistory(Wallet wallet, Integer amount) {
         // 월렛 거래 내역 추가
-        BigDecimal newBalance = walletRepository.getBalanceByWalletSeq(wallet.getWalletSeq()); // 충전 후의 월렛 잔액
-        System.out.println(newBalance);
         WalletHistoryDTO walletHistoryDTO = new WalletHistoryDTO();
         walletHistoryDTO.setWalletSeq(wallet.getWalletSeq());
-        walletHistoryDTO.setBalance(newBalance);
+        walletHistoryDTO.setBalance(wallet.getBalance().add(new BigDecimal(amount)));
         walletHistoryDTO.setTransactionAmount(new BigDecimal(amount));
         walletHistoryDTO.setCurrencyCode("KRW");
         walletHistoryDTO.setCurrency("Won");

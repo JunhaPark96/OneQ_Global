@@ -230,15 +230,13 @@
                 walletPasswd: walletPasswd,
                 walletSeq: walletSeq  // 추가된 월렛 ID
             },
-            success: function(data) {
-                alert(data.message); // 서버로부터 메시지를 반환받을 경우 사용
+            success: function(response) {
+                alert(response); // "충전 성공!" 또는 서버에서 반환된 다른 메시지를 표시
                 closeModal();
-                // 해당 월렛의 잔액을 업데이트
-                let walletElem = document.querySelector(`[data-currency="${data.currencyCode}"] .cardElem1 a`);
-                walletElem.textContent = `${data.newBalance} KRW`; // 잔액을 "KRW"와 함께 표시합니다. 필요에 따라 화폐 단위를 변경하십시오.
+                location.reload(); // 월렛 정보를 업데이트하기 위해 페이지를 다시 로드합니다.
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(jqXHR.responseText || errorThrown);
+            error: function(jqXHR) {
+                alert(jqXHR.responseText); // 서버에서 반환된 에러 메시지를 표시
             }
         });
     });

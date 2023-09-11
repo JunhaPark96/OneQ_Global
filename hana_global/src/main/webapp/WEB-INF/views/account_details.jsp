@@ -72,7 +72,7 @@
                                     </select>
                                 </td>
                             </tr>
-<%--                            기간 조회--%>
+                            <%--                            기간 조회--%>
                             <tr>
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;조회기간</th>
                                 <td class="tbl_left">
@@ -89,7 +89,7 @@
                                     </div>
                                 </td>
                             </tr>
-<%--                            거래 유형 선택--%>
+                            <%--                            거래 유형 선택--%>
                             <tr>
                                 <th scope="row" class="text-center align-middle">&nbsp;&nbsp;거래유형</th>
                                 <td>
@@ -176,7 +176,7 @@
                 },
                 success: function (data) {
                     // Empty the table body
-            $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
+                    $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
                     $('#transactionHistoryTable tbody').empty();
 
                     // Fill the table with response data

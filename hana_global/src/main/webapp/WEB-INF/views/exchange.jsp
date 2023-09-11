@@ -47,7 +47,7 @@
                         <th scope="row" class="text-center align-middle">&nbsp;&nbsp;조회기간</th>
                         <td class="tbl_left">
                             <div class="tbl_in">
-                                <input type="text" id="inqStrDt" name="inqStrDt">
+                                <input type="text" id="inqDt" name="inqDt">
                                 <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                      alt="Start Date Calendar Tab" onclick="openCalendar('inqDt')">
                                 <br>
@@ -119,17 +119,17 @@
         $('#btnNext').click(function () {
 
             let inqStrDt = document.getElementById('inqDt').value;
-            let quoteNo = document.getElementById('selectQuote').value;
+            // let quoteNo = document.getElementById('selectQuote').value;
             let currency = document.getElementById('selectCurrency').value;
 
             $.ajax({
                 url: '${pageContext.request.contextPath}/exchange',
                 method: 'post',
-                data: {
-                    inqStrDt: inqStrDt,
-                    quoteNo: quoteNo,
+                contentType: 'application/json', // 추가
+                data: JSON.stringify({
+                    inqDt: inqStrDt,
                     currency: currency
-                },
+                }),
                 success: function (data) {
                     // Empty the table body
                     $('#exchange_rate_tbl thead').show(); // 클릭 시 보이기
@@ -157,6 +157,15 @@
             });
         });
     });
+
+    function openCalendar(id) {
+        let input = document.getElementById(id);
+        let picker = new Pikaday({
+            field: input,
+            format: 'YYYY-MM-DD',
+        });
+        picker.show();
+    }
 </script>
 </body>
 

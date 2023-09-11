@@ -9,6 +9,5 @@ import lombok.*;
 @ToString
 public class ExchangeRateHistRequestDTO {
     private String inqDt;
-    private String quoteNo;
     private String currency;
 }

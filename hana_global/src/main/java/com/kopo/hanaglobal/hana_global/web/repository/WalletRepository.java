@@ -22,17 +22,9 @@ public interface WalletRepository {
     public void addWalletBalance(@Param("userSeq") int userSeq,
                                  @Param("deposit") Integer deposit,
                                  @Param("currencyCode") String currencyCode);
+    // 월렛 seq로 잔액 가져오기
     public BigDecimal getBalanceByWalletSeq(int walletSeq);
-
+    
+    // 월렛 충전시 거래내역 추가
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
-    public void insertWithdrawWalletHist();
-//    public void insertDepositWalletHist(@Param("walletTransNo") int walletTransNo,
-//                                        @Param("walletSeq") int walletSeq,
-//                                        @Param("balance") BigDecimal balance,
-//                                        @Param("transactionAmount") BigDecimal transactionAmount,
-//                                        @Param("currencyCode") String currencyCode,
-//                                        @Param("currency") String currency,
-//                                        @Param("transactionType") String transactionType,
-//                                        @Param("depositCur") String depositCur,
-//                                        @Param("depositName") String depositName);
 }

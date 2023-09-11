@@ -80,13 +80,10 @@
                                         <input type="text" id="inqStrDt" name="inqStrDt" readonly>
                                         <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                              alt="Start Date Calendar Tab" onclick="openCalendar('inqStrDt')">
-
                                         ~
-
                                         <input type="text" id="inqEndDt" name="inqEndDt" readonly>
                                         <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                              alt="End Date Calendar Tab" onclick="openCalendar('inqEndDt')">
-
                                         <br>
                                         <span class="ml5">(Enter 8-digit date in YYYYMMDD format. e.g. 20120101)</span>
                                     </div>
@@ -114,7 +111,6 @@
                                 <td>
                                     <div class="btnArea" id="btnFclArea">
                                         <p class="text-center align-middle" id="accountBalance">
-                                            <%--                                            10,000,000--%>
                                         </p>
                                         <a href="/account_transfer" class="btn_p">계좌 이체</a>
                                     </div>
@@ -149,6 +145,7 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 </div>

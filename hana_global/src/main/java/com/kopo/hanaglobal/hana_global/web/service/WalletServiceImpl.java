@@ -52,63 +52,6 @@ public class WalletServiceImpl implements WalletService {
         return walletList;
     }
 
-    // 월렛 충전
-//    @Transactional
-//    public void loadWallet(int userSeq, Integer amount, String password) {
-//        try {
-//            // 해당 유저의 원화가 들어있는 월렛만 검색
-//            System.out.println("월렛충전 시작 --------------------------");
-//            Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(userSeq, "KRW");
-//            System.out.println("원화 월렛은: " + wallet.toString());
-//            if (wallet == null) {
-//                throw new RuntimeException("지갑을 찾을 수 없습니다.");
-//            }
-//            // 비밀번호 체크
-//            if (!wallet.getWalletPw().equals(password)) {
-//                throw new RuntimeException("간편비밀번호가 틀렸습니다.");
-//            }
-//            // 계좌 잔액 확인
-//            Account account = accountRepository.getAccountByAcNo(wallet.getAcNo());
-//            System.out.println("계좌 잔액은: " + account.getBalance());
-//            if (account.getBalance() < amount) {
-//                throw new RuntimeException("계좌 잔액이 부족합니다.");
-//            }
-//            // 계좌 잔액 차감
-//            accountRepository.deductAccountBalance(account.getAcNo(), amount);
-//            // 계좌 내역 처리
-//            AccountHistoryResponseDTO accountHistoryDTO = new AccountHistoryResponseDTO();
-//            accountHistoryDTO.setAcNo(account.getAcNo());
-//            accountHistoryDTO.setTransactionAmount(amount);
-//            accountHistoryDTO.setTransactionType("1"); // 1은 출금
-//            accountHistoryDTO.setBalance(account.getBalance() - amount);
-//            accountHistoryDTO.setParticipant("Hana Wallet");
-//            accountHistoryDTO.setParticipantAccount(account.getAcNo());
-//            insertAccHistByWallet(accountHistoryDTO);
-//
-//            // 월렛 잔액 충전
-//            walletRepository.addWalletBalance(userSeq, amount, wallet.getCurrencyCode());
-//
-//            // 월렛 거래내역 추가
-//            // 충전 후의 월렛 잔액을 가져오기
-//            BigDecimal newBalance = walletRepository.getBalanceByWalletSeq(wallet.getWalletSeq());
-//            // 월렛 거래 내역 생성
-//            WalletHistoryDTO walletHistoryDTO = new WalletHistoryDTO();
-//            walletHistoryDTO.setWalletSeq(wallet.getWalletSeq());
-//            walletHistoryDTO.setBalance(newBalance);
-//            walletHistoryDTO.setTransactionAmount(new BigDecimal(amount));
-//            walletHistoryDTO.setCurrencyCode("KRW");
-//            walletHistoryDTO.setCurrency("Won");
-//            walletHistoryDTO.setTransactionType("A");
-//            walletHistoryDTO.setDepositCur("KRW");
-//            walletHistoryDTO.setDepositName("Won");
-//            insertDepositWalletHist(walletHistoryDTO);
-//
-//            System.out.println("월렛충전 끝 --------------------------");
-//        } catch (RuntimeException e) {
-//            // 로그에 예외 정보를 남긴다거나 추가적인 작업이 필요한 경우 여기서 처리
-//            throw e;
-//        }
-//    }
     @Transactional
     @Override
     public void loadWallet(int userSeq, Integer amount, String password) {
@@ -185,15 +128,4 @@ public class WalletServiceImpl implements WalletService {
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO) {
         walletRepository.insertDepositWalletHist(walletHistoryDTO);
     }
-
-
-    // 월렛 입금 내역 추가
-//    public void insertDepositWalletHist(int walletTransNo, int walletSeq, BigDecimal balance,
-//                                        BigDecimal transactionAmount, String currencyCode,
-//                                        String currency, String transactionType,
-//                                        String depositCur, String depositName){
-//        walletRepository.insertDepositWalletHist(walletTransNo, walletSeq, balance,
-//                transactionAmount, currencyCode, currency, transactionType,
-//                depositCur, depositName);
-//    }
 }

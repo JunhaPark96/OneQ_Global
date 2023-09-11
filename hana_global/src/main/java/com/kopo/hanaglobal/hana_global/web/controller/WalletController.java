@@ -1,5 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
@@ -54,4 +56,5 @@ public class WalletController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 }

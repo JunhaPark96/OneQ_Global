@@ -48,7 +48,6 @@
                 </div>
             </div>
             <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
-
                 <div class="walletCell" data-currency="${wallet.currencyCode}">
                     <div class="walletCard">
                         <div class="cardHeader">
@@ -60,7 +59,7 @@
                                 &nbsp; ${wallet.currency} </a>
                         </div>
                         <div class="cardElem2">
-                            <a href="${pageContext.request.contextPath}/accountInfo"> recurring exchange ></a>
+                            <a href="${pageContext.request.contextPath}/topUp"> recurring exchange ></a>
                         </div>
                         <div class="cardElem3">
                             <div class="btn_p">
@@ -135,59 +134,9 @@
         </div>
     </div>
 </div>
+</body>
+
 <script>
-    <%--// 모달 열기 함수--%>
-    <%--function openModal(walletSeq) {--%>
-    <%--    document.getElementById("myModal").setAttribute("data-wallet-id", walletSeq); // 월렛 지정--%>
-    <%--    document.getElementById("myModal").style.display = "block";--%>
-    <%--    document.getElementById('loadAmount').value = null;--%>
-    <%--    document.getElementById('walletPasswd').value = null;--%>
-    <%--}--%>
-
-
-    <%--// 모달 닫기 함수--%>
-    <%--function closeModal() {--%>
-    <%--    document.getElementById("myModal").style.display = "none";--%>
-    <%--}--%>
-    <%--// 금액 선택--%>
-    <%--function selectAmount(amount) {--%>
-    <%--    document.getElementById('loadAmount').value = amount;--%>
-    <%--}--%>
-
-    <%--let walletSeq = document.getElementById("myModal").getAttribute("data-wallet-id");--%>
-    <%--document.getElementById("loadWallet").addEventListener("click", function() {--%>
-    <%--    let loadAmount = document.getElementById('loadAmount').value;--%>
-    <%--    const walletPasswd = document.getElementById('walletPasswd').value;--%>
-
-    <%--    // loadAmount를 정수로 변환--%>
-    <%--    loadAmount = parseInt(loadAmount, 10);--%>
-
-    <%--    // NaN 확인 (parseInt에서 유효하지 않은 값이 입력되면 NaN을 반환합니다)--%>
-    <%--    if (isNaN(loadAmount)) {--%>
-    <%--        alert("loadAmount 값을 확인해주세요.");--%>
-    <%--        return;--%>
-    <%--    }--%>
-
-    <%--    $.ajax({--%>
-    <%--        url: "/loadWallet",--%>
-    <%--        method: "POST",--%>
-    <%--        data: {--%>
-    <%--            loadAmount: loadAmount, // 이제 loadAmount는 정수--%>
-    <%--            walletPasswd: walletPasswd,--%>
-    <%--            walletSeq: walletSeq  // 추가된 월렛 ID--%>
-    <%--        },--%>
-    <%--        success: function(data) {--%>
-    <%--            alert(data);--%>
-    <%--            closeModal();--%>
-    <%--            let walletElem = document.querySelector(".cardElem1 a");--%>
-    <%--            walletElem.textContent = `${data.newBalance} KRW`; // 잔액을 "KRW"와 함께 표시합니다. 필요에 따라 화폐 단위를 변경하십시오.--%>
-    <%--            console.log(`${data.newBalance}`);--%>
-    <%--        },--%>
-    <%--        error: function(jqXHR, textStatus, errorThrown) {--%>
-    <%--            alert(jqXHR.responseText || errorThrown);--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
     // 모달 열기 함수
     function openModal(walletSeq) {
         document.getElementById("myModal").setAttribute("data-wallet-id", walletSeq); // 월렛 지정
@@ -242,5 +191,4 @@
     });
 
 </script>
-</body>
 </html>

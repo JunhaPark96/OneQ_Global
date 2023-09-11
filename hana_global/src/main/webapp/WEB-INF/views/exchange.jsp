@@ -19,11 +19,15 @@
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/exchange/exchangeRate.css" rel="stylesheet"/>
     <%--    캘린더--%>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
-<%--    차트 js--%>
+    <%--    차트 js--%>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <%--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 
     <title>월렛 확인</title>
 </head>
@@ -61,10 +65,9 @@
                         <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Select Quote No</th>
                         <td>
                             <select class="form-select border-3 w-50" name="withdrawAccountNo"
-                                    id="selectQuote"
-                                    onchange="viewExchangeRate()">
+                                    id="selectQuote">
                                 <option>First</option>
-                                <option value="" selected disabled>Current</option>
+                                <option>Current</option>
                             </select>
                         </td>
                     </tr>
@@ -76,7 +79,6 @@
                                     id="selectCurrency"
                                     onchange="viewExchangeRate() ">
                                 <option value="" selected disabled>Select Currency</option>
-                                <option value="USD">USD</option>
                             </select>
                         </td>
                     </tr>
@@ -86,7 +88,7 @@
                     <input type="button" id="btnNext" class="btn_p" value="조회">
                 </div>
             </div>
-<%--            환율 조회 테이블--%>
+            <%--            환율 조회 테이블--%>
             <div class="exchange_rate_hist mt-5">
                 <table id="exchange_rate_tbl" class="table table-striped table-hover table-bordered">
                     <thead class="table-dark">
@@ -106,7 +108,7 @@
                     </tbody>
                 </table>
             </div>
-<%--            검색 통화 그래프 --%>
+            <%--            검색 통화 그래프 --%>
             <div class="mt-5">
                 <canvas id="exchangeRateChart" width="400" height="200"></canvas>
             </div>
@@ -119,6 +121,7 @@
 </div>
 
 <script>
+    let myChart;
     $(document).ready(function () {
         $('#exchange_rate_tbl thead').hide(); // 처음엔 숨기기
 
@@ -182,7 +185,10 @@
                     }
 
                     let ctx = document.getElementById('exchangeRateChart').getContext('2d');
-                    let myChart = new Chart(ctx, {
+                    if (myChart) {
+                        myChart.destroy(); // 이전 차트 인스턴스 제거
+                    }
+                    myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
                             labels: rateDates,
@@ -200,6 +206,24 @@
                                     beginAtZero: true
                                 }
                             }
+                        },
+                        plugins: {
+                            zoom: {
+                                pan: {
+                                    enabled: true,
+                                    mode: 'x',
+                                    speed: 0.1,
+                                    threshold: 10
+                                },
+                                zoom: {
+                                    enabled: true,
+                                    drag: false,
+                                    mode: 'x',
+                                    speed: 0.1,
+                                    threshold: 2,
+                                    sensitivity: 3
+                                }
+                            }
                         }
                     });
                 },
@@ -209,17 +233,6 @@
             });
         });
     });
-
-
-    function openCalendar(id) {
-        let input = document.getElementById(id);
-        let picker = new Pikaday({
-            field: input,
-            format: 'YYYY-MM-DD',
-        });
-        picker.show();
-    }
 </script>
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 .main-body {
     display: grid;
     margin-bottom: 0;
-    grid-template-rows: 0.1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.1fr 0.5fr 0.1fr 1fr;
 }
 
 /*계좌 조회*/
@@ -97,7 +97,7 @@ tbody tr td input{
     max-height: 36px;
 }
 
-/*계좌 내역 테이블*/
+/*환율 내역 테이블*/
 .exchange_rate_hist {
     margin-top: 30px;
 }
@@ -112,6 +112,7 @@ tbody tr td input{
     padding: 10px;
     text-align: left;
     border: 1px solid #e0e0e0;
+    white-space: nowrap;
 }
 
 .exchange_rate_hist th {
@@ -122,6 +123,14 @@ tbody tr td input{
 .exchange_rate_hist tr:hover {
     background-color: #f0f0f0;
 }
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --bs-table-bg-type: rgb(255 255 255 / 5%);
+}
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #e6e6e6;
+}
+
 
 /* 입력 값  ---------------------------------------------*/
 #selectAccountForm{

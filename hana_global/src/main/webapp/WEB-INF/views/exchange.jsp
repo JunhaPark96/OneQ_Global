@@ -17,12 +17,13 @@
     <link href="./css/nav.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
-    <link href="./css/account_details.css" rel="stylesheet"/>
     <link href="./css/exchange/exchangeRate.css" rel="stylesheet"/>
     <%--    캘린더--%>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+<%--    차트 js--%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <title>월렛 확인</title>
 </head>
@@ -85,26 +86,31 @@
                     <input type="button" id="btnNext" class="btn_p" value="조회">
                 </div>
             </div>
-
+<%--            환율 조회 테이블--%>
             <div class="exchange_rate_hist mt-5">
                 <table id="exchange_rate_tbl" class="table table-striped table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>
-                        <th>currency code</th>
-                        <th>rate date</th>
-                        <th>buy rate</th>
-                        <th>sell rate</th>
-                        <th>sending</th>
-                        <th>receiving</th>
-                        <th>base rate</th>
-                        <th>prev rate</th>
-                        <th>usd conversion rate</th>
+                        <th>Currency</th>
+                        <th>Rate Date</th>
+                        <th>Buy Rate</th>
+                        <th>Sell Rate</th>
+                        <th>Sending</th>
+                        <th>Receiving</th>
+                        <th>Base Rate</th>
+                        <th>Prev Rate</th>
+                        <th>USD Conversion Rate</th>
                     </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
             </div>
+<%--            검색 통화 그래프 --%>
+            <div class="mt-5">
+                <canvas id="exchangeRateChart" width="400" height="200"></canvas>
+            </div>
+
 
         </div>
         <footer>
@@ -119,13 +125,13 @@
         $('#btnNext').click(function () {
 
             let inqStrDt = document.getElementById('inqDt').value;
-            // let quoteNo = document.getElementById('selectQuote').value;
             let currency = document.getElementById('selectCurrency').value;
 
+            // 1. 특정 날짜의 환율 정보를 가져옵니다.
             $.ajax({
                 url: '${pageContext.request.contextPath}/exchange',
                 method: 'post',
-                contentType: 'application/json', // 추가
+                contentType: 'application/json',
                 data: JSON.stringify({
                     inqDt: inqStrDt,
                     currency: currency
@@ -137,12 +143,14 @@
 
                     // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
+                        let rawDate = data[i].rateDate;
+                        let formattedDate = new Date(rawDate).toISOString().split('T')[0];
                         $('#exchange_rate_tbl tbody').append('<tr>' +
                             '<td>' + data[i].currencyCode + '</td>' +
-                            '<td>' + data[i].rateDate + '</td>' +
+                            '<td>' + formattedDate + '</td>' +
                             '<td>' + data[i].buyRate + '</td>' +
                             '<td>' + data[i].sellRate + '</td>' +
-                            '<td>' + data[i].sending + '</td>' +
+                            '<td>' + data[i].remittance + '</td>' +
                             '<td>' + data[i].receiving + '</td>' +
                             '<td>' + data[i].baseRate + '</td>' +
                             '<td>' + data[i].prevRate + '</td>' +
@@ -150,13 +158,58 @@
                             '</tr>');
                     }
                 },
-
                 error: function () {
                     alert('Error retrieving exchange rate.');
                 }
             });
+
+            // 2. 최근 6개월 동안의 해당 통화의 환율 정보를 가져옵니다.
+            $.ajax({
+                url: '${pageContext.request.contextPath}/exchange/lastSixMonths',
+                method: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    currency: currency
+                }),
+                success: function (data) {
+                    let rateDates = [];
+                    let baseRates = [];
+                    for (let i = 0; i < data.length; i++) {
+                        let rawDate = data[i].rateDate;
+                        let formattedDate = new Date(rawDate).toISOString().split('T')[0];
+                        rateDates.push(formattedDate);
+                        baseRates.push(data[i].baseRate);
+                    }
+
+                    let ctx = document.getElementById('exchangeRateChart').getContext('2d');
+                    let myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: rateDates,
+                            datasets: [{
+                                label: 'Base Rate',
+                                data: baseRates,
+                                borderColor: 'rgb(75, 192, 192)',
+                                borderWidth: 2,
+                                fill: false
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                },
+                error: function () {
+                    alert('Error retrieving exchange rate for the last 6 months.');
+                }
+            });
         });
     });
+
 
     function openCalendar(id) {
         let input = document.getElementById(id);

@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
@@ -8,10 +9,7 @@ import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,8 +33,15 @@ public class ExchangeController {
     @ResponseBody
     public List<ExchangeRateHistDTO> getExchangeRateHist(@RequestBody ExchangeRateHistRequestDTO requestDTO){
         List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateHist(requestDTO);
+        return exchangeRateHistList;
+    }
+
+    @PostMapping("/exchange/lastSixMonths")
+    @ResponseBody
+    public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(@RequestBody CurrencyRequestDTO request){
+        List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateForLastSixMonths(request);
         for (ExchangeRateHistDTO e : exchangeRateHistList){
-            System.out.println(e.toString());
+            System.out.println("최근 6개월간 내역은: " + e.toString());
         }
         return exchangeRateHistList;
     }

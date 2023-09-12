@@ -11,6 +11,7 @@
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/account.js"></script>
 
     <script src="./js/wallet.js"></script>
     <link href="./css/service-main.css" rel="stylesheet"/>
@@ -19,6 +20,12 @@
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/wallet/recurExchange.css" rel="stylesheet"/>
     <link href="./css/wallet/flags.css" rel="stylesheet"/>
+
+    <%--    캘린더--%>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
 
     <title>월렛 확인</title>
 </head>
@@ -56,23 +63,14 @@
             </div>
             <%--            월렛 카드 구역 끝   --%>
             <div class="col pt-1 showBalance">
-                원화 잔액
-                해당나라 잔액
-                미화 잔액
+                Hana Wallet Balance (Won) <br/>
+                해당나라 잔액<br/>
+                미화 잔액<br/>
                 option: 해당국적의 환율로도 보여주기
             </div>
 
             <div class="col pt-1 settingRecurring">
                 <form>
-                    <%--                    <div class="row">--%>
-                    <%--                        <h4 class="text-start"> 날짜 설정 </h4>--%>
-                    <%--                        <p class="text-muted p-border"> </p>--%>
-                    <%--                    </div>--%>
-                    <%--                    날짜 설정--%>
-                    <%--                    종료일 설정--%>
-                    <%--                    충전통화설정--%>
-                    <%--                    충전금액설정--%>
-                    <%--                    목표환율설정--%>
                     <table class="table table-hover mb-3 border-light">
                         <tbody>
                         <tr>
@@ -88,8 +86,11 @@
                             <th scope="row" class="text-start align-middle">종료일 설정</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
-                                    <input type="text" name="endDate" id="endDate"
-                                           placeholder="종료 날짜">
+<%--                                    <input type="text" name="endDate" id="endDate"--%>
+<%--                                           placeholder="종료 날짜">--%>
+                                    <input type="text" id="endDate" name="endDate" readonly>
+                                    <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
+                                         alt="Start Date Calendar Tab" onclick="openCalendar('endDate')">
                                 </div>
                             </td>
                         </tr>
@@ -116,8 +117,8 @@
                         </tbody>
                     </table>
                     <br/>
-                    <div class="btnArea text-center align-middle">
-                        <p>2분 간격으로 하나은행 고시환율을 확인하여 설정한 환율보다 낮거나 같을 경우 자동충전을 진행</p>
+                    <div class="btnArea text-start align-middle">
+                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic charging if it is lower or equal to the set exchange rate</p>
                     </div>
 
                     <div class="btn-area mt15 mb30">

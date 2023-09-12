@@ -26,8 +26,8 @@ function selectTransType(type) {
 }
 
 function openCalendar(id) {
-    var input = document.getElementById(id);
-    var picker = new Pikaday({
+    let input = document.getElementById(id);
+    let picker = new Pikaday({
         field: input,
         format: 'YYYY-MM-DD',
     });

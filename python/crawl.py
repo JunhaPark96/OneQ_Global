@@ -22,11 +22,12 @@ driver = webdriver.Chrome(options=options)
 driver.implicitly_wait(10)
 driver.get("https://www.kebhana.com/cms/rate/index.do?contentUrl=/cms/rate/wpfxd651_07i.do")
 # cx_Oracle.init_oracle_client(lib_dir=r"C:\crawling\instantclient_21_6")
-oracledb.init_oracle_client(lib_dir=r"C:\Users\kopo\exchange\instantclient_19_20")
+# oracledb.init_oracle_client(lib_dir=r"C:\Users\kopo\exchange\instantclient_19_20")
+oracledb.init_oracle_client(lib_dir=r"C:\Users\JUNHA\oneQ_global\python\instantclient_19_20")
 #####################
 ## 8월 24, 26일 따로 해야함
 #####################
-search_date = 20230701
+search_date = 20230911
 # today = 20220809
 
 
@@ -55,13 +56,13 @@ while(search_date < today):
     for ccy_code in ccy_list:
         select.select_by_value(ccy_code)
 
-        time.sleep(3)
+        time.sleep(2)
 
         # 조회 버튼 클릭
         btn = driver.find_element(By.XPATH, r'//*[@id="HANA_CONTENTS_DIV"]/div[2]/a')
         btn.send_keys(Keys.ENTER)
 
-        time.sleep(4)
+        time.sleep(3)
 
         # BeautifulSoup으로 html 데이터 파싱
         html = driver.page_source
@@ -72,7 +73,7 @@ while(search_date < today):
         currency = soup.select_one('#searchContentDiv > div.printdiv > p > span.fl > strong:nth-child(4)').text # 조회 통화
         print("날짜는: " + date)
         print("통화는: " + currency)
-        time.sleep(3)
+        time.sleep(2)
 
         rows = soup.select('#searchContentDiv > div.printdiv > table > tbody > tr')
         oneNations = []

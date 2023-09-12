@@ -66,6 +66,14 @@ public class WalletServiceImpl implements WalletService {
         // 월렛 내역 추가
         addWalletHistory(wallet, amount);
     }
+
+    @Override
+    public Wallet findWalletByUserSeqAndCurrencyCode(int userSeq, String currencyCode) {
+        Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(userSeq, currencyCode);
+        System.out.println("선택된 월렛은: " + wallet.toString());
+        return wallet;
+    }
+
     // 월렛 유효성 체크
     private Wallet validateWalletAndRetrieve(int userSeq, String password) {
         Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(userSeq, "KRW");
@@ -128,4 +136,6 @@ public class WalletServiceImpl implements WalletService {
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO) {
         walletRepository.insertDepositWalletHist(walletHistoryDTO);
     }
+
+
 }

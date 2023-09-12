@@ -65,5 +65,4 @@
         WHERE user_seq = #{userSeq} AND currency_code = #{currencyCode}
     </update>
 
-
 </mapper>

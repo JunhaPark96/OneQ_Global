@@ -27,4 +27,6 @@ public interface WalletRepository {
     
     // 월렛 충전시 거래내역 추가
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
+
+//    public Wallet findWalletByCurrencyCode(@Param("userSeq") int userSeq, @Param("currencyCode") String currencyCode);
 }

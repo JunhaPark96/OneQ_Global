@@ -57,4 +57,12 @@ public class WalletController {
         }
     }
 
+    @GetMapping("/recurExchange")
+    public String getSelectedWallet(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model){
+        // 통화 코드를 사용하여 원하는 데이터나 로직 처리
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), currencyCode);
+        model.addAttribute("selectedWallet", wallet);
+        return "/wallet/recurExchange"; // recurExchange.jsp 페이지로 이동
+    }
+
 }

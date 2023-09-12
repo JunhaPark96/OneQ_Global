@@ -31,18 +31,19 @@ public class ExchangeController {
 
     @PostMapping("/exchange")
     @ResponseBody
-    public List<ExchangeRateHistDTO> getExchangeRateHist(@RequestBody ExchangeRateHistRequestDTO requestDTO){
+    public List<ExchangeRateHistDTO> getExchangeRateHist(@RequestBody ExchangeRateHistRequestDTO requestDTO) {
         List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateHist(requestDTO);
         return exchangeRateHistList;
     }
 
     @PostMapping("/exchange/lastSixMonths")
     @ResponseBody
-    public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(@RequestBody CurrencyRequestDTO request){
+    public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(@RequestBody CurrencyRequestDTO request) {
         List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateForLastSixMonths(request);
-        for (ExchangeRateHistDTO e : exchangeRateHistList){
+        for (ExchangeRateHistDTO e : exchangeRateHistList) {
             System.out.println("최근 6개월간 내역은: " + e.toString());
         }
         return exchangeRateHistList;
     }
+
 }

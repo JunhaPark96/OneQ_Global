@@ -59,7 +59,7 @@
                                 &nbsp; ${wallet.currency} </a>
                         </div>
                         <div class="cardElem2">
-                            <a href="${pageContext.request.contextPath}/topUp"> recurring exchange ></a>
+                            <a href="${pageContext.request.contextPath}/recurExchange?currency=${wallet.currencyCode}"> recurring exchange ></a>
                         </div>
                         <div class="cardElem3">
                             <div class="btn_p">

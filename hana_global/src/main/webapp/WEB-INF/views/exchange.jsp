@@ -24,10 +24,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
     <%--    차트 js--%>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>--%>
+<%--    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>--%>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.3"></script>
+<%--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--%>
     <%--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>--%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<%--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
 
     <title>월렛 확인</title>
 </head>
@@ -111,6 +119,9 @@
             <%--            검색 통화 그래프 --%>
             <div class="mt-5">
                 <canvas id="exchangeRateChart" width="400" height="200"></canvas>
+<%--                <button id="reset_zoom">Reset Zoom</button>--%>
+<%--                <button id="disable_zoom">Disable Zoom</button>--%>
+<%--                <button id="enable_zoom">Enable Zoom</button>--%>
             </div>
 
 
@@ -196,7 +207,7 @@
                                 label: 'Base Rate',
                                 data: baseRates,
                                 borderColor: 'rgb(75, 192, 192)',
-                                borderWidth: 2,
+                                borderWidth: 1,
                                 fill: false
                             }]
                         },
@@ -222,10 +233,13 @@
                                     speed: 0.1,
                                     threshold: 2,
                                     sensitivity: 3
+
                                 }
                             }
                         }
                     });
+                    myChart.options.plugins.zoom.zoom.enabled = true;
+                    myChart.options.plugins.zoom.pan.enabled = true;
                 },
                 error: function () {
                     alert('Error retrieving exchange rate for the last 6 months.');
@@ -233,6 +247,28 @@
             });
         });
     });
+    // $('#reset_zoom').click(function () {
+    //     if (myChart) {
+    //         myChart.resetZoom();
+    //     }
+    // });
+    //
+    // $('#disable_zoom').click(function () {
+    //     if (myChart) {
+    //         myChart.options.plugins.zoom.zoom.enabled = false;
+    //         myChart.options.plugins.zoom.pan.enabled = false;
+    //         myChart.update(); // 차트 설정 업데이트
+    //     }
+    // });
+    //
+    // $('#enable_zoom').click(function () {
+    //     if (myChart) {
+    //         myChart.options.plugins.zoom.zoom.enabled = true;
+    //         myChart.options.plugins.zoom.pan.enabled = true;
+    //         myChart.update(); // 차트 설정 업데이트
+    //     }
+    // });
+
 </script>
 </body>
 </html>

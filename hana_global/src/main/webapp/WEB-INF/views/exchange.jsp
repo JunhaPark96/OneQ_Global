@@ -211,14 +211,14 @@
                             zoom: {
                                 pan: {
                                     enabled: true,
-                                    mode: 'x',
+                                    mode: 'xy', // 'x'와 'y' 축 모두를 패닝하도록 설정
                                     speed: 0.1,
                                     threshold: 10
                                 },
                                 zoom: {
                                     enabled: true,
-                                    drag: false,
-                                    mode: 'x',
+                                    drag: true, // 사용자가 드래그하여 확대할 수 있도록 설정
+                                    mode: 'xy', // 'x'와 'y' 축 모두를 확대하도록 설정
                                     speed: 0.1,
                                     threshold: 2,
                                     sensitivity: 3

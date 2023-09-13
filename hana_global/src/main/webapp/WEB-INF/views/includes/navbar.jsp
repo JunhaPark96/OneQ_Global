@@ -36,8 +36,8 @@
         <a href="/exchange" style="padding-left: 15px">Foreign Exchange</a>
         <ul>
             <li><a href="/exchange">Exchange Rate</a></li>
-            <li><a href="/exchange">Currency Exchange</a></li>
-            <li><a href="/exchange">Exchange history</a></li>
+            <li><a href="${pageContext.request.contextPath}/doExchange">Currency Exchange</a></li>
+<%--            <li><a href="/exchange">Exchange history</a></li>--%>
             <li><a href="/exchange">Recurring Exchange</a></li>
         </ul>
     </li>
@@ -45,7 +45,7 @@
         <a href="/transfer" style="padding-left: 15px">Overseas Remittance</a>
         <ul>
             <li><a href="/transfer">Immediate Remittance</a></li>
-            <li><a href="/transfer">Remittance history</a></li>
+            <li><a href="/transfer">Scheduled Remittance</a></li>
         </ul>
     </li>
 </ul>

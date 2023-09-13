@@ -38,21 +38,6 @@
         FROM exchange_rate
     </select>
 
-<!--    <select id="getLowestBaseRateForDates" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"-->
-<!--            parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO">-->
-<!--        SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,-->
-<!--               base_rate, prev_rate, usd_conversion_rate-->
-<!--        FROM (-->
-<!--                 SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,-->
-<!--                        base_rate, prev_rate, usd_conversion_rate,-->
-<!--                        RANK() OVER (ORDER BY base_rate ASC) as ranking-->
-<!--                 FROM exchange_rate_hist-->
-<!--                 WHERE rate_date BETWEEN TO_DATE(#{startDate}, 'YYYY/MM/DD') AND TO_DATE(#{endDate}, 'YYYY/MM/DD')-->
-<!--                   AND currency_code = #{currency}-->
-<!--             ) WHERE ranking = 1-->
-<!--    </select>-->
-<!--    환율 최저가  조회 -->
-
     <select id="getLowestBaseRateForDates" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"
             parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO">
         SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,

@@ -2,11 +2,11 @@ package com.kopo.hanaglobal.hana_global.web.dto.request;
 
 import lombok.*;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Data
 public class CurrencyRequestDTO {
     private String currency;

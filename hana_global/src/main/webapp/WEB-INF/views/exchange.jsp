@@ -24,15 +24,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
     <%--    차트 js--%>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>--%>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>--%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>--%>
-<%--    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>--%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.3"></script>
-<%--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--%>
-    <%--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@1.1.1/dist/chartjs-plugin-zoom.min.js"></script>--%>
-<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 <%--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
@@ -241,9 +235,11 @@
                     myChart.options.plugins.zoom.zoom.enabled = true;
                     myChart.options.plugins.zoom.pan.enabled = true;
                 },
-                error: function () {
-                    alert('Error retrieving exchange rate for the last 6 months.');
+                error: function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert('Error code: ' + jqXHR.status + '. Error message: ' + jqXHR.responseText);
                 }
+
             });
         });
     });

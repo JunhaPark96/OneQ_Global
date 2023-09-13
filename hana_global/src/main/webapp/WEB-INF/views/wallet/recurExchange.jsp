@@ -75,41 +75,91 @@
                 </div>
             </div>
             <%--            월렛 카드 구역 끝   --%>
+            <%--         사용자에게 제공하는 정보 시작   --%>
             <div class="showBalance">
-                <div class="col pt-1">
-                    Hana Wallet Balance (${walletKRW.currency}) ${walletKRW.balance}<br/>
-                    USD Converted Balance <br/>
-                    option: 해당국적의 환율로도 보여주기
+                <div class="balanceInfo col pt-1">
+                    <div class="walletBalance">
+                        Hana Wallet Balance (${walletKRW.currency}) ${walletKRW.balance}
+                    </div>
+                    <div class="usdBalance">
+                        USD Converted Balance
+                    </div>
+                    <div class="conversionOption">
+                        option: 해당국적의 환율로도 보여주기
+                    </div>
                 </div>
-                <div class="account">
-                    <div class="accountWrap">
-                        <div class="account-header">
-                            Linked Accounts
-                        </div>
-                        <div class="account-content">
-                            <h4>Hana Bank</h4>
-                        </div>
-                        <div class="account-footer">
-                            <div class="accountNo">
-                                ${selectedWallet.acNo}
+                <%--                <div class="account">--%>
+                <%--                    <div class="accountWrap">--%>
+                <%--                        <div class="account-header">--%>
+                <%--                            Linked Accounts--%>
+                <%--                        </div>--%>
+                <%--                        <div class="account-content">--%>
+                <%--                            <h4>Hana Bank</h4>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="account-footer">--%>
+                <%--                            <div class="accountNo">--%>
+                <%--                                ${selectedWallet.acNo}--%>
+                <%--                            </div>--%>
+                <%--                                            <div class="locRight">--%>
+                <%--                                                Modify--%>
+                <%--                                            </div>--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+
+                <div class="row justify-content-start">
+
+                    <div class="col-md-4 gradient-custom text-center text-black">
+                    </div>
+
+                    <div class="col-md-8 ">
+                        <div class="card-body pe-5">
+                            <div class="row">
+                                <div class="col-5">
+                                    <h6>Linked Account</h6>
+                                    <h6>Hana Bank</h6>
+                                </div>
+                                <div class="account-image">
+                                    <div class="myAccount"></div>
+                                </div>
                             </div>
-                            <div class="locRight">
-                                Modify
+                            <hr class="mt-0 mb-3">
+                            <div class="col-grid">
+                                <div class="grid-left">
+                                    <div class="row" style="height: 50px">
+                                        <div class="col d-flex">
+                                            <h6>예금주명 <br>
+                                                <span class="text-bold"> Jane Smith</span>
+                                            </h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col grid-right">
+                                    <div class="col">
+                                        <h6 class="text-start">계좌번호</h6>
+                                        <p class="text-muted">${selectedWallet.acNo}</p>
+                                        <div class="locRight">
+                                            Modify
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <%--         사용자에게 제공하는 정보 끝   --%>
             <div class="col pt-1 settingRecurring">
                 <form>
                     <table class="table table-hover mb-3 border-light">
-<%--                        <tbody>--%>
-<%--                        <tr>--%>
-<%--                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>--%>
-<%--                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>--%>
-<%--                        </tr>--%>
-<%--                        </tbody>--%>
+                        <%--                        <tbody>--%>
+                        <%--                        <tr>--%>
+                        <%--                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>--%>
+                        <%--                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>--%>
+                        <%--                        </tr>--%>
+                        <%--                        </tbody>--%>
                         <tbody>
                         <tr>
                             <th scope="row" class="text-start align-middle">Set End Date</th>
@@ -136,7 +186,8 @@
 
                         <tr>
                             <th scope="row" class="text-start align-middle">Set Target Exchange Rate
-                                <br/>(Based on Selling Rate)</th>
+                                <br/>(Based on Selling Rate)
+                            </th>
                             <td>
                                 <div class="btnArea text-start align-middle">
                                     <select id="rateSelect" onchange="updateHiddenInput()">
@@ -155,7 +206,7 @@
                                     <!-- 숨겨진 custom 입력 필드 추가 -->
                                     <div id="customInputContainer" style="display: none;">
                                         Enter Manually: <input type="text" id="customRateInput"
-                                                      onkeyup="copyCustomValueToHidden()">
+                                                               onkeyup="copyCustomValueToHidden()">
                                     </div>
                                     <!-- Hidden Inputs -->
                                     <input type="hidden" id="selectedRate" name="selectedRate" value="">

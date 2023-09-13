@@ -8,7 +8,6 @@
     /*grid-auto-flow: column;*/
 }
 
-/*h2:nth-child(1) {}*/
 h2 {
     font-size: calc(1.325rem + .9vw);
     grid-column: 1 / span 2; /* 2칸 영역 차지 */
@@ -124,7 +123,18 @@ cardHeader h4{
     margin-top: 1.5rem;
     /*margin-bottom: 1rem;*/
 }
-
+/* 이미지 회전 */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.rotating {
+    animation: rotate 1s linear;
+}
 /* 카드 끝 ----------------------------*/
 
 .btn_p a {
@@ -174,6 +184,54 @@ cardHeader h4{
 
 /* 카드 내부 끝-----------------*/
 
+/* 사용자 정보 시작  --------------------------*/
+.account{
+    /*border: solid 1px black;*/
+}
+.accountWrap{
+    width: 330px;
+    height: 130px;
+    border-radius: 2rem;
+    /*background-color: aliceblue;*/
+    background: linear-gradient(60deg, #0088BA, #00FFED);
+}
+
+.account-header{
+    display: flex;
+    justify-content: center;
+    /*background-color: #3FC1C9;*/
+    border-radius: 2rem;
+    /*padding: 0.1rem;*/
+    border: none;
+    /*cursor: pointer;*/
+    transition: background-color 0.3s;
+    width: 100px;
+    /*text-align: center;*/
+    margin-left: 4%;
+    color: white;
+    padding-top: 5px;
+}
+
+.account-footer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+.account-content{
+    padding-left: 10%;
+    padding-top: 10px;
+}
+.accountNo{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    padding-left: 10%;
+    font-weight: 600;
+    font-size: larger;
+}
+
+/* 사용자 정보 끝  -------------------------------*/
+
 /*입력 폼 시작 -------------------------*/
 .showBalance{
     grid-row: 2;
@@ -190,6 +248,55 @@ input[type="password"]:focus, input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(1, 128, 133, 0.3);
 }
 
+/* 테이블 스타일링 */
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+}
+/* 금융 분위기에 맞는 입력 필드 스타일링 */
+input[type="text"], select {
+    padding: 10px;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    /*width: 100%;*/
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* 캘린더 버튼 스타일링 */
+.btnArea img {
+    margin-left: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* 숨겨진 custom 입력 필드 스타일링 */
+#customInputContainer {
+    margin-top: 10px;
+}
+
+/* 알림 메시지 스타일링 */
+.btnArea p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* 폼 전체에 대한 일관된 여백 및 패딩 */
+.settingRecurring {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+}
 /* 입력 폼 끝 ---------------------*/
 
 
@@ -202,10 +309,10 @@ input[type="password"]:focus, input[type="text"]:focus {
     text-align: center;
 }
 .mb30 {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
 }
 .mt15 {
-    margin-top: 55px;
+    margin-top: 35px;
 }
 /* 버튼 공통 */
 .btn-pack, .btn-pack * {

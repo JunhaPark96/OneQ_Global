@@ -2,15 +2,18 @@ package com.kopo.hanaglobal.hana_global.web.dto.request;
 
 import lombok.*;
 
-import java.util.Date;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
+//@Getter
+//@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@ToString
+@Data
 public class CurrencyRequestDTO {
     private String currency;
     private String startDate;
     private String endDate;
+
+    public CurrencyRequestDTO(String currency) {
+        this.currency = currency;
+    }
 }

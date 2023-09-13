@@ -48,8 +48,21 @@
                             &nbsp; ${selectedWallet.currency} </a>
                     </div>
                     <div class="cardElem2">
-                        <a href="${pageContext.request.contextPath}/recurExchange?currency=${selectedCurrency}"> JPY
-                            100 = 905.26원 새로고침 아이콘</a>
+                        <c:choose>
+                            <c:when test="${selectedWallet.currencyCode == 'JPY' || selectedWallet.currencyCode == 'VND'}">
+                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = ${currencyCode.baseRate} Won</span>
+                                <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
+                                    <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = ${currencyCode.baseRate} Won</span>
+                                <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
+                                    <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
+                                </button>
+
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="cardElem3">
                         <div class="btn_p">
@@ -62,32 +75,48 @@
                 </div>
             </div>
             <%--            월렛 카드 구역 끝   --%>
-            <div class="col pt-1 showBalance">
-                Hana Wallet Balance (Won) <br/>
-                해당나라 잔액<br/>
-                미화 잔액<br/>
-                option: 해당국적의 환율로도 보여주기
+            <div class="showBalance">
+                <div class="col pt-1">
+                    Hana Wallet Balance (${walletKRW.currency}) ${walletKRW.balance}<br/>
+                    USD Converted Balance <br/>
+                    option: 해당국적의 환율로도 보여주기
+                </div>
+                <div class="account">
+                    <div class="accountWrap">
+                        <div class="account-header">
+                            Linked Accounts
+                        </div>
+                        <div class="account-content">
+                            <h4>Hana Bank</h4>
+                        </div>
+                        <div class="account-footer">
+                            <div class="accountNo">
+                                ${selectedWallet.acNo}
+                            </div>
+                            <div class="locRight">
+                                Modify
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="col pt-1 settingRecurring">
                 <form>
                     <table class="table table-hover mb-3 border-light">
+<%--                        <tbody>--%>
+<%--                        <tr>--%>
+<%--                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>--%>
+<%--                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>--%>
+<%--                        </tr>--%>
+<%--                        </tbody>--%>
                         <tbody>
                         <tr>
-                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>
-                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>
-                        </tr>
-
-                        </tbody>
-
-                        <tbody>
-
-                        <tr>
-                            <th scope="row" class="text-start align-middle">종료일 설정</th>
+                            <th scope="row" class="text-start align-middle">Set End Date</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
-<%--                                    <input type="text" name="endDate" id="endDate"--%>
-<%--                                           placeholder="종료 날짜">--%>
+                                    <%--                                    <input type="text" name="endDate" id="endDate"--%>
+                                    <%--                                           placeholder="종료 날짜">--%>
                                     <input type="text" id="endDate" name="endDate" readonly>
                                     <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                          alt="Start Date Calendar Tab" onclick="openCalendar('endDate')">
@@ -96,21 +125,40 @@
                         </tr>
 
                         <tr>
-                            <th scope="row" class="text-start align-middle">충전 금액</th>
+                            <th scope="row" class="text-start align-middle">Load Amount</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
                                     <input type="text" name="targetAmount" id="targetAmount"
-                                           placeholder="목표 충전금액">
+                                           placeholder="Enter Amount">
                                 </div>
                             </td>
                         </tr>
 
                         <tr>
-                            <th scope="row" class="text-start align-middle">목표환율 설정(매매기준율)</th>
+                            <th scope="row" class="text-start align-middle">Set Target Exchange Rate
+                                <br/>(Based on Selling Rate)</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
-                                    <input type="text" name="targetRate" id="targetRate"
-                                           placeholder="목표 환율 설정">
+                                    <select id="rateSelect" onchange="updateHiddenInput()">
+                                        <option value="threeMonths"> ${lowestRateThreeMonths.baseRate} Won (Lowest
+                                            Amount Last Three Months)
+                                        </option>
+                                        <option value="lastMonth"> ${lowestRateLastMonth.baseRate} Won (Lowest Amount
+                                            Last Month)
+                                        </option>
+                                        <option value="lastWeek"> ${lowestRateLastWeek.baseRate} Won (Lowest Amount Last
+                                            Week)
+                                        </option>
+                                        <option value="custom"> Enter Manually</option>
+                                    </select>
+
+                                    <!-- 숨겨진 custom 입력 필드 추가 -->
+                                    <div id="customInputContainer" style="display: none;">
+                                        Enter Manually: <input type="text" id="customRateInput"
+                                                      onkeyup="copyCustomValueToHidden()">
+                                    </div>
+                                    <!-- Hidden Inputs -->
+                                    <input type="hidden" id="selectedRate" name="selectedRate" value="">
                                 </div>
                             </td>
                         </tr>
@@ -118,7 +166,8 @@
                     </table>
                     <br/>
                     <div class="btnArea text-start align-middle">
-                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic charging if it is lower or equal to the set exchange rate</p>
+                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic
+                            charging if it is lower or equal to the set exchange rate</p>
                     </div>
 
                     <div class="btn-area mt15 mb30">
@@ -126,7 +175,7 @@
                         <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
                            class="">Cancel</a></span>
                         <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                        <button type="submit" class="" id="buttonConfirm">Save </button></span>
+                        <button type="submit" class="" id="buttonConfirm">Confirm </button></span>
                     </div>
                 </form>
             </div>
@@ -137,6 +186,49 @@
         </footer>
     </div>
 </div>
-</body>
 
+<script>
+    $(document).ready(function () {
+        $('#updateRateBtn').on('click', function () {
+            let currency = $('.walletCell').data('currency');
+            $(this).addClass('rotating');  // 회전 시작
+            $.ajax({
+                url: "${pageContext.request.contextPath}/getLatestExchangeRate",
+                method: "GET",
+                data: {currency: currency},
+                success: function (data) {
+                    if (currency === 'JPY' || currency === 'VND') {
+                        $('.cardElem2 .rateInfo').html(currency + " 100 = " + data.baseRate + " Won");
+                    } else {
+                        $('.cardElem2 .rateInfo').html(currency + " 1 = " + data.baseRate + " Won");
+                    }
+                },
+                error: function () {
+                    alert("Error fetching data!");
+                },
+                complete: function () {
+                    $('.updateRateBtn').removeClass('rotating');  // 회전 중지
+                }
+            });
+        });
+    });
+
+    //     목표 환율 직접입력 선택 시
+    function updateHiddenInput() {
+        let select = document.getElementById("rateSelect");
+        let selectedValue = select.options[select.selectedIndex].value;
+
+        if (selectedValue === "custom") {
+            // 직접입력 선택 시 별도의 입력 필드 보여주기
+            document.getElementById("customInputContainer").style.display = "block";
+        } else {
+            document.getElementById("customInputContainer").style.display = "none";
+        }
+    }
+
+    function copyCustomValueToHidden() {
+        document.getElementById("selectedRate").value = document.getElementById("customRateInput").value;
+    }
+</script>
+</body>
 </html>

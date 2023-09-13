@@ -36,77 +36,8 @@
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>Recur Currency</h2>
-            <%--            월렛 카드 구역    --%>
-            <div class="walletCell" data-currency="${selectedWallet.currencyCode}">
-                <div class="walletCard">
-                    <div class="cardHeader">
-                        <h4>Hana Wallet</h4>
-                        <button class="loadBtn">Load</button>
-                    </div>
-                    <div class="cardElem1">
-                        <a href="${pageContext.request.contextPath}/accountInfo"> ${selectedWallet.balance}
-                            &nbsp; ${selectedWallet.currency} </a>
-                    </div>
-                    <div class="cardElem2">
-                        <c:choose>
-                            <c:when test="${selectedWallet.currencyCode == 'JPY' || selectedWallet.currencyCode == 'VND'}">
-                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = ${currencyCode.baseRate} Won</span>
-                                <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
-                                    <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
-                                </button>
-                            </c:when>
-                            <c:otherwise>
-                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = ${currencyCode.baseRate} Won</span>
-                                <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
-                                    <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
-                                </button>
-
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                    <div class="cardElem3">
-                        <div class="btn_p">
-                            <a href="/curExchange">Exchange</a>
-                        </div>
-                        <div class="btn_s">
-                            <a href="/overseaRemittance">Remittance</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%--            월렛 카드 구역 끝   --%>
             <%--         사용자에게 제공하는 정보 시작   --%>
             <div class="showBalance">
-                <div class="balanceInfo col pt-1">
-                    <div class="walletBalance">
-                        Hana Wallet Balance (${walletKRW.currency}) ${walletKRW.balance}
-                    </div>
-                    <div class="usdBalance">
-                        USD Converted Balance
-                    </div>
-                    <div class="conversionOption">
-                        option: 해당국적의 환율로도 보여주기
-                    </div>
-                </div>
-                <%--                <div class="account">--%>
-                <%--                    <div class="accountWrap">--%>
-                <%--                        <div class="account-header">--%>
-                <%--                            Linked Accounts--%>
-                <%--                        </div>--%>
-                <%--                        <div class="account-content">--%>
-                <%--                            <h4>Hana Bank</h4>--%>
-                <%--                        </div>--%>
-                <%--                        <div class="account-footer">--%>
-                <%--                            <div class="accountNo">--%>
-                <%--                                ${selectedWallet.acNo}--%>
-                <%--                            </div>--%>
-                <%--                                            <div class="locRight">--%>
-                <%--                                                Modify--%>
-                <%--                                            </div>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-
                 <div class="row justify-content-start">
 
                     <div class="col-md-4 gradient-custom text-center text-black">
@@ -138,7 +69,7 @@
                                 <div class="col grid-right">
                                     <div class="col">
                                         <h6 class="text-start">계좌번호</h6>
-                                        <p class="text-muted">${selectedWallet.acNo}</p>
+                                        <p class="text-muted">멤버의 계좌리스트</p>
                                         <div class="locRight">
                                             Modify
                                         </div>
@@ -237,49 +168,5 @@
         </footer>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('#updateRateBtn').on('click', function () {
-            let currency = $('.walletCell').data('currency');
-            $(this).addClass('rotating');  // 회전 시작
-            $.ajax({
-                url: "${pageContext.request.contextPath}/getLatestExchangeRate",
-                method: "GET",
-                data: {currency: currency},
-                success: function (data) {
-                    if (currency === 'JPY' || currency === 'VND') {
-                        $('.cardElem2 .rateInfo').html(currency + " 100 = " + data.baseRate + " Won");
-                    } else {
-                        $('.cardElem2 .rateInfo').html(currency + " 1 = " + data.baseRate + " Won");
-                    }
-                },
-                error: function () {
-                    alert("Error fetching data!");
-                },
-                complete: function () {
-                    $('.updateRateBtn').removeClass('rotating');  // 회전 중지
-                }
-            });
-        });
-    });
-
-    //     목표 환율 직접입력 선택 시
-    function updateHiddenInput() {
-        let select = document.getElementById("rateSelect");
-        let selectedValue = select.options[select.selectedIndex].value;
-
-        if (selectedValue === "custom") {
-            // 직접입력 선택 시 별도의 입력 필드 보여주기
-            document.getElementById("customInputContainer").style.display = "block";
-        } else {
-            document.getElementById("customInputContainer").style.display = "none";
-        }
-    }
-
-    function copyCustomValueToHidden() {
-        document.getElementById("selectedRate").value = document.getElementById("customRateInput").value;
-    }
-</script>
 </body>
 </html>

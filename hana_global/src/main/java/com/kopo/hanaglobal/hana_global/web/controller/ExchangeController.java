@@ -3,6 +3,8 @@ package com.kopo.hanaglobal.hana_global.web.controller;
 import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
+import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
@@ -47,7 +49,11 @@ public class ExchangeController {
     }
 
     @GetMapping("/doExchange")
-    public String doExchange(){
+    public String doExchange(@ModelAttribute("currentMember")Member member){
+        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
+        for (Account account : accountList){
+            System.out.println(account.toString());
+        }
         return "/wallet/doExchange";
     }
 

@@ -18,7 +18,7 @@
     <link href="./css/nav.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
-    <link href="./css/wallet/recurExchange.css" rel="stylesheet"/>
+    <link href="./css/exchange/doExchange.css" rel="stylesheet"/>
     <link href="./css/wallet/flags.css" rel="stylesheet"/>
 
     <%--    캘린더--%>
@@ -35,121 +35,120 @@
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
-            <h2>Recur Currency</h2>
-            <%--         사용자에게 제공하는 정보 시작   --%>
-            <div class="showBalance">
-                <div class="row justify-content-start">
+            <h2>Currency Exchange</h2>
+            <%--         연결게좌, 비밀번호 입력   --%>
+            <div class="account_transaction withdraw-card">
+                <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
+                    <div class="card-body pe-5">
+                        <table class="table table-hover border-light">
+                            <form action="${pageContext.request.contextPath}/walletInfo" method="post">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="h5 text-black-50 border-light" style="width: 50%"></th>
+                                    <th scope="col" class="h5 text-dark border-light" style="width: 50%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%--                                계좌 선택 --%>
+                                <tr class="text border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Choose</th>
+                                    <td>
+                                        <select class="form-select border-3 w-50" name="senderAccountNo"
+                                                id="selectAccountForm" onchange="changeBalance()" style="height: 45px;">
+                                            <option value="" selected disabled>계좌를 선택하세요.</option>
+                                            <c:forEach items="${accountList}" var="account">
+                                                <option value="${account.acNo}" data-balance="${account.balance}">
+                                                    (${account.acNo})
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                    </td>
+                                </tr>
 
-                    <div class="col-md-4 gradient-custom text-center text-black">
-                    </div>
-
-                    <div class="col-md-8 ">
-                        <div class="card-body pe-5">
-                            <div class="row">
-                                <div class="col-5">
-                                    <h6>Linked Account</h6>
-                                    <h6>Hana Bank</h6>
-                                </div>
-                                <div class="account-image">
-                                    <div class="myAccount"></div>
-                                </div>
-                            </div>
-                            <hr class="mt-0 mb-3">
-                            <div class="col-grid">
-                                <div class="grid-left">
-                                    <div class="row" style="height: 50px">
-                                        <div class="col d-flex">
-                                            <h6>예금주명 <br>
-                                                <span class="text-bold"> Jane Smith</span>
-                                            </h6>
+                                <tr class="border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
+                                    <td>
+                                        <div class="btnArea" id="btnFclArea">
+                                            <p class="text-center align-middle" id="accountBalance">
+                                            </p>
                                         </div>
-                                    </div>
+                                    </td>
+                                </tr>
 
-                                </div>
-                                <div class="col grid-right">
-                                    <div class="col">
-                                        <h6 class="text-start">계좌번호</h6>
-                                        <p class="text-muted">멤버의 계좌리스트</p>
-                                        <div class="locRight">
-                                            Modify
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                <tr class="border-light">
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;비밀번호</th>
+                                    <td>
+                                        <input type="password" name="account_password" id="account_password"
+                                               placeholder="계좌 비밀번호" maxlength="4"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </form>
+                        </table>
+                        Preferential rate is 100% with Hana Money!
                     </div>
                 </div>
+            </div>
+            <%--         사용자에게 제공하는 정보 시작   --%>
+            <div class="showBalance">
+                <div class="apprslt">
+                    <div class="apprslt_current">
+                        <p class="tit">결제금액(원)</p>
+                        <p class="price" name="p_krwAmt" id="p_krwAmt">13,313</p>
+                    </div>
 
+                    <div class="apprslt_result">
+                        <ul>
+                            <li>적용환율<span name="span_apclExhgRt" id="span_apclExhgRt">1,331.32 원</span></li>
+                            <li>우대율<span name="span_apclPrimRt" id="span_apclPrimRt">90 %</span></li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
             <%--         사용자에게 제공하는 정보 끝   --%>
             <div class="col pt-1 settingRecurring">
                 <form>
-                    <table class="table table-hover mb-3 border-light">
-                        <%--                        <tbody>--%>
-                        <%--                        <tr>--%>
-                        <%--                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>--%>
-                        <%--                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>--%>
-                        <%--                        </tr>--%>
-                        <%--                        </tbody>--%>
-                        <tbody>
-                        <tr>
-                            <th scope="row" class="text-start align-middle">Set End Date</th>
-                            <td>
-                                <div class="btnArea text-start align-middle">
-                                    <%--                                    <input type="text" name="endDate" id="endDate"--%>
-                                    <%--                                           placeholder="종료 날짜">--%>
-                                    <input type="text" id="endDate" name="endDate" readonly>
-                                    <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
-                                         alt="Start Date Calendar Tab" onclick="openCalendar('endDate')">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row" class="text-start align-middle">Load Amount</th>
-                            <td>
-                                <div class="btnArea text-start align-middle">
-                                    <input type="text" name="targetAmount" id="targetAmount"
-                                           placeholder="Enter Amount">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row" class="text-start align-middle">Set Target Exchange Rate
-                                <br/>(Based on Selling Rate)
-                            </th>
-                            <td>
-                                <div class="btnArea text-start align-middle">
-                                    <select id="rateSelect" onchange="updateHiddenInput()">
-                                        <option value="threeMonths"> ${lowestRateThreeMonths.baseRate} Won (Lowest
-                                            Amount Last Three Months)
-                                        </option>
-                                        <option value="lastMonth"> ${lowestRateLastMonth.baseRate} Won (Lowest Amount
-                                            Last Month)
-                                        </option>
-                                        <option value="lastWeek"> ${lowestRateLastWeek.baseRate} Won (Lowest Amount Last
-                                            Week)
-                                        </option>
-                                        <option value="custom"> Enter Manually</option>
-                                    </select>
-
-                                    <!-- 숨겨진 custom 입력 필드 추가 -->
-                                    <div id="customInputContainer" style="display: none;">
-                                        Enter Manually: <input type="text" id="customRateInput"
-                                                               onkeyup="copyCustomValueToHidden()">
-                                    </div>
-                                    <!-- Hidden Inputs -->
-                                    <input type="hidden" id="selectedRate" name="selectedRate" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <br/>
                     <div class="btnArea text-start align-middle">
                         <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic
                             charging if it is lower or equal to the set exchange rate</p>
+                    </div>
+
+                    <div class="banking-wrap input-focus-wrap">
+                        <div class="title-cont">
+                            <strong>결제정보를 입력하세요</strong>
+                        </div>
+
+                        <div class="banking-cont nothead">
+                            <table summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
+                                <caption>결제정보1</caption>
+                                <colgroup>
+                                    <col style="width: 150px">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                <tr>
+                                    <th>환전신청금액</th>
+                                    <td>
+									<span class="txt">
+										<img src="https://image.kebhana.com/pbk/cybrexh/resource/img/cyber/flag_USD.png"
+                                             alt="미국" class="flag">
+										미국 USD
+										<em class="price">10</em>
+									</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>결제하실 금액(원)</th>
+                                    <td><span class="txt"><em class="point">13,313</em></span></td>
+                                </tr>
+                                <tr>
+                                    <th>결제방법</th>
+                                    <td><span class="txt">하나은행 계좌 출금</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="btn-area mt15 mb30">
@@ -157,7 +156,7 @@
                         <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
                            class="">Cancel</a></span>
                         <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                        <button type="submit" class="" id="buttonConfirm">Confirm </button></span>
+                        <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 .main-body {
     /*border: 1px solid black;*/
     display: grid;
-    grid-template-columns: 0.6fr 1fr;
+    grid-template-columns: 0.8fr 1fr;
     grid-auto-rows: 0.1fr 0.1fr auto;
     row-gap: 30px;
     column-gap: 20px;
@@ -12,91 +12,6 @@ h2 {
     font-size: calc(1.325rem + .9vw);
     grid-column: 1 / span 2; /* 2칸 영역 차지 */
     grid-row: 1;
-}
-.locRight {
-    display: flex;
-    justify-content: center;
-    border-radius: 2rem;
-    border: none;
-    transition: background-color 0.3s ease-in-out;
-    width: 70px;  /* 조금 넓게 변경 */
-    align-items: center;
-    cursor: pointer;  /* 변경 가능한 영역임을 암시 */
-    margin-right: 5%;
-    font-weight: 500;  /* 글자가 조금 더 도드라져 보이게 */
-    border: 1px solid #3FC1C9;
-}
-/* 추가 및 수정된 스타일 */
-.showBalance {
-    grid-row: 2;
-    grid-column: 2;
-    display: grid;
-    grid-template-rows: 0.5fr 1fr; /* 월렛 정보와 계좌 정보가 가로로 배치될 수 있도록 */
-    column-gap: 20px;
-}
-
-.balanceInfo {
-    display: grid;
-    grid-template-rows: repeat(3, auto); /* 각 정보가 세로로 배치될 수 있도록 */
-    row-gap: 10px;
-}
-
-.walletBalance, .usdBalance, .conversionOption {
-    /*padding: 5px;*/
-    /*border: 1px solid #eee; !* 각 영역을 명확하게 보여주기 위해 임시로 테두리 추가 *!*/
-}
-
-.col-md-4 {
-    border-bottom: 1px solid rgba(1, 128, 133, 0.54);
-    border-top: 1px solid rgba(1, 128, 133, 0.54);
-    border-left: 1px solid rgba(1, 128, 133, 0.54);
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    max-width: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
-    /*background-color: rgba(255,204,92,0.8);*/
-    background-color: #016f73;
-    max-height: 210px;
-}
-
-/*오른쪽블럭*/
-.col-md-8 {
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
-    max-height: 210px;
-}
-
-.account-image {
-    display: grid;
-    align-items: center;
-    justify-content: center;
-}
-
-.myAccount {
-    content: url("/images/mascort.png");
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
-}
-
-.col-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "left-card right-card";
-}
-
-.grid-right {
-    display: grid;
-    grid-area: right-card;
-    margin-left: 12px;
-}
-
-.grid-left {
-    display: grid;
-    grid-area: left-card;
-    grid-template-rows: 0.2fr 1fr;
 }
 
 .row {
@@ -116,98 +31,17 @@ h2 {
     margin-bottom: 0px;
 }
 
-.card-body {
-    margin-top: 3%;
-    /*border: 1px solid brown;*/
-    padding: 20px;
-}
-
-/* card 내부 요소들 */
-.card h4,
-.card h5,
-.card p {
-    margin: 10px 0;
-    font-weight: bold;
-    color: #333;
-}
-
-.card p {
-    font-size: 18px;
-    color: #666;
-}
-
-.col h6 span{
-    line-height: 40px;
-}
-/* 결제할 환율 미리 보기 시작 ---------------------------------*/
-
-.apprslt{
-    line-height: 18px;
-    margin: 0px;
-    padding: 0px;
-    color: #555;
-    font-family: roboto,NotoSans_Dl;
-    font-size: 12px;
-    box-sizing: border-box !important;
-    margin-bottom: 10px;
-    border-top: 1px solid #e1e1e1;
-    border-bottom: 1px solid #e1e1e1;
-}
-ltwrap .apprslt .apprslt_current {
-    float: left;
-    width: 46%;
-    padding: 24px 0 0 30px;
-}
-
-.cybexapp_rsltwrap .apprslt .apprslt_current .tit {
-    margin-bottom: 8px;
-    font-size: 15px;
-    color: #637079;
-    letter-spacing: -0.3px;
-}
-
-.cybexapp_rsltwrap .apprslt .apprslt_current .price {
-    font-size: 20px;
-    color: #28b2a5;
-}
-
-ltwrap .apprslt .apprslt_result {
-    float: right;
-    width: 54%;
-    padding: 15px 40px 20px 50px;
-    border-left: 1px solid #e1e1e1;
-}
-
-.cybexapp_rsltwrap .apprslt .apprslt_result li {
-    position: relative;
-    font-size: 15px;
-    color: #637079;
-    line-height: 30px;
-}
-
-.cybexapp_rsltwrap .apprslt .apprslt_result li span {
-    position: absolute;
-    right: 0;
-    font-size: 16px;
-    color: #000;
-    font-weight: bold;
-}
-
-ul, ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
 /* 결제할 환율 미리 보기 끝 --------------------------*/
 
 /* 사용자 정보 끝 -------------------------------*/
 
 
 /*입력 폼 시작 -------------------------*/
-
-.settingRecurring{
-    grid-row: 3;
-    grid-column: span 2;
+.Authenticate{
+    grid-row: 2 ;
+    grid-column: span 3;
+    width: 600px;
+    height: 300px;
 }
 
 input[type="password"]:focus, input[type="text"]:focus {
@@ -216,33 +50,46 @@ input[type="password"]:focus, input[type="text"]:focus {
 }
 
 /* 테이블 스타일링 */
-.table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
+.table th, .table td {
+    /*padding: 15px;*/
+    text-align: left;
+    /*border-bottom: 1px solid #e1e1e1;  !* 선색 변경 *!*/
 }
 
-.table th, .table td {
-    padding: 15px;
-    text-align: left;
-    /*border-bottom: 1px solid #e1e1e1;*/
+.card-body {
+    border: 1px solid #e1e1e1;  /* 선색 변경 */
+    padding: 20px;
+    background-color: #f9f9f9;  /* 조금 더 밝은 배경색 */
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* 그림자 효과 추가 */
 }
-/* 금융 분위기에 맞는 입력 필드 스타일링 */
-input[type="text"], select {
-    padding: 10px;
+
+/* 입력 필드 스타일링 */
+input[type="text"], select, input[type="password"] {
+    padding: 10px 15px;
     border: 1px solid #c4c4c4;
     border-radius: 4px;
-    /*width: 100%;*/
-    box-sizing: border-box;
-    margin-bottom: 10px;
+    font-size: 0.95em;  /* 조금 더 큰 글씨체 */
+    width: 100%;
+    transition: border 0.3s, box-shadow 0.3s;  /* 부드럽게 변환 */
 }
 
-/* 캘린더 버튼 스타일링 */
-.btnArea img {
-    margin-left: 10px;
-    vertical-align: middle;
-    cursor: pointer;
+input[type="text"]:focus, select:focus, input[type="password"]:focus {
+    border-color: #018085;
+    box-shadow: 0 0 5px rgba(1, 128, 133, 0.3);
+}
+/* 버튼 스타일링 */
+.btnArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#account_password {
+    padding: 8px 12px;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    background-color: #fff;
 }
 
 /* 숨겨진 custom 입력 필드 스타일링 */
@@ -258,13 +105,41 @@ input[type="text"], select {
 }
 
 /* 폼 전체에 대한 일관된 여백 및 패딩 */
-.settingRecurring {
+.previewPayment {
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #e1e1e1;
     border-radius: 5px;
 }
 /* 입력 폼 끝 ---------------------*/
+
+/* 환율 가져오기 시작 ---------------------------------------*/
+.showExchangeRate{
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+}
+
+
+/* 환율 가져오기 끝 ---------------------------------------*/
+
+/* 환전 계산 시작 ------------------*/
+.compare_area{
+    grid-row: 3;
+    grid-column: 2;
+}
+
+
+
+
+
+/* 환전 계산 끝 ------------------*/
+
+.previewPayment{
+    grid-row: 4;
+    grid-column: span 2;
+}
 
 
 /* 제출 버튼 ----------------------*/
@@ -333,3 +208,4 @@ input[type="text"], select {
     text-decoration: none;
     color: #000;
 }
+

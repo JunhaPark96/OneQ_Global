@@ -1,0 +1,40 @@
+.walletCell[data-currency="KRW"]::before {
+    background-image: url("/images/walletIcon.png");
+}
+.walletCell[data-currency="USD"]::before {
+    background-image: url("/images/walletIcon_USD.png");
+}
+.walletCell[data-currency="JPY"]::before {
+    background-image: url("/images/walletIcon_JPY.png");
+}
+.walletCell[data-currency="EUR"]::before {
+    background-image: url("/images/walletIcon_EUR.png");
+}
+
+.walletCell[data-currency="GBP"]::before {
+    background-image: url("/images/walletIcon_GBP.png");
+}
+
+.walletCell[data-currency="AUD"]::before {
+    background-image: url("/images/walletIcon_AUD.png");
+}
+
+.walletCell[data-currency="CAD"]::before {
+    background-image: url("/images/walletIcon_CAD.png");
+}
+
+.walletCell[data-currency="CNY"]::before {
+    background-image: url("/images/walletIcon_CNY.png");
+}
+
+.walletCell[data-currency="INR"]::before {
+    background-image: url("/images/walletIcon_INR.png");
+}
+
+.walletCell[data-currency="BRL"]::before {
+    background-image: url("/images/walletIcon_BRL.png");
+}
+
+.walletCell[data-currency="RUB"]::before {
+    background-image: url("/images/walletIcon_RUB.png");
+}

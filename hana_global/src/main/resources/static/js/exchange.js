@@ -25,3 +25,16 @@ document.addEventListener("DOMContentLoaded", function() {
         selectElement.appendChild(option);
     });
 });
+
+// 잔액 확인
+// function changeBalance() {
+//     let select = document.getElementById("selectAccountForm");
+//     let selectedOption = select.options[select.selectedIndex];
+//     let balance = selectedOption.getAttribute("data-balance");
+//     document.getElementById("btnFclArea").innerText = balance;
+// }
+function changeBalance() {
+    let selectedOption = document.getElementById("selectAccountForm").querySelector("option:checked");
+    let balance = selectedOption.getAttribute("data-balance");
+    document.getElementById("accountBalance").innerHTML = balance ? balance : "";
+}

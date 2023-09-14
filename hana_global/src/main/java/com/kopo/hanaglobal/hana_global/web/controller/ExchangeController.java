@@ -4,13 +4,16 @@ import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
+import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,13 +51,30 @@ public class ExchangeController {
         return exchangeRateHistList;
     }
 
+//    navbar에서 환전 페이지 이동 시
     @GetMapping("/doExchange")
-    public String doExchange(@ModelAttribute("currentMember")Member member){
+    public String doExchange(@ModelAttribute("currentMember")Member member, Model model){
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
-        for (Account account : accountList){
-            System.out.println(account.toString());
+        model.addAttribute("accountList", accountList);
+//        for (Account account : accountList){
+//            System.out.println(account.toString());
+//        }
+
+//        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        // 원화 통화 가져오기
+        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+        model.addAttribute("walletKRW", walletKRW);
+        System.out.println(walletKRW.toString());
+
+        // 최신 환율 불러오기
+        List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
+        model.addAttribute("exchangeList", exchangeRateList);
+        for (ExchangeRate e : exchangeRateList){
+            System.out.println(e.toString());
         }
         return "/wallet/doExchange";
     }
+
+    // myWallet 페이지에서 특정 통화클릭 후 페이지 이동 시
 
 }

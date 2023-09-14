@@ -68,8 +68,7 @@
                                     <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
                                     <td>
                                         <div class="btnArea" id="btnFclArea">
-                                            <p class="text-center align-middle" id="accountBalance">
-                                            </p>
+                                            <p class="text-center align-middle" id="accountBalance"></p>
                                         </div>
                                     </td>
                                 </tr>

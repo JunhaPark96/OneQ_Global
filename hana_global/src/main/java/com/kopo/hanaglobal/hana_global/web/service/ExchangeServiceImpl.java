@@ -75,6 +75,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 //        return lowestBaseRate;
 //    }
     // 공통 로직을 별도의 메서드로 추출
+    // 특정 기간 환율 정보
     public ExchangeRateHistDTO getExchangeRateForPeriod(CurrencyRequestDTO requestDTO, Period period) {
         String endDate = LocalDate.now().toString();
         String startDate = LocalDate.now().minus(period).toString();
@@ -84,7 +85,7 @@ public class ExchangeServiceImpl implements ExchangeService {
         return exchangeRepository.getLowestBaseRateForDates(requestDTO);
     }
 
-
+    // 최근 6개월 환율 정보
     @Override
     public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(CurrencyRequestDTO requestDTO) {
         String endDate = LocalDate.now().toString();
@@ -105,5 +106,12 @@ public class ExchangeServiceImpl implements ExchangeService {
         return exchangeRate;
     }
 
+    public List<ExchangeRate> getExchangeRate(){
+        List<ExchangeRate> exchangeRateList = exchangeRepository.getExchangeRate();
+//        for (ExchangeRate e : exchangeRateList){
+//            System.out.println("오늘의 환율은: " + e.toString());
+//        }
+        return exchangeRateList;
+    }
 
 }

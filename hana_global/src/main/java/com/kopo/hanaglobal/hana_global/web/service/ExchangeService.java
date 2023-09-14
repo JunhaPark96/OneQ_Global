@@ -21,4 +21,7 @@ public interface ExchangeService {
     public ExchangeRate getExchangeRateByCurrency(String currency);
 
     public ExchangeRateHistDTO getExchangeRateForPeriod(CurrencyRequestDTO requestDTO, Period period);
+    
+    // 최신환율 불러오기
+    public List<ExchangeRate> getExchangeRate();
 }

@@ -15,9 +15,15 @@ import java.util.List;
 public interface ExchangeRepository {
     public List<ExchangeRateHistDTO> getExchangeRateHist(ExchangeRateHistRequestDTO requestDTO);
 
+    // 최근 6개월 환율 불러오기
     public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(CurrencyRequestDTO requestDTO);
 
+    // 해당 통화 불러오기
     public ExchangeRate getExchangeRateByCurrency(String currency);
 
+    // 환율 최저가 찾기
     public ExchangeRateHistDTO getLowestBaseRateForDates(CurrencyRequestDTO requestDTO);
+
+    // 가장 최신 환율 불러오기
+    public List<ExchangeRate> getExchangeRate();
 }

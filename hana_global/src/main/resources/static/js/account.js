@@ -1,7 +1,7 @@
 function changeBalance() {
-    var select = document.getElementById("selectAccountForm");
-    var selectedOption = select.options[select.selectedIndex];
-    var balance = selectedOption.getAttribute("data-balance");
+    let select = document.getElementById("selectAccountForm");
+    let selectedOption = select.options[select.selectedIndex];
+    let balance = selectedOption.getAttribute("data-balance");
     document.getElementById("accountBalance").innerText = balance;
 }
 

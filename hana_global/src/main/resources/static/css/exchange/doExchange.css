@@ -146,39 +146,63 @@ table tbody tr {
 .compare_area {
     grid-row: 3;
     grid-column: 2;
+
 }
 
-._select_box {
-    position: relative;
+/* selectbox 스타일링 */
+.sbox .selectbox_label {
+    background-color: #f5f5f5;
+    border: 1px solid #ced4da; /* Bootstrap의 input border 색상과 동일 */
+    border-radius: 0.25rem; /* Bootstrap의 input border-radius와 동일 */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 부드러운 전환 효과 */
 }
 
-._list {
-    display: none;
-    position: absolute;
-    top: 100%; /* selectbox 바로 아래에 위치 */
-    left: 0;
-    z-index: 1000; /* 다른 요소 위에 올라오도록 설정 */
-    width: 100%; /* 부모 요소와 동일한 너비 */
-    background-color: #fff; /* 배경색 설정 */
-    border: 1px solid #ccc; /* 테두리 설정 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    max-height: 200px; /* 최대 높이 제한 */
-    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
+.sbox .selectbox_label:hover {
+    border-color: #adb5bd; /* 호버 시 border 색상 조절 */
+}
+
+.ch_wrap_ly {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+}
+
+.ly_cont li:hover {
+    background-color: #f8f9fa; /* Bootstrap의 light grey */
+}
+
+/* input box 스타일링 */
+.input_box input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input_box input:focus {
+    border-color: #adb5bd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Bootstrap의 primary 색상에 기반한 포커스 그림자 효과 */
+}
+
+.recite {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: #495057; /* Bootstrap의 dark grey */
+}
+
+._i{
     list-style: none;
 }
 
-._list ul {
-    list-style-type: none;
-    padding: 0;
+._i a {
+    text-decoration: none;
+    color: black;
 }
 
-._list li {
-    padding: 10px; /* 패딩 추가 */
-}
-
-._list li:hover {
-    background-color: #f5f5f5; /* 호버 효과 */
-}
+/*.calExchange{*/
+/*    grid-row: 4;*/
+/*    grid-column: span 2;*/
+/*}*/
 
 
 /* 환전 계산 끝 ------------------*/

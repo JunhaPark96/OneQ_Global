@@ -11,7 +11,6 @@
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/exchange.js"></script>
     <script src="./js/wallet.js"></script>
 
     <link href="./css/service-main.css" rel="stylesheet"/>
@@ -99,20 +98,20 @@
                     <tbody>
                     <tr>
                         <th>When making a remittance</th>
-                        <td><span class="txt"><em class="point" id="remittance">1,339.40</em></span></td>
+                        <td><span class="txt"><em class="point" id="remittance"></em></span></td>
                     </tr>
                     <tr>
                         <th>Receiving</th>
-                        <td><span class="txt"><em class="point" id="receiving">1,313.60</em></span></td>
+                        <td><span class="txt"><em class="point" id="receiving"></em></span></td>
                     </tr>
                     <tr>
                         <th>Buying</th>
-                        <td><span class="txt"><em class="point" id="buying">1,349.71</em></span></td>
+                        <td><span class="txt"><em class="point" id="buying"></em></span></td>
 
                     </tr>
                     <tr>
                         <th>When selling</th>
-                        <td><span class="txt"><em class="point" id="selling">1,303.29</em></span></td>
+                        <td><span class="txt"><em class="point" id="selling"></em></span></td>
                     </tr>
                     </tbody>
                 </table>
@@ -132,14 +131,16 @@
                         <span class="nation_usd _flag">
                             <img src="./images/walletIcon_USD.png" class="_img" alt="미국 USD" width="30px" height="30px">
                         </span>
-                                    <label class="_text">미국 <em>USD</em></label>
+                                    <label class="_text">United States <em>USD</em></label>
                                 </div>
                                 <div class="ch_wrap_ly ly_rate scroll _list" style="display: none;">
                                     <ul class="ly_cont _l" id="sourceCurrencyList">
                                         <c:forEach var="rate" items="${exchangeList}">
                                             <li class="_i" data-value="${rate.currencyCode}">
-                                                <a onclick="currencySelected('${rate.currencyCode}', true);" href="javascript:void(0);">
-                                                    <span id="countryNameFor_${rate.currencyCode}">${currencyNames[rate.currencyCode]}</span> <em>${rate.currencyCode}</em>
+                                                <a onclick="currencySelected('${rate.currencyCode}', true);"
+                                                   href="javascript:void(0);">
+                                                    <span id="countryNameFor_${rate.currencyCode}">${currencyNames[rate.currencyCode]}</span>
+                                                    <em>${rate.currencyCode}</em>
                                                 </a>
                                             </li>
                                         </c:forEach>
@@ -153,7 +154,7 @@
                     <input id="ds_from_money" maxlength="15" type="text" style="ime-mode:disabled;" value="1"
                            class="_input input_text">
                 </span>
-                            <span class="recite _recite" id="sourceCurrencyName">USD 통화이름</span>
+                            <span class="recite _recite" id="sourceCurrencyName"></span>
                         </div>
                     </div>
                     <%--                    Conversion 아이콘 --%>
@@ -167,7 +168,7 @@
                             <img src="./images/walletIcon_KRW.png" class="_img"
                                  alt="대한민국 KRW" width="30px" height="25px">
                         </span>
-                                    <label for="ds_to_money" class="_text">대한민국 <em>KRW</em></label>
+                                    <label for="ds_to_money" class="_text">Republic of Korea <em>KRW</em></label>
                                 </div>
                                 <div class="ch_wrap_ly ly_rate2 scroll _list" style="display: none">
                                     <ul class="ly_cont" id="targetCurrencyList">
@@ -175,28 +176,35 @@
                                             <li class="_i" data-value="${rate.currencyCode}">
                                                 <a onclick="currencySelected('${rate.currencyCode}', false);"
                                                    href="javascript:void(0);">
-                                                    <span id="countryNameFor_${rate.currencyCode}"></span> ${rate.currencyCode}
+                                                    <span id="countryNameFor_${rate.currencyCode}">${currencyNames[rate.currencyCode]}</span>
+                                                    <em>${rate.currencyCode}</em>
                                                 </a>
                                             </li>
                                         </c:forEach>
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="input_box _input_box">
                 <span id="drt_to_span" class="input">
-                    <input id="ds_to_money"  type="text" style="ime-mode:disabled;" value="1,327.90"
+                    <input id="ds_to_money" type="text" style="ime-mode:disabled;" value="1,327.90"
                            class="_input input_text">
                 </span>
-                            <span class="recite _recite result">1,327.90 원</span>
+                            <span class="recite _recite result" id="targetCurrencyName"></span>
                         </div>
                     </div>
                     <p class="cal_txt _noservice"></p></div>
+                <div class="btn-area" style="text-align: right">
+                <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
+                        <button type="submit" class="" id="calExchange">계산 </button></span>
+                </div>
             </div>
             <%--          환전 계산 끝 --%>
 
+
             <%--        결제 정보 미리보기 시작    --%>
-            <div class="col pt-1 previewPayment">
+            <div class="col pt-1 previewPayment" style="display: none">
                 <form>
                     <%--                    <div class="btnArea text-start align-middle">--%>
                     <%--                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic--%>
@@ -212,7 +220,7 @@
                             <table summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
                                 <%--                                <caption>결제정보1</caption>--%>
                                 <colgroup>
-                                    <col style="width: 600px"/>
+                                    <col style="width: 500px"/>
                                 </colgroup>
 
                                 <tbody>
@@ -220,9 +228,9 @@
                                     <th>Foreign exchange application amount</th>
                                     <td>
 									<span class="txt">
-										<img src="https://image.kebhana.com/pbk/cybrexh/resource/img/cyber/flag_USD.png"
-                                             alt="미국" class="flag">
-										미국 USD
+										<img src="./images/walletIcon_.png" style="width: 30px; height: 30px"
+                                             alt="국기" class="flag">
+										<em class="currency"></em>
 										<em class="price">10</em>
 									</span>
                                     </td>
@@ -230,7 +238,7 @@
 
                                 <tr>
                                     <th>The amount you will be paying(Won)</th>
-                                    <td><span class="txt"><em class="point">13,313</em></span></td>
+                                    <td><span class="txt"><em class="point"></em></span></td>
                                 </tr>
 
                                 <tr>
@@ -258,107 +266,75 @@
         </footer>
     </div>
 </div>
-
 <script>
+
     // 환율 정보 저장
     let exchangeRates = {};
     <c:forEach var="rate" items="${exchangeList}">
-        exchangeRates["${rate.currencyCode}"] = ${rate.usdConversionRate};
+    exchangeRates["${rate.currencyCode}"] = {
+        baseRate: ${rate.baseRate},
+        usdConversionRate: ${rate.usdConversionRate},
+        remittance: ${rate.remittance},
+        receiving: ${rate.receiving},
+        buyRate: ${rate.buyRate},
+        sellRate: ${rate.sellRate}
+    };
     </c:forEach>
+</script>
 
-    // 환율 계산
-    function calculateExchange(sourceCurrency, targetCurrency, amount) {
-        if (sourceCurrency === "USD") {
-            return amount * exchangeRates[targetCurrency];
-        } else if (targetCurrency === "USD") {
-            return amount / exchangeRates[sourceCurrency];
-        } else {
-            const amountInUSD = amount / exchangeRates[sourceCurrency];
-            return amountInUSD * exchangeRates[targetCurrency];
-        }
-    }
 
-    // 환율 계산 업데이트
-    function updateExchangeRate() {
-        const sourceCurrency = document.querySelector("#ds_sel ._text em").innerText;
-        const targetCurrency = document.querySelector("#ds_sel2 ._text em").innerText;
-        const amount = parseFloat(document.getElementById("ds_from_money").value);
+<script src="./js/exchange.js"></script>
+<script>
+    // 페이지 로딩이 완료되었을 때 실행될 함수
+    document.addEventListener("DOMContentLoaded", function () {
+        // 기본 통화를 USD로 설정
+        currencySelected("USD", true); // Source를 USD로 설정
+        // currencySelected("KRW", false); // 이렇게 해서 대상 통화도 초기 설정할 수 있습니다.
+    });
 
-        const result = calculateExchange(sourceCurrency, targetCurrency, amount);
-        document.getElementById("ds_to_money").value = result.toFixed(2); // 소수점 두 자리로 고정
-    }
-    document.getElementById("ds_from_money").addEventListener("input", updateExchangeRate);
+</script>
 
-    // select box 통화 이미지, 통화코드, 나라 이름 설정
-    function currencySelected(currencyCode, isSource) {
-        // 해당 통화 코드에 대한 정보를 가져오기
-        console.log("currency Code :" , currencyCode);
-        const selectedRate = exchangeRates[currencyCode];
-
-        const imageUrl = "./images/walletIcon_" + currencyCode + ".png";
-        // console.log(imageUrl);
-        // console.log(currencyCode);
-        // console.log(selectedRate);
-        const countryName = currencyNames[currencyCode];
-        const currencyShortName = currencyCode;
-        console.log("isSource" , isSource);
-        console.log("countryName ", countryName);
-        const divId = isSource ? "ds_sel" : "ds_sel2";
-        const currencyDiv = document.getElementById(divId);
-        const flagImg = currencyDiv.querySelector("._img");
-        const currencyLabel = currencyDiv.querySelector("._text");
-        console.log(currencyLabel);
-
-        flagImg.src = imageUrl;
-        flagImg.alt = countryName + " " + currencyShortName;
-        currencyLabel.innerHTML = countryName + ' <em>' + currencyShortName + '</em>';
-        console.log("나라이름은 " + countryName);
-        console.log(currencyLabel);
-
-        // 리스트 항목의 텍스트를 업데이트
-        const listItem = document.querySelector(`#countryNameFor_${currencyCode}`);
-        if (listItem) {
-            listItem.textContent = countryName + ' ' + currencyShortName;
-        }
-
-        updateExchangeRate();
-    }
-
-    // 통화 선택 select box
-    document.querySelectorAll("._trigger").forEach(trigger => {
-        trigger.addEventListener("click", function () {
-            const parent = this.closest("._select_box");
-            const list = parent.querySelector("._list");
-
-            if (list.style.display === "none" || list.style.display === "") {
-                list.style.display = "block";
-            } else {
-                list.style.display = "none";
-            }
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 계산 버튼에 이벤트 리스너 추가
+        document.getElementById("calExchange").addEventListener("click", function() {
+            calculateAndPreviewPayment();
         });
     });
+    // 결제 창 보이기 및 환전금액 계산
+    function calculateAndPreviewPayment() {
+        // Source에서 입력된 금액 및 통화를 가져옵니다.
+        const sourceAmount = parseFloat(document.getElementById("ds_from_money").value);
+        const sourceCurrencyImageSrc = document.querySelector(".nation_usd ._img").src;
+        const sourceCurrencyCode = document.querySelector(".selectbox_label ._text em").textContent;
+        const countryName = currencyNames[sourceCurrencyCode];
+        document.querySelector(".previewPayment").style.display = "block";
+        // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
+        const targetAmount = parseFloat(document.getElementById("ds_to_money").value.replace(/,/g, ""));
 
-    // 페이지 어느 곳이든 클릭했을 때 dropdown을 닫도록 합니다.
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest("._select_box")) {
-            document.querySelectorAll("._list").forEach(list => {
-                list.style.display = "none";
-            });
-        }
-    });
+        // 1% 수수료를 적용
+        const finalAmount = targetAmount * 0.99;
 
+        // previewPayment 영역을 업데이트
+        const previewElem = document.querySelector(".previewPayment .banking-cont table tbody");
 
-    function setCountryNames() {
-        for (const currencyCode in currencyNames) {
-            const element = document.getElementById(`countryNameFor_${currencyCode}`);
-            if (element) {
-                element.textContent = currencyNames[currencyCode];
-            }
+        previewElem.querySelector("tr:nth-child(1) .txt img").src = sourceCurrencyImageSrc;
+        previewElem.querySelector("tr:nth-child(1) .txt em.currency").textContent = countryName + " " + sourceCurrencyCode ;
+        previewElem.querySelector("tr:nth-child(1) .txt em.price").textContent = sourceAmount.toFixed(2);
+        previewElem.querySelector("tr:nth-child(2) .txt em.point").textContent = finalAmount.toLocaleString();
+
+        // TODO: 결제 방식을 동적으로 설정할 수 있는 로직을 추가
+        const selectedOption = document.getElementById("selectAccountForm").value;
+        const paymentMethodText = document.querySelector(".previewPayment .banking-cont table tbody tr:nth-child(3) .txt");
+
+        if (selectedOption === "HANA Wallet") {
+            paymentMethodText.textContent = "Hana Wallet Money Withdrawal";
+        } else {
+            paymentMethodText.textContent = "Hana Bank Account Withdrawal";
         }
     }
 
-    // 페이지 로드 시 실행
-    window.onload = setCountryNames;
+
 </script>
 
 </body>

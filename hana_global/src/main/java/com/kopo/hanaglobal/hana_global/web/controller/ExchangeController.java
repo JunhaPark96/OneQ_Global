@@ -77,4 +77,39 @@ public class ExchangeController {
 
     // myWallet 페이지에서 특정 통화클릭 후 페이지 이동 시
 
+
+    // 원화에서 다른나라 통화로 환전
+    @PostMapping("/walletInfo")
+    public String fromKRWtoFCExchange(
+            @RequestParam String senderAccountNo,
+            @RequestParam String account_password,
+            @RequestParam String foreignCurrency,  // You might need to adjust the type or parameter name based on your frontend
+            @RequestParam String krwAmount,  // You might need to adjust the type or parameter name based on your frontend
+            Model model) {
+
+        // 1. 패스워드 확인
+        if (!walletService.checkPassword(senderAccountNo, account_password)) {
+            model.addAttribute("errorMessage", "Invalid password.");
+            return "/wallet/error";  // You might want to redirect to an error page
+        }
+
+        // 2. 계좌 또는 머니에서 원화 차감
+        if (!accountService.deductAmount(senderAccountNo, krwAmount)) {
+            model.addAttribute("errorMessage", "Insufficient funds in account or wallet.");
+            return "/wallet/error";
+        }
+
+        // 3. wallet에 해당 통화가 없으면 추가, 있으면 충전
+        walletService.addOrUpdateCurrencyToWallet(senderAccountNo, foreignCurrency);
+
+        // 4. 머니에 돈이 있으면 충전, 없으면 연동된 계좌에서 확인 후, 있으면 충전, 없으면 거절.
+        if (!walletService.rechargeWallet(senderAccountNo, krwAmount)) {
+            if (!accountService.deductAmountFromLinkedAccount(senderAccountNo, krwAmount)) {
+                model.addAttribute("errorMessage", "Insufficient funds in linked account.");
+                return "/wallet/error";
+            }
+        }
+
+        return "/wallet/walletInfo";
+    }
 }

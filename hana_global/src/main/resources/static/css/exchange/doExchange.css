@@ -155,11 +155,13 @@ table tbody tr {
     border: 1px solid #ced4da; /* Bootstrap의 input border 색상과 동일 */
     border-radius: 0.25rem; /* Bootstrap의 input border-radius와 동일 */
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 부드러운 전환 효과 */
+    padding-left: 10px;
 }
 
 .sbox .selectbox_label:hover {
     border-color: #adb5bd; /* 호버 시 border 색상 조절 */
 }
+
 
 .ch_wrap_ly {
     border: 1px solid #ced4da;

@@ -29,7 +29,7 @@
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>Currency Exchange</h2>
-            <%--         연결게좌, 비밀번호 입력   --%>
+            <%--         연결계좌, 비밀번호 입력   --%>
             <div class="Authenticate">
                 <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
                     <div class="card-body pe-5">
@@ -130,7 +130,7 @@
                             <div class="selectbox_box _select_box">
                                 <div class="selectbox_label _trigger">
                         <span class="nation_usd _flag">
-                            <img src="./images/walletIcon_USA.png" class="_img" alt="미국 USD" width="1" height="1">
+                            <img src="./images/walletIcon_USD.png" class="_img" alt="미국 USD" width="30px" height="30px">
                         </span>
                                     <label class="_text">미국 <em>USD</em></label>
                                 </div>
@@ -138,11 +138,12 @@
                                     <ul class="ly_cont _l" id="sourceCurrencyList">
                                         <c:forEach var="rate" items="${exchangeList}">
                                             <li class="_i" data-value="${rate.currencyCode}">
-                                                <a onclick="currencySelected('${rate.currencyCode}');" href="javascript:void(0);">
-                                                    <span id="countryNameFor_${rate.currencyCode}"></span> ${rate.currencyCode}
+                                                <a onclick="currencySelected('${rate.currencyCode}', true);" href="javascript:void(0);">
+                                                    <span id="countryNameFor_${rate.currencyCode}">${currencyNames[rate.currencyCode]}</span> <em>${rate.currencyCode}</em>
                                                 </a>
                                             </li>
                                         </c:forEach>
+
                                     </ul>
                                 </div>
                             </div>
@@ -163,8 +164,8 @@
                             <div class="selectbox_box">
                                 <div class="selectbox_label _trigger">
                         <span class="nation_krw _flag">
-                            <img src="https://ssl.pstatic.net/sstatic/keypage/image/direct/img_blank.gif" class="_img"
-                                 alt="대한민국 KRW" width="1" height="1">
+                            <img src="./images/walletIcon_KRW.png" class="_img"
+                                 alt="대한민국 KRW" width="30px" height="25px">
                         </span>
                                     <label for="ds_to_money" class="_text">대한민국 <em>KRW</em></label>
                                 </div>
@@ -172,7 +173,8 @@
                                     <ul class="ly_cont" id="targetCurrencyList">
                                         <c:forEach var="rate" items="${exchangeList}">
                                             <li class="_i" data-value="${rate.currencyCode}">
-                                                <a onclick="currencySelected('${rate.currencyCode}');" href="javascript:void(0);">
+                                                <a onclick="currencySelected('${rate.currencyCode}', false);"
+                                                   href="javascript:void(0);">
                                                     <span id="countryNameFor_${rate.currencyCode}"></span> ${rate.currencyCode}
                                                 </a>
                                             </li>
@@ -183,7 +185,7 @@
                         </div>
                         <div class="input_box _input_box">
                 <span id="drt_to_span" class="input">
-                    <input id="ds_to_money" maxlength="15" type="text" style="ime-mode:disabled;" value="1,327.90"
+                    <input id="ds_to_money"  type="text" style="ime-mode:disabled;" value="1,327.90"
                            class="_input input_text">
                 </span>
                             <span class="recite _recite result">1,327.90 원</span>
@@ -261,7 +263,7 @@
     // 환율 정보 저장
     let exchangeRates = {};
     <c:forEach var="rate" items="${exchangeList}">
-    exchangeRates["${rate.currencyCode}"] = ${rate.usdConversionRate};
+        exchangeRates["${rate.currencyCode}"] = ${rate.usdConversionRate};
     </c:forEach>
 
     // 환율 계산
@@ -285,29 +287,43 @@
         const result = calculateExchange(sourceCurrency, targetCurrency, amount);
         document.getElementById("ds_to_money").value = result.toFixed(2); // 소수점 두 자리로 고정
     }
+    document.getElementById("ds_from_money").addEventListener("input", updateExchangeRate);
 
+    // select box 통화 이미지, 통화코드, 나라 이름 설정
     function currencySelected(currencyCode, isSource) {
         // 해당 통화 코드에 대한 정보를 가져오기
+        console.log("currency Code :" , currencyCode);
         const selectedRate = exchangeRates[currencyCode];
 
-        const imageUrl = `./images/walletIcon_${currencyCode}.png`;
+        const imageUrl = "./images/walletIcon_" + currencyCode + ".png";
+        // console.log(imageUrl);
+        // console.log(currencyCode);
+        // console.log(selectedRate);
         const countryName = currencyNames[currencyCode];
         const currencyShortName = currencyCode;
-
+        console.log("isSource" , isSource);
+        console.log("countryName ", countryName);
         const divId = isSource ? "ds_sel" : "ds_sel2";
         const currencyDiv = document.getElementById(divId);
         const flagImg = currencyDiv.querySelector("._img");
         const currencyLabel = currencyDiv.querySelector("._text");
+        console.log(currencyLabel);
 
         flagImg.src = imageUrl;
         flagImg.alt = countryName + " " + currencyShortName;
-        currencyLabel.innerHTML = `<img src="${imageUrl}" alt="${countryName}"> ${countryName} <em>${currencyShortName}</em>`;
+        currencyLabel.innerHTML = countryName + ' <em>' + currencyShortName + '</em>';
+        console.log("나라이름은 " + countryName);
+        console.log(currencyLabel);
+
+        // 리스트 항목의 텍스트를 업데이트
+        const listItem = document.querySelector(`#countryNameFor_${currencyCode}`);
+        if (listItem) {
+            listItem.textContent = countryName + ' ' + currencyShortName;
+        }
 
         updateExchangeRate();
     }
 
-
-    document.getElementById("ds_from_money").addEventListener("input", updateExchangeRate);
     // 통화 선택 select box
     document.querySelectorAll("._trigger").forEach(trigger => {
         trigger.addEventListener("click", function () {
@@ -331,23 +347,7 @@
         }
     });
 
-    const currencyNames = {
-        "USD": "United States",
-        "KRW": "South Korea",
-        "CAD": "Canada",
-        "GBP": "United Kingdom",
-        "EUR": "Eurozone",
-        "AUD": "Australia",
-        "NZD": "New Zealand",
-        "JPY": "Japan",
-        "CNY": "China",
-        "HKD": "Hong Kong",
-        "INR": "India",
-        "MXN": "Mexico",
-        "BRL": "Brazil",
-        "ZAR": "South Africa",
-        "RUB": "Russia"
-    };
+
     function setCountryNames() {
         for (const currencyCode in currencyNames) {
             const element = document.getElementById(`countryNameFor_${currencyCode}`);

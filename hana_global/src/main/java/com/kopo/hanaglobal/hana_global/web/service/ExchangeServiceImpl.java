@@ -125,30 +125,4 @@ public class ExchangeServiceImpl implements ExchangeService {
         return exchangeRateList;
     }
 
-    // 환전기능 - 계좌금액 차감, 월렛 통화 충전
-    @Transactional
-    public void doExchange(int walletSeq, String currencyCode, String password, Integer amount){
-        // 계좌 금액 차감
-//        Account account = accountRepository.getAccountByAcNo(senderAccountNo);
-//        System.out.println(senderAccountNo.toString());
-//        Integer senderBalance = account.getBalance() - krwAmount;
-
-        // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
-        // 월렛에 돈이 있으면, 월렛에서 돈을 차감
-        // 원화 차감
-        Wallet fromWallet = walletRepository.findWalletByWalletNo(walletSeq);
-        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), amount, "KRW");
-        // 외화 충전
-        Wallet targetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
-        if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면
-            walletRepository.addWalletBalance(targetWallet.getUserSeq(), amount, targetWallet.getCurrencyCode());
-        } else{ // 월렛에 해당 외화가 없으면
-
-        }
-
-
-        // 통화가 이미 존재한다면 있는 것에 update
-        // 통화가 없으면 insert
-    }
-
 }

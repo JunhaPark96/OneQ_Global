@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.repository;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import org.apache.ibatis.annotations.Mapper;
@@ -35,4 +36,6 @@ public interface WalletRepository {
     public void deductWalletBalance(@Param("userSeq") int userSeq,
                                     @Param("withdraw") Integer withdraw,
                                     @Param("currencyCode") String currencyCode);
+
+    public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO);
 }

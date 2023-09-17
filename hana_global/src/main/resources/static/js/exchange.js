@@ -34,10 +34,18 @@ document.addEventListener("DOMContentLoaded", function () {
 //     document.getElementById("btnFclArea").innerText = balance;
 // }
 function changeBalance() {
-    let selectedOption = document.getElementById("selectAccountForm").querySelector("option:checked");
-    let balance = selectedOption.getAttribute("data-balance");
-    document.getElementById("accountBalance").innerHTML = balance ? balance : "";
+    const selectElem = document.getElementById("selectAccountForm");
+    const selectedOption = selectElem.options[selectElem.selectedIndex];
+    const selectedValue = selectedOption.value;
+    const selectedBalance = selectedOption.getAttribute("data-balance");
+
+    // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
+    document.getElementById("selectedAccountInfo").value = selectedValue;
+
+    // 잔액 정보 업데이트
+    document.getElementById("accountBalance").textContent = selectedBalance;
 }
+
 
 // 통화별 나라 매핑
 const currencyNames = {

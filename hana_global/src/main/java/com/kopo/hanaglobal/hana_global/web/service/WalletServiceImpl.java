@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
@@ -73,6 +74,43 @@ public class WalletServiceImpl implements WalletService {
         // 월렛 내역 추가
         addWalletHistory(wallet, amount);
     }
+    // 환전기능 - 계좌금액 차감, 월렛 통화 충전
+    @Transactional
+    public void doExchange(int walletSeq, String currencyCode, String password, Integer amount){
+        Wallet fromWallet = walletRepository.findWalletByWalletNo(walletSeq);
+        Account account = accountRepository.getAccountByAcNo(fromWallet.getAcNo());
+        // 계좌 내역 추가
+        addAccountHistory(account, amount);
+        // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
+
+        // 원화 차감
+        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), amount, "KRW");
+        // 월렛에 돈이 있으면, 월렛에서 돈을 차감
+        // 월렛에 돈이 없으면 계좌 금액 차감
+        deductFromAccount(account, amount);
+
+        // 외화 충전
+        Wallet targetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
+        if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면 update
+            walletRepository.addWalletBalance(targetWallet.getUserSeq(), amount, targetWallet.getCurrencyCode());
+        } else{ // 월렛에 해당 외화가 없으면 insert
+            addWalletNewCur(targetWallet);
+        }
+    }
+
+    private void addWalletNewCur(Wallet wallet) {
+        // 월렛 외화 추가
+        NewWalletCurrencyDTO newWalletCurrencyDTO = new NewWalletCurrencyDTO();
+        newWalletCurrencyDTO.setUserSeq(wallet.getUserSeq());
+        newWalletCurrencyDTO.setAcNo(wallet.getAcNo());
+        newWalletCurrencyDTO.setWalletPw(wallet.getWalletPw());
+        newWalletCurrencyDTO.setBalance(wallet.getBalance());
+        newWalletCurrencyDTO.setCurrencyCode(wallet.getCurrencyCode());
+        newWalletCurrencyDTO.setCurrency(wallet.getCurrency());
+        insertWalletNewCurrency(newWalletCurrencyDTO);
+
+        System.out.println("월렛 외화 추가: " + newWalletCurrencyDTO.toString());
+    }
 
     @Override
     public Wallet findWalletByUserSeqAndCurrencyCode(int userSeq, String currencyCode) {
@@ -117,6 +155,7 @@ public class WalletServiceImpl implements WalletService {
         System.out.println("월렛 충전 후: " + wallet.toString());
     }
 
+
     private void addAccountHistory(Account account, Integer amount) {
         // 계좌 거래 내역 추가
         AccountHistoryResponseDTO accountHistoryDTO = new AccountHistoryResponseDTO();
@@ -152,6 +191,12 @@ public class WalletServiceImpl implements WalletService {
     // 월렛 충전 거래내역 삽입
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO) {
         walletRepository.insertDepositWalletHist(walletHistoryDTO);
+    }
+
+    // 새로운 통화 삽입
+    @Override
+    public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO) {
+        walletRepository.insertWalletNewCurrency(newWalletCurrencyDTO);
     }
 
 

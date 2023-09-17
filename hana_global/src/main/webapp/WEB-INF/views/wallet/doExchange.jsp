@@ -256,7 +256,10 @@
                         <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
                     </div>
                 </div>
-
+                <input type="hidden" name="sourceCurrencyCode" id="sourceCurrencyCode">
+                <input type="hidden" name="sourceAmount" id="hiddenSourceAmount">
+                <input type="hidden" name="finalAmount" id="hiddenFinalAmount">
+                <input type="hidden" id="selectedAccountInfo" name="selectedAccountInfo" value="">
             </form>
         </div>
         <footer>
@@ -277,6 +280,9 @@
         sellRate: ${rate.sellRate}
     };
     </c:forEach>
+    // 컨트롤러에서 제공하는 객체 정보를 JavaScript 변수로 저장
+    let accounts = ${accountList};  // 사용자의 계좌 리스트
+    let walletKRW = ${walletKRW};  // 사용자의 원화 월렛 정보
 </script>
 
 
@@ -297,7 +303,33 @@
         document.getElementById("calExchange").addEventListener("click", function () {
             calculateAndPreviewPayment();
         });
+        // 결제 방식 선택박스에 이벤트 리스너 추가
+        document.getElementById("selectAccountForm").addEventListener("change", function () {
+            updatePaymentMethod();
+        });
     });
+
+    function updatePaymentMethod() {
+        const selectedOption = document.getElementById("selectAccountForm").value;
+        let paymentObject;
+
+        // 사용자가 선택한 결제 방식에 따라 해당 객체 정보를 paymentMethod에 지정
+        if (selectedOption === "HANA Wallet") {
+            paymentObject = walletKRW;
+        } else {
+            // 사용자가 선택한 계좌의 실제 객체 정보를 찾습니다.
+            for(let account of accounts) {
+                if(account.accountNo == selectedOption) {
+                    console.log("선택된 계좌는 ", account)
+                    paymentObject = account;
+                    break;
+                }
+            }
+        }
+
+        // 해당 객체 정보를 paymentMethod에 지정
+        document.getElementById("hiddenPaymentMethod").value = JSON.stringify(paymentObject);
+    }
 
     // 결제 창 보이기 및 환전금액 계산
     function calculateAndPreviewPayment() {
@@ -333,6 +365,11 @@
         } else {
             paymentMethodText.textContent = "Hana Bank Account Withdrawal";
         }
+
+        // 계산된 값을 hidden input 필드에 설정
+        document.getElementById("sourceCurrencyCode").value = sourceCurrencyCode; // 외화
+        document.getElementById("hiddenSourceAmount").value = sourceAmount.toFixed(0); // 외화 금액
+        document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
     }
 
 

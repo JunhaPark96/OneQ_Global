@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface WalletService {
     public void deductWalletBalance(Wallet wallet, Integer amount);
 
     public void addToWallet(Wallet wallet, Integer amount);
+
+    public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO);
 }

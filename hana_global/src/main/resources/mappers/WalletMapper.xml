@@ -69,4 +69,9 @@
         SET balance = balance - #{withdraw}
         WHERE user_seq = #{userSeq} AND currency_code = #{currencyCode}
     </update>
+
+    <insert id="insertWalletNewCurrency" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO">
+        INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW, BALANCE, CURRENCY_CODE, CURRENCY, PRIME_RATE)
+        VALUES (hana_wallet_seq.nextval, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100);
+    </insert>
 </mapper>

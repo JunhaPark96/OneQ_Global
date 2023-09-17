@@ -12,6 +12,8 @@ import java.util.List;
 public interface WalletRepository {
     // 월렛최초생성
     public void createNewWallet(Wallet wallet);
+    // 월렛 번호로 월렛 찾기
+    public Wallet findWalletByWalletNo(int walletSeq);
 
     public List<Wallet> findWalletByMemberId(int memberId);
 
@@ -29,4 +31,8 @@ public interface WalletRepository {
     public void insertDepositWalletHist(WalletHistoryDTO walletHistoryDTO);
 
 //    public Wallet findWalletByCurrencyCode(@Param("userSeq") int userSeq, @Param("currencyCode") String currencyCode);
+    // 월렛 출금
+    public void deductWalletBalance(@Param("userSeq") int userSeq,
+                                    @Param("withdraw") Integer withdraw,
+                                    @Param("currencyCode") String currencyCode);
 }

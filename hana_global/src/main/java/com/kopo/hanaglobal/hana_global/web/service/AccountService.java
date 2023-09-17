@@ -3,6 +3,7 @@ package com.kopo.hanaglobal.hana_global.web.service;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.MemberAccDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
+import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 
 import java.util.List;
 
@@ -20,4 +21,5 @@ public interface AccountService {
     void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount);
 
     void accountTransfer(String fromAcNo, String toAcNo, Integer amount);
+
 }

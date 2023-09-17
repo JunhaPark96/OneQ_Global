@@ -24,6 +24,7 @@ public class WalletServiceImpl implements WalletService {
         this.accountRepository = accountRepository;
     }
 
+
     @Override
     public void createNewWallet(int userSeq, String acNo, String walletPw) {
         Wallet newWallet = new Wallet();
@@ -32,6 +33,12 @@ public class WalletServiceImpl implements WalletService {
         newWallet.setWalletPw(walletPw);
 
         walletRepository.createNewWallet(newWallet);
+    }
+    @Override
+    public Wallet findWalletByWalletNo(int walletSeq){
+        Wallet wallet = walletRepository.findWalletByWalletNo(walletSeq);
+        System.out.println("서비스에서 가져온 월렛은 " + wallet.toString());
+        return wallet;
     }
 
     @Override
@@ -75,14 +82,16 @@ public class WalletServiceImpl implements WalletService {
     }
 
     // 월렛 유효성 체크
-    private Wallet validateWalletAndRetrieve(int userSeq, String password) {
+    @Override
+    public Wallet validateWalletAndRetrieve(int userSeq, String password) {
         Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(userSeq, "KRW");
         if (wallet == null) throw new RuntimeException("지갑을 찾을 수 없습니다.");
         if (!wallet.getWalletPw().equals(password)) throw new RuntimeException("간편비밀번호가 틀렸습니다.");
         return wallet;
     }
     // 계좌 유효성 체크
-    private Account validateAccountAndRetrieve(Wallet wallet, Integer amount) {
+    @Override
+    public Account validateAccountAndRetrieve(Wallet wallet, Integer amount) {
         Account account = accountRepository.getAccountByAcNo(wallet.getAcNo());
         if (account.getBalance() < amount) throw new RuntimeException("계좌 잔액이 부족합니다.");
         return account;
@@ -93,7 +102,15 @@ public class WalletServiceImpl implements WalletService {
         accountRepository.deductAccountBalance(account.getAcNo(), amount);
         System.out.println("계좌 출금 후: " + account.toString());
     }
-    private void addToWallet(Wallet wallet, Integer amount) {
+    @Override
+    public void deductWalletBalance(Wallet wallet, Integer amount){
+        System.out.println("월렛 출금 전: " + wallet.toString());
+        walletRepository.deductWalletBalance(wallet.getUserSeq(), amount, wallet.getCurrencyCode());
+        System.out.println("월렛 출금 후: " + wallet.toString());
+    }
+
+    @Override
+    public void addToWallet(Wallet wallet, Integer amount) {
         System.out.println("월렛 충전 전: " + wallet.toString());
         // 월렛 잔액에 충전
         walletRepository.addWalletBalance(wallet.getUserSeq(), amount, wallet.getCurrencyCode());

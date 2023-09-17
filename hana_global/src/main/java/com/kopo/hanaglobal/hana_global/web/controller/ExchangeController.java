@@ -69,9 +69,9 @@ public class ExchangeController {
         // 최신 환율 불러오기
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
         model.addAttribute("exchangeList", exchangeRateList);
-        for (ExchangeRate e : exchangeRateList){
-            System.out.println(e.toString());
-        }
+//        for (ExchangeRate e : exchangeRateList){
+//            System.out.println(e.toString());
+//        }
         return "/wallet/doExchange";
     }
 
@@ -80,35 +80,42 @@ public class ExchangeController {
 
     // 원화에서 다른나라 통화로 환전
     @PostMapping("/walletInfo")
-    public String fromKRWtoFCExchange(
-            @RequestParam String senderAccountNo,
+    public String fromKRWtoFCExchange(@ModelAttribute("currentMember") Member member,
+            @RequestParam String senderWalletNo,
             @RequestParam String account_password,
-            @RequestParam String foreignCurrency,  // You might need to adjust the type or parameter name based on your frontend
-            @RequestParam String krwAmount,  // You might need to adjust the type or parameter name based on your frontend
+            @RequestParam String foreignCurrency,
+            @RequestParam Integer krwAmount,
             Model model) {
 
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+
+        Account account = walletService.validateAccountAndRetrieve(wallet, krwAmount);
+
+
+
+
         // 1. 패스워드 확인
-        if (!walletService.checkPassword(senderAccountNo, account_password)) {
-            model.addAttribute("errorMessage", "Invalid password.");
-            return "/wallet/error";  // You might want to redirect to an error page
-        }
+//        if (!walletService.checkPassword(senderAccountNo, account_password)) {
+//            model.addAttribute("errorMessage", "Invalid password.");
+//            return "/wallet/error";  // You might want to redirect to an error page
+//        }
 
         // 2. 계좌 또는 머니에서 원화 차감
-        if (!accountService.deductAmount(senderAccountNo, krwAmount)) {
-            model.addAttribute("errorMessage", "Insufficient funds in account or wallet.");
-            return "/wallet/error";
-        }
-
-        // 3. wallet에 해당 통화가 없으면 추가, 있으면 충전
-        walletService.addOrUpdateCurrencyToWallet(senderAccountNo, foreignCurrency);
-
-        // 4. 머니에 돈이 있으면 충전, 없으면 연동된 계좌에서 확인 후, 있으면 충전, 없으면 거절.
-        if (!walletService.rechargeWallet(senderAccountNo, krwAmount)) {
-            if (!accountService.deductAmountFromLinkedAccount(senderAccountNo, krwAmount)) {
-                model.addAttribute("errorMessage", "Insufficient funds in linked account.");
-                return "/wallet/error";
-            }
-        }
+//        if (!accountService.deductAmount(senderAccountNo, krwAmount)) {
+//            model.addAttribute("errorMessage", "Insufficient funds in account or wallet.");
+//            return "/wallet/error";
+//        }
+//
+//        // 3. wallet에 해당 통화가 없으면 추가, 있으면 충전
+//        walletService.addOrUpdateCurrencyToWallet(senderAccountNo, foreignCurrency);
+//
+//        // 4. 머니에 돈이 있으면 충전, 없으면 연동된 계좌에서 확인 후, 있으면 충전, 없으면 거절.
+//        if (!walletService.rechargeWallet(senderAccountNo, krwAmount)) {
+//            if (!accountService.deductAmountFromLinkedAccount(senderAccountNo, krwAmount)) {
+//                model.addAttribute("errorMessage", "Insufficient funds in linked account.");
+//                return "/wallet/error";
+//            }
+//        }
 
         return "/wallet/walletInfo";
     }

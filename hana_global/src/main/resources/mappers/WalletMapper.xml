@@ -9,6 +9,13 @@
         VALUES (HANA_WALLET_SEQ.NEXTVAL,  #{userSeq}, #{acNo}, #{walletPw})
     </insert>
 
+<!--    월렛번호로 월렛 찾기-->
+    <select id="findWalletByWalletNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet"
+            parameterType="int">
+        SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
+        FROM HANA_WALLET where wallet_seq = #{walletSeq}
+    </select>
+
     <select id="findWalletByMemberId" resultType="com.kopo.hanaglobal.hana_global.web.entity.Wallet"
             parameterType="int">
         SELECT wallet_seq as walletSeq, user_seq as userSeq, ac_no as acNo, wallet_pw as walletPw, balance, deposit, CURRENCY_CODE as currencyCode, currency, prime_rate as primeRate
@@ -57,4 +64,9 @@
         WHERE user_seq = #{userSeq} AND currency_code = #{currencyCode}
     </update>
 
+    <update id="deductWalletBalance">
+        UPDATE HANA_WALLET
+        SET balance = balance - #{withdraw}
+        WHERE user_seq = #{userSeq} AND currency_code = #{currencyCode}
+    </update>
 </mapper>

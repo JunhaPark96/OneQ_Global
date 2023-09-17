@@ -3,10 +3,15 @@ package com.kopo.hanaglobal.hana_global.web.service;
 import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
+import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
+import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.ExchangeRepository;
+import com.kopo.hanaglobal.hana_global.web.repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,10 +20,15 @@ import java.util.List;
 @Service
 public class ExchangeServiceImpl implements ExchangeService {
     private ExchangeRepository exchangeRepository;
+    private AccountRepository accountRepository;
+    private WalletRepository walletRepository;
+
 
     @Autowired
-    public ExchangeServiceImpl(ExchangeRepository exchangeRepository) {
+    public ExchangeServiceImpl(ExchangeRepository exchangeRepository, AccountRepository accountRepository, WalletRepository walletRepository) {
         this.exchangeRepository = exchangeRepository;
+        this.accountRepository = accountRepository;
+        this.walletRepository = walletRepository;
     }
 
     @Override
@@ -106,12 +116,39 @@ public class ExchangeServiceImpl implements ExchangeService {
         return exchangeRate;
     }
 
+    @Override
     public List<ExchangeRate> getExchangeRate(){
         List<ExchangeRate> exchangeRateList = exchangeRepository.getExchangeRate();
 //        for (ExchangeRate e : exchangeRateList){
 //            System.out.println("오늘의 환율은: " + e.toString());
 //        }
         return exchangeRateList;
+    }
+
+    // 환전기능 - 계좌금액 차감, 월렛 통화 충전
+    @Transactional
+    public void doExchange(int walletSeq, String currencyCode, String password, Integer amount){
+        // 계좌 금액 차감
+//        Account account = accountRepository.getAccountByAcNo(senderAccountNo);
+//        System.out.println(senderAccountNo.toString());
+//        Integer senderBalance = account.getBalance() - krwAmount;
+
+        // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
+        // 월렛에 돈이 있으면, 월렛에서 돈을 차감
+        // 원화 차감
+        Wallet fromWallet = walletRepository.findWalletByWalletNo(walletSeq);
+        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), amount, "KRW");
+        // 외화 충전
+        Wallet targetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
+        if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면
+            walletRepository.addWalletBalance(targetWallet.getUserSeq(), amount, targetWallet.getCurrencyCode());
+        } else{ // 월렛에 해당 외화가 없으면
+
+        }
+
+
+        // 통화가 이미 존재한다면 있는 것에 update
+        // 통화가 없으면 insert
     }
 
 }

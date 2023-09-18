@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
@@ -76,7 +77,6 @@ public class WalletServiceImpl implements WalletService {
         addWalletHistory(wallet, amount);
     }
     // 환전기능 - 계좌금액 차감, 월렛 통화 충전
-    @Transactional
     @Override
     public void doExchange(String walletSeqStr, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName){
         int walletSeq;
@@ -111,21 +111,32 @@ public class WalletServiceImpl implements WalletService {
     }
     public void processForeignAddition(Wallet fromWallet, Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {
         // 외화 충전
-        if (targetWallet == null) { // 월렛에 해당 외화가 있으면 update
+        if (targetWallet == null) { // 월렛에 해당 외화가 없으면 insert
             addWalletNewCur(fromWallet, currencyCode, sourceCurrencyName, foreignAmount);
-        } else if (targetWallet.getCurrencyCode() != null) { // 월렛에 해당 외화가 없으면 insert
+        } else if (targetWallet.getCurrencyCode() != null) { // 월렛에 해당 외화가 있으면 update
             walletRepository.addWalletBalance(targetWallet.getUserSeq(), foreignAmount, targetWallet.getCurrencyCode());
         }
         // 외화 입금에 대한 내역
+//        WalletHistoryDTO walletDepositDTO = new WalletHistoryDTO();
+//        walletDepositDTO.setWalletSeq(targetWallet.getWalletSeq());
+//        walletDepositDTO.setBalance(targetWallet.getBalance().add(new BigDecimal(foreignAmount)));
+//        walletDepositDTO.setTransactionAmount(new BigDecimal(foreignAmount));
+//        walletDepositDTO.setTransactionType("E"); // E는 환전를 의미
+//        walletDepositDTO.setDepositCur(currencyCode);
+//        walletDepositDTO.setDepositName(sourceCurrencyName);
+        WalletHistoryDTO walletDepositDTO = createDepositDTO(targetWallet, currencyCode, foreignAmount, sourceCurrencyName);
+        walletRepository.insertDepositWalletHist(walletDepositDTO);
+        System.out.println("환전 입금 내역 추가: " + walletDepositDTO.toString());
+    }
+    public WalletHistoryDTO createDepositDTO(Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {
         WalletHistoryDTO walletDepositDTO = new WalletHistoryDTO();
         walletDepositDTO.setWalletSeq(targetWallet.getWalletSeq());
         walletDepositDTO.setBalance(targetWallet.getBalance().add(new BigDecimal(foreignAmount)));
         walletDepositDTO.setTransactionAmount(new BigDecimal(foreignAmount));
-        walletDepositDTO.setTransactionType("E"); // E는 환전를 의미
+        walletDepositDTO.setTransactionType("E"); // E는 환전을 의미
         walletDepositDTO.setDepositCur(currencyCode);
         walletDepositDTO.setDepositName(sourceCurrencyName);
-        walletRepository.insertDepositWalletHist(walletDepositDTO);
-        System.out.println("환전 입금 내역 추가: " + walletDepositDTO.toString());
+        return walletDepositDTO;
     }
 
     public void processKrwDeduction(Wallet fromWallet, Account account, Integer krwAmount) {
@@ -142,6 +153,18 @@ public class WalletServiceImpl implements WalletService {
         }
         walletRepository.deductWalletBalance(fromWallet.getUserSeq(), krwAmount, "KRW");
 
+//        WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
+//        walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
+//        walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
+//        walletWithdrawDTO.setTransactionAmount(new BigDecimal(krwAmount));
+//        walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
+//        walletWithdrawDTO.setWithdrawCur("KRW");
+//        walletWithdrawDTO.setWithdrawName("won");
+        WalletHistoryDTO walletWithdrawDTO = createWithdrawDTO(fromWallet, krwAmount);
+        walletRepository.insertWithdrawWalletHist(walletWithdrawDTO);
+        System.out.println("환전 출금 내역 추가: " + walletWithdrawDTO.toString());
+    }
+    public WalletHistoryDTO createWithdrawDTO(Wallet fromWallet, Integer krwAmount) {
         WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
         walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
         walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
@@ -149,8 +172,7 @@ public class WalletServiceImpl implements WalletService {
         walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
         walletWithdrawDTO.setWithdrawCur("KRW");
         walletWithdrawDTO.setWithdrawName("won");
-        walletRepository.insertWithdrawWalletHist(walletWithdrawDTO);
-        System.out.println("환전 출금 내역 추가: " + walletWithdrawDTO.toString());
+        return walletWithdrawDTO;
     }
 
     private void addWalletNewCur(Wallet wallet, String currencyCode, String sourceCurrencyName, Integer foreignAmount) {
@@ -266,5 +288,10 @@ public class WalletServiceImpl implements WalletService {
         walletRepository.insertWalletNewCurrency(newWalletCurrencyDTO);
     }
 
-
+    // 자동환전 테이블 삽입
+    @Override
+    public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO){
+        walletRepository.insertAutoExchange(autoExchangeDTO);
+        System.out.println("자동환전 삽입은 " + autoExchangeDTO.toString());
+    }
 }

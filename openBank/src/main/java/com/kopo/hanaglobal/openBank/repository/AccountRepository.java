@@ -14,6 +14,6 @@ public interface AccountRepository {
     // 계좌번호로 멤버 이름 찾기
     public String getMemberName(String accountNumber);
     // 오픈뱅킹 등록
-    void updateRegisterYn(String accountNumber)
+    void updateRegisterYn(String accountNumber);
 
 }

@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- format 태그 라이브러리--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -56,8 +58,11 @@
                             <button class="loadBtn" onclick="openModal(${walletList[0].walletSeq})">Load</button>
                         </div>
                         <div class="cardElem1" style="height: 56%;">
-                            <a href="${pageContext.request.contextPath}/accountInfo"> ${walletList[0].balance}
-                                &nbsp; ${walletList[0].currency} </a>
+                            <a href="${pageContext.request.contextPath}/accountInfo">
+                                <fmt:formatNumber value="${walletList[0].balance}" type="number" pattern="#,##0"/>
+                                &nbsp; ${walletList[0].currency}
+                            </a>
+
                         </div>
                         <div class="cardElem3">
                             <div class="btn_p">
@@ -79,8 +84,11 @@
                             <h4>Hana Wallet</h4>
                         </div>
                         <div class="cardElem1">
-                            <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
-                                &nbsp; ${wallet.currency} </a>
+                            <a href="${pageContext.request.contextPath}/accountInfo">
+                                <fmt:formatNumber value="${wallet.balance}" type="number" pattern="#,##0"/>
+                                &nbsp; ${wallet.currency}
+                            </a>
+
                         </div>
                         <div class="cardElem2">
                             <a href="${pageContext.request.contextPath}/recurExchange?currency=${wallet.currencyCode}"> recurring exchange ></a>
@@ -104,14 +112,14 @@
     <div id="myModal" class="modalContainer">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="authenticateHeader">충전하기</div>
+                <div class="authenticateHeader">Load Wallet</div>
                 <span class="close" onclick="closeModal()">&times;</span>
             </div>
 
             <div class="modal-main">
                 <div class="mdiptWrap">
                     <div class="input-group">
-                        <label>금액 </label>
+                        <label>Amount </label>
                     </div>
                     <div>
                         <input type="text" class="" maxlength="20"
@@ -136,10 +144,10 @@
                                 onclick="selectAmount('1000000')">1,000,000
                         </button>
                     </div>
-                    <h6>최소 1000원 ~ 최대 2000원</h6>
+                    <h6>Minimum 1000 won ~ Maximum 1,000,000 won</h6>
 
                     <div class="input-group">
-                        <label>간편 비밀번호 </label>
+                        <label>Simple Password </label>
                     </div>
                     <div>
                         <input type="password" class="" maxlength="6"

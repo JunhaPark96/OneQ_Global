@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.repository;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
@@ -41,5 +42,5 @@ public interface WalletRepository {
 
     public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO);
 
-
+    public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO);
 }

@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -125,6 +127,13 @@ public class ExchangeController {
         // 월렛 페이지로 이동
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         model.addAttribute("walletList", walletList);
+        return "/wallet/walletInfo";
+    }
+
+    @PostMapping("/autoExchange")
+    public String handleAutoExchange(@ModelAttribute("currentMember") Member member, @ModelAttribute AutoExchangeDTO autoExchangeDTO){
+        walletService.insertAutoExchange(autoExchangeDTO);
+
         return "/wallet/walletInfo";
     }
 }

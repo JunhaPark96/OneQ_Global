@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- format 태그 라이브러리--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -44,7 +46,8 @@
                         <button class="loadBtn">Load</button>
                     </div>
                     <div class="cardElem1">
-                        <a href="${pageContext.request.contextPath}/accountInfo"> ${selectedWallet.balance}
+                        <a href="${pageContext.request.contextPath}/accountInfo">
+                            <fmt:formatNumber value="${selectedWallet.balance}" type="number" pattern="#,##0"/>
                             &nbsp; ${selectedWallet.currency} </a>
                     </div>
                     <div class="cardElem2">
@@ -79,7 +82,8 @@
             <div class="showBalance">
                 <div class="balanceInfo col pt-1">
                     <div class="walletBalance">
-                        Hana Wallet Balance (${walletKRW.currency}) ${walletKRW.balance}
+                        Hana Wallet Balance (${walletKRW.currency})
+                        <fmt:formatNumber value="${walletKRW.balance}" type="number" pattern="#,##0"/>
                     </div>
                     <div class="usdBalance">
                         USD Converted Balance
@@ -88,27 +92,8 @@
                         option: 해당국적의 환율로도 보여주기
                     </div>
                 </div>
-                <%--                <div class="account">--%>
-                <%--                    <div class="accountWrap">--%>
-                <%--                        <div class="account-header">--%>
-                <%--                            Linked Accounts--%>
-                <%--                        </div>--%>
-                <%--                        <div class="account-content">--%>
-                <%--                            <h4>Hana Bank</h4>--%>
-                <%--                        </div>--%>
-                <%--                        <div class="account-footer">--%>
-                <%--                            <div class="accountNo">--%>
-                <%--                                ${selectedWallet.acNo}--%>
-                <%--                            </div>--%>
-                <%--                                            <div class="locRight">--%>
-                <%--                                                Modify--%>
-                <%--                                            </div>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-
+<%--                계좌 구역 시작--%>
                 <div class="row justify-content-start">
-
                     <div class="col-md-4 gradient-custom text-center text-black">
                     </div>
 
@@ -128,7 +113,7 @@
                                 <div class="grid-left">
                                     <div class="row" style="height: 50px">
                                         <div class="col d-flex">
-                                            <h6>예금주명 <br>
+                                            <h6>Depositor name <br>
                                                 <span class="text-bold"> Jane Smith</span>
                                             </h6>
                                         </div>
@@ -137,7 +122,7 @@
                                 </div>
                                 <div class="col grid-right">
                                     <div class="col">
-                                        <h6 class="text-start">계좌번호</h6>
+                                        <h6 class="text-start">Account Number</h6>
                                         <p class="text-muted">${selectedWallet.acNo}</p>
                                         <div class="locRight">
                                             Modify
@@ -150,9 +135,11 @@
                 </div>
 
             </div>
+            <%--                계좌 구역 끝--%>
+
             <%--         사용자에게 제공하는 정보 끝   --%>
             <div class="col pt-1 settingRecurring">
-                <form>
+                <form action="${pageContext.request.contextPath}/autoExchange" method="post">
                     <table class="table table-hover mb-3 border-light">
                         <%--                        <tbody>--%>
                         <%--                        <tr>--%>
@@ -167,7 +154,7 @@
                                 <div class="btnArea text-start align-middle">
                                     <%--                                    <input type="text" name="endDate" id="endDate"--%>
                                     <%--                                           placeholder="종료 날짜">--%>
-                                    <input type="text" id="endDate" name="endDate" readonly>
+                                    <input type="text" id="endDate" name="exchangeDate" readonly>
                                     <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                          alt="Start Date Calendar Tab" onclick="openCalendar('endDate')">
                                 </div>
@@ -178,7 +165,7 @@
                             <th scope="row" class="text-start align-middle">Load Amount</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
-                                    <input type="text" name="targetAmount" id="targetAmount"
+                                    <input type="text" name="exchangeAmount" id="targetAmount"
                                            placeholder="Enter Amount">
                                 </div>
                             </td>
@@ -209,7 +196,7 @@
                                                                onkeyup="copyCustomValueToHidden()">
                                     </div>
                                     <!-- Hidden Inputs -->
-                                    <input type="hidden" id="selectedRate" name="selectedRate" value="">
+                                    <input type="hidden" id="selectedRate" name="lowerBound" value="">
                                 </div>
                             </td>
                         </tr>
@@ -218,7 +205,10 @@
                     <br/>
                     <div class="btnArea text-start align-middle">
                         <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic
-                            charging if it is lower or equal to the set exchange rate</p>
+                            charging if it is lower or equal to the set exchange rate<br/>
+                            자동환전이 결제될 시, 수수료는 1%<br/>
+                            목표환율에 도달하지 못하면 마지막 날짜에 자동결제 됩니다
+                        </p>
                     </div>
 
                     <div class="btn-area mt15 mb30">
@@ -228,6 +218,8 @@
                         <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
                         <button type="submit" class="" id="buttonConfirm">Confirm </button></span>
                     </div>
+                    <input type="hidden" name="walletSeq" value="${selectedWallet.walletSeq}">
+                    <input type="hidden" name="targetCurCode" value="${selectedWallet.currencyCode}">
                 </form>
             </div>
 
@@ -264,22 +256,34 @@
         });
     });
 
-    //     목표 환율 직접입력 선택 시
+    // 목표환율 input에 입력
     function updateHiddenInput() {
-        let select = document.getElementById("rateSelect");
-        let selectedValue = select.options[select.selectedIndex].value;
+        let selectedValue = document.getElementById('rateSelect').value;
+        let hiddenInput = document.getElementById('selectedRate');
 
         if (selectedValue === "custom") {
-            // 직접입력 선택 시 별도의 입력 필드 보여주기
-            document.getElementById("customInputContainer").style.display = "block";
+            hiddenInput.value = document.getElementById('customRateInput').value;
+            document.getElementById('customInputContainer').style.display = 'block';
         } else {
-            document.getElementById("customInputContainer").style.display = "none";
+            let selectedText = document.getElementById('rateSelect').selectedOptions[0].textContent;
+            let matchedRate = selectedText.match(/\d+(\.\d{1,2})?/); // 숫자와 소수점을 찾습니다.
+
+            if (matchedRate && matchedRate[0]) {
+                hiddenInput.value = matchedRate[0];
+            }
+
+            document.getElementById('customInputContainer').style.display = 'none';
         }
     }
 
     function copyCustomValueToHidden() {
-        document.getElementById("selectedRate").value = document.getElementById("customRateInput").value;
+        let customRate = document.getElementById('customRateInput').value;
+        document.getElementById('selectedRate').value = customRate;
     }
+    $(document).ready(function() {
+        updateHiddenInput(); // 페이지 로딩 시 함수 호출하여 초기값 설정
+    });
+
 </script>
 </body>
 </html>

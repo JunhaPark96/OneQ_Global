@@ -45,14 +45,14 @@
 
                                             <optgroup label="Accounts">
                                                 <c:forEach items="${accountList}" var="account">
-                                                    <option value="${account.acNo}" data-balance="${account.balance}">
+                                                    <option value="${account.acNo}" data-account="${account}" data-balance="${account.balance}">
                                                             ${account.acNo}
                                                     </option>
                                                 </c:forEach>
                                             </optgroup>
 
                                             <optgroup label="Hana Wallet">
-                                                <option value="HANA Wallet" data-balance="${walletKRW.balance}">
+                                                <option value="HANA Wallet" data-wallet="${walletKRW}" data-balance="${walletKRW.balance}">
                                                     KRW Wallet
                                                 </option>
                                             </optgroup>
@@ -257,9 +257,10 @@
                     </div>
                 </div>
                 <input type="hidden" name="sourceCurrencyCode" id="sourceCurrencyCode">
-                <input type="hidden" name="sourceAmount" id="hiddenSourceAmount">
-                <input type="hidden" name="finalAmount" id="hiddenFinalAmount">
-                <input type="hidden" id="selectedAccountInfo" name="selectedAccountInfo" value="">
+                <input type="hidden" name="foreignAmount" id="hiddenSourceAmount">
+                <input type="hidden" name="krwAmount" id="hiddenFinalAmount">
+                <input type="hidden" name="selectedAccountInfo" id="selectedAccountInfo">
+
             </form>
         </div>
         <footer>
@@ -267,7 +268,6 @@
     </div>
 </div>
 <script>
-
     // 환율 정보 저장
     let exchangeRates = {};
     <c:forEach var="rate" items="${exchangeList}">
@@ -281,12 +281,13 @@
     };
     </c:forEach>
     // 컨트롤러에서 제공하는 객체 정보를 JavaScript 변수로 저장
-    let accounts = ${accountList};  // 사용자의 계좌 리스트
-    let walletKRW = ${walletKRW};  // 사용자의 원화 월렛 정보
+    let accounts = JSON.parse('${accountList}');
+    let walletKRW = JSON.parse('${walletKRW}');
+    console.log("선택된 계좌는", accounts[0].accountNo); // 배열이므로 첫 번째 아이템을 참조
+    console.log("선택된 월렛은", walletKRW.walletSeq); // walletSeq가 해당 월렛 객체의 속성일 경우
 </script>
 
 
-<script src="./js/exchange.js"></script>
 <script>
     // 페이지 로딩이 완료되었을 때 실행될 함수
     document.addEventListener("DOMContentLoaded", function () {
@@ -297,6 +298,9 @@
 
 </script>
 
+<script src="./js/exchange.js"></script>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // 계산 버튼에 이벤트 리스너 추가
@@ -304,32 +308,28 @@
             calculateAndPreviewPayment();
         });
         // 결제 방식 선택박스에 이벤트 리스너 추가
-        document.getElementById("selectAccountForm").addEventListener("change", function () {
-            updatePaymentMethod();
-        });
+        // document.getElementById("selectAccountForm").addEventListener("change", function () {
+        //     updatePaymentMethod();
+        // });
     });
 
-    function updatePaymentMethod() {
-        const selectedOption = document.getElementById("selectAccountForm").value;
-        let paymentObject;
+    function getSelectedAccountObject() {
+        const selectedOption = document.querySelector("#selectAccountForm option:checked");
 
-        // 사용자가 선택한 결제 방식에 따라 해당 객체 정보를 paymentMethod에 지정
-        if (selectedOption === "HANA Wallet") {
-            paymentObject = walletKRW;
+        if (selectedOption.value === "HANA Wallet") {
+            return JSON.parse(selectedOption.dataset.wallet);
         } else {
-            // 사용자가 선택한 계좌의 실제 객체 정보를 찾습니다.
-            for(let account of accounts) {
-                if(account.accountNo == selectedOption) {
-                    console.log("선택된 계좌는 ", account)
-                    paymentObject = account;
-                    break;
-                }
-            }
+            return JSON.parse(selectedOption.dataset.account);
         }
-
-        // 해당 객체 정보를 paymentMethod에 지정
-        document.getElementById("hiddenPaymentMethod").value = JSON.stringify(paymentObject);
     }
+
+
+    // 함수 테스트
+    document.addEventListener("DOMContentLoaded", function() {
+        const selectedAccount = getSelectedAccountObject();
+        console.log(selectedAccount);
+    });
+
 
     // 결제 창 보이기 및 환전금액 계산
     function calculateAndPreviewPayment() {
@@ -372,8 +372,27 @@
         document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
     }
 
+    function changeBalance() {
+        const selectElem = document.getElementById("selectAccountForm");
+        const selectedOption = selectElem.options[selectElem.selectedIndex];
+        const selectedValue = selectedOption.value;
+        const selectedBalance = selectedOption.getAttribute("data-balance");
+
+        // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
+        document.getElementById("selectedAccountInfo").value = selectedValue;
+
+        // 잔액 정보 업데이트
+        document.getElementById("accountBalance").textContent = selectedBalance;
+    }
+
+    console.log(document.getElementById("sourceCurrencyCode").value);
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log(document.getElementById("selectedAccountInfo").value);
+        console.log(document.getElementById("hiddenSourceAmount").value);
+        console.log(document.getElementById("hiddenFinalAmount").value);
+        console.log(document.getElementById("selectedAccountInfo").value);
+    });
 
 </script>
-
 </body>
 </html>

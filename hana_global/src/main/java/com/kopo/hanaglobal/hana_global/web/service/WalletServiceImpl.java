@@ -76,23 +76,29 @@ public class WalletServiceImpl implements WalletService {
     }
     // 환전기능 - 계좌금액 차감, 월렛 통화 충전
     @Transactional
-    public void doExchange(int walletSeq, String currencyCode, String password, Integer amount){
+    public void doExchange(int walletSeq, String currencyCode, String password, Integer krwAmount, Integer foreignAmount){
         Wallet fromWallet = walletRepository.findWalletByWalletNo(walletSeq);
         Account account = accountRepository.getAccountByAcNo(fromWallet.getAcNo());
         // 계좌 내역 추가
-        addAccountHistory(account, amount);
         // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
 
         // 원화 차감
-        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), amount, "KRW");
+        if (fromWallet.getBalance().compareTo(BigDecimal.valueOf(krwAmount)) < 0) {
+            // BigDecimal 값에서 Integer 값을 뺄셈하기
+            BigDecimal shortageBigDecimal = BigDecimal.valueOf(krwAmount).subtract(fromWallet.getBalance());
+            // 계좌에서 차감 후 월렛에 돈을 충전
+            int shortage = shortageBigDecimal.intValue();
+            deductFromAccount(account, shortage);
+            addAccountHistory(account, krwAmount);
+            // 월렛에 충전
+            walletRepository.addWalletBalance(fromWallet.getUserSeq(), shortage, "KRW");
+        }
         // 월렛에 돈이 있으면, 월렛에서 돈을 차감
-        // 월렛에 돈이 없으면 계좌 금액 차감
-        deductFromAccount(account, amount);
-
+        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), krwAmount, "KRW");
         // 외화 충전
         Wallet targetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
         if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면 update
-            walletRepository.addWalletBalance(targetWallet.getUserSeq(), amount, targetWallet.getCurrencyCode());
+            walletRepository.addWalletBalance(targetWallet.getUserSeq(), foreignAmount, targetWallet.getCurrencyCode());
         } else{ // 월렛에 해당 외화가 없으면 insert
             addWalletNewCur(targetWallet);
         }

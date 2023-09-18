@@ -6,7 +6,6 @@ function openCalendar(id) {
     });
     picker.show();
 }
-
 document.addEventListener("DOMContentLoaded", function () {
     const currencies = [
         "AED", "AUD", "BDT", "BHD", "BND", "BRL", "CAD", "CHF", "CLP", "CNY",
@@ -25,27 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
         selectElement.appendChild(option);
     });
 });
-
-// 잔액 확인
-// function changeBalance() {
-//     let select = document.getElementById("selectAccountForm");
-//     let selectedOption = select.options[select.selectedIndex];
-//     let balance = selectedOption.getAttribute("data-balance");
-//     document.getElementById("btnFclArea").innerText = balance;
-// }
-function changeBalance() {
-    const selectElem = document.getElementById("selectAccountForm");
-    const selectedOption = selectElem.options[selectElem.selectedIndex];
-    const selectedValue = selectedOption.value;
-    const selectedBalance = selectedOption.getAttribute("data-balance");
-
-    // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
-    document.getElementById("selectedAccountInfo").value = selectedValue;
-
-    // 잔액 정보 업데이트
-    document.getElementById("accountBalance").textContent = selectedBalance;
-}
-
 
 // 통화별 나라 매핑
 const currencyNames = {
@@ -148,7 +126,40 @@ const currencyUnits = {
     "USD": "dollar",
     "VND": "dong"
 };
+// select box 통화 이미지, 통화코드, 나라 이름 설정
+function currencySelected(currencyCode, isSource) {
+    // 해당 통화 코드에 대한 정보를 가져오기
+    console.log("currency Code :", currencyCode);
+    const selectedRate = exchangeRates[currencyCode];
+    const imageUrl = "./images/walletIcon_" + currencyCode + ".png";
+    const countryName = currencyNames[currencyCode];
+    const currencyShortName = currencyCode;
 
+    const divId = isSource ? "ds_sel" : "ds_sel2";
+    const currencyDiv = document.getElementById(divId);
+    const flagImg = currencyDiv.querySelector("._img");
+    const currencyLabel = currencyDiv.querySelector("._text");
+
+    flagImg.src = imageUrl;
+    flagImg.alt = countryName + " " + currencyShortName;
+    currencyLabel.innerHTML = countryName + ' <em>' + currencyShortName + '</em>';
+
+    if (isSource) {
+        sourceCurrency = currencyCode;
+    } else {
+        targetCurrency = currencyCode;
+    }
+
+    console.log("환율", selectedRate);
+    console.log("송금보낼때", selectedRate.remittance);
+    // 추가: 환율 정보 테이블 업데이트
+    document.getElementById("remittance").innerText = selectedRate.remittance.toFixed(2);
+    document.getElementById("receiving").innerText = selectedRate.receiving.toFixed(2);
+    document.getElementById("buying").innerText = selectedRate.buyRate.toFixed(2);
+    document.getElementById("selling").innerText = selectedRate.sellRate.toFixed(2);
+    updateRecite(isSource);
+    updateExchangeRate();
+}
 
 // 환율 변동률 계산
 function getExchangeRateBetween(sourceCurrency, targetCurrency) {
@@ -202,41 +213,12 @@ document.getElementById("ds_from_money").addEventListener("input", updateExchang
 document.getElementById("ds_from_money").addEventListener("input", function() {
     updateRecite(true);
 });
-// select box 통화 이미지, 통화코드, 나라 이름 설정
-function currencySelected(currencyCode, isSource) {
-    // 해당 통화 코드에 대한 정보를 가져오기
-    console.log("currency Code :", currencyCode);
-    const selectedRate = exchangeRates[currencyCode];
-    const imageUrl = "./images/walletIcon_" + currencyCode + ".png";
-    const countryName = currencyNames[currencyCode];
-    const currencyShortName = currencyCode;
 
-    const divId = isSource ? "ds_sel" : "ds_sel2";
-    const currencyDiv = document.getElementById(divId);
-    const flagImg = currencyDiv.querySelector("._img");
-    const currencyLabel = currencyDiv.querySelector("._text");
-
-    flagImg.src = imageUrl;
-    flagImg.alt = countryName + " " + currencyShortName;
-    currencyLabel.innerHTML = countryName + ' <em>' + currencyShortName + '</em>';
-
-    if (isSource) {
-        sourceCurrency = currencyCode;
-    } else {
-        targetCurrency = currencyCode;
-    }
-
-    console.log("환율", selectedRate);
-    console.log("송금보낼때", selectedRate.remittance);
-    // 추가: 환율 정보 테이블 업데이트
-    document.getElementById("remittance").innerText = selectedRate.remittance.toFixed(2);
-    document.getElementById("receiving").innerText = selectedRate.receiving.toFixed(2);
-    document.getElementById("buying").innerText = selectedRate.buyRate.toFixed(2);
-    document.getElementById("selling").innerText = selectedRate.sellRate.toFixed(2);
-    updateRecite(isSource);
+// 페이지 로드 시 실행
+window.onload = function () {
+    setCountryNames();
     updateExchangeRate();
-}
-
+};
 
 // 통화 선택 select box
 document.querySelectorAll("._trigger").forEach(trigger => {
@@ -272,7 +254,6 @@ function setCountryNames() {
 }
 
 // 페이지 로드 시 실행
-// window.onload = setCountryNames;
 window.onload = function () {
     setCountryNames();
     updateExchangeRate();
@@ -294,6 +275,16 @@ function updateRecite(isSource) {
         currencyName = currencyUnits[targetCurrencyCode];
     }
 
-    const reciteElementId = isSource ? "sourceCurrencyName" : "targetCurrencyName";
-    document.getElementById(reciteElementId).innerText = new Intl.NumberFormat().format(displayValue.toFixed(5)) + " " + currencyName;
+    // const reciteElementId = isSource ? "sourceCurrencyName" : "targetCurrencyName";
+    // document.getElementById(reciteElementId).innerText = new Intl.NumberFormat().format(displayValue.toFixed(5)) + " " + currencyName;
 }
+
+
+
+// 잔액 확인
+// function changeBalance() {
+//     let select = document.getElementById("selectAccountForm");
+//     let selectedOption = select.options[select.selectedIndex];
+//     let balance = selectedOption.getAttribute("data-balance");
+//     document.getElementById("btnFclArea").innerText = balance;
+// }

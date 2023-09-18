@@ -270,13 +270,14 @@ function updateRecite(isSource) {
     if (isSource) {
         displayValue = inputValue;
         currencyName = currencyUnits[sourceCurrencyCode];
+        document.getElementById("hiddenSourceCurrencyName").value = currencyName;
     } else {
         displayValue = calculateExchange(sourceCurrencyCode, targetCurrencyCode, inputValue);
         currencyName = currencyUnits[targetCurrencyCode];
     }
 
-    // const reciteElementId = isSource ? "sourceCurrencyName" : "targetCurrencyName";
-    // document.getElementById(reciteElementId).innerText = new Intl.NumberFormat().format(displayValue.toFixed(5)) + " " + currencyName;
+    const reciteElementId = isSource ? "sourceCurrencyName" : "targetCurrencyName";
+    document.getElementById(reciteElementId).innerText = new Intl.NumberFormat().format(displayValue.toFixed(5)) + " " + currencyName;
 }
 
 

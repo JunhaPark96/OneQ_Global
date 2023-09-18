@@ -47,8 +47,7 @@
 
     <insert id="insertDepositWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
         INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ, balance,
-                                     transaction_amount, currency_code,
-                                     currency, transaction_type,
+                                     transaction_amount, transaction_type,
                                      deposit_cur, deposit_name)
         VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
                 #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})
@@ -72,6 +71,6 @@
 
     <insert id="insertWalletNewCurrency" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO">
         INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW, BALANCE, CURRENCY_CODE, CURRENCY, PRIME_RATE)
-        VALUES (hana_wallet_seq.nextval, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100);
+        VALUES (hana_wallet_seq.nextval, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100)
     </insert>
 </mapper>

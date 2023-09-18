@@ -256,12 +256,12 @@
                         <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
                     </div>
                 </div>
-                <input type="hidden" name="walletSeq" id="${walletKRW.walletSeq}">
-                <input type="hidden" name="walletPw" id="${walletKRW.walletPw}">
-                <input type="hidden" name="walletBalance" id="${walletKRW.balance}">
+                <input type="hidden" name="walletSeq" value="${walletKRW.walletSeq}">
+                <input type="hidden" name="walletPw" value="${walletKRW.walletPw}">
                 <input type="hidden" name="sourceCurrencyCode" id="sourceCurrencyCode">
                 <input type="hidden" name="foreignAmount" id="hiddenSourceAmount">
                 <input type="hidden" name="krwAmount" id="hiddenFinalAmount">
+                <input type="hidden" name="sourceCurrencyName" id="hiddenSourceCurrencyName">
 
             </form>
         </div>

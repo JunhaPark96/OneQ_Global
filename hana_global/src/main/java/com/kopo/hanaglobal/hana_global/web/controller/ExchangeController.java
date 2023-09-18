@@ -69,9 +69,9 @@ public class ExchangeController {
         // 최신 환율 불러오기
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
         model.addAttribute("exchangeList", exchangeRateList);
-        for (ExchangeRate e : exchangeRateList){
-            System.out.println(e.toString());
-        }
+//        for (ExchangeRate e : exchangeRateList){
+//            System.out.println(e.toString());
+//        }
         return "/wallet/doExchange";
     }
 
@@ -83,11 +83,13 @@ public class ExchangeController {
     public String fromKRWtoFCExchange(@ModelAttribute("currentMember") Member member,
                                       @RequestParam String walletSeq,
                                       @RequestParam String walletPw,
-                                      @RequestParam String walletBalance,
                                       @RequestParam String sourceCurrencyCode,
                                       @RequestParam Integer foreignAmount,
                                       @RequestParam Integer krwAmount,
+                                      @RequestParam String sourceCurrencyName,
                                       Model model) {
+        // 환전 서비스 메서드 호출
+        walletService.doExchange(walletSeq, sourceCurrencyCode, walletPw, krwAmount, foreignAmount, sourceCurrencyName);
 
 
         // 월렛 페이지로 이동

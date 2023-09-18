@@ -31,4 +31,6 @@ public interface WalletService {
     public void addToWallet(Wallet wallet, Integer amount);
 
     public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO);
+
+    public void doExchange(String walletSeq, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName);
 }

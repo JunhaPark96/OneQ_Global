@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -75,48 +76,116 @@ public class WalletServiceImpl implements WalletService {
         addWalletHistory(wallet, amount);
     }
     // 환전기능 - 계좌금액 차감, 월렛 통화 충전
-    @Transactional
-    public void doExchange(int walletSeq, String currencyCode, String password, Integer krwAmount, Integer foreignAmount){
-        Wallet fromWallet = walletRepository.findWalletByWalletNo(walletSeq);
-        Account account = accountRepository.getAccountByAcNo(fromWallet.getAcNo());
-        // 계좌 내역 추가
-        // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
-
-        // 원화 차감
-        if (fromWallet.getBalance().compareTo(BigDecimal.valueOf(krwAmount)) < 0) {
-            // BigDecimal 값에서 Integer 값을 뺄셈하기
-            BigDecimal shortageBigDecimal = BigDecimal.valueOf(krwAmount).subtract(fromWallet.getBalance());
-            // 계좌에서 차감 후 월렛에 돈을 충전
-            int shortage = shortageBigDecimal.intValue();
-            deductFromAccount(account, shortage);
-            addAccountHistory(account, krwAmount);
-            // 월렛에 충전
-            walletRepository.addWalletBalance(fromWallet.getUserSeq(), shortage, "KRW");
+    @Override
+    public void doExchange(String walletSeqStr, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName){
+        int walletSeq;
+        try {
+            walletSeq = Integer.parseInt(walletSeqStr);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid wallet sequence number.", e);
         }
-        // 월렛에 돈이 있으면, 월렛에서 돈을 차감
-        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), krwAmount, "KRW");
+
+        Wallet fromWallet = getWalletBySeq(walletSeq);
+        Account account = getAccountByAcNo(fromWallet);
+        Wallet targetWallet = getWalletByUserAndCurrency(fromWallet, currencyCode);
+
+        processKrwDeduction(fromWallet, account, krwAmount);
+
+        processForeignAddition(fromWallet, targetWallet, currencyCode, foreignAmount, sourceCurrencyName);
+    }
+    @Transactional
+    public Wallet getWalletBySeq(int walletSeq) {
+        return walletRepository.findWalletByWalletNo(walletSeq);
+    }
+    @Transactional
+    public Account getAccountByAcNo(Wallet fromWallet) {
+        return accountRepository.getAccountByAcNo(fromWallet.getAcNo());
+    }
+
+    @Transactional
+    public Wallet getWalletByUserAndCurrency(Wallet fromWallet, String currencyCode) {
+        return walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
+//        Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
+//        if (wallet == null) {
+//            throw new NoSuchElementException("No wallet found with the given currency code.");
+//        }
+//        return wallet;
+    }
+    @Transactional
+    public void processForeignAddition(Wallet fromWallet, Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {
         // 외화 충전
-        Wallet targetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
-        if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면 update
+//        if (targetWallet.getCurrencyCode() != null){ // 월렛에 해당 외화가 있으면 update
+//            walletRepository.addWalletBalance(targetWallet.getUserSeq(), foreignAmount, targetWallet.getCurrencyCode());
+//        } else { // 월렛에 해당 외화가 없으면 insert
+//            addWalletNewCur(targetWallet, currencyCode, sourceCurrencyName);
+//        }
+        if (targetWallet == null) {
+            addWalletNewCur(fromWallet, currencyCode, sourceCurrencyName, foreignAmount);
+        } else if (targetWallet.getCurrencyCode() != null) {
             walletRepository.addWalletBalance(targetWallet.getUserSeq(), foreignAmount, targetWallet.getCurrencyCode());
-        } else{ // 월렛에 해당 외화가 없으면 insert
-            addWalletNewCur(targetWallet);
         }
     }
 
-    private void addWalletNewCur(Wallet wallet) {
+    @Transactional
+    public void processKrwDeduction(Wallet fromWallet, Account account, Integer krwAmount) {
+        // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
+        if (fromWallet.getBalance().compareTo(BigDecimal.valueOf(krwAmount)) < 0) {
+            // 계좌에서 차감 후 월렛에 돈을 충전
+            BigDecimal shortageBigDecimal = BigDecimal.valueOf(krwAmount).subtract(fromWallet.getBalance());
+            int shortage = shortageBigDecimal.intValue();
+            deductFromAccount(account, shortage);
+            // 월렛에 충전
+            walletRepository.addWalletBalance(fromWallet.getUserSeq(), shortage, "KRW");
+            // 거래내역추가
+            addAccountHistory(account, krwAmount);
+        }
+        walletRepository.deductWalletBalance(fromWallet.getUserSeq(), krwAmount, "KRW");
+    }
+
+    private void addWalletNewCur(Wallet wallet, String currencyCode, String sourceCurrencyName, Integer foreignAmount) {
         // 월렛 외화 추가
         NewWalletCurrencyDTO newWalletCurrencyDTO = new NewWalletCurrencyDTO();
         newWalletCurrencyDTO.setUserSeq(wallet.getUserSeq());
         newWalletCurrencyDTO.setAcNo(wallet.getAcNo());
         newWalletCurrencyDTO.setWalletPw(wallet.getWalletPw());
-        newWalletCurrencyDTO.setBalance(wallet.getBalance());
-        newWalletCurrencyDTO.setCurrencyCode(wallet.getCurrencyCode());
-        newWalletCurrencyDTO.setCurrency(wallet.getCurrency());
+        BigDecimal formattedAmount = BigDecimal.valueOf(foreignAmount);
+        newWalletCurrencyDTO.setBalance(formattedAmount);
+        newWalletCurrencyDTO.setCurrencyCode(currencyCode);
+        newWalletCurrencyDTO.setCurrency(sourceCurrencyName);
+
         insertWalletNewCurrency(newWalletCurrencyDTO);
 
         System.out.println("월렛 외화 추가: " + newWalletCurrencyDTO.toString());
     }
+    // 환전 거래 내역
+    private void addExchangeWalletHistory(Wallet fromWallet, Wallet targetWallet, Integer krwAmount, Integer foreignAmount) {
+        // 원화 출금에 대한 내역
+        WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
+        walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
+        walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
+        walletWithdrawDTO.setTransactionAmount(new BigDecimal(krwAmount));
+        walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
+        walletWithdrawDTO.setWithdrawCur("KRW");
+        walletWithdrawDTO.setDepositCur(targetWallet.getCurrencyCode());
+        insertExchangeWalletHist(walletWithdrawDTO);
+        System.out.println("환전 출금 내역 추가: " + walletWithdrawDTO.toString());
+
+        // 외화 입금에 대한 내역
+        WalletHistoryDTO walletDepositDTO = new WalletHistoryDTO();
+        walletDepositDTO.setWalletSeq(targetWallet.getWalletSeq());
+        walletDepositDTO.setBalance(targetWallet.getBalance().add(new BigDecimal(foreignAmount)));
+        walletDepositDTO.setTransactionAmount(new BigDecimal(foreignAmount));
+        walletDepositDTO.setTransactionType("E"); // E는 환전를 의미
+        walletDepositDTO.setDepositCur(targetWallet.getCurrencyCode());
+        walletDepositDTO.setDepositName(targetWallet.getCurrency());
+        insertExchangeWalletHist(walletDepositDTO);
+        System.out.println("환전 입금 내역 추가: " + walletDepositDTO.toString());
+    }
+    private void insertExchangeWalletHist(WalletHistoryDTO walletHistoryDTO) {
+        // 여기에 월렛 거래 내역을 데이터베이스에 추가하는 로직을 넣어주세요.
+        // 예를 들어, walletHistoryRepository.save(walletHistoryDTO); 등
+    }
+
 
     @Override
     public Wallet findWalletByUserSeqAndCurrencyCode(int userSeq, String currencyCode) {
@@ -143,9 +212,19 @@ public class WalletServiceImpl implements WalletService {
     private void deductFromAccount(Account account, Integer amount) {
         // 계좌에서 출금
         System.out.println("계좌 출금 전: " + account.toString());
+        Integer accountBalance = account.getBalance(); // 계좌의 현재 잔액을 얻습니다.
+        if (accountBalance < amount) {
+            throw new InsufficientBalanceException("계좌 잔액이 부족합니다.");
+        }
         accountRepository.deductAccountBalance(account.getAcNo(), amount);
         System.out.println("계좌 출금 후: " + account.toString());
     }
+    public class InsufficientBalanceException extends RuntimeException {
+        public InsufficientBalanceException(String message) {
+            super(message);
+        }
+    }
+
     @Override
     public void deductWalletBalance(Wallet wallet, Integer amount){
         System.out.println("월렛 출금 전: " + wallet.toString());
@@ -184,9 +263,7 @@ public class WalletServiceImpl implements WalletService {
         walletHistoryDTO.setWalletSeq(wallet.getWalletSeq());
         walletHistoryDTO.setBalance(wallet.getBalance().add(new BigDecimal(amount)));
         walletHistoryDTO.setTransactionAmount(new BigDecimal(amount));
-        walletHistoryDTO.setCurrencyCode("KRW");
-        walletHistoryDTO.setCurrency("Won");
-        walletHistoryDTO.setTransactionType("A"); // A는 충전을 의미
+        walletHistoryDTO.setTransactionType("A"); // A는 계좌를 의미
         walletHistoryDTO.setDepositCur("KRW");
         walletHistoryDTO.setDepositName("Won");
 

@@ -73,7 +73,6 @@ h2 {
 }
 
 .walletCell {
-    grid-row: 3;
     position: relative;
     display: flex;
     border-radius: 18px;
@@ -84,7 +83,9 @@ h2 {
     flex-direction: column;
     justify-content: space-around;
     max-width: 262px;
+    min-width: 262px;
     max-height: 336px;
+    min-height: 336px;
 }
 .walletCard{
     display: flex;

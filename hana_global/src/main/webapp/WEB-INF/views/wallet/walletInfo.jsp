@@ -48,7 +48,7 @@
                 </div>
             </div>
             <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
-                <div class="walletCell" data-currency="${wallet.currencyCode}">
+                <div class="walletCell" data-currency="${wallet.currencyCode}" style="grid-row: ${3 + Math.ceil((loop.index + 1) / 3.0)};">
                     <div class="walletCard">
                         <div class="cardHeader">
                             <h4>Hana Wallet</h4>

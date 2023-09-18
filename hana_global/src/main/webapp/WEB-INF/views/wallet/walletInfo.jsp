@@ -47,19 +47,17 @@
                     </div>
                 </div>
             </div>
-            <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="0">
-                <div class="walletCell" data-currency="${wallet.currencyCode}" style="grid-row: ${3 + Math.ceil((loop.index + 1) / 3.0)};">
+            <!-- 원화 (KRW) 월렛 구역 -->
+            <c:if test="${walletList[0].currencyCode eq 'KRW'}">
+                <div class="walletCell" data-currency="KRW" style="grid-row: 3;">
                     <div class="walletCard">
                         <div class="cardHeader">
                             <h4>Hana Wallet</h4>
-                            <button class="loadBtn" onclick="openModal(${wallet.walletSeq})">Load</button>
+                            <button class="loadBtn" onclick="openModal(${walletList[0].walletSeq})">Load</button>
                         </div>
-                        <div class="cardElem1">
-                            <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
-                                &nbsp; ${wallet.currency} </a>
-                        </div>
-                        <div class="cardElem2">
-                            <a href="${pageContext.request.contextPath}/recurExchange?currency=${wallet.currencyCode}"> recurring exchange ></a>
+                        <div class="cardElem1" style="height: 56%;">
+                            <a href="${pageContext.request.contextPath}/accountInfo"> ${walletList[0].balance}
+                                &nbsp; ${walletList[0].currency} </a>
                         </div>
                         <div class="cardElem3">
                             <div class="btn_p">
@@ -71,7 +69,32 @@
                         </div>
                     </div>
                 </div>
+            </c:if>
 
+            <!-- 나머지 외화 월렛 구역 -->
+            <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="1">
+                <div class="walletCell" data-currency="${wallet.currencyCode}" style="grid-row: ${3 + Math.ceil((loop.index + 1) / 3.0)};">
+                    <div class="walletCard">
+                        <div class="cardHeader">
+                            <h4>Hana Wallet</h4>
+                        </div>
+                        <div class="cardElem1">
+                            <a href="${pageContext.request.contextPath}/accountInfo"> ${wallet.balance}
+                                &nbsp; ${wallet.currency} </a>
+                        </div>
+                        <div class="cardElem2">
+                            <a href="${pageContext.request.contextPath}/recurExchange?currency=${wallet.currencyCode}"> recurring exchange ></a>
+                        </div>
+                        <div class="cardElem3">
+                            <div class="btn_p">
+                                <a href="${pageContext.request.contextPath}/doExchange?selectedCurrency=${wallet.currencyCode}">Exchange</a>
+                            </div>
+                            <div class="btn_s">
+                                <a href="/overseaRemittance">Remittance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
         </div>
         <footer>

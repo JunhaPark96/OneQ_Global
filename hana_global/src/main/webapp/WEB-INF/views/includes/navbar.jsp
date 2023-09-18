@@ -36,7 +36,7 @@
         <a href="/exchange" style="padding-left: 15px">Foreign Exchange</a>
         <ul>
             <li><a href="/exchange">Exchange Rate</a></li>
-            <li><a href="${pageContext.request.contextPath}/doExchange">Currency Exchange</a></li>
+            <li><a href="${pageContext.request.contextPath}/doExchange?currency=KRW">Exchange</a></li>
 <%--            <li><a href="/exchange">Exchange history</a></li>--%>
             <li><a href="/exchange">Recurring Exchange</a></li>
         </ul>

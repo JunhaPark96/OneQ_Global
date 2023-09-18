@@ -50,14 +50,16 @@
 
                                             <optgroup label="Accounts">
                                                 <c:forEach items="${accountList}" var="account">
-                                                    <option value="${account.acNo}" data-account="${account}" data-balance="${account.balance}">
+                                                    <option value="${account.acNo}" data-account="${account}"
+                                                            data-balance="${account.balance}">
                                                             ${account.acNo}
                                                     </option>
                                                 </c:forEach>
                                             </optgroup>
 
                                             <optgroup label="Hana Wallet">
-                                                <option value="HANA Wallet" data-wallet="${walletKRW}" data-balance="${walletKRW.balance}">
+                                                <option value="HANA Wallet" data-wallet="${walletKRW}"
+                                                        data-balance="${walletKRW.balance}">
                                                     KRW Wallet
                                                 </option>
                                             </optgroup>
@@ -339,7 +341,7 @@
 
 
     // 함수 테스트
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const selectedAccount = getSelectedAccountObject();
         console.log(selectedAccount);
     });
@@ -405,6 +407,23 @@
         console.log(document.getElementById("hiddenSourceAmount").value);
         console.log(document.getElementById("hiddenFinalAmount").value);
         // console.log(document.getElementById("selectedAccountInfo").value);
+    });
+
+    <%--window.onload = function() {--%>
+    <%--    const defaultCurrency = "${defaultCurrency}";--%>
+    <%--    if(defaultCurrency) {--%>
+    <%--        currencySelected(defaultCurrency, true);--%>
+    <%--    }--%>
+    <%--}--%>
+    document.addEventListener("DOMContentLoaded", function () {
+        // 사용자의 국적에 따른 기본 통화와 선택한 통화를 반영
+        let defaultCurrency = "${defaultCurrencyCode}";
+        currencySelected(defaultCurrency, true);
+
+        let selectedCurrency = "${selectedCurrency}";
+        if (selectedCurrency) {
+            currencySelected(selectedCurrency, true);
+        }
     });
 
 </script>

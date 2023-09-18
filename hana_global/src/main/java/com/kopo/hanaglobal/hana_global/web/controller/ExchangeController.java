@@ -7,6 +7,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
+import com.kopo.hanaglobal.hana_global.web.mapping.CountryCurrencyMapping;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
@@ -52,28 +53,57 @@ public class ExchangeController {
     }
 
     //    navbar에서 환전 페이지 이동 시
+//    @GetMapping("/doExchange")
+//    public String doExchange(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model) {
+//        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
+//        model.addAttribute("accountList", accountList);
+//        model.addAttribute("defaultCurrency", currencyCode);
+////        for (Account account : accountList){
+////            System.out.println(account.toString());
+////        }
+//
+////        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+//        // 원화 통화 가져오기
+//        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+//        model.addAttribute("walletKRW", walletKRW);
+//        System.out.println(walletKRW.toString());
+//
+//        // 최신 환율 불러오기
+//        List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
+//        model.addAttribute("exchangeList", exchangeRateList);
+////        for (ExchangeRate e : exchangeRateList){
+////            System.out.println(e.toString());
+////        }
+//        return "/wallet/doExchange";
+//    }
     @GetMapping("/doExchange")
-    public String doExchange(@ModelAttribute("currentMember") Member member, Model model) {
+    public String doExchange(
+            @ModelAttribute("currentMember") Member member,
+            @RequestParam(value = "selectedCurrency", required = false) String selectedCurrency,
+            Model model) {
+
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
         model.addAttribute("accountList", accountList);
-//        for (Account account : accountList){
-//            System.out.println(account.toString());
-//        }
 
-//        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
-        // 원화 통화 가져오기
+        String defaultCurrencyCode = CountryCurrencyMapping.getCurrencyCodeByCountryCode(member.getCountrySP());
+
+        if (selectedCurrency != null && !selectedCurrency.trim().isEmpty()) {
+            // 사용자가 특정 외화 월렛을 선택한 경우, 해당 통화를 기본 통화로 설정
+            defaultCurrencyCode = selectedCurrency;
+        }
+        System.out.println("통화는 " + defaultCurrencyCode);
+
+        model.addAttribute("defaultCurrencyCode", defaultCurrencyCode);
+
         Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         model.addAttribute("walletKRW", walletKRW);
-        System.out.println(walletKRW.toString());
 
-        // 최신 환율 불러오기
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
         model.addAttribute("exchangeList", exchangeRateList);
-//        for (ExchangeRate e : exchangeRateList){
-//            System.out.println(e.toString());
-//        }
+
         return "/wallet/doExchange";
     }
+
 
     // myWallet 페이지에서 특정 통화클릭 후 페이지 이동 시
 

@@ -63,7 +63,7 @@
                         </div>
                         <div class="cardElem3">
                             <div class="btn_p">
-                                <a href="/curExchange">Exchange</a>
+                                <a href="${pageContext.request.contextPath}/doExchange">Exchange</a>
                             </div>
                             <div class="btn_s">
                                 <a href="/overseaRemittance">Remittance</a>

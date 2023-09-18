@@ -22,6 +22,11 @@
     <title>월렛 확인</title>
 </head>
 <body>
+<% if (request.getAttribute("errorMessage") != null) { %>
+<script>
+    alert('<%= request.getAttribute("errorMessage") %>');
+</script>
+<% } %>
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">

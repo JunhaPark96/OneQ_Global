@@ -36,12 +36,9 @@
     </select>
 
     <insert id="insertWithdrawWalletHist" parameterType="com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO">
-        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ as walletSeq, balance,
-                                     transaction_amount as transactionAmount, currency_code as currencyCode,
-                                     currency, transaction_type as transactionType,
-                                     withdraw_cur as withdrawCur, withdraw_name as withdrawName)
-        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
-                #{currencyCode}, #{currency}, #{transactionType}, #{withdrawCur}, #{withdrawName})
+        INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ, balance, transaction_amount, transaction_type,
+                                     withdraw_cur, withdraw_name)
+        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount}, #{transactionType}, #{withdrawCur}, #{withdrawName})
     </insert>
 
 
@@ -49,8 +46,7 @@
         INSERT INTO HANA_WALLET_HIST(WALLET_TRANS_NO, WALLET_SEQ, balance,
                                      transaction_amount, transaction_type,
                                      deposit_cur, deposit_name)
-        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount},
-                #{currencyCode}, #{currency}, #{transactionType}, #{depositCur}, #{depositName})
+        VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, #{walletSeq}, #{balance}, #{transactionAmount}, #{transactionType}, #{depositCur}, #{depositName})
     </insert>
 
     <select id="getBalanceByWalletSeq" resultType="BigDecimal">
@@ -73,4 +69,6 @@
         INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW, BALANCE, CURRENCY_CODE, CURRENCY, PRIME_RATE)
         VALUES (hana_wallet_seq.nextval, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100)
     </insert>
+
+
 </mapper>

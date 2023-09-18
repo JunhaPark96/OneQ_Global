@@ -14,8 +14,6 @@ public class WalletHistoryDTO {
     private int walletSeq;
     private BigDecimal balance;
     private BigDecimal transactionAmount;
-    private String currencyCode;
-    private String currency;
     private String transactionType;
     private String withdrawCur;
     private String withdrawName;

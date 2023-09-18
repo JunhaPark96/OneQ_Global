@@ -256,10 +256,12 @@
                         <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
                     </div>
                 </div>
+                <input type="hidden" name="walletSeq" id="${walletKRW.walletSeq}">
+                <input type="hidden" name="walletPw" id="${walletKRW.walletPw}">
+                <input type="hidden" name="walletBalance" id="${walletKRW.balance}">
                 <input type="hidden" name="sourceCurrencyCode" id="sourceCurrencyCode">
                 <input type="hidden" name="foreignAmount" id="hiddenSourceAmount">
                 <input type="hidden" name="krwAmount" id="hiddenFinalAmount">
-                <input type="hidden" name="selectedAccountInfo" id="selectedAccountInfo">
 
             </form>
         </div>
@@ -281,10 +283,17 @@
     };
     </c:forEach>
     // 컨트롤러에서 제공하는 객체 정보를 JavaScript 변수로 저장
-    let accounts = JSON.parse('${accountList}');
-    let walletKRW = JSON.parse('${walletKRW}');
-    console.log("선택된 계좌는", accounts[0].accountNo); // 배열이므로 첫 번째 아이템을 참조
-    console.log("선택된 월렛은", walletKRW.walletSeq); // walletSeq가 해당 월렛 객체의 속성일 경우
+    let walletInfo = {
+        walletSeq: "${walletKRW.walletSeq}",
+        userSeq: "${walletKRW.userSeq}",
+        balance: "${walletKRW.balance}",
+        walletPw: "${walletKRW.walletPw}",
+        currencyCode: "${walletKRW.currencyCode}",
+        currency: "${walletKRW.currency}"
+    };
+
+    console.log(walletInfo);  // 테스트: 월렛 정보를 콘솔에 출력
+    document.getElementById("selectedAccountInfo").value = JSON.stringify(walletInfo);
 </script>
 
 
@@ -379,7 +388,7 @@
         const selectedBalance = selectedOption.getAttribute("data-balance");
 
         // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
-        document.getElementById("selectedAccountInfo").value = selectedValue;
+        // document.getElementById("selectedAccountInfo").value = selectedValue;
 
         // 잔액 정보 업데이트
         document.getElementById("accountBalance").textContent = selectedBalance;
@@ -387,10 +396,10 @@
 
     console.log(document.getElementById("sourceCurrencyCode").value);
     document.addEventListener("DOMContentLoaded", function () {
-        console.log(document.getElementById("selectedAccountInfo").value);
+        // console.log(document.getElementById("selectedAccountInfo").value);
         console.log(document.getElementById("hiddenSourceAmount").value);
         console.log(document.getElementById("hiddenFinalAmount").value);
-        console.log(document.getElementById("selectedAccountInfo").value);
+        // console.log(document.getElementById("selectedAccountInfo").value);
     });
 
 </script>

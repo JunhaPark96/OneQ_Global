@@ -81,12 +81,18 @@ public class ExchangeController {
     // 원화에서 다른나라 통화로 환전
     @PostMapping("/walletInfo")
     public String fromKRWtoFCExchange(@ModelAttribute("currentMember") Member member,
-                                      @RequestParam Wallet senderWallet,
+                                      @RequestParam String walletSeq,
+                                      @RequestParam String walletPw,
+                                      @RequestParam String walletBalance,
                                       @RequestParam String sourceCurrencyCode,
-                                      @RequestParam Integer krwAmount,
                                       @RequestParam Integer foreignAmount,
+                                      @RequestParam Integer krwAmount,
                                       Model model) {
 
+
+        // 월렛 페이지로 이동
+        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        model.addAttribute("walletList", walletList);
         return "/wallet/walletInfo";
     }
 }

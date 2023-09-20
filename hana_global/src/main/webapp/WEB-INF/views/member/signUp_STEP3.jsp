@@ -138,12 +138,26 @@
                                 <div class="iptWrap setPhone">
                                     <input type="text" id="mobileDigit" name="mobileDigit" class="ipt notDel uiAct"
                                            maxlength="11" title="휴대전화 국번 입력">
-                                    <button id="mobileAuth" name="mobileAuth" class="btn_p" onclick="authorize()">인증요청</button>
+                                    <button id="requestCodeButton" name="requestCodeButton" class="btn_p">인증요청</button>
                                 </div>
                             </td>
                         </tr>
                         <%--                        휴대폰 번호 끝--%>
-
+<%--                       coolsms 문자 인증 시작--%>
+                        <tr id="phoneCodeInput" hidden>
+                            <td class="th">인증번호 입력</td>
+                            <td>
+                                <div class="iptWrap">
+                                    <input type="text" id="phoneCode" name="phoneCode" class="ipt uiAct"
+                                           maxlength="6" title="인증번호 입력">
+                                    <button id="phoneCodeSubmitButton" name="phoneCodeSubmitButton" class="btn_p" hidden>인증확인</button>
+                                </div>
+                                <div id="InvalidPhoneNumber" class="error-message" hidden>유효하지 않은 휴대폰 번호입니다.</div>
+                                <div id="InvalidCode" class="error-message" hidden>유효하지 않은 인증번호입니다.</div>
+                                <div id="validCode" class="success-message" hidden>인증번호 확인 완료!</div>
+                            </td>
+                        </tr>
+<%--                       coolsms 문자 인증 끝--%>
                         </tbody>
                     </table>
                 </section>
@@ -229,23 +243,6 @@
                                 </div>
                             </td>
                         </tr>
-                        <!-- 성별 시작 -->
-<%--                        <tr>--%>
-<%--                            <td class="th">성별</td>--%>
-<%--                            <td>--%>
-<%--                                <div class="iptWrap">--%>
-<%--                                    <!-- 숨겨진 입력 필드 추가 -->--%>
-<%--                                    <input type="hidden" name="gender" id="gender" value="">--%>
-<%--                                    <button type="button" id="maleBtn" class="genderBtn" onclick="selectGender('male')">--%>
-<%--                                        M--%>
-<%--                                    </button>--%>
-<%--                                    <button type="button" id="femaleBtn" class="genderBtn"--%>
-<%--                                            onclick="selectGender('female')">F--%>
-<%--                                    </button>--%>
-<%--                                </div>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-                        <!-- 성별 끝 -->
 
                         <%--주소 시작--%>
                         <tr>
@@ -368,6 +365,73 @@
         document.getElementById('countryCode').value = countries[countryName] || "Unknown"; // 국가코드가 존재하지 않을 경우 "Unknown" 출력
     }
 
+    // 폼 제출 방지
+    document.addEventListener('DOMContentLoaded', function () {
+
+        let form = document.getElementById('frm');
+        let requestCodeButton = document.getElementById('requestCodeButton');
+
+        requestCodeButton.addEventListener('click', function (event) {
+            event.preventDefault(); // 기본 동작 방지
+            // 휴대폰 인증번호 요청 버튼 클릭
+            $("#requestCodeButton").click(function (event) {
+                let phone = $("#mobileDigit").val();
+                console.log(phone);
+                if (phone) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/sms',
+                        data: {
+                            phone: phone
+                        },
+                        success: function () {
+                            // 인증번호 입력창 띄우기
+                            $("#phoneCodeInput").removeAttr("hidden");
+                            document.getElementById("requestCodeButton").disabled = true;
+                            document.getElementById("phoneCodeSubmitButton").hidden = false;
+                        },
+                        error: function (error) {
+                            // 유효하지 않은 휴대전화
+                            $("#InvalidPhoneNumber").removeAttr("hidden");
+                        }
+                    });
+
+                } else {
+                    alert("휴대폰 번호를 입력해주세요.");
+                }
+            });
+
+
+            // 다음 페이지로 이동하거나 다른 작업 수행
+            // form.submit(); // 필요한 경우에만 사용
+        });
+    });
+    // 휴대폰 인증번호 확인 버튼 클릭
+    $("#phoneCodeSubmitButton").click(function (event) {
+        event.preventDefault();
+        let code = $("#phoneCodeInput").val();
+        console.log("인증번호는 ", code);
+        if (code) {
+            $.ajax({
+                type: 'POST',
+                url: '/sms',
+                data: {
+                    phoneCodeInput: code
+                },
+                success: function () {
+                    // 인증번호 입력창 띄우기
+                    $("#validCode").removeAttr("hidden");
+                    document.getElementById("InvalidCode").hidden = true;
+                },
+                error: function (error) {
+                    // 유효하지 않은 휴대전화
+                    $("#InvalidCode").removeAttr("hidden");
+                }
+            });
+        } else {
+            alert("인증번호를 입력해주세요.");
+        }
+    });
 
 
 </script>

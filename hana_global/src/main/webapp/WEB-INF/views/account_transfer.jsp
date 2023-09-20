@@ -258,7 +258,7 @@
     function fetchReceiverName() {
         // For demonstration purposes, let's assume "박준하" is the name associated with the given account number.
         // In a real-world scenario, you would make an AJAX request to a server to fetch the actual account holder's name.
-        document.getElementById('receiverName').textContent = "박준하";
+        document.getElementById('receiverName').textContent = "Danniel O'Laery";
     }
 </script>
 <script>

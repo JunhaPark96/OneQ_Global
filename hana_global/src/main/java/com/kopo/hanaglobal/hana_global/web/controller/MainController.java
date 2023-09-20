@@ -1,29 +1,29 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
-import com.kopo.hanaglobal.hana_global.web.entity.Account;
-import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 @Controller
 public class MainController {
     private MemberService memberService;
     private AccountService accountService;
+
     @Autowired
-    public MainController(MemberService memberService, AccountService accountService){
+    public MainController(MemberService memberService, AccountService accountService) {
         this.memberService = memberService;
         this.accountService = accountService;
     }
+
     @GetMapping("/")
     public String index() {
         System.out.println("index페이지");
@@ -59,10 +59,10 @@ public class MainController {
 //        return "account_transfer";
 //    }
 
-    @GetMapping("/transfer")
+    @GetMapping("/remittance")
     public String transfer() {
         System.out.println("transfer 페이지");
-        return "transfer";
+        return "remittance/remittance";
     }
 
 //    @GetMapping("/signUp")
@@ -99,6 +99,31 @@ public class MainController {
         System.out.println("signUp step3 get 페이지");
         return "member/signUp_STEP3";
     }
+
+    //      CoolSMS 이용 SMS 인증번호 요청
+    @GetMapping("/sms")
+    public ResponseEntity sendSMS(@RequestParam("phone") String phone, HttpSession session) {
+        try {
+            // SMS 전송
+            memberService.getSmsCertificationNumber(phone, session);
+            // 정상 전송됨
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send SMS");
+        }
+    }
+
+    //       사용자 입력 인증코드 검증
+    @PostMapping("/sms")
+    public ResponseEntity verifySmsCode(@RequestParam("phoneCodeInput") String phoneCodeInput, HttpSession session) {
+        // SMS 전송
+        if (memberService.isVerifySms(phoneCodeInput, session)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid SMS code");
+        }
+    }
+
 
     @PostMapping("/signUp_STEP3")
     public String processSignUp3(
@@ -213,7 +238,7 @@ public class MainController {
         System.out.println("userSeq: " + userSeq);
         accountService.createNewAccount(acPasswd, userSeq);
         System.out.println(accountService.toString());
-        
+
         return "member/signUp_STEP5";
     }
 }

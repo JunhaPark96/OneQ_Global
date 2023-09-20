@@ -4,6 +4,7 @@ import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface MemberService {
@@ -16,4 +17,8 @@ public interface MemberService {
     public Member findMemberById(int memberId);
 
     public Integer findUserSeqByID(String id);
+
+    public void getSmsCertificationNumber(String phoneNumber, HttpSession session);
+
+    public boolean isVerifySms(String userInput, HttpSession session);
 }

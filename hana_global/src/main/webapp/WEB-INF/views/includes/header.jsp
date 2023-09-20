@@ -46,7 +46,7 @@
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/account</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Account</a></div>
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/walletInfo</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Hana Wallet</a></div>
         <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/exchange</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Exchange</a></div>
-        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/transfer</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Transfer</a></div>
+        <div class="st"><a href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/remittance</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>">Remittance</a></div>
     </div>
 
     <div class="blank">

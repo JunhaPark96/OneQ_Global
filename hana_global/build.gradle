@@ -48,6 +48,9 @@ dependencies {
 	implementation 'org.json:json:20211205'
 	// 랜덤 스트링
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	// coolsms
+//	implementation 'net.nurigo:sdk:4.3.0'
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 
 tasks.named('test') {

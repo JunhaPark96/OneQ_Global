@@ -21,7 +21,7 @@
     <%--    주소 api 링크--%>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="./js/main.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <link href="./css/main.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
@@ -31,31 +31,31 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-        function authorize() {
-
-            event.preventDefault();
-            let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
-                +"response_type=code"
-                +"&client_id=53b902d1-c485-49ec-bfaa-034c00aeb53e"
-                +"&redirect_uri=http://localhost:8080/signUp_STEP3"
-                +"&scope=login inquiry transfer"
-                +"&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY"
-                +"&auth_type=0";
-
-            window.open(url, "width=1200,height=900,scrollbars=yes,resizable=yes");
-
-        }
-
-        $(document).on("ready", function(){
-            callbackURL = window.parent.document.URL;
-            //alert(callbackURL)
-            console.log(callbackURL)
-
-            if(callbackURL.indexOf('callback') == -1){
-                window.close();
-            }
-
-        });
+        // function authorize() {
+        //
+        //     event.preventDefault();
+        //     let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
+        //         +"response_type=code"
+        //         +"&client_id=53b902d1-c485-49ec-bfaa-034c00aeb53e"
+        //         +"&redirect_uri=http://localhost:8080/signUp_STEP3"
+        //         +"&scope=login inquiry transfer"
+        //         +"&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY"
+        //         +"&auth_type=0";
+        //
+        //     window.open(url, "width=1200,height=900,scrollbars=yes,resizable=yes");
+        //
+        // }
+        //
+        // $(document).on("ready", function(){
+        //     callbackURL = window.parent.document.URL;
+        //     //alert(callbackURL)
+        //     console.log(callbackURL)
+        //
+        //     if(callbackURL.indexOf('callback') == -1){
+        //         window.close();
+        //     }
+        //
+        // });
     </script>
 </head>
 <body>
@@ -69,7 +69,7 @@
         <div class="content">
             <%--    1002962104821--%>
             <form name="frm" action="${pageContext.request.contextPath}/signUp_STEP4" method="post" id="frm">
-        <input type="hidden" id="foreignRegNo" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
+            <input type="hidden" id="foreignRegNo" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
                 <section>
                     <div class="titArea">
                         <h2>휴대폰 본인확인</h2>
@@ -365,51 +365,38 @@
         document.getElementById('countryCode').value = countries[countryName] || "Unknown"; // 국가코드가 존재하지 않을 경우 "Unknown" 출력
     }
 
-    // 폼 제출 방지
-    document.addEventListener('DOMContentLoaded', function () {
-
-        let form = document.getElementById('frm');
-        let requestCodeButton = document.getElementById('requestCodeButton');
-
-        requestCodeButton.addEventListener('click', function (event) {
-            event.preventDefault(); // 기본 동작 방지
-            // 휴대폰 인증번호 요청 버튼 클릭
-            $("#requestCodeButton").click(function (event) {
-                let phone = $("#mobileDigit").val();
-                console.log(phone);
-                if (phone) {
-                    $.ajax({
-                        type: 'GET',
-                        url: '/sms',
-                        data: {
-                            phone: phone
-                        },
-                        success: function () {
-                            // 인증번호 입력창 띄우기
-                            $("#phoneCodeInput").removeAttr("hidden");
-                            document.getElementById("requestCodeButton").disabled = true;
-                            document.getElementById("phoneCodeSubmitButton").hidden = false;
-                        },
-                        error: function (error) {
-                            // 유효하지 않은 휴대전화
-                            $("#InvalidPhoneNumber").removeAttr("hidden");
-                        }
-                    });
-
-                } else {
-                    alert("휴대폰 번호를 입력해주세요.");
+    $("#requestCodeButton").click(function (event) {
+        let phone = $("#mobileDigit").val();
+        event.preventDefault(); // 기본 동작 방지
+        console.log(phone);
+        if (phone) {
+            $.ajax({
+                type: 'GET',
+                url: '/sms',
+                data: {
+                    phone: phone
+                },
+                success: function () {
+                    // 인증번호 입력창 띄우기
+                    $("#phoneCodeInput").removeAttr("hidden");
+                    document.getElementById("requestCodeButton").disabled = true;
+                    document.getElementById("phoneCodeSubmitButton").hidden = false;
+                },
+                error: function (error) {
+                    // 유효하지 않은 휴대전화
+                    $("#InvalidPhoneNumber").removeAttr("hidden");
                 }
             });
 
-
-            // 다음 페이지로 이동하거나 다른 작업 수행
-            // form.submit(); // 필요한 경우에만 사용
-        });
+        } else {
+            alert("휴대폰 번호를 입력해주세요.");
+        }
     });
+
     // 휴대폰 인증번호 확인 버튼 클릭
     $("#phoneCodeSubmitButton").click(function (event) {
         event.preventDefault();
-        let code = $("#phoneCodeInput").val();
+        let code = $("#phoneCode").val();
         console.log("인증번호는 ", code);
         if (code) {
             $.ajax({

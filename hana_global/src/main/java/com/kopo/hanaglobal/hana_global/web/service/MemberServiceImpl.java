@@ -102,7 +102,7 @@ public class MemberServiceImpl implements MemberService {
             params.put("to", phoneNumber); // 수신 전화번호
             params.put("from", myPhone); // 발신 전화번호
             params.put("type", "sms");
-            params.put("text", "Confirm your phone number on HanaGlobal with the code" + numStr + ". Don't share with anyone");
+            params.put("text", "Confirm your phone number on HanaGlobal with the code " + numStr + ". Don't share with anyone");
             coolsms.send(params);
 
             // 세션에 인증번호 저장 (유효기간 3분)

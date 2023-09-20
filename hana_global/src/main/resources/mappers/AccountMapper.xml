@@ -43,12 +43,12 @@
     
     <select id="getAccountByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account" parameterType="String">
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
-        FROM CHECKING_ACCOUNT where ac_no = #{ac_no}
+        FROM CHECKING_ACCOUNT where ac_no = #{acNo}
     </select>
     
     <select id="getTransactionHistoryByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO">
         SELECT ac_no, to_char(trade_date, 'YYYY-MM-DD') as tradeDate, balance, transaction_amount, transaction_type, PARTICIPANT, PARTICIPANT_ACCOUNT
-        FROM ACCOUNT_HISTORY where ac_no = #{ac_no}
+        FROM ACCOUNT_HISTORY where ac_no = #{acNo}
     </select>
 
     <update id="updateAccountBalance">

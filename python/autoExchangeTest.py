@@ -45,7 +45,7 @@ class WalletService:
         deposit_dto = self.create_deposit_dto(target_wallet if target_wallet else from_wallet, currency_code, foreign_amount, source_currency_name)
         cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, DEPOSIT_CUR, DEPOSIT_NAME) VALUES (HANA_WALLET_SEQ.NEXTVAL, :1, :2, :3, 'E', :4, :5)",
                             deposit_dto)
-        print("환전 입금 내역 추가:", deposit_dto)
+        # print("환전 입금 내역 추가:", deposit_dto)
 
     # 환전 입금 내역 추가
     def create_deposit_dto(self, target_wallet, currency_code, foreign_amount, source_currency_name):
@@ -71,7 +71,7 @@ class WalletService:
         withdraw_dto = self.create_withdraw_dto(from_wallet, krw_amount)
         cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, WITHDRAW_CUR, WITHDRAW_NAME) VALUES (HANA_WALLET_SEQ.NEXTVAL, :1, :2, :3, 'E', 'KRW', 'won')",
                             withdraw_dto)
-        print("환전 출금 내역 추가:", withdraw_dto)
+        # print("환전 출금 내역 추가:", withdraw_dto)
 
     def create_withdraw_dto(self, from_wallet, krw_amount):
         return (
@@ -111,7 +111,7 @@ class WalletService:
             source_currency_name
         )
         cursor.execute("INSERT INTO HANA_WALLET (WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW, BALANCE, CURRENCY_CODE, CURRENCY, PRIME_RATE) VALUES (HANA_WALLET_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6, 100)", new_wallet_currency_dto)
-        print("월렛 외화 추가:", new_wallet_currency_dto)
+        # print("월렛 외화 추가:", new_wallet_currency_dto)
         cursor.close()
 
     # wallet번호로 wallet 조회
@@ -145,7 +145,7 @@ class AutoExchange:
     def connect_to_oracle(self):
         logging.info("Connecting to Oracle database...")
         # oracledb.init_oracle_client(lib_dir=r"C:\Users\kopo\exchange\instantclient_19_20")
-        oracledb.init_oracle_client(lib_dir=r"C:\Users\kopo\exchange\instantclient_19_20")
+        oracledb.init_oracle_client(lib_dir=r"C:/home/ubuntu/instantclient_19_20")
         self.connection = oracledb.connect(user='ADMIN', password='@Pasdf658215', dsn='junha_high')
         logging.info("Connected to Oracle database")
     
@@ -203,8 +203,13 @@ class AutoExchange:
 
     
     def check_and_exchange(self):
+        self.connect_to_oracle()
         exchange_rates = self._get_latest_exchange_rates()
         pending_requests = self.get_waiting_auto_exchanges()
+
+        if pending_requests is None:
+            self.close_oracle_connection()
+            return
 
         wallet_service = WalletService(self.connection)
 
@@ -220,26 +225,27 @@ class AutoExchange:
 
             wallet_info = self.get_wallet_by_auto_exchange_seq(ae_seq)
             krw_wallet_info = self.get_wallet_by_user_and_currency(wallet_info[1])
-            print("월렛정보는 ", wallet_info)
-            print("원화 월렛정보는 ", krw_wallet_info)
+            # print("월렛정보는 ", wallet_info)
+            # print("원화 월렛정보는 ", krw_wallet_info)
             # 날짜가 만료되면 status 'F'로 변환
             if exchange_date.date() <= datetime.today().date():
                 self.update_status(ae_seq, 'F')
                 continue
             
             target_rate = lower_bound
-            print("환율정보 총: ", exchange_rates)
-            print("환율은 ", exchange_rates[target_cur_code])
+            # print("환율정보 총: ", exchange_rates)
+            # print("환율은 ", exchange_rates[target_cur_code])
             if target_cur_code in exchange_rates and exchange_rates[target_cur_code]:
-                print(target_cur_code)
+                # print(target_cur_code)
                 exchanged_amount = self.perform_exchange(exchange_amount, exchange_rates[target_cur_code])
-                print("환전할 금액은 ", exchanged_amount)
-                print("출금할월렛의번호", krw_wallet_info[0], "환전할외화코드", target_cur_code, "월렛비밀번호", wallet_info[3], "결제할원화금액", exchanged_amount, "환전될외화금액", exchange_amount, "외화통화이름", wallet_info[7])
+                # print("환전할 금액은 ", exchanged_amount)
+                # print("출금할월렛의번호", krw_wallet_info[0], "환전할외화코드", target_cur_code, "월렛비밀번호", wallet_info[3], "결제할원화금액", exchanged_amount, "환전될외화금액", exchange_amount, "외화통화이름", wallet_info[7])
                 wallet_service.do_exchange(krw_wallet_info[0], target_cur_code, wallet_info[3], exchanged_amount, exchange_amount, wallet_info[7])
                 # 출금할월렛의번호, 환전할외화코드, 월렛비밀번호, 결제할원화금액, 환전될외화금액, 외화통화이름
                 self.update_status(ae_seq, 'S')
                 print("자동환전 상태 변환", status)
 
+        self.close_oracle_connection()
     # 자동환전에 성공하면 상태 update
     def update_status(self, ae_seq, status):
         cursor = self.connection.cursor()
@@ -250,12 +256,21 @@ class AutoExchange:
 def main():
     logging.basicConfig(level=logging.INFO)  # 로깅을 활성화하려면 이 줄이 필요합니다.
     logging.info("Starting the program...")
-    
+
     connection = None
     auto_exchange = AutoExchange(connection)
-    auto_exchange.connect_to_oracle()
-    auto_exchange.check_and_exchange()
-    auto_exchange.close_oracle_connection()
+    # auto_exchange.connect_to_oracle()
 
+    # 스케줄러에 5분마다 실행되도록 작업을 추가합니다.
+    schedule.every(5).minutes.do(auto_exchange.check_and_exchange)
+
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+    except KeyboardInterrupt:
+        pass
+
+    # auto_exchange.close_oracle_connection()
 if __name__ == "__main__":
     main()

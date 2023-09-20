@@ -23,11 +23,11 @@ public interface AccountRepository {
     public void deductAccountBalance(@Param("acNo") String acNo, @Param("amount") Integer amount);
 
     public void insertAccHistTransaction(
-            @Param("ac_no") String acNo,
+            @Param("acNo") String acNo,
             @Param("balance") Integer balance,
-            @Param("transaction_amount") Integer transactionAmount,
-            @Param("transaction_type") int transactionType,
+            @Param("transactionAmount") Integer transactionAmount,
+            @Param("transactionType") int transactionType,
             @Param("participant") String participant,
-            @Param("participant_account") String participantAccount);
+            @Param("participantAccount") String participantAccount);
     public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO);
 }

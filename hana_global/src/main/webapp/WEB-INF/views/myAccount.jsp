@@ -132,7 +132,7 @@
                                                 <h4>View Account Information</h4>
                                             </div>
                                             <div class="col-6">
-                                                <h5><string>계좌종류</string> &nbsp;&nbsp;
+                                                <h5><string>Account Type</string> &nbsp;&nbsp;
                                                         <span class="text-bold">
                                                         ${account.acName}</span>
                                                 </h5>
@@ -156,7 +156,7 @@
                                             <div class="grid-left">
                                                 <div class="row pt-1" style="height: 50px">
                                                     <div class="col d-flex align-items-center">
-                                                        <h3>예금주명 <br/>
+                                                        <h3>Account Holder Name <br/>
                                                             <span class="text-bold"> ${account.name}</span>
                                                         </h3>
 <%--                                                        <p class="text-muted" style="font-size:22px">--%>
@@ -171,25 +171,25 @@
                                             </div>
                                         <div class="col pt-1 grid-right">
                                             <div class="col">
-                                                <h4 class="test-start">계좌개설날짜</h4>
+                                                <h4 class="test-start"> Account Opening Date</h4>
                                                 <p class="text-muted text-end p-border" style="font-size:22px">
                                                         ${account.signupDate} </p>
                                             </div>
                                             <div class="col text-end">
-                                                <h4 class="text-start">마지막 거래 날짜</h4>
+                                                <h4 class="text-start">Last Transaction Date</h4>
                                                 <p class="text-muted p-border" style="font-size:22px">
                                                     2023-08-19
                                                         <%--${account.getLastTransactionDate()}--%></p>
                                             </div>
                                             <div class="col text-end">
-                                                <h4 class="text-start">계좌번호</h4>
+                                                <h4 class="text-start">Account Number</h4>
                                                 <p class="text-muted p-border" style="font-size:22px">
                                                         ${account.acNo}</p>
                                             </div>
                                             <div class="col">
-                                                <h4 class="text-start">잔액</h4>
+                                                <h4 class="text-start">Balance</h4>
                                                 <p class="text-muted text-end p-border" style="font-size:20px">
-                                                        ${account.balance}원</p>
+                                                        ${account.balance} Won</p>
                                             </div>
                                             <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
                                                     <%--                                            <input style="margin-top:-30px;margin-left: 30px !important;"--%>
@@ -202,8 +202,8 @@
 
                                         <section class="certContain">
                                             <div class="btnArea" id="btnFclArea">
-                                                <a href="/account_details" id="btnCancel" class="btn_s">거래 내역</a>
-                                                <a href="/account_transfer" id="btnNext" class="btn_p">계좌 이체</a>
+                                                <a href="/account_details" id="btnCancel" class="btn_s">History</a>
+                                                <a href="/account_transfer" id="btnNext" class="btn_p">Transfer</a>
                                             </div>
                                         </section>
                                     </div>

@@ -46,6 +46,8 @@ public class WalletController {
 
     @GetMapping("/walletInfo")
     public String walletInfo(@ModelAttribute("currentMember")Member member, Model model){
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+        model.addAttribute("selectedWallet", wallet);
         System.out.println("현재 멤버는 : " + member.toString());
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         for (Wallet w : walletList){

@@ -81,10 +81,7 @@ public class AccountServiceImpl implements AccountService{
     public void updateAccountBalance(@Param("acNo") String acNo, @Param("amount") Integer amount){
         accountRepository.updateAccountBalance(acNo, amount);
     }
-    @Override
-    public void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount){
-        accountRepository.insertAccHistTransaction(acNo, balance, transactionAmount, transactionType, participant, participantAccount);
-    }
+
     @Transactional
     @Override
     public void accountTransfer(String fromAcNo, String toAcNo, Integer amount){
@@ -118,5 +115,8 @@ public class AccountServiceImpl implements AccountService{
         // 6. 받는 사람의 계좌 내역에 입금 내역 추가
         insertAccHistTransaction(toAcNo, toBalance, amount, 0, fromName, fromAcNo);
     }
-
+    @Override
+    public void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount){
+        accountRepository.insertAccHistTransaction(acNo, balance, transactionAmount, transactionType, participant, participantAccount);
+    }
 }

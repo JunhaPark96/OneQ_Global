@@ -31,24 +31,63 @@
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>View Wallets</h2>
-            <div class="account">
-                <div class="accountWrap">
-                    <div class="account-header">
-                        연결계좌
-                    </div>
-                    <div class="account-content">
-                        <h4>하나은행</h4>
-                    </div>
-                    <div class="account-footer">
-                        <div class="accountNo">
-                            ${walletList[0].acNo}
+            <div class="row justify-content-start">
+                <div class="col-md-4 gradient-custom text-center text-black">
+                </div>
+                <div class="col-md-6 ">
+                    <div class="card-body pe-5">
+                        <div class="row">
+                            <div class="col-5">
+                                <h6>Linked Account</h6>
+                                <h6>Hana Bank</h6>
+                            </div>
+                            <div class="account-image">
+                                <div class="myAccount"></div>
+                            </div>
                         </div>
-                        <div class="locRight">
-                            변경
+                        <hr class="mt-0 mb-3">
+                        <div class="col-grid">
+                            <div class="grid-left">
+                                <div class="row" style="height: 50px">
+                                    <div class="col d-flex">
+                                        <h6>Depositor name <br>
+                                            <span class="text-bold"> ${currentMember.name}</span>
+                                        </h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col grid-right">
+                                <div class="col">
+                                    <h6 class="text-start">Account Number</h6>
+                                    <p class="text-muted">${selectedWallet.acNo}</p>
+                                    <div class="locRight">
+                                        Modify
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+<%--            <div class="account">--%>
+<%--                <div class="accountWrap">--%>
+<%--                    <div class="account-header">--%>
+<%--                        연결계좌--%>
+<%--                    </div>--%>
+<%--                    <div class="account-content">--%>
+<%--                        <h4>하나은행</h4>--%>
+<%--                    </div>--%>
+<%--                    <div class="account-footer">--%>
+<%--                        <div class="accountNo">--%>
+<%--                            ${walletList[0].acNo}--%>
+<%--                        </div>--%>
+<%--                        <div class="locRight">--%>
+<%--                            변경--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
             <!-- 원화 (KRW) 월렛 구역 -->
             <c:if test="${walletList[0].currencyCode eq 'KRW'}">
                 <div class="walletCell" data-currency="KRW" style="grid-row: 3;">

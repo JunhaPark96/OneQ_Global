@@ -1,7 +1,7 @@
 .main-body {
     /*border: 1px solid black;*/
     display: grid;
-    row-gap: 50px;
+    row-gap: 30px;
     column-gap: 20px;
     /*grid-auto-flow: column;*/
 }

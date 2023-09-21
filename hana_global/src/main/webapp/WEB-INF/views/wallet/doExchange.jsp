@@ -113,7 +113,7 @@
                         <p class="cal_txt _noservice"></p></div>
                     <div class="btn-area" style="text-align: right">
                         <div class="toggleExchangeRate" onclick="toggleRateInfo()">
-                            상세환율 보기 <span class="arrow">&#9660;</span>
+                            View Detailed Exchange Rates <span class="arrow">&#9660;</span>
                         </div>
                         <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
 
@@ -185,7 +185,7 @@
 
                                 <tr>
                                     <th>The amount you will be paying(Won)</th>
-                                    <td><span class="txt"><em class="point"></em></span></td>
+                                    <td><span class="txt" style="color: #016f73; font-weight: 700"><em class="point"></em></span></td>
                                 </tr>
 
                                 <tr>

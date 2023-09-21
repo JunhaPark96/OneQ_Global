@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-08
-  Time: 오후 8:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,8 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="./css/nav.css" rel="stylesheet"/>
 </head>
 <body>
+<div class="navbarWrap">
 <div class="navbar">
 <ul>
     <li>
@@ -50,8 +46,52 @@
     </li>
 </ul>
 </div>
+</div>
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentPath = window.location.pathname;
 
+        // 모든 하위 메뉴를 숨깁니다.
+        document.querySelectorAll(".navbar ul li ul").forEach(function(innerItem) {
+            innerItem.style.display = "none";
+        });
+
+        document.querySelectorAll(".navbar a").forEach(function(anchor) {
+            if (anchor.getAttribute('href') === currentPath) {
+                // 해당 메뉴 아이템을 활성화하고 부모의 하위 메뉴를 표시합니다.
+                anchor.parentNode.classList.add('active');
+                const submenu = anchor.closest('ul');
+                if (submenu) {
+                    submenu.style.display = "block";
+                }
+            }
+        });
+
+        document.querySelectorAll(".navbar > ul > li > a").forEach(function(item) {
+            item.addEventListener("click", function(e) {
+                e.preventDefault(); // 링크의 기본 동작을 방지
+
+                const submenu = this.nextElementSibling;
+
+                // 모든 하위 메뉴를 숨깁니다.
+                document.querySelectorAll(".navbar ul li ul").forEach(function(innerItem) {
+                    if (innerItem !== submenu) {
+                        innerItem.style.display = "none";
+                    }
+                });
+
+                // 클릭된 메뉴의 하위 메뉴를 토글
+                if (submenu.style.display === "block") {
+                    submenu.style.display = "none";
+                } else {
+                    submenu.style.display = "block";
+                }
+            });
+        });
+    });
+
+</script>
 </body>
 </html>

@@ -241,4 +241,10 @@ public class MainController {
 
         return "member/signUp_STEP5";
     }
+
+    @GetMapping("/profile")
+    public String getProfile(){
+
+        return "/member/profile";
+    }
 }

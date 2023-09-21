@@ -32,102 +32,12 @@
     <div class="main-area">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="">
-            <form action="${pageContext.request.contextPath}/walletInfo" method="post" class="main-body">
                 <h2>Currency Exchange</h2>
-                <%--         연결계좌, 비밀번호 입력   --%>
-                <div class="Authenticate">
-                    <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
-                        <div class="card-body pe-5">
-                            <table class="table table-hover border-light">
-                                <tbody>
-                                <%--                                계좌 선택 --%>
-                                <tr class="text border-light">
-                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Select</th>
-                                    <td>
-                                        <select class="form-select border-3 w-60" name="senderAccountNo"
-                                                id="selectAccountForm" onchange="changeBalance()" style="height: 45px;">
-                                            <option value="" selected disabled>Choose Payment Method</option>
-
-                                            <optgroup label="Accounts">
-                                                <c:forEach items="${accountList}" var="account">
-                                                    <option value="${account.acNo}" data-account="${account}"
-                                                            data-balance="${account.balance}">
-                                                            ${account.acNo}
-                                                    </option>
-                                                </c:forEach>
-                                            </optgroup>
-
-                                            <optgroup label="Hana Wallet">
-                                                <option value="HANA Wallet" data-wallet="${walletKRW}"
-                                                        data-balance="${walletKRW.balance}">
-                                                    KRW Wallet
-                                                </option>
-                                            </optgroup>
-
-                                        </select>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-light">
-                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Balance</th>
-                                    <td>
-                                        <div class="btnArea" id="btnFclArea">
-                                            <%--                                            <input type="text" name="accountBalance" id="accountBalance"--%>
-                                            <%--                                                   placeholder="balance" maxlength="20" readonly/>--%>
-                                            <p class="text-start align-middle" id="accountBalance"></p>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="border-light">
-                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Password</th>
-                                    <td>
-                                        <input type="password" name="account_password" id="account_password"
-                                               placeholder="password" maxlength="6"/>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            Preferential rate is 100% with Hana Money!
-                        </div>
-                    </div>
-                </div>
-                <%--            연결계좌, 비밀번호 입력 --%>
-                <%--         환율 정보 시작   --%>
-                <div class="showExchangeRate">
-                    <table>
-                        <caption>ExchangeRate Info</caption>
-                        <colgroup>
-                            <col style="width: 55%;">
-                            <col style="width: 35%;">
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <th>When making a remittance</th>
-                            <td><span class="txt"><em class="point" id="remittance"></em></span></td>
-                        </tr>
-                        <tr>
-                            <th>Receiving</th>
-                            <td><span class="txt"><em class="point" id="receiving"></em></span></td>
-                        </tr>
-                        <tr>
-                            <th>Buying</th>
-                            <td><span class="txt"><em class="point" id="buying"></em></span></td>
-
-                        </tr>
-                        <tr>
-                            <th>When selling</th>
-                            <td><span class="txt"><em class="point" id="selling"></em></span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-                <%--         환율 정보 끝   --%>
-
+            <form action="${pageContext.request.contextPath}/walletInfo" method="post" class="main-body">
 
                 <%--          환전 계산 시작 --%>
                 <div class="compare_area">
+                    Please select the currency you want to exchange
                     <div class="compare_section">
                         <%--                    Source 통화 섹션 --%>
                         <div class="fr_info">
@@ -202,12 +112,44 @@
                         </div>
                         <p class="cal_txt _noservice"></p></div>
                     <div class="btn-area" style="text-align: right">
-                <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                        <button type="button" class="" id="calExchange">계산 </button></span>
+                        <div class="toggleExchangeRate" onclick="toggleRateInfo()">
+                            상세환율 보기 <span class="arrow">&#9660;</span>
+                        </div>
+                        <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
+
+                        <button type="button" class="" id="calExchange">Calculate </button></span>
                     </div>
                 </div>
                 <%--          환전 계산 끝 --%>
 
+                <%--         환율 정보 시작   --%>
+                <div class="showExchangeRate">
+                    <table>
+                        <caption>ExchangeRate Info</caption>
+                        <colgroup>
+                            <col style="width: 27.5%;">
+                            <col style="width: 17.5%;">
+                            <col style="width: 27.5%;">
+                            <col style="width: 17.5%;">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th>When making a remittance</th>
+                            <td><span class="txt"><em class="point" id="remittance"></em></span></td>
+                            <th>Buying</th>
+                            <td><span class="txt"><em class="point" id="buying"></em></span></td>
+                        </tr>
+                        <tr>
+                            <th>Receiving</th>
+                            <td><span class="txt"><em class="point" id="receiving"></em></span></td>
+                            <th>When selling</th>
+                            <td><span class="txt"><em class="point" id="selling"></em></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            <%--         환율 정보 끝   --%>
 
                 <%--        결제 정보 미리보기 시작    --%>
                 <div class="col pt-1 previewPayment" style="display: none">
@@ -255,13 +197,6 @@
                         </div>
                     </div>
 
-                    <div class="btn-area mt15 mb30">
-                        <span class=" btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
-                        <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
-                           class="">Cancel</a></span>
-                        <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                        <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
-                    </div>
                 </div>
                 <input type="hidden" name="walletSeq" value="${walletKRW.walletSeq}">
                 <input type="hidden" name="walletPw" value="${walletKRW.walletPw}">
@@ -270,6 +205,73 @@
                 <input type="hidden" name="krwAmount" id="hiddenFinalAmount">
                 <input type="hidden" name="sourceCurrencyName" id="hiddenSourceCurrencyName">
 
+
+                <%--         연결계좌, 비밀번호 입력   --%>
+                <div class="Authenticate">
+                    <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
+                        <div class="card-body pe-5">
+                            <table class="table table-hover border-light">
+                                <tbody>
+                                <%--                                계좌 선택 --%>
+                                <tr class="text border-light">
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Select</th>
+                                    <td>
+                                        <select class="form-select border-3 w-60" name="senderAccountNo"
+                                                id="selectAccountForm" onchange="changeBalance()" style="height: 45px;">
+                                            <option value="" selected disabled>Choose Payment Method</option>
+
+                                            <optgroup label="Accounts">
+                                                <c:forEach items="${accountList}" var="account">
+                                                    <option value="${account.acNo}" data-account="${account}"
+                                                            data-balance="${account.balance}">
+                                                            ${account.acNo}
+                                                    </option>
+                                                </c:forEach>
+                                            </optgroup>
+
+                                            <optgroup label="Hana Wallet">
+                                                <option value="HANA Wallet" data-wallet="${walletKRW}"
+                                                        data-balance="${walletKRW.balance}">
+                                                    KRW Wallet
+                                                </option>
+                                            </optgroup>
+
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-light">
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Balance</th>
+                                    <td>
+                                        <div class="btnArea" id="btnFclArea">
+                                            <%--                                            <input type="text" name="accountBalance" id="accountBalance"--%>
+                                            <%--                                                   placeholder="balance" maxlength="20" readonly/>--%>
+                                            <p class="text-start align-middle" id="accountBalance"></p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr class="border-light">
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Password</th>
+                                    <td>
+                                        <input type="password" name="account_password" id="account_password"
+                                               placeholder="password" maxlength="6"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            Preferential rate is 100% with Hana Money!
+                        </div>
+                    </div>
+                </div>
+                <%--            연결계좌, 비밀번호 입력 --%>
+            <div class="btn-area2 mt15 mb30">
+                        <span class=" btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
+                        <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
+                           class="">Cancel</a></span>
+                <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
+                        <button type="submit" class="" id="buttonConfirm">Topping up </button></span>
+            </div>
             </form>
         </div>
         <footer>
@@ -355,6 +357,9 @@
         const sourceCurrencyCode = document.querySelector(".selectbox_label ._text em").textContent;
         const countryName = currencyNames[sourceCurrencyCode];
         document.querySelector(".previewPayment").style.display = "block";
+        const previewPayment = document.querySelector('.previewPayment');
+        previewPayment.scrollIntoView({behavior: "smooth"});
+        previewPayment.classList.add('focusArea');
         // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
         const targetAmount = parseFloat(document.getElementById("ds_to_money").value.replace(/,/g, ""));
 
@@ -426,6 +431,83 @@
         }
     });
 
+    function toggleRateInfo() {
+        let rateInfo = document.querySelector('.showExchangeRate');
+        let arrow = document.querySelector('.arrow');
+        let toggleText = document.querySelector('.toggleText');
+
+        if(rateInfo.classList.contains('open')) {
+            rateInfo.classList.remove('open');
+            arrow.innerHTML = '&#9660;'; // 아래쪽 화살표로 변경
+            toggleText.textContent = 'open'; // 텍스트를 '보기'로 변경
+        } else {
+            rateInfo.classList.add('open');
+            arrow.innerHTML = '&#9650;'; // 위쪽 화살표로 변경
+            toggleText.textContent = 'close'; // 텍스트를 '닫기'로 변경
+        }
+    }
 </script>
+
+<script>
+    // 페이지 로드 시 compare_area에 배경색 추가 및 나머지 영역을 회색 처리
+    // let colors = [
+    //     '#F2B705',
+    //     '#F25C05',
+    //     '#0388A6',
+    //     '#0E5929',
+    //     '#F272A1',
+    // ];
+    //
+    // let container = document.querySelector('.main-area');
+    // // let sections = [document.querySelector('.compare_area'), document.querySelector('.showExchangeRate'), document.querySelector('.previewPayment'), document.querySelector('.Authenticate')];
+    // let sections = [
+    //     document.querySelector('.compare_area').parentNode,
+    //     document.querySelector('.previewPayment').parentNode,
+    //     document.querySelector('.Authenticate').parentNode
+    // ];
+    // let colorIndex = 0;
+    // let scrollValue = 0;
+    // let dateNow = Date.now();
+    //
+    // container.onwheel = changeBgColor;
+    //
+    // function changeBgColor(e) {
+    //     scrollValue += e.deltaY * 0.01;
+    //
+    //     timePassed = Date.now() - dateNow;
+    //     if (scrollValue > 10 && timePassed > 500) {
+    //         dateNow = Date.now();
+    //         colorIndex += 1;
+    //         if (colorIndex > colors.length-1) colorIndex = 0;
+    //         setSectionStyles();
+    //         scrollValue = 0;
+    //     }
+    //
+    //     if (scrollValue < -10 && timePassed > 500) {
+    //         dateNow = Date.now();
+    //         colorIndex -= 1;
+    //         if (colorIndex < 0) colorIndex = colors.length-1;
+    //         setSectionStyles();
+    //         scrollValue = 0;
+    //     }
+    //     e.preventDefault(); // 실제 스크롤을 비활성화
+    // }
+    //
+    // function setSectionStyles() {
+    //     for (let i = 0; i < sections.length; i++) {
+    //         if (i === colorIndex) {
+    //             sections[i].classList.add('highlighted');
+    //             sections[i].classList.remove('dimmed');
+    //         } else {
+    //             sections[i].classList.remove('highlighted');
+    //             sections[i].classList.add('dimmed');
+    //         }
+    //     }
+    // }
+
+
+
+</script>
+
 </body>
 </html>

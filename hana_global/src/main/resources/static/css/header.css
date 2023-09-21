@@ -110,14 +110,18 @@
     text-align: right;
     transform: translate(0%, 20%);
     background-color: white;
-    border: 1px solid black;
-    border-radius: 20px;
-    max-height: 20px;
+    border-radius: 15px;
+    border-color: #018085;
+    box-shadow: 0 0 5px rgba(1, 128, 133, 0.77);
+    min-height: 30px;
+    max-height: 30px;
     max-width: 100px;
     text-align: center;
     align-items:center;
     position: relative;
     left: 130px;
+    display: flex;
+    justify-content: center;
 }
 
 #language-select {

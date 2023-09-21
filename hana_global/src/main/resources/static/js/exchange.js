@@ -234,7 +234,7 @@ document.querySelectorAll("._trigger").forEach(trigger => {
     });
 });
 
-// 페이지 어느 곳이든 클릭했을 때 dropdown을 닫도록 합니다.
+// 페이지 어느 곳이든 클릭했을 때 dropdown
 document.addEventListener("click", function (event) {
     if (!event.target.closest("._select_box")) {
         document.querySelectorAll("._list").forEach(list => {

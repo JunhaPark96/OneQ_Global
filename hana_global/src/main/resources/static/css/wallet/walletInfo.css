@@ -224,6 +224,8 @@ cardHeader h4{
     overflow: auto;
     background-color: rgba(0,0,0,0.4);
     z-index: 9999;
+
+    font-family: 'Roboto', sans-serif;
 }
 .modal-header {
     display: grid;
@@ -241,8 +243,11 @@ cardHeader h4{
     cursor: pointer;
     padding: 0 10px;
     border-radius: 5px;
-    margin-bottom: 25px;  /* Increase this value to move the close button up */
-    align-self: start;    /* This will align the close button to the top */
+    margin-bottom: 25px;
+    align-self: start;
+    color: #FFFFFF;
+    background-color: #016f73; /* 더 진한 색상 */
+    border: 2px solid #018015; /* 녹색으로 테두리 설정 */
 }
 .authenticateHeader {
     font-size: 2rem;
@@ -250,6 +255,7 @@ cardHeader h4{
     color: #333;
     margin-bottom: 30px;  /* Increase or decrease as required to adjust vertical position */
     margin-top: 15px;     /* Add this to move the Login text down a bit */
+    color: #016f73; /* 진한 블루 */
 }
 /* Modal Content */
 .modal-content {
@@ -260,11 +266,13 @@ cardHeader h4{
     border-radius: 15px;
     padding: 15px;
     min-width: 200px;
-    max-width: 400px;
+    max-width: 500px;
     min-height: 300px;
     margin: 10% auto;
     border: 5px solid #3FC1C9;
-    background-color: #f5f5f5; /* Adjust as per user-info */
+    background-color: #FFFFFF; /* 흰색 배경 */
+    border: none; /* 테두리 제거 */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
 }
 
 .modal-header {
@@ -272,6 +280,8 @@ cardHeader h4{
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
+    color: #016f73; /* 진한 블루 */
+    background-color: #FFFFFF; /* 흰색 배경 */
 }
 
 .modal-main{
@@ -279,6 +289,55 @@ cardHeader h4{
     width: 100%;
     justify-content: center;
 }
+
+.input-group {
+    padding: 10px;
+    /*border: 1px solid #ddd; !* light grey border *!*/
+    /*margin-bottom: 10px; !* space between input groups *!*/
+    text-align: left;
+    padding-bottom: 0px;
+}
+
+.input-group label {
+    display: block; /* make label display block */
+    margin-bottom: 5px; /* space between label and input field */
+    color: #059196; /* 중간 블루톤 */
+}
+
+/* 입력 필드 스타일 */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid #059196; /* 중간 블루톤 테두리 */
+    background-color: #F2F2F2; /* 약간 회색빛의 흰색 */
+    color: #016f73; /* 글자색 진한 블루 */
+    font-size: 16px;
+}
+
+/* 버튼 디자인 변경 */
+.loadWallet, .btn-amount .btn {
+    background-color: #008080; /* 녹색 배경 */
+    color: #FFFFFF; /* 흰색 글자 */
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.loadWallet:hover, .btn-amount .btn:hover {
+    background-color: #059196; /* 호버 시 중간 블루톤 */
+    color: #FFFFFF; /* 흰색 글자 */
+}
+
 
 /*.modal-main-left{*/
 /*    display: grid;*/
@@ -293,20 +352,6 @@ cardHeader h4{
 /*    justify-content: center;*/
 /*    width: 100%;*/
 /*}*/
-
-.input-group {
-    padding: 10px;
-    /*border: 1px solid #ddd; !* light grey border *!*/
-    /*margin-bottom: 10px; !* space between input groups *!*/
-    text-align: left;
-    padding-bottom: 0px;
-}
-
-.input-group label {
-    display: block; /* make label display block */
-    margin-bottom: 5px; /* space between label and input field */
-}
-
 /* 모달 끝--------------------------------------*/
 
 

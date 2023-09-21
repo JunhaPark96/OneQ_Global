@@ -61,7 +61,7 @@ public class WalletController {
     public ResponseEntity loadWallet(@ModelAttribute("currentMember") Member member, @RequestParam("loadAmount") Integer loadAmount, @RequestParam("walletPasswd") String walletPasswd){
         try {
             walletService.loadWallet(member.getUserSeq(), loadAmount, walletPasswd);
-            return ResponseEntity.ok().body("충전 성공!");
+            return ResponseEntity.ok().body("Load Success!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

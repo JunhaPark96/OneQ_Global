@@ -202,7 +202,10 @@
                                 data: baseRates,
                                 borderColor: 'rgb(75, 192, 192)',
                                 borderWidth: 1,
-                                fill: true
+                                fill: true,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)', // fill 색상 설정. 0.2는 투명도를 나타냅니다.
+                                pointRadius: 0, // 점의 크기를 0으로 설정하여 점을 안보이게 합니다.
+                                pointHitRadius: 10 // line 위에 커서를 올렸을 때 값이 보이도록 설정합니다.
                             }]
                         },
                         options: {

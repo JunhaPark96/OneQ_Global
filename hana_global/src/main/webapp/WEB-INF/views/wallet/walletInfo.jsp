@@ -167,19 +167,19 @@
                     </div>
                     <div class="btn-amount">
                         <button type="button"
-                                class="btn bg-white  border-1  me-2 pushButton border-2"
+                                class="btn   border-1  me-2 pushButton border-2"
                                 onclick="selectAmount('10000')">10,000
                         </button>
                         <button type="button"
-                                class="btn bg-white  border-1  me-2 pushButton border-2"
+                                class="btn  border-1  me-2 pushButton border-2"
                                 onclick="selectAmount('50000')">50,000
                         </button>
                         <button type="button"
-                                class="btn bg-white  border-1  me-2 pushButton border-2"
+                                class="btn border-1  me-2 pushButton border-2"
                                 onclick="selectAmount('100000')">100,000
                         </button>
                         <button type="button"
-                                class="btn bg-white  border-1  me-2 pushButton border-2"
+                                class="btn  border-1  me-2 pushButton border-2"
                                 onclick="selectAmount('1000000')">1,000,000
                         </button>
                     </div>
@@ -197,7 +197,7 @@
                 </div>
                 <div class="modal-footer">
                         <button id="loadWallet" class="loadWallet" >
-                            충전
+                            Load
                         </button>
                 </div>
             </div>

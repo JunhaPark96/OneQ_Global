@@ -4,21 +4,39 @@
 
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.ExchangeRepository">
 <!-- 날짜/통화로 환율 조회  -->
+<!--    <select id="getExchangeRateHist" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"-->
+<!--            parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO">-->
+<!--        SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,-->
+<!--               base_rate, prev_rate, usd_conversion_rate-->
+<!--        FROM exchange_rate_hist-->
+<!--        WHERE TO_CHAR(rate_date, 'YYYY/MM/DD') = #{inqDt} AND currency_code = #{currency}-->
+<!--    </select>-->
     <select id="getExchangeRateHist" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"
             parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO">
         SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,
                base_rate, prev_rate, usd_conversion_rate
         FROM exchange_rate_hist
-        WHERE TO_CHAR(rate_date, 'YYYY/MM/DD') = #{inqDt} AND currency_code = #{currency}
+        WHERE rate_date = (
+            SELECT MAX(rate_date)
+            FROM exchange_rate_hist
+            WHERE currency_code = #{currency}
+        )
+          AND currency_code = #{currency}
     </select>
+
 
     <select id="getExchangeRateForLastSixMonths" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"
             parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO">
         SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,
                base_rate, prev_rate, usd_conversion_rate
-        FROM exchange_rate_hist
-        WHERE rate_date BETWEEN TO_DATE(#{startDate}, 'YYYY/MM/DD') AND TO_DATE(#{endDate}, 'YYYY/MM/DD')
-          AND currency_code = #{currency}
+        FROM (
+                 SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,
+                        base_rate, prev_rate, usd_conversion_rate,
+                        ROW_NUMBER() OVER (PARTITION BY TRUNC(rate_date) ORDER BY rate_date DESC) as rn
+                 FROM exchange_rate_hist
+                 WHERE rate_date BETWEEN TO_DATE(#{startDate}, 'YYYY/MM/DD') AND TO_DATE(#{endDate}, 'YYYY/MM/DD HH24:MI:SS')
+                   AND currency_code = #{currency}
+             ) WHERE rn = 1
         ORDER BY rate_date ASC
     </select>
 

@@ -202,7 +202,7 @@
                                 data: baseRates,
                                 borderColor: 'rgb(75, 192, 192)',
                                 borderWidth: 1,
-                                fill: false
+                                fill: true
                             }]
                         },
                         options: {

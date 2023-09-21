@@ -48,7 +48,7 @@
     
     <select id="getTransactionHistoryByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO">
         SELECT ac_no, to_char(trade_date, 'YYYY-MM-DD') as tradeDate, balance, transaction_amount, transaction_type, PARTICIPANT, PARTICIPANT_ACCOUNT
-        FROM ACCOUNT_HISTORY where ac_no = #{acNo}
+        FROM ACCOUNT_HISTORY where ac_no = #{acNo} order by tradeDate desc
     </select>
 
     <update id="updateAccountBalance">

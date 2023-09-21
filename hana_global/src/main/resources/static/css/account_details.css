@@ -2,7 +2,7 @@
 .main-body {
     display: grid;
     margin-bottom: 0;
-    grid-template-rows: 0.15fr 0.35fr 0.1fr 0.1fr;
+    grid-template-rows: 0.15fr 0.3fr 0.1fr 0.1fr;
 }
 
 .justify-content-center{
@@ -134,7 +134,7 @@ tbody tr td input{
 }
 
 .transaction_history th, .transaction_history td {
-    padding: 10px;
+    /*padding: 10px;*/
     text-align: left;
     border: 1px solid #e0e0e0;
 }

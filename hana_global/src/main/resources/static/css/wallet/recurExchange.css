@@ -40,14 +40,14 @@ h2 {
 .walletCell::before {
     content: "";
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 0;
     right: 0;
     bottom: 0;
     /*background-image: url("/images/walletIcon.png");*/
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 200px 200px;
+    background-size: 150px 150px;
     opacity: 0.65;  /* 여기에서 이미지의 투명도를 조정합니다. */
     z-index: -1;  /* 그라데이션 아래에 이미지가 위치하도록 합니다. */
 }
@@ -56,8 +56,8 @@ h2 {
 .cardHeader{
     display: flex;
     justify-content: space-between;
-    align-items: center; /* 내용을 수직 중앙에 정렬하고 싶다면 추가하세요. */
-    /*height: 45%;*/
+    /*align-items: center; */
+    /*height: 15%;*/
     padding-left: 10%;
     padding-right: 5%;
 }
@@ -67,14 +67,18 @@ cardHeader h4{
 }
 
 .loadBtn{
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     border-radius: 2rem;
-    /*background: rgba(65, 243, 5, 0.3);*/
+    background: rgba(65, 243, 5, 0.3);
     box-shadow: inset 0 0 5px rgb(103, 231, 159);
     padding-right: 15px;
     padding-left: 15px;
-    border: none;
     background: white;
+    border: none;
+    /*border-top: 2px inset rgb(103, 231, 159); !* 위쪽 그림자 설정 *!*/
+    /*border-bottom: 2px inset rgb(103, 231, 159); !* 아래쪽 그림자 설정 *!*/
+    /*border-right: none;*/
+    /*border-left: none;*/
 }
 .cardHeader h5{
 }
@@ -91,6 +95,14 @@ cardHeader h4{
     color: black;
     font-weight: 600;
     font-size: larger;
+}
+
+.baseRateNote{
+    display: flex;
+    justify-content: flex-start;
+    color: #777777;
+    /*margin-right: 60px;*/
+    margin-left: 27px;
 }
 
 .cardElem2{

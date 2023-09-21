@@ -43,23 +43,28 @@
                 <div class="walletCard">
                     <div class="cardHeader">
                         <h4>Hana Wallet</h4>
-                        <button class="loadBtn">Load</button>
+                    </div>
+                    <div class="baseRateNote">
+                        Balance
                     </div>
                     <div class="cardElem1">
                         <a href="${pageContext.request.contextPath}/accountInfo">
                             <fmt:formatNumber value="${selectedWallet.balance}" type="number" pattern="#,##0"/>
-                            &nbsp; ${selectedWallet.currency} </a>
+                             ${selectedWallet.currency} </a>
+                    </div>
+                    <div class="baseRateNote">
+                        baseRate
                     </div>
                     <div class="cardElem2">
                         <c:choose>
                             <c:when test="${selectedWallet.currencyCode == 'JPY' || selectedWallet.currencyCode == 'VND'}">
-                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = ${currencyCode.baseRate} Won</span>
+                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = <span style="color: red"> ${currencyCode.baseRate} Won </span> </span>
                                 <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
                                     <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
                                 </button>
                             </c:when>
                             <c:otherwise>
-                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = ${currencyCode.baseRate} Won</span>
+                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = <span style="color: red"> ${currencyCode.baseRate} Won </span></span>
                                 <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
                                     <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
                                 </button>
@@ -205,9 +210,9 @@
                     <br/>
                     <div class="btnArea text-start align-middle">
                         <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic
-                            charging if it is lower or equal to the set exchange rate<br/>
-                            자동환전이 결제될 시, 수수료는 1%<br/>
-                            목표환율에 도달하지 못하면 마지막 날짜에 자동결제 됩니다
+                            charging if it is lower or equal to the set exchange rate<br/><br/>
+                            When automatic currency conversion is initiated upon payment, a fee of 1% will be applied.<br/>
+                            If the target exchange rate is not reached, it will be automatically canceled on the last day.
                         </p>
                     </div>
 

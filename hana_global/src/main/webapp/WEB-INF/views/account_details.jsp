@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                             <tr class="text">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;계좌선택</th>
+                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Account Selection</th>
                                 <td>
                                     <select class="form-select border-3 w-50" name="withdrawAccountNo"
                                             id="selectAccountForm"
@@ -74,7 +74,7 @@
                             </tr>
                             <%--                            기간 조회--%>
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;조회기간</th>
+                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Date Range</th>
                                 <td class="tbl_left">
                                     <div class="tbl_in">
                                         <input type="text" id="inqStrDt" name="inqStrDt" readonly>
@@ -91,28 +91,28 @@
                             </tr>
                             <%--                            거래 유형 선택--%>
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;거래유형</th>
+                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Transaction Type</th>
                                 <td>
                                     <input type="hidden" name="transaction_type" id="transaction_type" value="">
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('ALL')">전체
+                                            onclick="selectTransType('ALL')">All
                                     </button>
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('1')">출금
+                                            onclick="selectTransType('1')">Withdrawal
                                     </button>
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
-                                            onclick="selectTransType('0')">입금
+                                            onclick="selectTransType('0')">Deposit
                                     </button>
                                 </td>
                             </tr>
 
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
+                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Balance</th>
                                 <td>
                                     <div class="btnArea" id="btnFclArea">
                                         <p class="text-center align-middle" id="accountBalance">
                                         </p>
-                                        <a href="/account_transfer" class="btn_p">계좌 이체</a>
+                                        <a href="/account_transfer" class="btn_p">Transfer</a>
                                     </div>
                                 </td>
                             </tr>
@@ -121,7 +121,7 @@
                         </table>
 
                         <div class="btnArea justify-content-center" id="acc_trans_inquiry">
-                            <input type="button" id="btnNext" class="btn_p" value="조회">
+                            <input type="button" id="btnNext" class="btn_p" value="Inquiry">
                         </div>
 
                     </div>
@@ -133,12 +133,12 @@
                 <table id="transactionHistoryTable" class="table table-striped table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>
-                        <th>거래일시</th>
-                        <th>거래금액</th>
-                        <th>거래구분</th>
-                        <th>잔액</th>
-                        <th>거래대상</th>
-                        <th>거래대상 계좌번호</th>
+                        <th>Date and Time</th>
+                        <th>Transaction Amount</th>
+                        <th>Transaction Type</th>
+                        <th>Balance</th>
+                        <th>Transaction Target</th>
+                        <th>Participant</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -184,9 +184,9 @@
                         let transactionTypeText = data[i].transactionType == '0' ? '입금' : '출금';
                         $('#transactionHistoryTable tbody').append('<tr>' +
                             '<td>' + data[i].tradeDate + '</td>' +
-                            '<td>' + data[i].transactionAmount + '원</td>' +
+                            '<td>' + data[i].transactionAmount + ' won</td>' +
                             '<td>' + transactionTypeText + '</td>' +
-                            '<td>' + data[i].balance + '원</td>' +
+                            '<td>' + data[i].balance + ' won</td>' +
                             '<td>' + data[i].participant + '</td>' +
                             '<td>' + data[i].participantAccount + '</td>' +
                             '</tr>');

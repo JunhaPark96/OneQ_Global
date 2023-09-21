@@ -387,3 +387,17 @@ cardHeader h4{
     /*border: 1px solid brown;*/
     padding: 20px;
 }
+.locRight {
+    display: flex;
+    justify-content: center;
+    /*background-color: #3FC1C9;*/
+    border-radius: 2rem;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+    width: 70px;  /* 조금 넓게 변경 */
+    align-items: center;
+    cursor: pointer;  /* 변경 가능한 영역임을 암시 */
+    margin-right: 5%;
+    font-weight: 500;  /* 글자가 조금 더 도드라져 보이게 */
+    border: 1px solid #3FC1C9;
+}

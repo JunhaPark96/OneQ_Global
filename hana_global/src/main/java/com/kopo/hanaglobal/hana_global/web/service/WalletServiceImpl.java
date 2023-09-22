@@ -8,6 +8,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.WalletRepository;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -279,5 +280,14 @@ public class WalletServiceImpl implements WalletService {
     public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO){
         walletRepository.insertAutoExchange(autoExchangeDTO);
         System.out.println("자동환전 삽입은 " + autoExchangeDTO.toString());
+    }
+
+    @Override
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq){
+        List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByWalletSeq(userSeq);
+        for (AutoExchangeDTO a : autoExchangeDTOS) {
+            System.out.println("자동환전 리스트는 " + a);
+        }
+        return autoExchangeDTOS;
     }
 }

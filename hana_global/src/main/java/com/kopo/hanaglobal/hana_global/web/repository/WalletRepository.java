@@ -43,4 +43,6 @@ public interface WalletRepository {
     public void insertWalletNewCurrency(NewWalletCurrencyDTO newWalletCurrencyDTO);
 
     public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO);
+
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq);
 }

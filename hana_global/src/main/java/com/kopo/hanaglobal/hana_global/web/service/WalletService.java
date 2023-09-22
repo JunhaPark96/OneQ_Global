@@ -36,4 +36,6 @@ public interface WalletService {
     public void doExchange(String walletSeq, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName);
     // 자동환전 삽입
     public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO);
+
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq);
 }

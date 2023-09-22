@@ -74,4 +74,11 @@
         insert into auto_exchange (ae_seq, wallet_seq, base_cur_code, target_cur_code, exchange_amount, exchange_date, lower_bound)
         values (auto_exchange_seq.nextval, #{walletSeq}, 'KRW', #{targetCurCode}, #{exchangeAmount}, #{exchangeDate}, #{lowerBound})
     </insert>
+
+    <select id="getAutoExchangeListByWalletSeq" resultType="AutoExchangeDTO">
+        SELECT ae_seq, wallet_seq, base_cur_code, target_cur_code, exchange_amount, exchange_date, lower_bound
+        FROM HANA_WALLET HW
+                 JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
+        WHERE HW.USER_SEQ = #{userSeq};
+    </select>
 </mapper>

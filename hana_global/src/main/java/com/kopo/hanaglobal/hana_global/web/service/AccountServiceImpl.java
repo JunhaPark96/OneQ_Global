@@ -119,4 +119,9 @@ public class AccountServiceImpl implements AccountService{
     public void insertAccHistTransaction(String acNo, Integer balance, Integer transactionAmount, int transactionType, String participant, String participantAccount){
         accountRepository.insertAccHistTransaction(acNo, balance, transactionAmount, transactionType, participant, participantAccount);
     }
+
+    @Override
+    public Account getAccountByAcNo(String acNo){
+        return accountRepository.getAccountByAcNo(acNo);
+    }
 }

@@ -1,11 +1,12 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.ocr.ClovaOCRTemplate;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
-import com.kopo.hanaglobal.hana_global.web.service.MemberService;
-import com.kopo.hanaglobal.hana_global.web.service.MemberServiceImpl;
+import com.kopo.hanaglobal.hana_global.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +32,16 @@ import java.util.Map;
 @SessionAttributes("currentMember")
 public class MemberController {
     private MemberService memberService;
+    private AccountService accountService;
+    private WalletService walletService;
+    private ExchangeService exchangeService;
 
     @Autowired
-    public MemberController(MemberService memberService){
+    public MemberController(MemberService memberService, AccountService accountService, WalletService walletService, ExchangeService exchangeService){
         this.memberService = memberService;
+        this.accountService = accountService;
+        this.walletService = walletService;
+        this.exchangeService = exchangeService;
     }
     @GetMapping("/boardlist")
     public ModelAndView getMemberAll(){
@@ -118,8 +125,15 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(@ModelAttribute("currentMember") Member member){
+    public String getProfile(@ModelAttribute("currentMember") Member member, Model model){
+        // 원화 월렛
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+        Account account = accountService.getAccountByAcNo(wallet.getAcNo());
 
+        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+
+        model.addAttribute("walletList", walletList);
+        model.addAttribute("account", account);
         return "/member/profile";
     }
 

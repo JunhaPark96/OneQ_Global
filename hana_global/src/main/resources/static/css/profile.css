@@ -26,8 +26,8 @@ body {
     grid-template-columns: 0.5fr 2fr;
     display: grid;
     max-height: 850px;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
     column-gap: 40px;
 }
 
@@ -35,35 +35,182 @@ body {
 /* 기능 메인 바디 */
 .main-body{
     display: grid;
-    max-height: 1000px;
+    max-height: 700px;
     /*border: 1px solid black;*/
     column-gap: 20px;
+
 }
 /* main 구역 레이아웃 */
 
 
-/* 본문 좌측--------------------------------------*/
-.main-info {
-    position: relative;
-    /* 배경 이미지와 텍스트를 겹치기 위해 relative 설정 */
-    text-align: center;
+/* 본문 구역--------------------------------------*/
+.main-wrapper{
+    display: grid;
+    grid-template-areas:
+    "user-info main-info"
+    "exchange-info remittance-info "
+;
+    column-gap: 20px;
+    row-gap: 20px;
     overflow: hidden;
     height: 100%;
     width: 100%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
     border-radius: 20px;
-    min-height: 290px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.main-info {
+    grid-area: main-info;
+    position: relative;
+    /* 배경 이미지와 텍스트를 겹치기 위해 relative 설정 */
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    border-radius: 20px;
+}
+
+.card-user{
+    grid-area: user-info;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    border-radius: 20px;
+}
+
+.exchange-info{
+    grid-area: exchange-info;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    border-radius: 20px;
+}
+
+.remittance-info{
+    grid-area: remittance-info;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    border-radius: 20px;
 }
 
 
+/* 대시보드 본문 시작 ------------------------------*/
+
+/* 계좌연동 대시보드 시작 ----------------------------*/
+.row {
+    flex-wrap: nowrap;
+    --bs-gutter-x: 0rem;
+    margin-left: 0px;
+    height: 100%;
+}
+.col-md-4 {
+    border-bottom: 1px solid rgba(1, 128, 133, 0.54);
+    border-top: 1px solid rgba(1, 128, 133, 0.54);
+    border-left: 1px solid rgba(1, 128, 133, 0.54);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    max-width: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    /*background-color: rgba(255,204,92,0.8);*/
+    background-color: #016f73;
+    min-height: 400px;
+}
+.col-md-8 {
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+
+}
+
+.account-image {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+/*.myAccount {*/
+/*    content: url("/images/mascort.png");*/
+/*    display: block;*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    margin-right: 20px;*/
+/*}*/
+
+.col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "left-card right-card"
+            "modify-wrapper modify-wrapper"
+    ;
+    row-gap: 20px;
+    padding-left: 20px;
+}
+
+.grid-right {
+    display: grid;
+    grid-area: right-card;
+    margin-left: 12px;
+    grid-template-rows: 1fr 1fr;
+}
+
+.grid-left {
+    display: grid;
+    grid-area: left-card;
+    /*grid-template-rows: 0fr 1fr;*/
+}
 
 
+.pt-1 h5 {
+    text-align: right;
+}
+
+.text-start {
+    line-height: 50px;
+    text-align: start;
+}
+
+.mb-3 {
+    margin-bottom: 0px;
+}
+
+.card-body {
+    margin-top: 3%;
+    /*border: 1px solid brown;*/
+    /*padding: 20px;*/
+    /*height: 100%;*/
+    padding: 0px;
+    /*padding-left: 20px;*/
+}
+.modify-wrapper{
+    grid-area: modify-wrapper;
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+}
+.locRight {
+    display: flex;
+    justify-content: center;
+    /*background-color: #3FC1C9;*/
+    width: 70px;  /* 조금 넓게 변경 */
+    align-items: center;
+    cursor: pointer;  /* 변경 가능한 영역임을 암시 */
+    margin-right: 5%;
+    font-weight: 500;  /* 글자가 조금 더 도드라져 보이게 */
+    border: 1px solid #3FC1C9;
+    background-color: #018085;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+/* 계좌연동 대시보드 끝 ----------------------------*/
 
 
-
-/* 본문 우측--------------------------------------*/
-
-
+/* 대시보드 본문 끝 ------------------------------*/
 
 
 

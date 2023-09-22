@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("currentMember")
 public class MemberController {
     private MemberService memberService;
 
@@ -116,11 +117,15 @@ public class MemberController {
         }
     }
 
-    // 로그아웃
-    @GetMapping("/signout")
-    public String signOut(HttpSession session){
-        session.invalidate();
-        System.out.println("로그아웃 완료");
-        return "redirect:/";
+    @GetMapping("/profile")
+    public String getProfile(@ModelAttribute("currentMember") Member member){
+
+        return "/member/profile";
+    }
+
+    @GetMapping("/dashboard")
+    public String getDashBoard(@ModelAttribute("currentMember") Member member){
+
+        return "/admin/dashboard";
     }
 }

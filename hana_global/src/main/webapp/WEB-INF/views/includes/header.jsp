@@ -61,7 +61,7 @@
     <div class="login-box">
         <c:if test="${not empty currentMember}">
             <c:choose>
-                <c:when test="${currentMember.name == 'admin'}">
+                <c:when test="${currentMember.name == 'ADMIN'}">
                     <div class="signin">
                         <a href="${pageContext.request.contextPath}/dashboard"> DashBoard </a>
                     </div>

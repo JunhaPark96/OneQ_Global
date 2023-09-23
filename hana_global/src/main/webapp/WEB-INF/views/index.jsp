@@ -129,11 +129,13 @@
                      </div>
                  </div>--%>
                 <div class="main-info">
+                <a href="${pageContext.request.contextPath}/openAccount" style="text-decoration: none; color: black">
                     <div class="user-image"></div>
                     <div class="user-text">
-                        <h3>Banking Guide</h3>
-                        for Foreign Customer
+                        <h3>Open Account</h3>
+                        Open a Hana Bank account up to 14 days before you arrive in Korea, or up to three months after you arrive.
                     </div>
+                </a>
                 </div>
             </div>
         </div>

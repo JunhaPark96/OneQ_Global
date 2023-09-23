@@ -293,18 +293,19 @@ body {
 
 .user-text {
     position: absolute;
-    left: 58%;
+    left: 55%;
     /* 가로 중앙에 배치 */
     /*transform: translate(-50%, -50%);*/
     /* 정확한 중앙 정렬을 위한 보정 */
     z-index: 1;
     /* z-index를 1로 설정하여 배경 이미지 위에 위치시킴 */
-    font-size: 1.5em;
+    font-size: 1.4em;
     /*animation: slideIn 2s linear forwards;*/
     /*opacity: 0; !* 애니메이션이 시작하기 전에 텍스트를 숨기기 *!*/
-    white-space: nowrap; /* 한 줄로 표시 */
+    /*white-space: nowrap; !* 한 줄로 표시 *!*/
     overflow: hidden; /* 텍스트가 박스 밖으로 나가지 않게 함 */
     text-align: right;
+    padding-right: 30px;
 }
 
 /* 키 프레임 정의 */

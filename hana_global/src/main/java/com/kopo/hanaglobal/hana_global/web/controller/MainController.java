@@ -59,12 +59,6 @@ public class MainController {
 //        return "account_transfer";
 //    }
 
-    @GetMapping("/remittance")
-    public String transfer() {
-        System.out.println("transfer 페이지");
-        return "remittance/remittance";
-    }
-
 //    @GetMapping("/signUp")
 //    public String signUp() {
 //        System.out.println("signUp 페이지");

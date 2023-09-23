@@ -64,7 +64,16 @@
 <%--                    <input type="submit" value="Login" class="loginBtn">--%>
 <%--                </div>--%>
                 </div>
+                <div class="login-option">
+                    <div>
+                        <a href="${pageContext.request.contextPath}/openAccount"> open account </a>
+                    </div>
+                    <div>
+                        <a href="${pageContext.request.contextPath}/openAccount"> forget your password? </a>
+                    </div>
+                </div>
             </form:form>
+
         </div>
     </div>
     <footer>

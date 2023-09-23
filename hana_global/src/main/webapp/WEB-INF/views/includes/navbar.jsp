@@ -40,7 +40,7 @@
     <li>
         <a href="/transfer" style="padding-left: 15px">Overseas Remittance</a>
         <ul>
-            <li><a href="/transfer">Immediate Remittance</a></li>
+            <li><a href="${pageContext.request.contextPath}/remittance">Immediate Remittance</a></li>
             <li><a href="/transfer">Scheduled Remittance</a></li>
         </ul>
     </li>

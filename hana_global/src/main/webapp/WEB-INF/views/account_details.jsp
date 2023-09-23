@@ -181,7 +181,7 @@
 
                     // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
-                        let transactionTypeText = data[i].transactionType == '0' ? '입금' : '출금';
+                        let transactionTypeText = data[i].transactionType == '0' ? 'Deposit' : 'Withdrawal';
                         $('#transactionHistoryTable tbody').append('<tr>' +
                             '<td>' + data[i].tradeDate + '</td>' +
                             '<td>' + data[i].transactionAmount + ' won</td>' +

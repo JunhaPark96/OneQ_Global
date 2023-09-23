@@ -146,3 +146,15 @@ body {
 .loginBtn:hover {
     background-color: #016f73;
 }
+
+.login-option{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+}
+
+.login-option a {
+    color: #51cbce;
+    font-size: 18px;
+    font-weight: bold;
+}

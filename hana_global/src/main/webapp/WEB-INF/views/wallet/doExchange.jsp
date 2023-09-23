@@ -152,7 +152,7 @@
             <%--         환율 정보 끝   --%>
 
                 <%--        결제 정보 미리보기 시작    --%>
-                <div class="col pt-1 previewPayment" style="display: none">
+                <div class="col previewPayment" style="display: none">
                     <%--                    <div class="btnArea text-start align-middle">--%>
                     <%--                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic--%>
                     <%--                            charging if it is lower or equal to the set exchange rate</p>--%>
@@ -185,7 +185,7 @@
 
                                 <tr>
                                     <th>The amount you will be paying(Won)</th>
-                                    <td><span class="txt" style="color: #016f73; font-weight: 700"><em class="point"></em></span></td>
+                                    <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em class="point"></em></span></td>
                                 </tr>
 
                                 <tr>

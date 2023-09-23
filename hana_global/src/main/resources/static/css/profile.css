@@ -4,6 +4,7 @@ body {
     height: 100vh;
     margin: 0px;
     font-family: "Pretendard-Regular", sans-serif;
+    background-color: #f4f3ef;
 }
 
 .main-container {
@@ -35,10 +36,9 @@ body {
 /* 기능 메인 바디 */
 .main-body{
     display: grid;
-    max-height: 700px;
+    /*max-height: 700px;*/
     /*border: 1px solid black;*/
     column-gap: 20px;
-
 }
 /* main 구역 레이아웃 */
 
@@ -68,6 +68,7 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
     border-radius: 20px;
+    background-color: white;
 }
 
 .card-user{
@@ -82,8 +83,9 @@ body {
     grid-area: exchange-info;
     height: 100%;
     width: 100%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
-    border-radius: 20px;
+    /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; !* 입체감 부각 *!*/
+    /*border-radius: 20px;*/
+    /*background-color: rgba(0, 187, 255, 0.8);*/
 }
 
 .remittance-info{
@@ -211,13 +213,19 @@ body {
 
 
 /* 자동환전 시작 --------------------------------*/
+.title-text{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
 .walletCell::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 48%;
     left: 0;
-    right: 0;
-    bottom: 30%;
+    right: 30%;
+    bottom: 0%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50px 50px;

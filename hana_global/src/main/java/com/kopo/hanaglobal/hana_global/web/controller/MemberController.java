@@ -133,7 +133,7 @@ public class MemberController {
 
 //        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByWalletSeq(member.getUserSeq());
-//        model.addAttribute("walletList", walletList);
+
         model.addAttribute("autoExchangeList", autoExchangeDTOList);
         model.addAttribute("account", account);
         return "/member/profile";

@@ -76,7 +76,7 @@
     </insert>
 
     <select id="getAutoExchangeListByWalletSeq">
-        SELECT AE.ae_seq, AE.wallet_seq, AE.base_cur_code, AE.target_cur_code, AE.exchange_amount, AE.exchange_date, AE.lower_bound
+        SELECT AE.ae_seq, AE.wallet_seq, AE.base_cur_code, AE.target_cur_code, AE.exchange_amount, AE.exchange_date, AE.lower_bound, AE.STATUS
         FROM HANA_WALLET HW
                  JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
         WHERE HW.USER_SEQ = #{userSeq}

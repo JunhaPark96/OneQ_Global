@@ -1,0 +1,51 @@
+/* 전체 레이아웃 구조 시작 -----*/
+.main-body-wrapper{
+    display: grid;
+    grid-template-areas:
+    "header-section content-section"
+    ;
+    grid-template-columns: 3fr 7fr;
+    column-gap: 40px;
+    padding: 20px;
+    background-color: #f4f4f4; /* 배경 색상 변경 */
+    border-radius: 10px; /* 둥근 모서리 추가 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 그림자 효과 추가 */
+}
+
+.header-section{
+    display: grid;
+    grid-area: header-section;
+    background-color: #ffffff; /* 배경 색상 변경 */
+    padding: 20px;
+    border-radius: 10px; /* 둥근 모서리 추가 */
+}
+
+.content-section{
+    display: grid;
+    grid-area: content-section;
+    grid-gap: 20px; /* 내용물 간 간격 조절 */
+}
+/* 전체 레이아웃 구조 끝 -----*/
+.item {
+    background-color: #ffffff; /* 배경 색상 변경 */
+    padding: 20px;
+    border-radius: 10px; /* 둥근 모서리 추가 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.05); /* 그림자 효과 추가 */
+}
+
+.button-section .button_primary {
+    background-color: #018085; /* 버튼 색상 변경 */
+    color: #ffffff; /* 텍스트 색상 변경 */
+    padding: 10px 20px;
+    border-radius: 5px; /* 둥근 모서리 추가 */
+    text-decoration: none;
+}
+
+.button-section .button_primary:hover {
+    background-color: #016f73; /* 호버 시 버튼 색상 변경 */
+}
+
+
+a:hover {
+    text-decoration: underline;
+}

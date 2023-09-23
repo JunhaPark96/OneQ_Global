@@ -1,0 +1,36 @@
+{
+  "visaTypes": [
+    {
+      "VisaTypeId": 0,
+      "VisaType": "Permanent Resident"
+    },
+    {
+      "VisaTypeId": 1,
+      "VisaType": "Skilled Temp Worker (TSS/457)"
+    },
+    {
+      "VisaTypeId": 2,
+      "VisaType": "Working Holiday Maker"
+    },
+    {
+      "VisaTypeId": 3,
+      "VisaType": "International Student"
+    },
+    {
+      "VisaTypeId": 4,
+      "VisaType": "Temporary Business Visa"
+    },
+    {
+      "VisaTypeId": 5,
+      "VisaType": "Other"
+    },
+    {
+      "VisaTypeId": 6,
+      "VisaType": "Significant Investor VISA"
+    },
+    {
+      "VisaTypeId": 7,
+      "VisaType": "Family Visa"
+    }
+  ]
+}

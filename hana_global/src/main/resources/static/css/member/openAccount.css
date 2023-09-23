@@ -1,0 +1,68 @@
+.step {
+    height: 400px;  /* Setting height to 300px */
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ddd;  /* Adding border for better visibility */
+    box-sizing: border-box;  /* Ensuring padding and border are included in the element's total height and width */
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.highlight {
+    /*background-color: #f4f3ef;*/
+    background-color: #FFFFFF;
+    /*border-color: #018085;*/
+    box-shadow: 0 0 8px rgba(1, 128, 133, 0.7);
+}
+
+.step h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.step p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.step input,
+.step select {
+    width: 30%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.step button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #018085; /* A finance friendly color */
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100px;
+}
+
+.step button:hover {
+    background-color: #016f73;
+}
+
+.country-phone-group {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Adjust this value to change the spacing between elements */
+    align-items: center;
+}
+
+.country-phone-group label,
+.country-phone-group select,
+.country-phone-group input {
+    margin-bottom: 0; /* Override the margin-bottom for these elements */
+}

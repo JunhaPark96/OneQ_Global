@@ -6,7 +6,6 @@ import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.ocr.ClovaOCRTemplate;
-import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
 import com.kopo.hanaglobal.hana_global.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -143,5 +141,14 @@ public class MemberController {
     public String getDashBoard(@ModelAttribute("currentMember") Member member){
 
         return "/admin/dashboard";
+    }
+
+    @GetMapping("/readyToApply")
+    public String readyToApply(){
+        return "/member/readyToApply";
+    }
+    @GetMapping("/openAccount")
+    public String openAccount(){
+        return "/member/openAccount";
     }
 }

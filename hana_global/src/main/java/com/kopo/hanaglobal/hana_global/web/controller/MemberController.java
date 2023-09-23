@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
@@ -130,9 +131,10 @@ public class MemberController {
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         Account account = accountService.getAccountByAcNo(wallet.getAcNo());
 
-        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
-
-        model.addAttribute("walletList", walletList);
+//        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByWalletSeq(member.getUserSeq());
+//        model.addAttribute("walletList", walletList);
+        model.addAttribute("autoExchangeList", autoExchangeDTOList);
         model.addAttribute("account", account);
         return "/member/profile";
     }

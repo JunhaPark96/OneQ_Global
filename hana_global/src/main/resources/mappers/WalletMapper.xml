@@ -75,10 +75,10 @@
         values (auto_exchange_seq.nextval, #{walletSeq}, 'KRW', #{targetCurCode}, #{exchangeAmount}, #{exchangeDate}, #{lowerBound})
     </insert>
 
-    <select id="getAutoExchangeListByWalletSeq" resultType="AutoExchangeDTO">
-        SELECT ae_seq, wallet_seq, base_cur_code, target_cur_code, exchange_amount, exchange_date, lower_bound
+    <select id="getAutoExchangeListByWalletSeq">
+        SELECT AE.ae_seq, AE.wallet_seq, AE.base_cur_code, AE.target_cur_code, AE.exchange_amount, AE.exchange_date, AE.lower_bound
         FROM HANA_WALLET HW
                  JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
-        WHERE HW.USER_SEQ = #{userSeq};
+        WHERE HW.USER_SEQ = #{userSeq}
     </select>
 </mapper>

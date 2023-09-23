@@ -58,7 +58,7 @@ body {
     /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; !* 입체감 부각 *!*/
     /*border-radius: 20px;*/
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 350px auto;
 }
 .main-info {
     grid-area: main-info;
@@ -208,6 +208,24 @@ body {
     transition: background-color 0.3s;
 }
 /* 계좌연동 대시보드 끝 ----------------------------*/
+
+
+/* 자동환전 시작 --------------------------------*/
+.walletCell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50px 50px;
+    /*opacity: 0.65;  !* 여기에서 이미지의 투명도를 조정합니다. *!*/
+    z-index: 1;  /* 그라데이션 아래에 이미지가 위치하도록 합니다. */
+}
+/* 자동환전 끝 --------------------------------*/
+
 
 
 /* 대시보드 본문 끝 ------------------------------*/

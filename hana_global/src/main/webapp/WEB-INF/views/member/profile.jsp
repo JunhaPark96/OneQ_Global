@@ -16,6 +16,7 @@
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/profile.css" rel="stylesheet">
+    <link href="./css/wallet/flags.css" rel="stylesheet">
     <script src="./js/main.js"></script>
 </head>
 <body>
@@ -134,24 +135,25 @@
                     </div>
                 </div>
 
-
                 <div class="exchange-info">
-                    <c:forEach items="${walletList}" var="wallet" varStatus="loop" begin="1">
                         <div class="">
+                            자동환전 예약 리스트
                         </div>
-                        <div class="card card-stats">
+                    <c:forEach items="${autoExchangeList}" var="autoWallet" varStatus="loop" begin="1">
+                        <div class="card card-stats" >
                             <div class="card-body ">
                                 <div class="row">
                                     <div class="col-5">
                                         <div class="icon-big text-center icon-warning">
                                             <i class=""></i>
-                                            [목표환율] 이하가되면 [목표날짜] [통화] [금액] 충전
+                                            ${autoWallet.lowerBound} 이하가되면 ${autoWallet.exchangeDate} ${autoWallet.targetCurCode} ${autoWallet.exchangeAmount} 충전
                                         </div>
                                     </div>
                                     <div class="col-7 col-md-6">
                                         <div class="numbers">
-                                            <p class="card-category">보유금액</p>
-                                            <p class="card-title">[통화] [금액]
+                                            <p class="card-category">보유통화</p>
+                                            <p class="card-title walletCell" data-currency="${autoWallet.targetCurCode}">
+                                                    ${autoWallet.targetCurCode}
                                             <p>
                                         </div>
                                     </div>

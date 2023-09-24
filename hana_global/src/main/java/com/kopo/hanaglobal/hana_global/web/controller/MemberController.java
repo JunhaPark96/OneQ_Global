@@ -154,9 +154,9 @@ public class MemberController {
     }
 
     @PostMapping("/processOpenAccount")
-    public String processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO){
+    public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO){
 
 
-        return "/member/completeAccount";
+        return ResponseEntity.ok("Account processed successfully");
     }
 }

@@ -128,7 +128,7 @@
                         If you need ongoing credit once you are living in Korea, one of our credit products may be suitable. The overdraw feature may impact later credit assessments if you apply for a loan product. Applications for credit are subject to application and credit assessment.</li>
                     <br>
                 </ul>
-                <button type="submit" style="width: 200px">Accept and open now</button>
+                <button type="submit" style="width: 200px" onclick="submitForm()">Accept and open now</button>
             </div>
         </form>
     </div>
@@ -184,14 +184,17 @@
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('country');
-            data.countries.forEach(country => {
+            for (const country of data.countries) {
                 const option = document.createElement('option');
-                option.value = country;
-                option.textContent = country;
+                option.textContent = country.nationality;  // 국가 이름 표시
+                option.value = country.countrySP;  // 국가 코드 저장
                 select.appendChild(option);
-            });
+            }
         })
         .catch(error => console.error('Error fetching countries:', error));
+
+
+
     // 비자 타입 불러오기
     fetch('./json/visaTypes.json')
         .then(response => response.json())
@@ -205,6 +208,42 @@
             });
         })
         .catch(error => console.error('Error fetching visa types:', error));
+
+
+    // 컨트롤러에 전달
+    function submitForm() {
+        const countrySelect = document.getElementById('country');
+        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+
+        let data = {
+            name: document.getElementsByName('firstName')[0].value + ' ' + document.getElementsByName('lastName')[0].value,
+            id: document.getElementsByName('ID')[0].value,
+            passwd: document.getElementsByName('password')[0].value,
+            email: document.getElementsByName('email')[0].value,
+            countrySP: selectedOption.value,  // 국가 코드
+            nationality: selectedOption.textContent,  // 국가 이름
+            contact: document.getElementsByName('phoneNumber')[0].value,
+            jibunAddress: document.getElementsByName('address')[0].value,
+            birthDate: document.getElementsByName('dob')[0].value
+
+        };
+
+        fetch('/processOpenAccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/member/completeAccount';  // Redirect to the desired page
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 
 
     function checkArrivalDate() {
@@ -236,33 +275,6 @@
             document.getElementById('dobMessage').innerHTML = '';
         }
     }
-    // 컨트롤러에 전달
-    function submitForm() {
-        let data = {
-            name: document.getElementsByName('firstName')[0].value + ' ' + document.getElementsByName('lastName')[0].value,
-            id: document.getElementsByName('ID')[0].value,
-            passwd: document.getElementsByName('password')[0].value,
-            email: document.getElementsByName('email')[0].value,
-            // ... other fields
-        };
-
-        fetch('/processOpenAccount', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                window.location.href = '/member/completeAccount';  // Redirect to the desired page
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
-
 </script>
 
 </body>

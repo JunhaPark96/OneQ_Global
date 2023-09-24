@@ -2,6 +2,7 @@ package com.kopo.hanaglobal.hana_global.web.controller;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.request.OpenAccountDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
@@ -150,5 +151,12 @@ public class MemberController {
     @GetMapping("/openAccount")
     public String openAccount(){
         return "/member/openAccount";
+    }
+
+    @PostMapping("/processOpenAccount")
+    public String processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO){
+
+
+        return "/member/completeAccount";
     }
 }

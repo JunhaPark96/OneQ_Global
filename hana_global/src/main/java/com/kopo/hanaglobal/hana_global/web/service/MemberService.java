@@ -1,6 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.request.OpenAccountDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 
@@ -21,4 +22,6 @@ public interface MemberService {
     public void getSmsCertificationNumber(String phoneNumber, HttpSession session);
 
     public boolean isVerifySms(String userInput, HttpSession session);
+
+    public void insertTemporaryMember(OpenAccountDTO openAccountDTO);
 }

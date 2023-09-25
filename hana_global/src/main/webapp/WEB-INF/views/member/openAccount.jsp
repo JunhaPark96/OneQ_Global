@@ -139,6 +139,42 @@
 
 
 <script>
+    // 컨트롤러에 전달
+    function submitForm() {
+        event.preventDefault();
+        const countrySelect = document.getElementById('country');
+        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
+
+        let data = {
+            name: document.getElementsByName('firstName')[0].value + ' ' + document.getElementsByName('lastName')[0].value,
+            id: document.getElementsByName('ID')[0].value,
+            passwd: document.getElementsByName('password')[0].value,
+            email: document.getElementsByName('email')[0].value,
+            countrySP: selectedOption.value,  // 국가 코드
+            nationality: selectedOption.textContent,  // 국가 이름
+            contact: document.getElementsByName('phoneNumber')[0].value,
+            jibunAddress: document.getElementsByName('address')[0].value,
+            birthDate: document.getElementsByName('dob')[0].value
+
+        };
+
+        fetch('/processOpenAccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = '/completeAccount';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
     const steps = document.querySelectorAll('.step');
     let currentStep = 0;  // 추가된 부분
 
@@ -157,6 +193,7 @@
     });
 
     function nextStep() {
+        event.preventDefault();
         if (currentStep < steps.length - 1) {
             steps[currentStep].classList.remove('highlight');
             currentStep++;
@@ -208,43 +245,6 @@
             });
         })
         .catch(error => console.error('Error fetching visa types:', error));
-
-
-    // 컨트롤러에 전달
-    function submitForm() {
-        const countrySelect = document.getElementById('country');
-        const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-
-        let data = {
-            name: document.getElementsByName('firstName')[0].value + ' ' + document.getElementsByName('lastName')[0].value,
-            id: document.getElementsByName('ID')[0].value,
-            passwd: document.getElementsByName('password')[0].value,
-            email: document.getElementsByName('email')[0].value,
-            countrySP: selectedOption.value,  // 국가 코드
-            nationality: selectedOption.textContent,  // 국가 이름
-            contact: document.getElementsByName('phoneNumber')[0].value,
-            jibunAddress: document.getElementsByName('address')[0].value,
-            birthDate: document.getElementsByName('dob')[0].value
-
-        };
-
-        fetch('/processOpenAccount', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                window.location.href = '/member/completeAccount';  // Redirect to the desired page
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
-
 
     function checkArrivalDate() {
         let today = new Date();

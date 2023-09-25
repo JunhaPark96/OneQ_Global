@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -153,10 +154,29 @@ public class MemberController {
         return "/member/openAccount";
     }
 
+    @Transactional
     @PostMapping("/processOpenAccount")
     public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO){
+        // 임시 멤버 생성
+        try {
+            memberService.insertTemporaryMember(openAccountDTO);
+        } catch (Exception e) {
+            // 예외 처리 로직
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
 
-
+        System.out.println("회원정보: " + memberService.toString());
+        int userSeq = memberService.findUserSeqByID(openAccountDTO.getId());
+        System.out.println(userSeq);
+        // 임시 계좌 생성
+        accountService.createTemporaryAccount(userSeq);
+        System.out.println("계좌정보: " + accountService.toString());
         return ResponseEntity.ok("Account processed successfully");
+    }
+
+    @GetMapping("/completeAccount")
+    public String completeAccount(){
+        return "/member/completeAccount";
     }
 }

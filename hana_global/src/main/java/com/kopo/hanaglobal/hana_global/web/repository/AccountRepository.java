@@ -30,4 +30,6 @@ public interface AccountRepository {
             @Param("participant") String participant,
             @Param("participantAccount") String participantAccount);
     public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO);
+
+    public void createTemporaryAccount(Account account);
 }

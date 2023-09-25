@@ -4,13 +4,15 @@ import lombok.Data;
 
 @Data
 public class OpenAccountDTO {
-    private String name;
+//    private int userSeq;
+    private String email;
     private String id;
     private String passwd;
-    private String email;
+    private String name;
     private String countrySP;
     private String nationality;
+    private String birthDate;
     private String contact;
     private String jibunAddress;
-    private String birthDate;
+//    private String status;
 }

@@ -23,4 +23,6 @@ public interface AccountService {
     void accountTransfer(String fromAcNo, String toAcNo, Integer amount);
 
     Account getAccountByAcNo(String acNo);
+
+    void createTemporaryAccount(int userSeq);
 }

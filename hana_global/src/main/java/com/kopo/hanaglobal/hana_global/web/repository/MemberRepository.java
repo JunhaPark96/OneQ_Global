@@ -1,6 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.repository;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.request.OpenAccountDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,5 @@ public interface MemberRepository {
 
     public Member findUserSeqByID(String id);
 
+    public void insertTemporaryMember(OpenAccountDTO openAccountDTO);
 }

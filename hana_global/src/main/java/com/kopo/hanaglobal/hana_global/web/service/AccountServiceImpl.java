@@ -36,6 +36,18 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.createNewAccount(newAccount);
     }
 
+    // 임시계좌생성
+    @Override
+    public void createTemporaryAccount(int userSeq){
+        Account tempAccount = new Account();
+        tempAccount.setAcNo(RandomStringUtils.randomNumeric(14));
+        tempAccount.setAcName("Smart Access");
+        tempAccount.setUserSeq(userSeq);
+        tempAccount.setStatus(0);
+
+        accountRepository.createTemporaryAccount(tempAccount);
+    }
+
     @Override
     public List<Account> findAccountByMemberId(int memberId) {
         List<Account> accountList = accountRepository.findAccountByMemberId(memberId);

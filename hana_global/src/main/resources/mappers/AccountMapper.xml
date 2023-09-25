@@ -35,6 +35,12 @@
         VALUES (#{acNo}, '주계좌', #{userSeq}, #{acPasswd}, #{status})
     </insert>
 
+<!-- 임시 계좌 생성-->
+    <insert id="createTemporaryAccount" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Account">
+        INSERT INTO CHECKING_ACCOUNT(AC_NO, AC_NAME, USER_SEQ, STATUS)
+        VALUES (#{acNo}, #{acName}, #{userSeq}, #{status})
+    </insert>
+
     <select id="findAccountByMemberId" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account"
         parameterType="int">
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status

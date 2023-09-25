@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Hana2.0+H&display=swap" rel="stylesheet"/>
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
-    <link href="./css/main.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/main-body.css" rel="stylesheet"/>

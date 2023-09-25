@@ -1,7 +1,9 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.LoginDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.request.OpenAccountDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +20,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Service
 public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
+    private AccountRepository accountRepository;
 //    @Value("${NCSOMB62T3GUKWR3}")
 //    private String smsApiKey;
 //    @Value("${BPIN24PCFSFWVZUOFL0QJ6HXZDTZI9EL}")
@@ -26,8 +29,9 @@ public class MemberServiceImpl implements MemberService {
 
     // 생성자 주입
     @Autowired
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    public MemberServiceImpl(MemberRepository memberRepository, AccountRepository accountRepository) {
         this.memberRepository = memberRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Override
@@ -131,5 +135,16 @@ public class MemberServiceImpl implements MemberService {
         }
         return false;
     }
+    
+    
+    // 임시 회원가입 및 계좌 생성
+    @Override
+    public void insertTemporaryMember(OpenAccountDTO openAccountDTO){
+        System.out.println(openAccountDTO);
+        // 임시 회원 생성
+        memberRepository.insertTemporaryMember(openAccountDTO);
+
+    }
+
 
 }

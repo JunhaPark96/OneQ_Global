@@ -27,7 +27,7 @@ public class RemittanceController {
 
     @GetMapping("/remittance")
     public String transfer() {
-        System.out.println("transfer 페이지");
+        System.out.println("remittance 페이지");
         return "remittance/remittance";
     }
 }

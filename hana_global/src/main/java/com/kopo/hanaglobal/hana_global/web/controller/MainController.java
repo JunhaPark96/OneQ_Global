@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
 
 @Controller
 public class MainController {
@@ -25,8 +26,9 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Locale locale) {
         System.out.println("index페이지");
+        System.out.println("index 페이지, 로케일: " + locale);
         return "index";
     }
 

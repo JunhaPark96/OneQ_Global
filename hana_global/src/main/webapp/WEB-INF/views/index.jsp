@@ -1,14 +1,16 @@
 <%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link href="css/header.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<%--    <link href="css/header.css" rel="stylesheet"/>--%>
     <link href="css/TTF.css" rel="stylesheet"/>
     <link href="css/main.css" rel="stylesheet">
 
@@ -96,10 +98,10 @@
                     </a>
                 </div>
                 <div class="card card4">
-                    <a href="<%= redirectURL != "" ? redirectURL : "/transfer" %>">
+                    <a href="<%= redirectURL != "" ? redirectURL : "/remittance" %>">
                         <div class="card-area">
                             <div class="card-text-area">
-                                <p class="text-header">Transfer</p>
+                                <p class="text-header">Remittance</p>
                                 <p class="card-text">
                                     Hana Bank supports<br>
                                     your overseas<br>

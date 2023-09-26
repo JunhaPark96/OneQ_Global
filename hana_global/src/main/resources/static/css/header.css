@@ -115,70 +115,96 @@
     /*box-shadow: 0 0 5px rgba(1, 128, 133, 0.77);*/
     min-height: 30px;
     max-height: 30px;
-    max-width: 100px;
+    /*max-width: 100px;*/
     text-align: center;
     align-items:center;
     position: relative;
-    left: 140px;
+    left: 60px;
     display: flex;
     justify-content: center;
 }
 
-/*#language-select {*/
-/*    border: none;*/
-/*    outline: none;*/
-/*    background-color: white;*/
-/*    font-size: 14px;*/
-/*    border-radius: 15px;*/
-/*}*/
 
-/*.language {*/
-/*    position: relative;*/
-/*    display: inline-block;*/
-/*}*/
-
-/* 드롭다운 메뉴에 대한 스타일 */
-.dropdown-menu {
-    display: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
-    border: none;
-    width: 150px; /* 변경 가능한 값 */
-    margin-top: 150px;
+.dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    position: relative;
 }
-/* 클릭된 후의 링크 색상 설정 */
-.nav-link.dropdown-toggle:visited {
+
+.dropdown a {
     color: black;
+    text-decoration: none;
+    /*padding: 1rem 0.1rem;*/
+    display: block;
+    transition: all 0.3s ease;
 }
 
-/* 아이템 간의 간격을 조정 */
-.dropdown-menu .dropdown-item {
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.9); /* 불투명한 하얀색 배경 */
-    color: black; /* 텍스트 색상을 검은색으로 설정 */
-    text-decoration: none; /* 밑줄 제거 */
+.dropdown .dropdown-toggle::after {
+    content: '';
+    display: inline-block;
+    /*margin-left: 0.5em;*/
+    vertical-align: 0.25em;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
 }
 
-/* 아이템 내의 이미지 스타일링 */
-.dropdown-menu .dropdown-item img {
-    border-radius: 50%; /* 이미지를 원형으로 만듦 */
-    margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조절 */
+.dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 10rem;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: .2rem;
+    display: none;
+    list-style: none;
+    padding-left: 0px;
 }
 
-/* 드롭다운 트리거 버튼 스타일링 */
-.nav-link.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px; /* 버튼의 패딩 값을 조정 */
+.dropdown .dropdown-menu .dropdown-item {
+    color: #212529;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: .5rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    font-size: 1rem;
+    /*text-align: inherit;*/
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
 }
 
-/* 트리거 버튼 내의 이미지 스타일링 */
-.nav-link.dropdown-toggle img {
-    border-radius: 50%; /* 이미지를 원형으로 만듦 */
-    margin-right: 5px; /* 이미지와 텍스트 사이의 간격 조절 */
+.dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #007bff;
+    color: #fff;
 }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown > a {
+    font-weight: bold;
+    color: #333;
+    font-size: 19px;
+    /*padding: 1.2rem 0.5rem;*/
+}
+
+
+
+
 /* 언어 선택 끝 ------------------------------*/
 
 /* 로그인 모달 */

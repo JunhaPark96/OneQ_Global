@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MyProfile</title>
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet"/>

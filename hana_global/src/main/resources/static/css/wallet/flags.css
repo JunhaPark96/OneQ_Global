@@ -1,5 +1,6 @@
 .walletCell[data-currency="KRW"]::before {
     background-image: url("/images/walletIcon.png");
+
 }
 .walletCell[data-currency="USD"]::before {
     background-image: url("/images/walletIcon_USD.png");

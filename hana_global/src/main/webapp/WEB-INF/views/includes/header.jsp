@@ -16,6 +16,7 @@
     <%--    <link href="./css/bootstrap/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />--%>
     <%--    <link href="./css/bootstrap/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />--%>
     <!-- Bootstrap 5 CSS -->
+
 </head>
 <body>
 <div class="header">
@@ -28,16 +29,19 @@
     <div class="language">
         <ul class="dropdown"> <!-- "dropdown" 클래스 추가 -->
             <li class="dropdown">
-                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" id="topbar-languagedrop" href="#"
+                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
                    role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span
-                        class="align-middle"><spring:message code="label.language" text="English"/></span>
                 </a>
+<%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
+<%--                   role="button" aria-haspopup="true" aria-expanded="false">--%>
+<%--                    <img id="flagImage" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span--%>
+<%--                        class="align-middle"><spring:message code="label.language" text="English"/></span>--%>
+<%--                </a>--%>
                 <ul class="dropdown-menu"> <!-- "dropdown-menu" 클래스 추가 -->
                     <!-- 기본으로 보이는 "English" 항목 -->
                     <li>
                         <a href="?lang=ko" class="dropdown-item ">
-                            <img src="./images/walletIcon_KRW.png" alt="user-image" class="mr-1" height="12"> <span
+                            <img src="./images/flags/kr.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="align-middle">Korean</span>
                         </a>
                     </li>
@@ -134,56 +138,21 @@
 </div>
 
 <script>
-    // // 언어선택 드롭다운
-    // $(document).ready(function () {
-    //     $("#topbar-languagedrop").click(function (e) {
-    //         e.preventDefault();
-    //         $(".dropdown-menu").toggle();
-    //     });
-    //
-    //     $(".dropdown-item").click(function () {
-    //         // 클릭한 아이템의 이미지와 텍스트 가져오기
-    //         let selectedImg = $(this).find('img').attr('src');
-    //         let selectedText = $(this).find('span').text();
-    //
-    //         // 메인 버튼의 이미지와 텍스트 업데이트
-    //         $("#topbar-languagedrop img").attr('src', selectedImg);
-    //         $("#topbar-languagedrop span").text(selectedText);
-    //
-    //         // 드롭다운 메뉴에서 선택한 아이템 숨기기
-    //         $(this).hide();
-    //
-    //         // 기존에 숨겨져 있던 아이템들 보이기
-    //         $(".dropdown-item").not(this).show();
-    //
-    //         // 드롭다운 메뉴 숨기기
-    //         $(".dropdown-menu").hide();
-    //     });
-    //
-    //     $(document).click(function (e) {
-    //         if (!$(e.target).closest('.dropdown').length) {
-    //             $(".dropdown-menu").hide();
-    //         }
-    //     });
-    // });
-
-    // 언어선택 드롭다운
     $(document).ready(function () {
+        // 기본 언어와 이미지 설정
+        const defaultImg = './images/flags/us.jpg';
+        const defaultText = 'English';
+
+        document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + defaultImg + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + defaultText + '</span>';
+
         $(".dropdown-item").click(function () {
             // 클릭한 아이템의 이미지와 텍스트 가져오기
             let selectedImg = $(this).find('img').attr('src');
             let selectedText = $(this).find('span').text();
 
             // 메인 버튼의 이미지와 텍스트 업데이트
-            $("#topbar-languagedrop img").attr('src', selectedImg);
-            $("#topbar-languagedrop span").text(selectedText);
-
-            // 드롭다운 메뉴에서 선택한 아이템 숨기기
-            $(this).hide();
-
-            // 기존에 숨겨져 있던 아이템들 보이기
-            $(".dropdown-item").not(this).show();
-
+            <%--$(".dropdown-toggle").html(`<img src="${selectedImg}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">${selectedText}</span>`);--%>
+            document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + selectedImg + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + selectedText + '</span>';
             // 드롭다운 메뉴 숨기기
             $(".dropdown-menu").hide();
         });

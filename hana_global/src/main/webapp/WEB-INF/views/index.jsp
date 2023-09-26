@@ -38,16 +38,20 @@
                 <div class="main-info">
                     <div class="main-image"></div>
                     <div class="main-text">
-                        <h3>All-In-One <br>Banking System</h3> <br>
+<%--                        <h3>All-In-One <br>Banking System</h3> <br>--%>
+                        <h3><spring:message code="allInOneBankingSystem"  /></h3>
                     </div>
                 </div>
                 <div class="card card1">
                     <a href="<%= redirectURL != "" ? redirectURL : "/account" %>">
                         <div class="card-area">
                             <div class="card-text-area">
-                                <p class="text-header">Account</p>
-                                <p class="card-text">Easy-One Pack <br>
-                                    Account</p>
+                                <p class="text-header"><spring:message code="link.account"/></p>
+                                <p class="card-text">
+                                    <spring:message code="easyOnePackAccount"/>
+<%--                                    Easy-One Pack <br>--%>
+<%--                                    Account--%>
+                                </p>
                             </div>
                             <div class="card-image card-image1" alt="계좌"></div>
                         </div>
@@ -62,11 +66,12 @@
                     <a href="<%= redirectURL != "" ? redirectURL : "/exchange" %>">
                         <div class="card-area">
                             <div class="card-text-area">
-                                <p class="text-header">Exchange</p>
+                                <p class="text-header"><spring:message code="exchange"/></p>
                                 <p class="card-text">
-                                    Enjoy excellent <br>
-                                    exchange rates <br>
-                                    for 29 currencies</p>
+                                    <spring:message code="exchangeDesc"/>
+<%--                                    Enjoy excellent <br>--%>
+<%--                                    exchange rates <br>--%>
+<%--                                    for 29 currencies</p>--%>
                             </div>
                             <div class="card-image card-image2" alt="환전"></div>
                         </div>
@@ -86,11 +91,12 @@
                         <div class="card-image card-image3" alt="페이"></div>
                         <div class="card-area">
                             <div class="card-text-area">
-                                <p class="text-header">Hana Wallet</p>
+                                <p class="text-header"><spring:message code="hanaWallet"/></p>
                                 <p class="card-text">
-                                    Experience an easier <br>
-                                    banking system <br>
-                                    with Hana Wallet
+                                    <spring:message code="hanaWalletDesc"/>
+<%--                                    Experience an easier <br>--%>
+<%--                                    banking system <br>--%>
+<%--                                    with Hana Wallet--%>
                                 </p>
                             </div>
                             <div class="card-image card-image3" alt="하나월렛"></div>
@@ -101,11 +107,12 @@
                     <a href="<%= redirectURL != "" ? redirectURL : "/remittance" %>">
                         <div class="card-area">
                             <div class="card-text-area">
-                                <p class="text-header">Remittance</p>
+                                <p class="text-header"><spring:message code="remittance"/></p>
                                 <p class="card-text">
-                                    Hana Bank supports<br>
-                                    your overseas<br>
-                                    remittance
+                                    <spring:message code="remittanceDesc"/>
+<%--                                    Hana Bank supports<br>--%>
+<%--                                    your overseas<br>--%>
+<%--                                    remittance--%>
                                 </p>
                             </div>
                             <div class="card-image card-image4" alt="송금"></div>
@@ -114,28 +121,13 @@
                     </a>
                 </div>
 
-                <%-- <div class="user-info">
-                     <div class="loginHeader">ID Log in</div>
-                     <div class="loginInput">
-                         <div class="loginField loginId">
-                             <label for="userId" class="login">ID</label>
-                             <input type="text" name="userId" id="userId" maxlength="15">
-                         </div>
-                         <div class="loginField loginPw">
-                             <label for="userPw" class="login">Passwd</label>
-                             <input type="password" name="password" id="userPw" maxlength="16">
-                         </div>
-                         <div class="loginButton">
-                             <a href="index.html" class="loginBtn">Log In</a>
-                         </div>
-                     </div>
-                 </div>--%>
                 <div class="main-info">
                 <a href="${pageContext.request.contextPath}/readyToApply" style="text-decoration: none; color: black">
                     <div class="user-image"></div>
                     <div class="user-text">
-                        <h3>Open Account</h3>
-                        Open a Hana Bank account up to 14 days before you arrive in Korea, or up to three months after you arrive.
+                        <h3><spring:message code="openAccount"/></h3>
+<%--                        Open a Hana Bank account up to 14 days before you arrive in Korea, or up to three months after you arrive.--%>
+                        <spring:message code="openAccountDesc"/>
                     </div>
                 </a>
                 </div>

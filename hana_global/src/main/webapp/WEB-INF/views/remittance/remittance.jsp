@@ -11,6 +11,11 @@
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <%--    스와이퍼--%>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
     <script src="./js/wallet.js"></script>
 
     <link href="./css/service-main.css" rel="stylesheet"/>
@@ -20,9 +25,6 @@
     <%--    <link href="./css/exchange/doExchange.css" rel="stylesheet"/>--%>
     <link href="./css/wallet/flags.css" rel="stylesheet"/>
     <link href="./css/remittance/immediateRemittance.css" rel="stylesheet"/>
-<%--    스와이퍼--%>
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <title>월렛 확인</title>
 </head>
 <body>
@@ -41,64 +43,81 @@
                 <%--            통화선택 시작    --%>
                 <div class="selectCurAndPayment">
                     <div class="container">
-                        <p>Select Country where you want to make a Remittance</p>
+                        <p class="text-center">Select Country where you want to make a Remittance</p>
                         <div class="swiper-container" style="height: 80%">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_USD.png" alt="">
-                                    <div> USA </div>
+                                    <div> USA</div>
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="./images/walletIcon_KRW.png" alt="">
+                                    <img src="./images/walletIcon_KRW.png">
+                                    <div style="top: 85%; position: absolute;"> Korea</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CAD.png" alt="">
+                                    <div> Canada</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_AUD.png" alt="">
+                                    <div> Australia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_JPY.png" alt="">
+                                    <div> Japan</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CHF.png" alt="">
+                                    <div> Swiss</div>
                                 </div>
 
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CNY.png" alt="">
+                                    <div> China</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_Czech.png" alt="">
+                                    <div> Czechia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_EUR.png" alt="">
+                                    <div> EU</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_GBP.png" alt="">
+                                    <div> United Kingdom</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_HKD.png" alt="">
+                                    <div> Hong Kong</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_HUF.png" alt="">
+                                    <div> Hungary</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_IDR.png" alt="">
+                                    <div> Indonesia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_PHP.png" alt="">
+                                    <div> Philippine</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_SEK.png" alt="">
+                                    <div> Sweden</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_SGD.png" alt="">
+                                    <div> Singapore</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_THB.png" alt="">
+                                    <div> Thailand</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_VND.png" alt="">
+                                    <div> Vietnam</div>
                                 </div>
                             </div>
 
@@ -107,51 +126,49 @@
                             <div class="swiper-button-prev" style="left: 1px"></div>
                         </div>
                     </div>
-
-
-<%--                    <div class="selectPaymentWrapper">--%>
-<%--                        <div class="selectAccount">--%>
-<%--                            <div>이미지</div>--%>
-<%--                            <div>Hana Bank Account</div>--%>
-<%--                            <div>환전해서 송금</div>--%>
-<%--                        </div>--%>
-<%--                        <div class="selectWallet">--%>
-<%--                            <div>이미지</div>--%>
-<%--                            <div>Hana Wallet</div>--%>
-<%--                            <div>환전한 돈을 송금</div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
+                    <div class="selectPaymentWrapper">
+                        <div class="selectAccount">
+                            <div><img src="./images/myAccount.png" class="paymentImage" alt=""></div>
+                            <div>
+                                <p>Bank Account</p>
+                            </div>
+                        </div>
+                        <div class="selectWallet">
+                            <div><img src="./images/walletIcon.png" class="paymentImage" alt=""></div>
+                            <div>Hana Wallet</div>
+                        </div>
+                    </div>
                 </div>
-                    <%--                    <div class="selectCurrency">--%>
-                    <%--                        <div class="nation_header">--%>
-                    <%--                            <div>Select Country where you want to make a remittance</div>--%>
-                    <%--                            <div class="nation_usd _flag">--%>
-                    <%--                                <img src="./images/walletIcon_USD.png" class="_img" alt="미국 USD" width="30px" height="30px">--%>
-                    <%--                                <label class="_text"><em>United States</em></label>--%>
-                    <%--                            </div>--%>
-                    <%--                        </div>--%>
-                    <%--                        <div class="currencyImages" id="currencyImages">--%>
-                    <%--                            <div class="walletCell" data-currency="USD"><img src="./images/walletIcon_USD.png">USA</div>--%>
-                    <%--                            <div class="walletCell" data-currency="KRW"><img src="./images/walletIcon_KRW.png">KOR</div>--%>
-                    <%--                            <div class="walletCell" data-currency="JPY"><img src="./images/walletIcon_JPY.png">JPN</div>--%>
-                    <%--                            <div class="walletCell" data-currency="AUD"><img src="./images/walletIcon_AUD.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="CAD"><img src="./images/walletIcon_CAD.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="CHF"><img src="./images/walletIcon_CHF.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="CNY"><img src="./images/walletIcon_CNY.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="Czech"><img src="./images/walletIcon_Czech.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="EUR"><img src="./images/walletIcon_EUR.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="GBP"><img src="./images/walletIcon_GBP.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="HKD"><img src="./images/walletIcon_HKD.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="HUF"><img src="./images/walletIcon_HUF.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="IDR"><img src="./images/walletIcon_IDR.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="PHP"><img src="./images/walletIcon_PHP.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="SEK"><img src="./images/walletIcon_SEK.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="SGD"><img src="./images/walletIcon_SGD.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="THB"><img src="./images/walletIcon_THB.png"></div>--%>
-                    <%--                            <div class="walletCell" data-currency="VND"><img src="./images/walletIcon_VND.png"></div>--%>
-                    <%--                            <div>전체 국가 보기 +</div>--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
+                <%--                    <div class="selectCurrency">--%>
+                <%--                        <div class="nation_header">--%>
+                <%--                            <div>Select Country where you want to make a remittance</div>--%>
+                <%--                            <div class="nation_usd _flag">--%>
+                <%--                                <img src="./images/walletIcon_USD.png" class="_img" alt="미국 USD" width="30px" height="30px">--%>
+                <%--                                <label class="_text"><em>United States</em></label>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="currencyImages" id="currencyImages">--%>
+                <%--                            <div class="walletCell" data-currency="USD"><img src="./images/walletIcon_USD.png">USA</div>--%>
+                <%--                            <div class="walletCell" data-currency="KRW"><img src="./images/walletIcon_KRW.png">KOR</div>--%>
+                <%--                            <div class="walletCell" data-currency="JPY"><img src="./images/walletIcon_JPY.png">JPN</div>--%>
+                <%--                            <div class="walletCell" data-currency="AUD"><img src="./images/walletIcon_AUD.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="CAD"><img src="./images/walletIcon_CAD.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="CHF"><img src="./images/walletIcon_CHF.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="CNY"><img src="./images/walletIcon_CNY.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="Czech"><img src="./images/walletIcon_Czech.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="EUR"><img src="./images/walletIcon_EUR.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="GBP"><img src="./images/walletIcon_GBP.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="HKD"><img src="./images/walletIcon_HKD.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="HUF"><img src="./images/walletIcon_HUF.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="IDR"><img src="./images/walletIcon_IDR.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="PHP"><img src="./images/walletIcon_PHP.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="SEK"><img src="./images/walletIcon_SEK.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="SGD"><img src="./images/walletIcon_SGD.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="THB"><img src="./images/walletIcon_THB.png"></div>--%>
+                <%--                            <div class="walletCell" data-currency="VND"><img src="./images/walletIcon_VND.png"></div>--%>
+                <%--                            <div>전체 국가 보기 +</div>--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
 
                 <%--            통화선택 모달 구역 시작    --%>
                 <%--                <div id="myModal" class="modalContainer">--%>
@@ -471,35 +488,22 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+        // autoplay: {
+        //     delay: 1500,
+        //     disableOnInteraction: true,
+        // },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        // freeMode: true,
+        // freeModeMomentum: true,
+        // freeModeMomentumRatio: 0.5,
         breakpoints: {
-            // when window width is >= 600px
-            // 600: {
-            //     slidesPerView: 2,
-            //     slidesPerGroup: 2,
-            //     spaceBetween: 5,
-            //     centeredSlides: true
-            //
-            // },
-            // // when window width is >= 900px
-            // 900: {
-            //     slidesPerView: 3,
-            //     slidesPerGroup: 3,
-            //     spaceBetween: 5,
-            //     centeredSlides: false
-            //
-            // },
-            // // when window width is >= 1200px
-            // 1200: {
-            //     slidesPerView: 4,
-            //     slidesPerGroup: 4,
-            //     spaceBetween: 5,
-            //     centeredSlides: false
-            // },
-
             // when window width is >= 1500px
             1500: {
                 slidesPerView: 3,
-                slidesPerGroup: 5,
+                slidesPerGroup: 1,
                 spaceBetween: 5,
                 centeredSlides: false
             },
@@ -513,7 +517,12 @@
             }
         }
     });
-
+    $('.swiper-slide').on('mouseover', function () {
+        swiper.autoplay.stop();
+    });
+    $('.swiper-slide').on('mouseout', function () {
+        swiper.autoplay.start();
+    });
 
 </script>
 </body>

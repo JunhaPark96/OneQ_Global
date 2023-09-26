@@ -18,7 +18,18 @@
     height: 450px;
     justify-content: space-between;
 }
+input[type="text"] {
+    width: 20%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid #059196;
+    background-color: #ffffff;
+    color: #016f73;
+    font-size: 16px;
+    margin-bottom: 20px;
 
+}
 /* 넷플릭스 슬라이더 시작*/
 .container {
     width: 100%; /* 혹은 필요한 너비를 설정 */
@@ -79,6 +90,7 @@
 }
 .swiper-button-next, .swiper-button-prev {
     color: #e5e5e5;
+    top: 62%
 }
 .swiper-pointer-events {
     touch-action: pan-y;
@@ -103,9 +115,9 @@
         border-radius: 2px;
     }
 }
-/* 넷플릭스 슬라이더 끝*/
+/* 넷플릭스 슬라이더 끝 ------------------------------*/
 
-/* 결제방식 선택 시작*/
+/* 결제방식 선택 시작-----------------------------------*/
 .selectPaymentWrapper {
     width: 100%;
     display: flex;

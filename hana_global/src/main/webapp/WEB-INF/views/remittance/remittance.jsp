@@ -13,7 +13,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <%--    스와이퍼--%>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<%--    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>--%>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <script src="./js/wallet.js"></script>
@@ -43,81 +44,86 @@
                 <%--            통화선택 시작    --%>
                 <div class="selectCurAndPayment">
                     <div class="container">
-                        <p class="text-center">Select Country where you want to make a Remittance</p>
-                        <div class="swiper-container" style="height: 80%">
+                        <div class="fs-5" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Select Country</strong></div>
+                        <br/>
+                        <p class="text-start">Select Country where you want to make a Remittance</p>
+                        <div style="text-align: right;">
+                            <input type="text" id="countrySearch" placeholder="Search Country">
+                        </div>
+                        <div class="swiper-container" style="">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_USD.png" alt="">
-                                    <div> USA</div>
+                                    <div id="USA"> USA</div>
                                 </div>
-                                <div class="swiper-slide">
+                                <div class="swiper-slide" style="height: 225px">
                                     <img src="./images/walletIcon_KRW.png">
-                                    <div style="top: 85%; position: absolute;"> Korea</div>
+                                    <div id="korea" style="top: 89%; position: absolute;"> Korea</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CAD.png" alt="">
-                                    <div> Canada</div>
+                                    <div id="canada"> Canada</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_AUD.png" alt="">
-                                    <div> Australia</div>
+                                    <div id="australia"> Australia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_JPY.png" alt="">
-                                    <div> Japan</div>
+                                    <div id="japan"> Japan</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CHF.png" alt="">
-                                    <div> Swiss</div>
+                                    <div id="swiss"> Swiss</div>
                                 </div>
 
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_CNY.png" alt="">
-                                    <div> China</div>
+                                    <div id="china"> China</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_Czech.png" alt="">
-                                    <div> Czechia</div>
+                                    <div id="czechia"> Czechia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_EUR.png" alt="">
-                                    <div> EU</div>
+                                    <div id="eu"> EU</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_GBP.png" alt="">
-                                    <div> United Kingdom</div>
+                                    <div id="unitedKingdom"> United Kingdom</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_HKD.png" alt="">
-                                    <div> Hong Kong</div>
+                                    <div id="hongkong"> Hong Kong</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_HUF.png" alt="">
-                                    <div> Hungary</div>
+                                    <div id="hungary"> Hungary</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_IDR.png" alt="">
-                                    <div> Indonesia</div>
+                                    <div id="indonesia"> Indonesia</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_PHP.png" alt="">
-                                    <div> Philippine</div>
+                                    <div id="philippine"> Philippine</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_SEK.png" alt="">
-                                    <div> Sweden</div>
+                                    <div id="sweden"> Sweden</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_SGD.png" alt="">
-                                    <div> Singapore</div>
+                                    <div id="singapore"> Singapore</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_THB.png" alt="">
-                                    <div> Thailand</div>
+                                    <div id="thailand"> Thailand</div>
                                 </div>
                                 <div class="swiper-slide">
                                     <img src="./images/walletIcon_VND.png" alt="">
-                                    <div> Vietnam</div>
+                                    <div id="vietnam"> Vietnam</div>
                                 </div>
                             </div>
 
@@ -126,19 +132,35 @@
                             <div class="swiper-button-prev" style="left: 1px"></div>
                         </div>
                     </div>
-                    <div class="selectPaymentWrapper">
-                        <div class="selectAccount">
-                            <div><img src="./images/myAccount.png" class="paymentImage" alt=""></div>
-                            <div>
-                                <p>Bank Account</p>
+                </div>
+<%--                    결제방식 선택 모달 시작--%>
+                    <div id="myModal" class="modalContainer">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="authenticateHeader">Choose Payment Method</div>
+                                <span class="close" onclick="closeModal()">&times;</span>
+                            </div>
+
+                            <div class="modal-main">
+                                <div class="selectPaymentWrapper" >
+                                    <div class="selectAccount">
+                                        <div><img src="./images/myAccount.png" class="paymentImage" alt=""></div>
+                                        <div>
+                                            <p>Remittance with <br/> <span>Bank Account</span></p>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="selectWallet">
+                                        <div><img src="./images/walletIcon.png" class="paymentImage" alt=""></div>
+                                        <div>
+                                            <p>Remittance with <br/> <span>Hana Wallet</span></p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="selectWallet">
-                            <div><img src="./images/walletIcon.png" class="paymentImage" alt=""></div>
-                            <div>Hana Wallet</div>
-                        </div>
                     </div>
-                </div>
+<%--                    결제방식 선택 모달 끝--%>
                 <%--                    <div class="selectCurrency">--%>
                 <%--                        <div class="nation_header">--%>
                 <%--                            <div>Select Country where you want to make a remittance</div>--%>
@@ -457,18 +479,7 @@
 
 
 <script>
-    // // 모달 열기 함수
-    // function openModal(walletSeq) {
-    //     document.getElementById("myModal").style.display = "block";
-    //     document.getElementById('loadAmount').value = null;
-    //     document.getElementById('walletPasswd').value = null;
-    // }
-    //
-    // // 모달 닫기 함수
-    // function closeModal() {
-    //     document.getElementById("myModal").style.display = "none";
-    // }
-    //
+
     // // 아코디언 토글 기능
     // document.querySelector('.nation_header').addEventListener('click', function () {
     //     let container = document.querySelector('.selectCurrency');
@@ -478,6 +489,50 @@
     //         container.classList.add('open');
     //     }
     // });
+    document.getElementById('countrySearch').addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        const slides = document.querySelectorAll('.swiper-slide');
+        for (let i = 0; i < slides.length; i++) {
+            const countryName = slides[i].textContent.trim().toLowerCase();
+            console.log(countryName);
+            if (countryName.includes(query)) {
+                // const adjustedIndex = i - 1;
+                swiper.slideToLoop(i, 500);  // 500ms의 속도로 해당 슬라이드로 이동합니다.
+                break;
+            }
+        }
+    });
+    const countryToIndex = {
+        USA: 0,
+        Korea: 1,
+        Canada: 2,
+        Australia: 3,
+        Japan: 4,
+        Swiss: 5,
+        China: 6,
+        Czechia: 7,
+        EU: 8,
+        UnitedKingdom: 9,
+        HongKong: 10,
+        Hungary: 11,
+        Indonesia: 12,
+        Philippine: 13,
+        Sweden: 14,
+        Singapore: 15,
+        Thailand: 16,
+        Vietnam: 17
+    };
+    // document.getElementById('countrySearch').addEventListener('input', function () {
+    //     const query = this.value.trim().toLowerCase();  // 공백을 제거하고 입력 값을 가져옵니다.
+    //     console.log(query);
+    //     if (countryToIndex.hasOwnProperty(query)) {  // 매핑 객체에서 쿼리를 찾습니다.
+    //     console.log(index);
+    //         const index = countryToIndex[query];  // 나라 이름에 해당하는 인덱스를 가져옵니다.
+    //         swiper.slideTo(index, 500);  // 슬라이드를 중앙에 배치합니다.
+    //     }
+    // });
+
+
     const swiper = new Swiper(".swiper-container", {
         slidesPerView: 2,
         slidesPerGroup: 1,
@@ -489,7 +544,7 @@
             prevEl: '.swiper-button-prev',
         },
         // autoplay: {
-        //     delay: 1500,
+        //     delay: 1,
         //     disableOnInteraction: true,
         // },
         pagination: {
@@ -517,6 +572,7 @@
             }
         }
     });
+    // 스와이프 멈추기
     $('.swiper-slide').on('mouseover', function () {
         swiper.autoplay.stop();
     });
@@ -524,6 +580,36 @@
         swiper.autoplay.start();
     });
 
+    // 결제 방식 선택 모달
+    const slides = document.querySelectorAll('.swiper-slide');
+
+    // 각 스와이퍼 슬라이드에 클릭 이벤트 리스너를 추가
+    slides.forEach(slide => {
+        slide.addEventListener('click', () => {
+            // 클릭하면 모달창을 표시합니다.
+            document.querySelector('#myModal').style.display = 'block';
+        });
+    });
+
+    // 모달창 외부를 클릭하면 모달창을 닫기
+    window.addEventListener('click', (event) => {
+        const modal = document.querySelector('#myModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    // 모달 열기 함수
+    // function openModal(walletSeq) {
+    //     document.getElementById("myModal").setAttribute("data-wallet-id", walletSeq); // 월렛 지정
+    //     document.getElementById("myModal").style.display = "block";
+    //     document.getElementById('loadAmount').value = null;
+    //     document.getElementById('walletPasswd').value = null;
+    // }
+    //
+    // // 모달 닫기 함수
+    // function closeModal() {
+    //     document.getElementById("myModal").style.display = "none";
+    // }
 </script>
 </body>
 </html>

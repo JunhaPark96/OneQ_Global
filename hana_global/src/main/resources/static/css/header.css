@@ -209,36 +209,36 @@
 
 /* 로그인 모달 */
 /* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    z-index: 9999;
-}
-.modal-header {
-    display: grid;
-    grid-template-columns: 1fr auto; /* 1fr for the header, auto for the close button */
-    width: 100%;
-    height: 90px;
-}
+/*.modal {*/
+/*    display: none;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*    background-color: rgba(0,0,0,0.4);*/
+/*    z-index: 9999;*/
+/*}*/
+/*.modal-header {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr auto; !* 1fr for the header, auto for the close button *!*/
+/*    width: 100%;*/
+/*    height: 90px;*/
+/*}*/
 /* Close Button */
-.close {
-    color: #aaa;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: #f5f5f5;
-    border: none;
-    cursor: pointer;
-    padding: 0 10px;
-    border-radius: 5px;
-    margin-bottom: 25px;  /* Increase this value to move the close button up */
-    align-self: start;    /* This will align the close button to the top */
-}
+/*.close {*/
+/*    color: #aaa;*/
+/*    font-size: 24px;*/
+/*    font-weight: bold;*/
+/*    background-color: #f5f5f5;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    padding: 0 10px;*/
+/*    border-radius: 5px;*/
+/*    margin-bottom: 25px;  !* Increase this value to move the close button up *!*/
+/*    align-self: start;    !* This will align the close button to the top *!*/
+/*}*/
 /*.loginHeader {*/
 /*    font-size: 2rem;*/
 /*    font-weight: bold;*/
@@ -320,20 +320,20 @@
 /*}*/
 
 /* Close Button */
-.close {
-    color: #aaa;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: #f5f5f5;
-    border: none;
-    cursor: pointer;
-    padding: 0 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
+/*.close {*/
+/*    color: #aaa;*/
+/*    font-size: 24px;*/
+/*    font-weight: bold;*/
+/*    background-color: #f5f5f5;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    padding: 0 10px;*/
+/*    border-radius: 5px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
-.close:hover, .close:focus {
-    color: black;
-    background-color: #e6e6e6;
-}
+/*.close:hover, .close:focus {*/
+/*    color: black;*/
+/*    background-color: #e6e6e6;*/
+/*}*/
 

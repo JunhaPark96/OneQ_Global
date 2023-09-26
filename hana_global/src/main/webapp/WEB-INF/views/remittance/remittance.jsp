@@ -63,11 +63,11 @@
                                 </div>
                                 <div class="swiper-slide" id="Australia">
                                     <img src="./images/walletIcon_AUD.png" alt="">
-                                    <div > Australia</div>
+                                    <div> Australia</div>
                                 </div>
                                 <div class="swiper-slide" id="Japan">
                                     <img src="./images/walletIcon_JPY.png" alt="">
-                                    <div > Japan</div>
+                                    <div> Japan</div>
                                 </div>
                                 <div class="swiper-slide" id="Swiss">
                                     <img src="./images/walletIcon_CHF.png" alt="">
@@ -89,7 +89,7 @@
 
                                 <div class="swiper-slide" id="UnitedKingdom">
                                     <img src="./images/walletIcon_GBP.png" alt="">
-                                    <div > United Kingdom</div>
+                                    <div> United Kingdom</div>
                                 </div>
                                 <div class="swiper-slide" id="HongKong">
                                     <img src="./images/walletIcon_HKD.png" alt="">
@@ -191,6 +191,8 @@
 
                 <%--          환전 계산 시작 --%>
                 <div class="compare_area">
+                    <div class="fs-5" style="color: #bdbdbd">Remittance / <strong
+                            style="color: #000000">Calculation</strong></div>
                     Please select the currency you want to exchange
                     <div class="compare_section">
                         <%--                    Source 통화 섹션 --%>
@@ -271,55 +273,57 @@
                         <div class="toggleExchangeRate" onclick="toggleRateInfo()">
                         </div>
                         <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-
-                                        <button type="button" class="" id="calExchange">Calculate </button></span>
+                            <button type="button" class="" id="calExchange">Calculate </button>
+                        </span>
                     </div>
                 </div>
                 <%--          환전 계산 끝 --%>
 
 
                 <%--        결제 정보 미리보기 시작    --%>
-                <%--                <div class="col previewPayment" style="display: none">--%>
-                <%--                    <div class="banking-wrap input-focus-wrap">--%>
-                <%--                        <div class="title-cont">--%>
-                <%--                            <h5>Confirm the amount before topping up</h5>--%>
-                <%--                        </div>--%>
-                <%--                        <br/>--%>
-                <%--                        <div class="banking-cont">--%>
-                <%--                            <table summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">--%>
-                <%--                                &lt;%&ndash;                                <caption>결제정보1</caption>&ndash;%&gt;--%>
-                <%--                                <colgroup>--%>
-                <%--                                    <col style="width: 500px"/>--%>
-                <%--                                </colgroup>--%>
+<%--                <div class="col previewPayment" style="display: none">--%>
+<%--                    <div class="banking-wrap input-focus-wrap">--%>
+<%--                        <div class="title-cont">--%>
+<%--                            <h5>Confirm the amount before topping up</h5>--%>
+<%--                        </div>--%>
+<%--                        <br/>--%>
+<%--                        <div class="banking-cont">--%>
+<%--                            <table summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">--%>
+<%--                                &lt;%&ndash;                                <caption>결제정보1</caption>&ndash;%&gt;--%>
+<%--                                <colgroup>--%>
+<%--                                    <col style="width: 500px"/>--%>
+<%--                                </colgroup>--%>
 
-                <%--                                <tbody>--%>
-                <%--                                <tr>--%>
-                <%--                                    <th>Foreign exchange application amount</th>--%>
-                <%--                                    <td>--%>
-                <%--									<span class="txt">--%>
-                <%--										<img src="./images/walletIcon_.png" style="width: 30px; height: 30px"--%>
-                <%--                                             alt="국기" class="flag">--%>
-                <%--										<em class="currency"></em>--%>
-                <%--										<em class="price">10</em>--%>
-                <%--									</span>--%>
-                <%--                                    </td>--%>
-                <%--                                </tr>--%>
+<%--                                <tbody>--%>
+<%--                                <tr>--%>
+<%--                                    <th>Foreign exchange application amount</th>--%>
+<%--                                    <td>--%>
+<%--                									<span class="txt">--%>
+<%--                										<img src="./images/walletIcon_.png"--%>
+<%--                                                             style="width: 30px; height: 30px"--%>
+<%--                                                             alt="국기" class="flag">--%>
+<%--                										<em class="currency"></em>--%>
+<%--                										<em class="price">10</em>--%>
+<%--                									</span>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
 
-                <%--                                <tr>--%>
-                <%--                                    <th>The amount you will be paying(Won)</th>--%>
-                <%--                                    <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em class="point"></em></span></td>--%>
-                <%--                                </tr>--%>
+<%--                                <tr>--%>
+<%--                                    <th>The amount you will be paying(Won)</th>--%>
+<%--                                    <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em--%>
+<%--                                            class="point"></em></span></td>--%>
+<%--                                </tr>--%>
 
-                <%--                                <tr>--%>
-                <%--                                    <th>Payment method</th>--%>
-                <%--                                    <td><span class="txt"></span></td>--%>
-                <%--                                </tr>--%>
-                <%--                                </tbody>--%>
-                <%--                            </table>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
+<%--                                <tr>--%>
+<%--                                    <th>Payment method</th>--%>
+<%--                                    <td><span class="txt"></span></td>--%>
+<%--                                </tr>--%>
+<%--                                </tbody>--%>
+<%--                            </table>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
 
-                <%--                </div>--%>
+<%--                </div>--%>
                 <%--        결제 정보 미리보기 끝    --%>
 
 
@@ -410,6 +414,30 @@
     //         container.classList.add('open');
     //     }
     // });
+    // 환율 정보 저장
+    let exchangeRates = {};
+    <c:forEach var="rate" items="${exchangeList}">
+    exchangeRates["${rate.currencyCode}"] = {
+        baseRate: ${rate.baseRate},
+        usdConversionRate: ${rate.usdConversionRate},
+        remittance: ${rate.remittance},
+        receiving: ${rate.receiving},
+        buyRate: ${rate.buyRate},
+        sellRate: ${rate.sellRate}
+    };
+    </c:forEach>
+    // 컨트롤러에서 제공하는 객체 정보를 JavaScript 변수로 저장
+    let walletInfo = {
+        walletSeq: "${walletKRW.walletSeq}",
+        userSeq: "${walletKRW.userSeq}",
+        balance: "${walletKRW.balance}",
+        walletPw: "${walletKRW.walletPw}",
+        currencyCode: "${walletKRW.currencyCode}",
+        currency: "${walletKRW.currency}"
+    };
+
+    console.log(walletInfo);  // 테스트: 월렛 정보를 콘솔에 출력
+    document.getElementById("selectedAccountInfo").value = JSON.stringify(walletInfo);
     const countryToIndex = {
         USA: 0,
         Korea: 1,
@@ -433,6 +461,7 @@
 
     let selectedCountry = null;
     let selectedPaymentMethod = null;
+
     // 국가 및 결제 방식을 선택하면 호출할 함수를 정의합니다.
     function selectCountry(country) {
         selectedCountry = country;
@@ -444,15 +473,16 @@
         console.log("선택된 결제방식은 ", selectedPaymentMethod);
         nextStep();
     }
+
     // HTML에서 국가 및 결제 방식을 선택할 수 있도록 버튼에 이벤트 리스너를 연결합니다.
-    document.querySelectorAll('.swiper-slide').forEach(function(slide) {
-        slide.addEventListener('click', function() {
+    document.querySelectorAll('.swiper-slide').forEach(function (slide) {
+        slide.addEventListener('click', function () {
             selectCountry(slide.id);  // 이 id는 각 나라의 id와 일치해야 합니다.
         });
     });
 
-    document.querySelectorAll('.selectPaymentWrapper div').forEach(function(paymentOption) {
-        paymentOption.addEventListener('click', function() {
+    document.querySelectorAll('.selectPaymentWrapper div').forEach(function (paymentOption) {
+        paymentOption.addEventListener('click', function () {
             selectPaymentMethod(paymentOption.id);
             document.getElementById('myModal').style.display = 'none';
         });
@@ -461,5 +491,6 @@
 
 </script>
 <script src="./js/remittance.js"></script>
+<script src="./js/exchange.js"></script>
 </body>
 </html>

@@ -229,72 +229,142 @@ input[type="text"] {
     justify-content: center;
     height: 200px;
 }
-/* 결제방식 선택 끝*/
+/* 결제방식 선택 끝* ======================================================/
 
 
-/* 새로운 CSS 추가 */
-/*.nation_header {*/
-/*    width: 100%;*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*    cursor: pointer;*/
-/*    padding: 10px 0;*/
-/*    border-bottom: 1px solid #ddd;*/
-/*}*/
+/* 환율 보기 및 비용 계산 시작 =============================================*/
+.compare_area {
+    /*background-color: #ffffff;*/
+    /*border: 1px solid #ddd;*/
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 450px;
+    background-color: #f4f3ef;
+    /*justify-content: space-between;*/
+}
 
-/*.nation_header .nation_usd {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*}*/
+/* selectbox 스타일링 */
+.sbox .selectbox_label {
+    background-color: #f5f5f5;
+    border: 1px solid #ced4da; /* Bootstrap의 input border 색상과 동일 */
+    border-radius: 0.25rem; /* Bootstrap의 input border-radius와 동일 */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* 부드러운 전환 효과 */
+    padding-left: 10px;
+}
 
-/*!* JavaScript에 의해 토글됩니다 *!*/
-/*.selectCurAndPayment.open .selectPaymentWrapper {*/
-/*    display: flex; !* open 클래스가 추가되면 보여집니다 *!*/
-/*}*/
-
-/*.currencyImages {*/
-/*    display: none; !* 기본적으로 숨김 *!*/
-/*}*/
-
-/*.selectCurrency.open .currencyImages {*/
-/*    display: grid; !* open 클래스가 있을 때 표시 *!*/
-/*    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); !* 그리드 레이아웃을 사용하여 이미지를 정렬 *!*/
-/*    gap: 30px; !* 이미지 사이의 간격 *!*/
-/*    padding: 10px; !* 패딩을 추가하여 간격을 만듦 *!*/
-/*    width: 100%;*/
-/*}*/
-/*.walletCell {*/
-/*    position: relative;*/
-/*    display: flex;*/
-/*    border-radius: 18px;*/
-/*    !*box-shadow: inset 0 0 10px #018085;*!*/
-/*    !*background-color: aliceblue;*!*/
-/*    !*background: linear-gradient(70deg, rgba(0, 255, 237, 0.4), rgba(0, 184, 186, 0.2));*!*/
-/*    background-size: auto;*/
-/*    flex-direction: column;*/
-/*    justify-content: space-around;*/
-/*    max-width: 100px;*/
-/*    min-width: 100px;*/
-/*    max-height: 100px;*/
-/*    min-height: 100px;*/
-/*}*/
-/*.walletCell[data-currency="USD"]::before {*/
-/*    background-image: url("/images/walletIcon_USD.png");*/
-/*    content: ''; !* 추가 *!*/
-/*    display: block; !* 추가 *!*/
-/*    width: 50px; !* 추가 *!*/
-/*    height: 50px; !* 추가 *!*/
-/*    z-index: 9999;*/
-/*}*/
-/*.walletCell[data-currency="JPY"]::before {*/
-/*    background-image: url("/images/walletIcon_JPY.png");*/
-/*    content: ''; !* 추가 *!*/
-/*    display: inline-block; !* 추가 *!*/
-/*    width: 50px; !* 추가 *!*/
-/*    height: 50px; !* 추가 *!*/
-/*}*/
-
-/* 통화선택, 결제방식 선택 끝*/
+.sbox .selectbox_label:hover {
+    border-color: #adb5bd; /* 호버 시 border 색상 조절 */
+}
 
 
+.ch_wrap_ly {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+}
+
+.ly_cont li:hover {
+    background-color: #f8f9fa; /* Bootstrap의 light grey */
+}
+
+/* input box 스타일링 */
+.input_box input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input_box input:focus {
+    border-color: #adb5bd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Bootstrap의 primary 색상에 기반한 포커스 그림자 효과 */
+}
+
+.recite {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: #495057; /* Bootstrap의 dark grey */
+}
+
+._i{
+    list-style: none;
+}
+
+._i a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 환율 보기 및 비용 계산 끝 =============================================*/
+
+/* 버튼 공통 */
+.btn-area {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    /*text-align: center;*/
+    display: flex;
+    justify-content: center;
+}
+.btn-pack, .btn-pack * {
+    display: inline-block;
+    overflow: visible;
+    margin: 0;
+    /*background: url(/img/common/etc/bg_btn/common.gif) no-repeat;*/
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/* 확인 버튼 span */
+.btn-pack.btn-type-3c {
+    height: 34px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 34px;
+    vertical-align: middle;
+    margin-left: 40px;
+    margin-right: 2px;
+    background-color: #018085;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+!important;
+}
+
+.btn-pack.btn-type-3c button {
+    color: white;
+!important;
+}
+
+/* 취소 버튼 span */
+.btn-pack.btn-type-3 {
+    height: 34px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 34px;
+    vertical-align: middle;
+}
+
+/* 버튼 간격 */
+.btn-pack.btn-type-3c button, .btn-pack.btn-type-3c input {
+    min-width: 90px;
+}
+
+/* 하이퍼링크 스타일 삭제 */
+.btn-pack.btn-type-3c a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.btn-pack.btn-type-3 a {
+    min-width: 63px;
+    text-decoration: none;
+    color: #000;
+}

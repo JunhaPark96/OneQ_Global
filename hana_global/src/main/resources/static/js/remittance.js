@@ -85,154 +85,203 @@ window.addEventListener('click', (event) => {
 //=================================================
 // 단계 별 구역 표시
 // 초기 단계를 설정합니다.
-let currentStep = 1;
+// let currentStep = 1;
+//
+// // 각 단계의 구역을 배열에 저장합니다.
+// let steps = [
+//     document.querySelector('.selectCurAndPayment'),
+//     document.querySelector('.compare_area'),
+//     // document.querySelector('.recipient_info')
+// ].filter(Boolean); // `null` 값 제거
+//
+// // 초기화 함수를 호출하여 첫 번째 단계만 표시합니다.
+// function initialize() {
+//     // 모든 단계를 숨깁니다.
+//     steps.forEach(function (step) {
+//         step.style.display = 'none';
+//     });
+//
+//     // 첫 번째 단계만 표시합니다.
+//     steps[0].style.display = 'block';
+//     console.log("현재 스텝은 ", steps[0]);
+// }
+// initialize();
+// // 다음 단계로 이동하는 함수를 정의.
+// function nextStep() {
+//     console.log(currentStep);
+//     console.log(steps.length);
+//     if (currentStep < steps.length) {
+//         // 현재 단계를 숨기고 다음 단계를 표시.
+//         console.log(steps[currentStep - 1]);
+//         console.log(steps[currentStep]);
+//         steps[currentStep - 1].style.display = 'none';
+//         steps[currentStep].style.display = 'block';
+//
+//         currentStep++;
+//         // 단계 번호를 증가.
+//         console.log("증가한 현재 스텝은 ", currentStep);
+//         console.log("증가한 현재 구역은 ", steps[currentStep]);
+//     }
+// }
+//
+// // 이전 단계로 돌아가는 함수를 정의.
+// function prevStep() {
+//     if (currentStep > 1) {
+//         // 현재 단계를 숨기고 이전 단계를 표시.
+//         steps[currentStep - 1].style.display = 'none';
+//         steps[currentStep - 2].style.display = 'block';
+//
+//         // 단계 번호를 감소시킵니다.
+//         currentStep--;
+//     }
+// }
 
-// 각 단계의 구역을 배열에 저장합니다.
-let steps = [
-    document.querySelector('.compare_area'),
-    document.querySelector('.selectCurAndPayment'),
-    // document.querySelector('.recipient_info')
-];
+// // "다음" 버튼에 이벤트 리스너를 연결하여 다음 단계로 이동합니다.
+// document.getElementById('nextButton').addEventListener('click', nextStep);
 
-// 초기화 함수를 호출하여 첫 번째 단계만 표시합니다.
-initialize();
+// 환율계산 시작 ========================================================================
 
-function initialize() {
-    // 모든 단계를 숨깁니다.
-    steps.forEach(function (step) {
-        step.style.display = 'none';
-    });
+// 2단계 환율계산
 
-    // 첫 번째 단계만 표시합니다.
-    steps[0].style.display = 'block';
-    console.log("현재 스텝은 ", steps[0]);
-}
+// 환율 계산 함수
+function calculateExchange(remittanceRate) {
+    // ds_from_money 필드에서 원화 금액 가져오기
+    const krwAmount = parseFloat(document.getElementById('ds_from_money').value) || 1;
+    const currencyCode = document.getElementById('currencyName').textContent;
+    let targetAmount;
 
-// 다음 단계로 이동하는 함수를 정의.
-function nextStep() {
-    if (currentStep < steps.length) {
-        // 현재 단계를 숨기고 다음 단계를 표시.
-        steps[currentStep - 1].style.display = 'none';
-        steps[currentStep].style.display = 'block';
+    if (currencyCode === 'JPY' || currencyCode === 'VND') {
+        targetAmount = (krwAmount / remittanceRate) * 100;
+    } else {
+        targetAmount = krwAmount / remittanceRate;
+    }
+    console.log("현재 입력된 원화는 ", krwAmount);
 
-        // 단계 번호를 증가.
-        currentStep++;
-        console.log("증가한 현재 스텝은 ", currentStep);
-        console.log("증가한 현재 구역은 ", steps[currentStep]);
+    if (!isNaN(krwAmount)) {
+        // 금액이 유효하면 환율 계산
+        // const targetAmount = krwAmount / remittanceRate;
+        // 결과를 ds_to_money 필드에 표시
+        // document.getElementById('ds_to_money').value = targetAmount.toFixed(2);
+        document.getElementById('ds_to_money').value = formatNumber(targetAmount.toFixed(2));
+
+        // 통화의 이름과 금액을 targetCurrencyName 필드에 표시
+        const currencyCode = document.getElementById('currencyName').textContent;
+        const currencyName = currencyUnits[currencyCode] || currencyCode;
+        console.log("현재 입력된 통화이름 ", currencyName);
+        // document.getElementById('targetCurrencyName').textContent = targetAmount.toFixed(2) + ' ' + currencyName;
+        document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
+        document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
+
     }
 }
 
-// 이전 단계로 돌아가는 함수를 정의.
-function prevStep() {
-    if (currentStep > 1) {
-        // 현재 단계를 숨기고 이전 단계를 표시.
-        steps[currentStep - 1].style.display = 'none';
-        steps[currentStep - 2].style.display = 'block';
-
-        // 단계 번호를 감소시킵니다.
-        currentStep--;
+function selectCurrency(currencyCode) {
+    // 국가의 환율 정보 가져오기
+    const rateInfo = exchangeRates[currencyCode];
+    console.log("선택된국가의 환율은 ", rateInfo);
+    if (rateInfo) {
+        // 환율 정보가 있으면 환율 계산을 위해 이 정보를 사용
+        console.log("선택된국가의 송금환율은 ", rateInfo.remittance);
+        calculateExchange(rateInfo.remittance);
+    } else {
+        console.error("환율 정보를 찾을 수 없습니다");
     }
 }
 
-// "다음" 버튼에 이벤트 리스너를 연결하여 다음 단계로 이동합니다.
-document.getElementById('nextButton').addEventListener('click', nextStep);
+// ds_from_money 필드의 input 이벤트에 대한 리스너 추가
+document.getElementById('ds_from_money').addEventListener('input', function () {
+    // 사용자가 입력할 때마다 환율 계산 실행
+    const currencyCode = document.getElementById('currencyName').textContent;
+    console.log("통화코드는 ", currencyCode);
+    selectCurrency(currencyCode);
+});
+
+const currencyUnits = {
+    "AED": "dirham",
+    "DZD": "dinar",
+    "AUD": "dollar",
+    "BHD": "dinar",
+    "BDT": "taka",
+    "BRL": "real",
+    "BND": "dollar",
+    "CAD": "dollar",
+    "CLP": "peso",
+    "CNY": "yuan",
+    "COP": "peso",
+    "CZK": "koruna",
+    "DKK": "krone",
+    "EGP": "pound",
+    "EUR": "euro",
+    "HKD": "dollar",
+    "HUF": "forint",
+    "INR": "rupee",
+    "IDR": "rupiah",
+    "ILS": "shekel",
+    "JPY": "yen",
+    "JOD": "dinar",
+    "KES": "shilling",
+    "KWD": "dinar",
+    "KZT": "tenge",
+    "KRW": "won",
+    "LKR": "rupee",
+    "MYR": "ringgit",
+    "MXN": "peso",
+    "MNT": "tugrik",
+    "NZD": "dollar",
+    "NOK": "krone",
+    "OMR": "rial",
+    "PKR": "rupee",
+    "PLN": "złoty",
+    "QAR": "riyal",
+    "RUB": "ruble",
+    "SAR": "riyal",
+    "SEK": "krona",
+    "SGD": "dollar",
+    "ZAR": "rand",
+    "CHF": "franc",
+    "TZS": "shilling",
+    "TRY": "lira",
+    "GBP": "pound",
+    "USD": "dollar",
+    "VND": "dong"
+};
+
+// ds_from_money 필드의 input 이벤트에 대한 리스너 추가
+document.getElementById('ds_from_money').addEventListener('input', function() {
+    const krwAmount = document.getElementById('ds_from_money').value.replace(/,/g, '');
+    document.getElementById('ds_from_money').value = formatNumber(krwAmount);
+    const currencyCode = document.getElementById('currencyName').textContent;
+    console.log("통화코드는 ", currencyCode);
+    selectCurrency(currencyCode);
+});
+
+// 숫자 포맷
+function formatNumber(num) {
+    return num.toLocaleString('en-US');
+}
+
+
+// 환율계산 끝========================================================================
 
 // 결제 창 보이기 및 환전 =============================================================
 
-document.addEventListener("DOMContentLoaded", function () {
-    // 계산 버튼에 이벤트 리스너 추가
-    document.getElementById("calExchange").addEventListener("click", function () {
-        calculateAndPreviewPayment();
-    });
-});
+
 // 결제 창 보이기 및 환전금액 계산
-function calculateAndPreviewPayment() {
-    // Source에서 입력된 금액 및 통화를 가져옵니다.
-    const sourceAmount = parseFloat(document.getElementById("ds_from_money").value);
-    const sourceCurrencyImageSrc = document.querySelector(".nation_usd ._img").src;
-    const sourceCurrencyCode = document.querySelector(".selectbox_label ._text em").textContent;
-    const countryName = currencyNames[sourceCurrencyCode];
-    document.querySelector(".previewPayment").style.display = "block";
-    const previewPayment = document.querySelector('.previewPayment');
-    previewPayment.scrollIntoView({behavior: "smooth"});
-    previewPayment.classList.add('focusArea');
-    // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
-    const targetAmount = parseFloat(document.getElementById("ds_to_money").value.replace(/,/g, ""));
-
-    // 1% 수수료를 추가하고 10의 단위로 반올림
-    const adjustedAmount = targetAmount * 1.01;
-    const finalAmountWithoutDecimal = Math.round(adjustedAmount);
-    const finalAmount = Math.round(finalAmountWithoutDecimal / 10) * 10;
 
 
-    // previewPayment 영역을 업데이트
-    const previewElem = document.querySelector(".previewPayment .banking-cont table tbody");
 
-    previewElem.querySelector("tr:nth-child(1) .txt img").src = sourceCurrencyImageSrc;
-    previewElem.querySelector("tr:nth-child(1) .txt em.currency").textContent = countryName + " " + sourceCurrencyCode;
-    previewElem.querySelector("tr:nth-child(1) .txt em.price").textContent = sourceAmount.toFixed(0);
-    previewElem.querySelector("tr:nth-child(2) .txt em.point").textContent = finalAmount.toLocaleString();
-
-    //  결제 방식을 동적으로 설정할 수 있는 로직을 추가
-    const selectedOption = document.getElementById("selectAccountForm").value;
-    const paymentMethodText = document.querySelector(".previewPayment .banking-cont table tbody tr:nth-child(3) .txt");
-
-    if (selectedOption === "HANA Wallet") {
-        paymentMethodText.textContent = "Hana Wallet Money Withdrawal";
-    } else {
-        paymentMethodText.textContent = "Hana Bank Account Withdrawal";
-    }
-
-    // 계산된 값을 hidden input 필드에 설정
-    document.getElementById("sourceCurrencyCode").value = sourceCurrencyCode; // 외화
-    document.getElementById("hiddenSourceAmount").value = sourceAmount.toFixed(0); // 외화 금액
-    document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
-}
-
-function changeBalance() {
-    const selectElem = document.getElementById("selectAccountForm");
-    const selectedOption = selectElem.options[selectElem.selectedIndex];
-    const selectedValue = selectedOption.value;
-    const selectedBalance = selectedOption.getAttribute("data-balance");
-
-    // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
-    // document.getElementById("selectedAccountInfo").value = selectedValue;
-
-    // 잔액 정보 업데이트
-    document.getElementById("accountBalance").textContent = selectedBalance;
-}
-
-console.log(document.getElementById("sourceCurrencyCode").value);
-document.addEventListener("DOMContentLoaded", function () {
-    // console.log(document.getElementById("selectedAccountInfo").value);
-    console.log(document.getElementById("hiddenSourceAmount").value);
-    console.log(document.getElementById("hiddenFinalAmount").value);
-    // console.log(document.getElementById("selectedAccountInfo").value);
-});
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // 사용자의 국적에 따른 기본 통화와 선택한 통화를 반영
-        let defaultCurrency = "${defaultCurrencyCode}";
-        currencySelected(defaultCurrency, true);
-
-        let selectedCurrency = "${selectedCurrency}";
-        if (selectedCurrency) {
-            currencySelected(selectedCurrency, true);
-        }
-    });
-
-function toggleRateInfo() {
-    let rateInfo = document.querySelector('.showExchangeRate');
-    let arrow = document.querySelector('.arrow');
-    let toggleText = document.querySelector('.toggleText');
-
-    if(rateInfo.classList.contains('open')) {
-        rateInfo.classList.remove('open');
-        arrow.innerHTML = '&#9660;'; // 아래쪽 화살표로 변경
-        toggleText.textContent = 'open'; // 텍스트를 '보기'로 변경
-    } else {
-        rateInfo.classList.add('open');
-        arrow.innerHTML = '&#9650;'; // 위쪽 화살표로 변경
-        toggleText.textContent = 'close'; // 텍스트를 '닫기'로 변경
-    }
-}
+// function toggleRateInfo() {
+//     let rateInfo = document.querySelector('.showExchangeRate');
+//     let arrow = document.querySelector('.arrow');
+//     let toggleText = document.querySelector('.toggleText');
+//
+//     if(rateInfo.classList.contains('open')) {
+//         rateInfo.classList.remove('open');
+//         arrow.innerHTML = '&#9660;'; // 아래쪽 화살표로 변경
+//         toggleText.textContent = 'open'; // 텍스트를 '보기'로 변경
+//     } else {
+//         rateInfo.classList.add('open');
+//         arrow.innerHTML = '&#9650;'; // 위쪽 화살표로 변경
+//         toggleText.textContent = 'close'; // 텍스트를 '닫기'로 변경
+//     }
+// }

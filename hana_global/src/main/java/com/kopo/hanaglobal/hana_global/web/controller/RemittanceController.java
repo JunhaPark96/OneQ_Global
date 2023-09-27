@@ -10,14 +10,15 @@ import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @SessionAttributes("currentMember")
@@ -57,7 +58,20 @@ public class RemittanceController {
         model.addAttribute("walletKRW", walletKRW);
 
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
+        for (ExchangeRate e : exchangeRateList){
+            System.out.println("오늘의 환율은 " + e);
+        }
         model.addAttribute("exchangeList", exchangeRateList);
         return "remittance/remittance";
+    }
+
+    @PostMapping("selectCountryAndPayment")
+    public ResponseEntity<Map<String, String>> selectCountryAndPayment
+            (@RequestParam("selectedCountry") String country, @RequestParam("selectedPaymentMethod") String payment){
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("selectedCountry", country);
+        responseMap.put("selectedPaymentMethod", payment);
+        System.out.println("선택된 국가와 결제방식은 : " + country + " " + payment);
+        return ResponseEntity.ok().body(responseMap);
     }
 }

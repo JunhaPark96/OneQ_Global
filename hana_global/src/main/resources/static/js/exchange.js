@@ -254,10 +254,10 @@ function setCountryNames() {
 }
 
 // 페이지 로드 시 실행
-window.onload = function () {
-    setCountryNames();
-    updateExchangeRate();
-};
+// window.onload = function () {
+//     setCountryNames();
+//     updateExchangeRate();
+// };
 
 // 통화 입력값, 이름 표시
 function updateRecite(isSource) {

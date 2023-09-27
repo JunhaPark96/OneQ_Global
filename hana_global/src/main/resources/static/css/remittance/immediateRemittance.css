@@ -18,7 +18,7 @@
     height: 450px;
     justify-content: space-between;
 }
-input[type="text"] {
+#countrySearch input[type="text"] {
     width: 20%;
     padding: 5px 20px;
     box-sizing: border-box;
@@ -28,8 +28,8 @@ input[type="text"] {
     color: #016f73;
     font-size: 16px;
     margin-bottom: 20px;
-
 }
+
 /* 넷플릭스 슬라이더 시작*/
 .container {
     width: 100%; /* 혹은 필요한 너비를 설정 */
@@ -246,6 +246,10 @@ input[type="text"] {
     background-color: #f4f3ef;
     /*justify-content: space-between;*/
 }
+.compare_section{
+    display: flex;
+    justify-content: space-around;
+}
 
 /* selectbox 스타일링 */
 .sbox .selectbox_label {
@@ -270,7 +274,16 @@ input[type="text"] {
 .ly_cont li:hover {
     background-color: #f8f9fa; /* Bootstrap의 light grey */
 }
-
+input[type="text"] {
+    width: 100%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid #059196;
+    background-color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
 /* input box 스타일링 */
 .input_box input {
     border: 1px solid #ced4da;
@@ -334,13 +347,11 @@ input[type="text"] {
     background-color: #018085;
     border-radius: 20px;
     text-decoration: none;
-    color: white;
-!important;
+    color: white; !important;
 }
 
 .btn-pack.btn-type-3c button {
-    color: white;
-!important;
+    color: white; !important;
 }
 
 /* 취소 버튼 span */

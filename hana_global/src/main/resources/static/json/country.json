@@ -2,923 +2,1212 @@
   "countries": [
     {
       "nationality": "Aland Islands",
-      "countrySP": "ALA"
+      "countrySP": "ALA",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Albania",
-      "countrySP": "ALB"
+      "countrySP": "ALB",
+      "currencyCode": "ALL"
     },
     {
       "nationality": "Algeria",
-      "countrySP": "DZA"
+      "countrySP": "DZA",
+      "currencyCode": "DZD"
     },
     {
       "nationality": "American Samoa",
-      "countrySP": "ASM"
+      "countrySP": "ASM",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Andorra",
-      "countrySP": "AND"
+      "countrySP": "AND",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Angola",
-      "countrySP": "AGO"
+      "countrySP": "AGO",
+      "currencyCode": "AOA"
     },
     {
       "nationality": "Anguilla",
-      "countrySP": "AIA"
+      "countrySP": "AIA",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Antarctica",
-      "countrySP": "ATA"
+      "countrySP": "ATA",
+      "currencyCode": ""
     },
     {
       "nationality": "Antigua and Barbuda",
-      "countrySP": "ATG"
+      "countrySP": "ATG",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Argentina",
-      "countrySP": "ARG"
+      "countrySP": "ARG",
+      "currencyCode": "ARS"
     },
     {
       "nationality": "Armenia",
-      "countrySP": "ARM"
+      "countrySP": "ARM",
+      "currencyCode": "AMD"
     },
     {
       "nationality": "Aruba",
-      "countrySP": "ABW"
+      "countrySP": "ABW",
+      "currencyCode": "AWG"
     },
     {
       "nationality": "Australia",
-      "countrySP": "AUS"
+      "countrySP": "AUS",
+      "currencyCode": "AUD",
+      "imagePath": "/images/walletIcon_AUD.png"
     },
     {
       "nationality": "Austria",
-      "countrySP": "AUT"
+      "countrySP": "AUT",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Azerbaijan",
-      "countrySP": "AZE"
+      "countrySP": "AZE",
+      "currencyCode": "AZN"
     },
     {
       "nationality": "Bahamas",
-      "countrySP": "BHS"
+      "countrySP": "BHS",
+      "currencyCode": "BSD"
     },
     {
       "nationality": "Bahrain",
-      "countrySP": "BHR"
+      "countrySP": "BHR",
+      "currencyCode": "BHD"
     },
     {
       "nationality": "Bangladesh",
-      "countrySP": "BGD"
+      "countrySP": "BGD",
+      "currencyCode": "BDT"
     },
     {
       "nationality": "Barbados",
-      "countrySP": "BRB"
+      "countrySP": "BRB",
+      "currencyCode": "BBD"
     },
     {
       "nationality": "Belarus",
-      "countrySP": "BLR"
+      "countrySP": "BLR",
+      "currencyCode": "BYN"
     },
     {
       "nationality": "Belgium",
-      "countrySP": "BEL"
+      "countrySP": "BEL",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Belize",
-      "countrySP": "BLZ"
+      "countrySP": "BLZ",
+      "currencyCode": "BZD"
     },
     {
       "nationality": "Benin",
-      "countrySP": "BEN"
+      "countrySP": "BEN",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Bermuda",
-      "countrySP": "BMU"
+      "countrySP": "BMU",
+      "currencyCode": "BMD"
     },
     {
       "nationality": "Bhutan",
-      "countrySP": "BTN"
+      "countrySP": "BTN",
+      "currencyCode": "BTN"
     },
     {
       "nationality": "Bolivia, Plurinational State Of",
-      "countrySP": "BOL"
+      "countrySP": "BOL",
+      "currencyCode": "BOB"
     },
     {
       "nationality": "Bonaire, Sint Eustatius and Saba",
-      "countrySP": "BES"
+      "countrySP": "BES",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Bosnia and Herzegovina",
-      "countrySP": "BIH"
+      "countrySP": "BIH",
+      "currencyCode": "BAM"
     },
     {
       "nationality": "Botswana",
-      "countrySP": "BWA"
+      "countrySP": "BWA",
+      "currencyCode": "BWP"
     },
     {
       "nationality": "Bouvet Island",
-      "countrySP": "BVT"
+      "countrySP": "BVT",
+      "currencyCode": ""
     },
     {
       "nationality": "Brazil",
-      "countrySP": "BRA"
+      "countrySP": "BRA",
+      "currencyCode": "BRL"
     },
     {
       "nationality": "British Indian Ocean Territory",
-      "countrySP": "IOT"
+      "countrySP": "IOT",
+      "currencyCode": ""
     },
     {
       "nationality": "Brunei Darussalam",
-      "countrySP": "BRN"
+      "countrySP": "BRN",
+      "currencyCode": "BND"
     },
     {
       "nationality": "Bulgaria",
-      "countrySP": "BGR"
+      "countrySP": "BGR",
+      "currencyCode": "BGN"
     },
     {
       "nationality": "Burkina Faso",
-      "countrySP": "BFA"
+      "countrySP": "BFA",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Burundi",
-      "countrySP": "BDI"
+      "countrySP": "BDI",
+      "currencyCode": "BIF"
     },
     {
       "nationality": "Cambodia",
-      "countrySP": "KHM"
+      "countrySP": "KHM",
+      "currencyCode": "KHR"
     },
     {
       "nationality": "Cameroon",
-      "countrySP": "CMR"
+      "countrySP": "CMR",
+      "currencyCode": "XAF"
     },
     {
       "nationality": "Canada",
-      "countrySP": "CAN"
+      "countrySP": "CAN",
+      "currencyCode": "CAD",
+      "imagePath": "/images/walletIcon_CAD.png"
     },
     {
       "nationality": "Cape Verde",
-      "countrySP": "CPV"
+      "countrySP": "CPV",
+      "currencyCode": "CVE"
     },
     {
       "nationality": "Cayman Islands",
-      "countrySP": "CYM"
+      "countrySP": "CYM",
+      "currencyCode": "KYD"
     },
     {
       "nationality": "Central African Republic",
-      "countrySP": "CAF"
+      "countrySP": "CAF",
+      "currencyCode": "XAF"
     },
     {
       "nationality": "Chad",
-      "countrySP": "TCD"
+      "countrySP": "TCD",
+      "currencyCode": "XAF"
     },
     {
       "nationality": "Chile",
-      "countrySP": "CHL"
+      "countrySP": "CHL",
+      "currencyCode": "CLP"
     },
     {
       "nationality": "China",
-      "countrySP": "CHN"
+      "countrySP": "CHN",
+      "currencyCode": "CNY",
+      "imagePath": "/images/walletIcon_CNY.png"
     },
     {
       "nationality": "Christmas Island",
-      "countrySP": "CXR"
+      "countrySP": "CXR",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Cocos (Keeling) Islands",
-      "countrySP": "CCK"
+      "countrySP": "CCK",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Colombia",
-      "countrySP": "COL"
+      "countrySP": "COL",
+      "currencyCode": "COP"
     },
     {
       "nationality": "Comoros",
-      "countrySP": "COM"
+      "countrySP": "COM",
+      "currencyCode": "KMF"
     },
     {
       "nationality": "Cook Islands",
-      "countrySP": "COK"
+      "countrySP": "COK",
+      "currencyCode": "NZD"
     },
     {
       "nationality": "Costa Rica",
-      "countrySP": "CRI"
+      "countrySP": "CRI",
+      "currencyCode": "CRC"
     },
     {
       "nationality": "Croatia",
-      "countrySP": "HRV"
+      "countrySP": "HRV",
+      "currencyCode": "HRK"
     },
     {
       "nationality": "Curacao",
-      "countrySP": "CUW"
+      "countrySP": "CUW",
+      "currencyCode": "ANG"
     },
     {
       "nationality": "Cyprus",
-      "countrySP": "CYP"
+      "countrySP": "CYP",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Czech Republic",
-      "countrySP": "CZE"
+      "countrySP": "CZE",
+      "currencyCode": "CZK",
+      "imagePath": "/images/walletIcon_Czech.png"
     },
     {
       "nationality": "Denmark",
-      "countrySP": "DNK"
+      "countrySP": "DNK",
+      "currencyCode": "DKK"
     },
     {
       "nationality": "Djibouti",
-      "countrySP": "DJI"
+      "countrySP": "DJI",
+      "currencyCode": "DJF"
     },
     {
       "nationality": "Dominica",
-      "countrySP": "DMA"
+      "countrySP": "DMA",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Dominican Republic",
-      "countrySP": "DOM"
+      "countrySP": "DOM",
+      "currencyCode": "DOP"
     },
     {
       "nationality": "Ecuador",
-      "countrySP": "ECU"
+      "countrySP": "ECU",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Egypt",
-      "countrySP": "EGY"
+      "countrySP": "EGY",
+      "currencyCode": "EGP"
     },
     {
       "nationality": "El Salvador",
-      "countrySP": "SLV"
+      "countrySP": "SLV",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Equatorial Guinea",
-      "countrySP": "GNQ"
+      "countrySP": "GNQ",
+      "currencyCode": "XAF"
     },
     {
       "nationality": "Estonia",
-      "countrySP": "EST"
+      "countrySP": "EST",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Ethiopia",
-      "countrySP": "ETH"
+      "countrySP": "ETH",
+      "currencyCode": "ETB"
     },
     {
       "nationality": "Falkland Islands (Malvinas)",
-      "countrySP": "FLK"
+      "countrySP": "FLK",
+      "currencyCode": "FKP"
     },
     {
       "nationality": "Faroe Islands",
-      "countrySP": "FRO"
+      "countrySP": "FRO",
+      "currencyCode": "DKK"
     },
     {
       "nationality": "Fiji",
-      "countrySP": "FJI"
+      "countrySP": "FJI",
+      "currencyCode": "FJD"
     },
     {
       "nationality": "Finland",
-      "countrySP": "FIN"
+      "countrySP": "FIN",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "France",
-      "countrySP": "FRA"
+      "countrySP": "FRA",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "French Guiana",
-      "countrySP": "GUF"
+      "countrySP": "GUF",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "French Polynesia",
-      "countrySP": "PYF"
+      "countrySP": "PYF",
+      "currencyCode": "XPF"
     },
     {
       "nationality": "French Southern Territories",
-      "countrySP": "ATF"
+      "countrySP": "ATF",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Gabon",
-      "countrySP": "GAB"
+      "countrySP": "GAB",
+      "currencyCode": "XAF"
     },
     {
       "nationality": "Gambia",
-      "countrySP": "GMB"
+      "countrySP": "GMB",
+      "currencyCode": "GMD"
     },
     {
       "nationality": "Georgia",
-      "countrySP": "GEO"
+      "countrySP": "GEO",
+      "currencyCode": "GEL"
     },
     {
       "nationality": "Germany",
-      "countrySP": "DEU"
+      "countrySP": "DEU",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Ghana",
-      "countrySP": "GHA"
+      "countrySP": "GHA",
+      "currencyCode": "GHS"
     },
     {
       "nationality": "Gibraltar",
-      "countrySP": "GIB"
+      "countrySP": "GIB",
+      "currencyCode": "GIP"
     },
     {
       "nationality": "Greece",
-      "countrySP": "GRC"
+      "countrySP": "GRC",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Greenland",
-      "countrySP": "GRL"
+      "countrySP": "GRL",
+      "currencyCode": "DKK"
     },
     {
       "nationality": "Grenada",
-      "countrySP": "GRD"
+      "countrySP": "GRD",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Guadeloupe",
-      "countrySP": "GLP"
+      "countrySP": "GLP",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Guam",
-      "countrySP": "GUM"
+      "countrySP": "GUM",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Guatemala",
-      "countrySP": "GTM"
+      "countrySP": "GTM",
+      "currencyCode": "GTQ"
     },
     {
       "nationality": "Guernsey",
-      "countrySP": "GGY"
+      "countrySP": "GGY",
+      "currencyCode": "GBP"
     },
     {
       "nationality": "Guinea",
-      "countrySP": "GIN"
+      "countrySP": "GIN",
+      "currencyCode": "GNF"
     },
     {
       "nationality": "Guinea-Bissau",
-      "countrySP": "GNB"
+      "countrySP": "GNB",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Guyana",
-      "countrySP": "GUY"
+      "countrySP": "GUY",
+      "currencyCode": "GYD"
     },
     {
       "nationality": "Haiti",
-      "countrySP": "HTI"
+      "countrySP": "HTI",
+      "currencyCode": "HTG"
     },
     {
       "nationality": "Heard Island and McDonald Islands",
-      "countrySP": "HMD"
+      "countrySP": "HMD",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Herzegovina",
-      "countrySP": "BHZ"
+      "countrySP": "BHZ",
+      "currencyCode": "BAM"
     },
     {
       "nationality": "Holy See (Vatican City State)",
-      "countrySP": "VAT"
+      "countrySP": "VAT",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Honduras",
-      "countrySP": "HND"
+      "countrySP": "HND",
+      "currencyCode": "HNL"
     },
     {
       "nationality": "Hong Kong",
-      "countrySP": "HKG"
+      "countrySP": "HKG",
+      "currencyCode": "HKD",
+      "imagePath": "/images/walletIcon_HKD.png"
+
     },
     {
       "nationality": "Hungary",
-      "countrySP": "HUN"
+      "countrySP": "HUN",
+      "currencyCode": "HUF",
+      "imagePath": "/images/walletIcon_HUF.png"
     },
     {
       "nationality": "Iceland",
-      "countrySP": "ISL"
+      "countrySP": "ISL",
+      "currencyCode": "ISK"
     },
     {
       "nationality": "India",
-      "countrySP": "IND"
+      "countrySP": "IND",
+      "currencyCode": "INR"
     },
     {
       "nationality": "Indonesia",
-      "countrySP": "IDN"
+      "countrySP": "IDN",
+      "currencyCode": "IDR",
+      "imagePath": "/images/walletIcon_IDR.png"
     },
     {
       "nationality": "Ireland",
-      "countrySP": "IRL"
+      "countrySP": "IRL",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Isle of Man",
-      "countrySP": "IMN"
+      "countrySP": "IMN",
+      "currencyCode": "GBP"
     },
     {
       "nationality": "Israel",
-      "countrySP": "ISR"
+      "countrySP": "ISR",
+      "currencyCode": "ILS"
     },
     {
       "nationality": "Italy",
-      "countrySP": "ITA"
+      "countrySP": "ITA",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Jamaica",
-      "countrySP": "JAM"
+      "countrySP": "JAM",
+      "currencyCode": "JMD"
     },
     {
       "nationality": "Japan",
-      "countrySP": "JPN"
+      "countrySP": "JPN",
+      "currencyCode": "JPY",
+      "imagePath": "/images/walletIcon_JPY.png"
     },
     {
       "nationality": "Jersey",
-      "countrySP": "JEY"
+      "countrySP": "JEY",
+      "currencyCode": "GBP"
     },
     {
       "nationality": "Jordan",
-      "countrySP": "JOR"
+      "countrySP": "JOR",
+      "currencyCode": "JOD"
     },
     {
       "nationality": "Kazakhstan",
-      "countrySP": "KAZ"
+      "countrySP": "KAZ",
+      "currencyCode": "KZT"
     },
     {
       "nationality": "Kenya",
-      "countrySP": "KEN"
+      "countrySP": "KEN",
+      "currencyCode": "KES"
     },
     {
       "nationality": "Kiribati",
-      "countrySP": "KIR"
+      "countrySP": "KIR",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Korea, Republic of",
-      "countrySP": "KOR"
+      "countrySP": "KOR",
+      "currencyCode": "KRW",
+      "imagePath": "/images/walletIcon_KRW.png"
     },
     {
       "nationality": "Kuwait",
-      "countrySP": "KWT"
+      "countrySP": "KWT",
+      "currencyCode": "KWD"
     },
     {
       "nationality": "Kyrgyzstan",
-      "countrySP": "KGZ"
+      "countrySP": "KGZ",
+      "currencyCode": "KGS"
     },
     {
       "nationality": "Lao People's Democratic Republic",
-      "countrySP": "LAO"
+      "countrySP": "LAO",
+      "currencyCode": "LAK"
     },
     {
       "nationality": "Latvia",
-      "countrySP": "LVA"
+      "countrySP": "LVA",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Lesotho",
-      "countrySP": "LSO"
+      "countrySP": "LSO",
+      "currencyCode": "LSL"
     },
     {
       "nationality": "Liberia",
-      "countrySP": "LBR"
+      "countrySP": "LBR",
+      "currencyCode": "LRD"
     },
     {
       "nationality": "Libya",
-      "countrySP": "LBY"
+      "countrySP": "LBY",
+      "currencyCode": "LYD"
     },
     {
       "nationality": "Liechtenstein",
-      "countrySP": "LIE"
+      "countrySP": "LIE",
+      "currencyCode": "CHF"
     },
     {
       "nationality": "Lithuania",
-      "countrySP": "LTU"
+      "countrySP": "LTU",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Luxembourg",
-      "countrySP": "LUX"
+      "countrySP": "LUX",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Macao",
-      "countrySP": "MAC"
+      "countrySP": "MAC",
+      "currencyCode": "MOP"
     },
     {
       "nationality": "Macedonia, the former Yugoslav Republic of",
-      "countrySP": "MKD"
+      "countrySP": "MKD",
+      "currencyCode": "MKD"
     },
     {
       "nationality": "Madagascar",
-      "countrySP": "MDG"
+      "countrySP": "MDG",
+      "currencyCode": "MGA"
     },
     {
       "nationality": "Malawi",
-      "countrySP": "MWI"
+      "countrySP": "MWI",
+      "currencyCode": "MWK"
     },
     {
       "nationality": "Malaysia",
-      "countrySP": "MYS"
+      "countrySP": "MYS",
+      "currencyCode": "MYR"
     },
     {
       "nationality": "Maldives",
-      "countrySP": "MDV"
+      "countrySP": "MDV",
+      "currencyCode": "MVR"
     },
     {
       "nationality": "Mali",
-      "countrySP": "MLI"
+      "countrySP": "MLI",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Malta",
-      "countrySP": "MLT"
+      "countrySP": "MLT",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Marshall Islands",
-      "countrySP": "MHL"
+      "countrySP": "MHL",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Martinique",
-      "countrySP": "MTQ"
+      "countrySP": "MTQ",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Mauritania",
-      "countrySP": "MRT"
+      "countrySP": "MRT",
+      "currencyCode": "MRU"
     },
     {
       "nationality": "Mauritius",
-      "countrySP": "MUS"
+      "countrySP": "MUS",
+      "currencyCode": "MUR"
     },
     {
       "nationality": "Mayotte",
-      "countrySP": "MYT"
+      "countrySP": "MYT",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Mexico",
-      "countrySP": "MEX"
+      "countrySP": "MEX",
+      "currencyCode": "MXN"
     },
     {
       "nationality": "Micronesia, Federated States of",
-      "countrySP": "FSM"
+      "countrySP": "FSM",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Moldova",
-      "countrySP": "MDA"
+      "countrySP": "MDA",
+      "currencyCode": "MDL"
     },
     {
       "nationality": "Monaco",
-      "countrySP": "MCO"
+      "countrySP": "MCO",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Mongolia",
-      "countrySP": "MNG"
+      "countrySP": "MNG",
+      "currencyCode": "MNT"
     },
     {
       "nationality": "Montenegro",
-      "countrySP": "MNE"
+      "countrySP": "MNE",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Montserrat",
-      "countrySP": "MSR"
+      "countrySP": "MSR",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Morocco",
-      "countrySP": "MAR"
+      "countrySP": "MAR",
+      "currencyCode": "MAD"
     },
     {
       "nationality": "Mozambique",
-      "countrySP": "MOZ"
+      "countrySP": "MOZ",
+      "currencyCode": "MZN"
+    },
+    {
+      "nationality": "Myanmar",
+      "countrySP": "MMR",
+      "currencyCode": "MMK"
     },
     {
       "nationality": "Namibia",
-      "countrySP": "NAM"
+      "countrySP": "NAM",
+      "currencyCode": "NAD"
     },
     {
       "nationality": "Nauru",
-      "countrySP": "NRU"
+      "countrySP": "NRU",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Nepal",
-      "countrySP": "NPL"
+      "countrySP": "NPL",
+      "currencyCode": "NPR"
     },
     {
       "nationality": "Netherlands",
-      "countrySP": "NLD"
-    },
-    {
-      "nationality": "Netherlands Antilles",
-      "countrySP": "ANT"
+      "countrySP": "NLD",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "New Caledonia",
-      "countrySP": "NCL"
+      "countrySP": "NCL",
+      "currencyCode": "XPF"
     },
     {
       "nationality": "New Zealand",
-      "countrySP": "NZL"
+      "countrySP": "NZL",
+      "currencyCode": "NZD"
     },
     {
       "nationality": "Nicaragua",
-      "countrySP": "NIC"
+      "countrySP": "NIC",
+      "currencyCode": "NIO"
     },
     {
       "nationality": "Niger",
-      "countrySP": "NER"
+      "countrySP": "NER",
+      "currencyCode": "XOF"
+    },
+    {
+      "nationality": "Nigeria",
+      "countrySP": "NGA",
+      "currencyCode": "NGN"
     },
     {
       "nationality": "Niue",
-      "countrySP": "NIU"
+      "countrySP": "NIU",
+      "currencyCode": "NZD"
     },
     {
       "nationality": "Norfolk Island",
-      "countrySP": "NFK"
+      "countrySP": "NFK",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Northern Mariana Islands",
-      "countrySP": "MNP"
+      "countrySP": "MNP",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Norway",
-      "countrySP": "NOR"
+      "countrySP": "NOR",
+      "currencyCode": "NOK"
     },
     {
       "nationality": "Oman",
-      "countrySP": "OMN"
+      "countrySP": "OMN",
+      "currencyCode": "OMR"
+    },
+    {
+      "nationality": "Pakistan",
+      "countrySP": "PAK",
+      "currencyCode": "PKR"
     },
     {
       "nationality": "Palau",
-      "countrySP": "PLW"
+      "countrySP": "PLW",
+      "currencyCode": "USD"
+    },
+    {
+      "nationality": "Palestine, State of",
+      "countrySP": "PSE",
+      "currencyCode": "ILS"
     },
     {
       "nationality": "Panama",
-      "countrySP": "PAN"
+      "countrySP": "PAN",
+      "currencyCode": "PAB"
     },
     {
       "nationality": "Papua New Guinea",
-      "countrySP": "PNG"
+      "countrySP": "PNG",
+      "currencyCode": "PGK"
     },
     {
       "nationality": "Paraguay",
-      "countrySP": "PRY"
+      "countrySP": "PRY",
+      "currencyCode": "PYG"
     },
     {
       "nationality": "Peru",
-      "countrySP": "PER"
+      "countrySP": "PER",
+      "currencyCode": "PEN"
     },
     {
       "nationality": "Philippines",
-      "countrySP": "PHL"
+      "countrySP": "PHL",
+      "currencyCode": "PHP",
+      "imagePath": "/images/walletIcon_PHP.png"
     },
     {
       "nationality": "Pitcairn",
-      "countrySP": "PCN"
+      "countrySP": "PCN",
+      "currencyCode": ""
     },
     {
       "nationality": "Poland",
-      "countrySP": "POL"
+      "countrySP": "POL",
+      "currencyCode": "PLN"
     },
     {
       "nationality": "Portugal",
-      "countrySP": "PRT"
+      "countrySP": "PRT",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Puerto Rico",
-      "countrySP": "PRI"
+      "countrySP": "PRI",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Qatar",
-      "countrySP": "QAT"
-    },
-    {
-      "nationality": "Reunion",
-      "countrySP": "REU"
+      "countrySP": "QAT",
+      "currencyCode": "QAR"
     },
     {
       "nationality": "Romania",
-      "countrySP": "ROU"
+      "countrySP": "ROU",
+      "currencyCode": "RON"
     },
     {
       "nationality": "Russian Federation",
-      "countrySP": "RUS"
+      "countrySP": "RUS",
+      "currencyCode": "RUB"
     },
     {
       "nationality": "Rwanda",
-      "countrySP": "RWA"
+      "countrySP": "RWA",
+      "currencyCode": "RWF"
     },
     {
       "nationality": "Saint Barthelemy",
-      "countrySP": "BLM"
+      "countrySP": "BLM",
+      "currencyCode": "EUR"
     },
     {
-      "nationality": "Saint Helena, Ascension and Tristan Da Cunha",
-      "countrySP": "SHN"
+      "nationality": "Saint Helena, Ascension and Tristan da Cunha",
+      "countrySP": "SHN",
+      "currencyCode": "SHP"
     },
     {
       "nationality": "Saint Kitts and Nevis",
-      "countrySP": "KNA"
+      "countrySP": "KNA",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Saint Lucia",
-      "countrySP": "LCA"
+      "countrySP": "LCA",
+      "currencyCode": "XCD"
     },
     {
-      "nationality": "Saint Martin (French Part)",
-      "countrySP": "MAF"
+      "nationality": "Saint Martin (French part)",
+      "countrySP": "MAF",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Saint Pierre and Miquelon",
-      "countrySP": "SPM"
+      "countrySP": "SPM",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Saint Vincent and the Grenadines",
-      "countrySP": "VCT"
+      "countrySP": "VCT",
+      "currencyCode": "XCD"
     },
     {
       "nationality": "Samoa",
-      "countrySP": "WSM"
+      "countrySP": "WSM",
+      "currencyCode": "WST"
     },
     {
       "nationality": "San Marino",
-      "countrySP": "SMR"
+      "countrySP": "SMR",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Sao Tome and Principe",
-      "countrySP": "STP"
+      "countrySP": "STP",
+      "currencyCode": "STN"
     },
     {
       "nationality": "Saudi Arabia",
-      "countrySP": "SAU"
+      "countrySP": "SAU",
+      "currencyCode": "SAR"
     },
     {
       "nationality": "Senegal",
-      "countrySP": "SEN"
+      "countrySP": "SEN",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Serbia",
-      "countrySP": "SRB"
+      "countrySP": "SRB",
+      "currencyCode": "RSD"
     },
     {
       "nationality": "Seychelles",
-      "countrySP": "SYC"
+      "countrySP": "SYC",
+      "currencyCode": "SCR"
     },
     {
       "nationality": "Sierra Leone",
-      "countrySP": "SLE"
+      "countrySP": "SLE",
+      "currencyCode": "SLL"
     },
     {
       "nationality": "Singapore",
-      "countrySP": "SGP"
+      "countrySP": "SGP",
+      "currencyCode": "SGD",
+      "imagePath": "/images/walletIcon_SGD.png"
     },
     {
-      "nationality": "Sint Maarten (Dutch Part)",
-      "countrySP": "SXM"
+      "nationality": "Sint Maarten (Dutch part)",
+      "countrySP": "SXM",
+      "currencyCode": "ANG"
     },
     {
       "nationality": "Slovakia",
-      "countrySP": "SVK"
+      "countrySP": "SVK",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Slovenia",
-      "countrySP": "SVN"
+      "countrySP": "SVN",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Solomon Islands",
-      "countrySP": "SLB"
+      "countrySP": "SLB",
+      "currencyCode": "SBD"
+    },
+    {
+      "nationality": "Somalia",
+      "countrySP": "SOM",
+      "currencyCode": "SOS"
     },
     {
       "nationality": "South Africa",
-      "countrySP": "ZAF"
+      "countrySP": "ZAF",
+      "currencyCode": "ZAR"
     },
     {
       "nationality": "South Georgia and the South Sandwich Islands",
-      "countrySP": "SGS"
+      "countrySP": "SGS",
+      "currencyCode": "GBP"
+    },
+    {
+      "nationality": "South Sudan",
+      "countrySP": "SSD",
+      "currencyCode": "SSP"
     },
     {
       "nationality": "Spain",
-      "countrySP": "ESP"
+      "countrySP": "ESP",
+      "currencyCode": "EUR"
     },
     {
       "nationality": "Sri Lanka",
-      "countrySP": "LKA"
+      "countrySP": "LKA",
+      "currencyCode": "LKR"
+    },
+    {
+      "nationality": "Sudan",
+      "countrySP": "SDN",
+      "currencyCode": "SDG"
     },
     {
       "nationality": "Suriname",
-      "countrySP": "SUR"
+      "countrySP": "SUR",
+      "currencyCode": "SRD"
     },
     {
       "nationality": "Svalbard and Jan Mayen",
-      "countrySP": "SJM"
-    },
-    {
-      "nationality": "Swaziland",
-      "countrySP": "SWZ"
+      "countrySP": "SJM",
+      "currencyCode": "NOK"
     },
     {
       "nationality": "Sweden",
-      "countrySP": "SWE"
+      "countrySP": "SWE",
+      "currencyCode": "SEK",
+      "imagePath": "/images/walletIcon_SEK.png"
     },
     {
       "nationality": "Switzerland",
-      "countrySP": "CHE"
+      "countrySP": "CHE",
+      "currencyCode": "CHF",
+      "imagePath": "/images/walletIcon_CHF.png"
     },
     {
-      "nationality": "Taiwan",
-      "countrySP": "TWN"
+      "nationality": "Syrian Arab Republic",
+      "countrySP": "SYR",
+      "currencyCode": "SYP"
+    },
+    {
+      "nationality": "Taiwan, Province of China",
+      "countrySP": "TWN",
+      "currencyCode": "TWD"
     },
     {
       "nationality": "Tajikistan",
-      "countrySP": "TJK"
+      "countrySP": "TJK",
+      "currencyCode": "TJS"
     },
     {
       "nationality": "Tanzania, United Republic of",
-      "countrySP": "TZA"
+      "countrySP": "TZA",
+      "currencyCode": "TZS"
     },
     {
       "nationality": "Thailand",
-      "countrySP": "THA"
+      "countrySP": "THA",
+      "currencyCode": "THB",
+      "imagePath": "/images/walletIcon_THB.png"
     },
     {
       "nationality": "Timor-Leste",
-      "countrySP": "TLS"
+      "countrySP": "TLS",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Togo",
-      "countrySP": "TGO"
+      "countrySP": "TGO",
+      "currencyCode": "XOF"
     },
     {
       "nationality": "Tokelau",
-      "countrySP": "TKL"
+      "countrySP": "TKL",
+      "currencyCode": "NZD"
     },
     {
       "nationality": "Tonga",
-      "countrySP": "TON"
+      "countrySP": "TON",
+      "currencyCode": "TOP"
     },
     {
       "nationality": "Trinidad and Tobago",
-      "countrySP": "TTO"
+      "countrySP": "TTO",
+      "currencyCode": "TTD"
     },
     {
       "nationality": "Tunisia",
-      "countrySP": "TUN"
+      "countrySP": "TUN",
+      "currencyCode": "TND"
     },
     {
       "nationality": "Turkey",
-      "countrySP": "TUR"
+      "countrySP": "TUR",
+      "currencyCode": "TRY"
     },
     {
       "nationality": "Turkmenistan",
-      "countrySP": "TKM"
+      "countrySP": "TKM",
+      "currencyCode": "TMT"
     },
     {
       "nationality": "Turks and Caicos Islands",
-      "countrySP": "TCA"
+      "countrySP": "TCA",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Tuvalu",
-      "countrySP": "TUV"
+      "countrySP": "TUV",
+      "currencyCode": "AUD"
     },
     {
       "nationality": "Uganda",
-      "countrySP": "UGA"
+      "countrySP": "UGA",
+      "currencyCode": "UGX"
     },
     {
       "nationality": "Ukraine",
-      "countrySP": "UKR"
+      "countrySP": "UKR",
+      "currencyCode": "UAH"
     },
     {
       "nationality": "United Arab Emirates",
-      "countrySP": "ARE"
+      "countrySP": "ARE",
+      "currencyCode": "AED"
     },
     {
       "nationality": "United Kingdom",
-      "countrySP": "GBR"
+      "countrySP": "GBR",
+      "currencyCode": "GBP",
+      "imagePath": "/images/walletIcon_GBP.png"
+
     },
     {
       "nationality": "United States",
-      "countrySP": "USA"
+      "countrySP": "USA",
+      "currencyCode": "USD",
+      "imagePath": "/images/walletIcon_USD.png"
     },
     {
       "nationality": "United States Minor Outlying Islands",
-      "countrySP": "UMI"
+      "countrySP": "UMI",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Uruguay",
-      "countrySP": "URY"
+      "countrySP": "URY",
+      "currencyCode": "UYU"
     },
     {
       "nationality": "Uzbekistan",
-      "countrySP": "UZB"
+      "countrySP": "UZB",
+      "currencyCode": "UZS"
     },
     {
       "nationality": "Vanuatu",
-      "countrySP": "VUT"
+      "countrySP": "VUT",
+      "currencyCode": "VUV"
     },
     {
-      "nationality": "Vietnam",
-      "countrySP": "VNM"
+      "nationality": "Venezuela, Bolivarian Republic of",
+      "countrySP": "VEN",
+      "currencyCode": "VES"
+    },
+    {
+      "nationality": "Viet Nam",
+      "countrySP": "VNM",
+      "currencyCode": "VND",
+      "imagePath": "/images/walletIcon_VND.png"
     },
     {
       "nationality": "Virgin Islands, British",
-      "countrySP": "VGB"
+      "countrySP": "VGB",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Virgin Islands, U.S.",
-      "countrySP": "VIR"
+      "countrySP": "VIR",
+      "currencyCode": "USD"
     },
     {
       "nationality": "Wallis and Futuna",
-      "countrySP": "WLF"
+      "countrySP": "WLF",
+      "currencyCode": "XPF"
     },
     {
       "nationality": "Western Sahara",
-      "countrySP": "ESH"
+      "countrySP": "ESH",
+      "currencyCode": "MAD"
+    },
+    {
+      "nationality": "Yemen",
+      "countrySP": "YEM",
+      "currencyCode": "YER"
     },
     {
       "nationality": "Zambia",
-      "countrySP": "ZMB"
+      "countrySP": "ZMB",
+      "currencyCode": "ZMW"
+    },
+    {
+      "nationality": "Zimbabwe",
+      "countrySP": "ZWE",
+      "currencyCode": "USD"
     }
   ]
 }

@@ -264,7 +264,70 @@ function formatNumber(num) {
 // 환율계산 끝========================================================================
 
 // 결제 창 보이기 및 환전 =============================================================
+// 3단계 결제창과 결제방식 미리보기
+function calculateAndPreviewPayment() {
+    // Source에서 입력된 금액 및 통화를 가져옴.
+    const sourceAmount = parseFloat(document.getElementById("ds_to_money").value);
+    const sourceCurrencyImageSrc = document.querySelector('.nation').src; //
+    const targetCurrencyCode = document.querySelector("#currencyName").textContent; //원화코드
+    // const countryName = currencyNames[sourceCurrencyCode];
+    const countryName = document.getElementById('countryName').textContent;
 
+    document.querySelector(".previewPayment").style.display = "block";
+    const previewPayment = document.querySelector('.previewPayment');
+    previewPayment.scrollIntoView({behavior: "smooth"});
+    previewPayment.classList.add('focusArea');
+    // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
+    const targetAmount = parseFloat(document.getElementById("ds_from_money").value.replace(/,/g, ""));
+
+    // 5000원의 수수료를 추가하고 10의 단위로 반올림
+    // const finalAmountWithoutDecimal = Math.round(targetAmount);
+    const finalAmountWithoutDecimal = Math.floor(targetAmount * 100) / 100;
+    const adjustedAmount = finalAmountWithoutDecimal + 5000; // 수수료 5천원
+    const finalAmount = Math.round(adjustedAmount / 10) * 10;
+
+
+    // previewPayment 영역을 업데이트
+    const previewElem = document.querySelector(".previewPayment .banking-cont table tbody");
+    console.log("타겟코드 ", targetCurrencyCode);
+    console.log("나라이름 ", countryName);
+    previewElem.querySelector("tr:nth-child(1) .txt img").src = sourceCurrencyImageSrc;
+    previewElem.querySelector("tr:nth-child(1) .txt em.currency").textContent = countryName + " " + targetCurrencyCode;
+    previewElem.querySelector("tr:nth-child(1) .txt em.price").textContent = sourceAmount.toFixed(0);
+    previewElem.querySelector("tr:nth-child(3) .txt em.point").textContent = finalAmount.toLocaleString();
+
+    //  결제 방식을 동적으로 설정할 수 있는 로직을 추가
+    const selectedOption = document.getElementById("selectAccountForm").value;
+    const paymentMethodText = document.querySelector(".previewPayment .banking-cont table tbody tr:nth-child(4) .txt");
+
+    // 계산된 값을 hidden input 필드에 설정
+    // document.getElementById("targetCurrencyCode").value = targetCurrencyCode; // 외화
+    // document.getElementById("hiddenSourceAmount").value = sourceAmount.toFixed(0); // 외화 금액
+    // document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
+}
+
+// 계좌선택시 잔액 표시
+function displayBalance() {
+    let selectElement = document.getElementById('selectAccountForm');
+    let selectedOption = selectElement.options[selectElement.selectedIndex];
+    console.log("선택된 계좌는 ", selectedOption);
+    let balance = selectedOption.getAttribute('data-balance');
+
+    // 잔액을 표시할 span 엘리먼트를 찾아서 잔액을 설정합니다
+    let balanceDisplayElement = document.getElementById('balanceDisplay');
+    let balanceRow = document.getElementById('balanceRow');  // 잔액 표시 tr 엘리먼트를 찾습니다.
+
+    if (selectElement.value) {  // 계좌가 선택되었는지 확인
+        balanceDisplayElement.textContent = balance;
+        balanceRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
+    } else {
+        balanceRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
+    }
+
+    const buttonArea = document.querySelector('.btn-area2');
+    console.log(buttonArea);
+    buttonArea.style.display = 'block';
+}
 
 // 결제 창 보이기 및 환전금액 계산
 

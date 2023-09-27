@@ -58,9 +58,9 @@ public class RemittanceController {
         model.addAttribute("walletKRW", walletKRW);
 
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
-        for (ExchangeRate e : exchangeRateList){
-            System.out.println("오늘의 환율은 " + e);
-        }
+//        for (ExchangeRate e : exchangeRateList){
+//            System.out.println("오늘의 환율은 " + e);
+//        }
         model.addAttribute("exchangeList", exchangeRateList);
         return "remittance/remittance";
     }

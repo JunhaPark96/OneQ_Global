@@ -247,6 +247,11 @@
                                 									</span>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>Transfer Fee</th>
+                                        <td><span class="txt"><em>5,000</em></span></td>
+                                    </tr>
+
 
                                     <tr>
                                         <th>The amount you will be paying(Won)</th>
@@ -256,7 +261,23 @@
 
                                     <tr>
                                         <th>Payment method</th>
-                                        <td><span class="txt"></span></td>
+                                        <td>
+                                            <span class="txt"></span>
+                                            <select id="selectAccountForm" name="account" onchange="displayBalance()">
+                                                <option value="">-- Select an account --</option>
+                                                <!-- JSTL을 사용하여 accountList를 반복하고 각 계좌에 대한 옵션을 생성합니다 -->
+                                                <c:forEach var="account" items="${accountList}">
+                                                    <option value="${account.acNo}"
+                                                            data-balance="${account.balance}">${account.acNo} ${account.acName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr style="display: none" id="balanceRow">
+                                        <th>Available Withdrawal</th>
+                                        <td>
+                                            <span class="txt" id="balanceDisplay"></span>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -265,16 +286,21 @@
 
                     </div>
                     <%--        결제 정보 미리보기 끝    --%>
+                    <%--                 다음/이전 버튼 시작 --%>
+                    <div class="btn-area2 mt15 mb30" style="display: none">
+                                <span class=" btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
+                                <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
+                                   class="">Prev</a></span>
+                        <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
+                                <button type="submit" class="" id="buttonConfirm">Next </button></span>
+                    </div>
+                    <%--                 다음/이전 버튼 끝  --%>
                 </div>
 
-        <%--          환전 계산 끝 --%>
-
+                <%--          환전 계산 끝 --%>
 
 
         </div>
-
-
-
 
 
         <%--         연결계좌, 비밀번호 입력   --%>
@@ -336,13 +362,7 @@
         <%--                    </div>--%>
         <%--                </div>--%>
         <%--            연결계좌, 비밀번호 입력 --%>
-        <%--                <div class="btn-area2 mt15 mb30">--%>
-        <%--                        <span class=" btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">--%>
-        <%--                        <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"--%>
-        <%--                           class="">Cancel</a></span>--%>
-        <%--                    <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">--%>
-        <%--                        <button type="submit" class="" id="buttonConfirm">Topping up </button></span>--%>
-        <%--                </div>--%>
+
         </form>
     </div>
 
@@ -459,51 +479,6 @@
         });
     });
 
-    // 3단계 결제창과 결제방식 미리보기
-    function calculateAndPreviewPayment() {
-        // Source에서 입력된 금액 및 통화를 가져옴.
-        const sourceAmount = parseFloat(document.getElementById("ds_to_money").value);
-        const sourceCurrencyImageSrc = document.querySelector('.nation').src; //
-        const sourceCurrencyCode = document.querySelector(".selectbox_label ._text em").textContent; //원화코드
-        // const countryName = currencyNames[sourceCurrencyCode];
-        const countryName = document.getElementById('countryName');
-
-        document.querySelector(".previewPayment").style.display = "block";
-        const previewPayment = document.querySelector('.previewPayment');
-        previewPayment.scrollIntoView({behavior: "smooth"});
-        previewPayment.classList.add('focusArea');
-        // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
-        const targetAmount = parseFloat(document.getElementById("ds_from_money").value.replace(/,/g, ""));
-
-        // 1% 수수료를 추가하고 10의 단위로 반올림
-        const finalAmountWithoutDecimal = Math.round(targetAmount);
-        const adjustedAmount = finalAmountWithoutDecimal + 5000; // 수수료 5천원
-        const finalAmount = Math.round(adjustedAmount / 10) * 10;
-
-
-        // previewPayment 영역을 업데이트
-        const previewElem = document.querySelector(".previewPayment .banking-cont table tbody");
-
-        previewElem.querySelector("tr:nth-child(1) .txt img").src = sourceCurrencyImageSrc;
-        previewElem.querySelector("tr:nth-child(1) .txt em.currency").textContent = countryName + " " + sourceCurrencyCode;
-        previewElem.querySelector("tr:nth-child(1) .txt em.price").textContent = sourceAmount.toFixed(0);
-        previewElem.querySelector("tr:nth-child(2) .txt em.point").textContent = finalAmount.toLocaleString();
-
-        //  결제 방식을 동적으로 설정할 수 있는 로직을 추가
-        const selectedOption = document.getElementById("selectAccountForm").value;
-        const paymentMethodText = document.querySelector(".previewPayment .banking-cont table tbody tr:nth-child(3) .txt");
-
-        if (selectedOption === "HANA Wallet") {
-            paymentMethodText.textContent = "Hana Wallet Money Withdrawal";
-        } else {
-            paymentMethodText.textContent = "Hana Bank Account Withdrawal";
-        }
-
-        // 계산된 값을 hidden input 필드에 설정
-        document.getElementById("sourceCurrencyCode").value = sourceCurrencyCode; // 외화
-        document.getElementById("hiddenSourceAmount").value = sourceAmount.toFixed(0); // 외화 금액
-        document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
-    }
 
 </script>
 

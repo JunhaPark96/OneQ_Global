@@ -18,7 +18,7 @@
     height: 450px;
     justify-content: space-between;
 }
-#countrySearch input[type="text"] {
+.countrySearch input[type="text"] {
     width: 20%;
     padding: 5px 20px;
     box-sizing: border-box;
@@ -282,7 +282,6 @@ input[type="text"] {
     border: 2px solid #059196;
     background-color: #ffffff;
     font-size: 16px;
-    margin-bottom: 20px;
 }
 /* input box 스타일링 */
 .input_box input {
@@ -379,3 +378,27 @@ input[type="text"] {
     text-decoration: none;
     color: #000;
 }
+
+/* 수취인 정보 시작 ================================================*/
+.recipientDiv {
+    /*grid-column: span 3;*/
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    background-color: #f4f3ef;
+}
+
+.table {
+    --bs-table-bg: #f4f3ef;
+}
+
+tbody, td, tfoot, th, thead, tr {
+     border-style: none;
+}
+/* 수취인 정보 끝 ================================================*/

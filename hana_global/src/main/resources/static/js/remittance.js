@@ -170,7 +170,8 @@ function calculateExchange(remittanceRate) {
         console.log("현재 입력된 통화이름 ", currencyName);
         // document.getElementById('targetCurrencyName').textContent = targetAmount.toFixed(2) + ' ' + currencyName;
         document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
-        document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
+        document.getElementById('targetCurrencyName').textContent = formatNumber(parseFloat(targetAmount.toFixed(2))) + ' ' + currencyName;
+        // document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
 
     }
 }
@@ -249,7 +250,9 @@ const currencyUnits = {
 // ds_from_money 필드의 input 이벤트에 대한 리스너 추가
 document.getElementById('ds_from_money').addEventListener('input', function() {
     const krwAmount = document.getElementById('ds_from_money').value.replace(/,/g, '');
+    // const targetAmount = document.getElementById('ds_to_money').value.replace(/,/g, '');
     document.getElementById('ds_from_money').value = formatNumber(krwAmount);
+    // document.getElementById('ds_to_money').value = formatNumber(targetAmount);
     const currencyCode = document.getElementById('currencyName').textContent;
     console.log("통화코드는 ", currencyCode);
     selectCurrency(currencyCode);
@@ -312,13 +315,16 @@ function displayBalance() {
     let selectedOption = selectElement.options[selectElement.selectedIndex];
     console.log("선택된 계좌는 ", selectedOption);
     let balance = selectedOption.getAttribute('data-balance');
+    // 숫자 포맷팅
+    let balanceNumber = parseFloat(balance);
+    let formattedBalance = formatNumber(balanceNumber);
 
     // 잔액을 표시할 span 엘리먼트를 찾아서 잔액을 설정합니다
     let balanceDisplayElement = document.getElementById('balanceDisplay');
     let balanceRow = document.getElementById('balanceRow');  // 잔액 표시 tr 엘리먼트를 찾습니다.
 
     if (selectElement.value) {  // 계좌가 선택되었는지 확인
-        balanceDisplayElement.textContent = balance;
+        balanceDisplayElement.textContent = formattedBalance;
         balanceRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
     } else {
         balanceRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
@@ -330,6 +336,22 @@ function displayBalance() {
 }
 
 // 결제 창 보이기 및 환전금액 계산
+
+// 수취인 정보 입력 시작 =====================================================
+function nextStep(event) {
+    event.preventDefault();
+    let authenticateDiv = document.getElementById('recipientDiv');
+    let compareArea = document.querySelector('.compare_area');
+    // authenticate div를 보이게 설정
+    authenticateDiv.style.display = 'block';
+    compareArea.style.display = 'none';
+}
+
+
+
+
+
+// 수취인 정보 입력 끝 =====================================================
 
 
 

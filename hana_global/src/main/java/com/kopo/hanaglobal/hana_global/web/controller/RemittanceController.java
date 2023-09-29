@@ -76,6 +76,28 @@ public class RemittanceController {
         return ResponseEntity.ok().body(responseMap);
     }
 
+//    @PostMapping("/verifyAccount")
+//    public ResponseEntity<Map<String, Object>> verifyAccount(
+//            @RequestParam("account_password") String accountPassword,
+//            @RequestParam("account_no") String accountNo,
+//            @RequestParam("account_balance") String balance) {
+//
+//        Map<String, Object> response = new HashMap<>();
+//        // ... 비밀번호와 계좌 잔액 확인 로직
+//        boolean isPasswordCorrect = ...;  // 비밀번호 확인 로직
+//        boolean isBalanceSufficient = ...;  // 계좌 잔액 확인 로직
+//
+//        if (isPasswordCorrect && isBalanceSufficient) {
+//            response.put("success", true);
+//        } else {
+//            response.put("success", false);
+//            response.put("errorMessage", "The password is incorrect or the account balance is insufficient.");
+//        }
+//        return ResponseEntity.ok().body(response);
+//    }
+
+
+
     @PostMapping("/selectAccountInfo")
     public ResponseEntity<Map<String, String>> selectAccountInfo(
             @RequestParam("recipientName") String recipientName,
@@ -84,6 +106,7 @@ public class RemittanceController {
             @RequestParam("accountNo") String accountNo) {
 
         Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("success", "true");
         responseMap.put("recipientName", recipientName);
         responseMap.put("address", address);
         responseMap.put("routingNo", routingNo);
@@ -102,6 +125,7 @@ public class RemittanceController {
             @RequestParam("paymentPlace") String paymentPlace) {
 
         Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("success", "true");
         responseMap.put("recipientName", recipientName);
         responseMap.put("address", address);
         responseMap.put("paymentPlace", paymentPlace);

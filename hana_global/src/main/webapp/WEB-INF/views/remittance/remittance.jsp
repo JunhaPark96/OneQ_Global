@@ -264,7 +264,7 @@
                                     <tr>
                                         <th>The amount you will be paying(Won)</th>
                                         <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em
-                                                class="point"></em></span></td>
+                                                class="point" id="paymentAmount"></em></span></td>
                                     </tr>
 
                                     <tr>
@@ -287,7 +287,7 @@
                                                 <optgroup label="Accounts">
                                                     <c:forEach items="${accountList}" var="account">
                                                         <option value="${account.acNo}" data-account="${account}"
-                                                                data-balance="${account.balance}">
+                                                                data-balance="${account.balance}" data-balance="${account.balance}" data-password="${account.acPasswd}">
                                                                 ${account.acNo}
                                                         </option>
                                                     </c:forEach>
@@ -342,7 +342,8 @@
 
                 <%--         수취인 정보 입력   --%>
                 <div class="recipientDiv" id="recipientDiv" style="display: none">
-                    <div class="fs-5" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Recipient Information Entry</strong></div>
+                    <div class="fs-5" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Recipient
+                        Information Entry</strong></div>
                     <div class="col-md-12">
                         <div class="card-body pe-5">
                             <table class="table" style="background-color: #f4f3ef;">
@@ -399,6 +400,19 @@
                                         <select class="form-select border-3 w-60" name="addressState" id="addressState"
                                                 style="height: 45px; width: 50%;">
                                             <option value="" selected disabled>State</option>
+                                            <option value="AB">Alberta</option>
+                                            <option value="BC">British Columbia</option>
+                                            <option value="MB">Manitoba</option>
+                                            <option value="NB">New Brunswick</option>
+                                            <option value="NL">Newfoundland and Labrador</option>
+                                            <option value="NS">Nova Scotia</option>
+                                            <option value="NT">Northwest Territories</option>
+                                            <option value="NU">Nunavut</option>
+                                            <option value="ON">Ontario</option>
+                                            <option value="PE">Prince Edward Island</option>
+                                            <option value="QC">Quebec</option>
+                                            <option value="SK">Saskatchewan</option>
+                                            <option value="YT">Yukon</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -477,7 +491,7 @@
                                             <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
                                                class="">Prev</a></span>
                                 <span class="btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                                            <button id="btnComplete" onclick="">Remit </button></span>
+                                            <button id="btnComplete">Remit </button></span>
                             </div>
                         </div>
                     </div>
@@ -656,11 +670,64 @@
             calculateAndPreviewPayment();
         });
     });
-    // 최종 컨트롤러
-    $(document).ready(function() {
-        $('#btnComplete').on('click', function(e) {
-            e.preventDefault();
 
+    function nextStep(event) {
+        event.preventDefault();
+
+        let selectedAccountOption = document.getElementById('selectAccountForm').selectedOptions[0];
+        let accountNo = document.getElementById('selectAccountForm').value;
+        let password = document.getElementById('account_password').value;
+        let paymentAmount = document.getElementById('paymentAmount').value;
+        let accountBalance = parseFloat(selectedAccountOption.getAttribute('data-balance'));
+        let accountPassword = selectedAccountOption.getAttribute('data-password');
+        console.log("선택된 계좌는 ", selectedAccountOption);
+        console.log("입력한 비밀번호는 ", password);
+        console.log("지불할금액은 ", paymentAmount);
+        console.log("계좌잔액 ", accountBalance);
+        console.log("계좌비밀번호 ", accountPassword);
+
+        if (password !== accountPassword) {
+            alert('Incorrect password!');
+            return;
+        }
+
+        if (accountBalance < paymentAmount) {
+            alert('Insufficient funds!');
+            return;
+        }
+
+        let data = {
+            account_no: accountNo,
+            account_password: password,
+            account_balance: paymentAmount
+        };
+        proceedToNextStep();
+        // 서버에 비밀번호와 계좌 잔액 확인 요청을 보냅니다.
+        <%--$.ajax({--%>
+        <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>
+        <%--    type: 'POST',--%>
+        <%--    data: data,--%>
+        <%--    success: function(response) {--%>
+        <%--        if (response.success) {--%>
+        <%--            // 비밀번호와 계좌 잔액이 올바른 경우 다음 단계로 진행합니다.--%>
+        <%--            proceedToNextStep();--%>
+        <%--        } else {--%>
+        <%--            // 에러 메시지를 사용자에게 표시합니다.--%>
+        <%--            alert(response.errorMessage);--%>
+        <%--        }--%>
+        <%--    },--%>
+        <%--    error: function(jqXHR, status, error) {--%>
+        <%--        console.error(error);--%>
+        <%--        alert('An error occurred while verifying the account.');--%>
+        <%--    }--%>
+        <%--});--%>
+    }
+
+    // 최종 컨트롤러
+    $(document).ready(function () {
+        $('#btnComplete').on('click', function (e) {
+            e.preventDefault();
+            console.log("선택된 송금방식은 ", selectedPaymentMethod);
             let recipientName = $('#recipientName').val();
             console.log(recipientName);
             let address = $('#addressDetail').val() + ', ' + $('#addressCity').val() + ', ' + $('#addressState').val();
@@ -669,49 +736,58 @@
             if (selectedPaymentMethod === 'selectAccount') {
                 let routingNo = $('#routingNo').val();
                 let accountNo = $('#accountNo').val();
+                console.log("보낼 routing No은 ", routingNo);
+                console.log("보낼 accountNo은 ", accountNo);
 
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectAccountInfo',
                     type: 'POST',
-                    dataType: 'json',
+                    // dataType: 'json',
                     data: {
                         recipientName: recipientName,
                         address: address,
                         routingNo: routingNo,
                         accountNo: accountNo
                     },
-                    success: function(response) {
+                    success: function (response, jqXHR) {
                         if (response.success) {
-                            $('.remittance-complete').show();
+                            document.querySelector('.remittance-complete').style.display = 'block';
+                            document.querySelector('.recipientDiv').style.display = 'none';
                         } else {
-                            alert('Error: ' + response.error);
+                            alert('Error: ' + jqXHR.responseText);
+                            console.log(jqXHR.responseText);
                         }
                     },
-                    error: function(xhr, status, error) {
-                        alert('Error: ' + error);
+                    error: function (jqXHR, status, error) {
+                        console.log(jqXHR);
+                        alert('Error: ' + jqXHR.responseText);
                     }
                 });
             } else if (selectedPaymentMethod === 'selectWesternUnion') {
                 let paymentPlace = $('#receiptCity').val() + ', ' + $('#receiptState').val();
-
+                console.log("paymentPlace는 ", paymentPlace);
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectPaymentPlaceInfo',
                     type: 'POST',
-                    dataType: 'json',
+                    // dataType: 'json',
                     data: {
                         recipientName: recipientName,
                         address: address,
                         paymentPlace: paymentPlace
                     },
-                    success: function(response) {
+                    success: function (response, jqXHR) {
                         if (response.success) {
-                            $('.remittance-complete').show();
+                            // $('.remittance-complete').show();
+                            document.querySelector('.remittance-complete').style.display = 'block';
+                            document.querySelector('.recipientDiv').style.display = 'none';
                         } else {
-                            alert('Error: ' + response.error);
+                            console.log(jqXHR);
+                            alert('Error: ' + jqXHR.responseText);
                         }
                     },
-                    error: function(xhr, status, error) {
-                        alert('Error: ' + error);
+                    error: function (jqXHR, status, error) {
+                        console.log(jqXHR);
+                        alert('Error: ' + jqXHR.responseText);
                     }
                 });
             }

@@ -341,12 +341,30 @@ function displayBalance() {
 // 결제 창 보이기 및 환전금액 계산
 
 // 수취인 정보 입력 시작 =====================================================
-function nextStep(event) {
-    event.preventDefault();
+// function nextStep(event) {
+//     event.preventDefault();
+//     let recipientDiv = document.getElementById('recipientDiv');
+//     let compareArea = document.querySelector('.compare_area');
+//     let bankAccountInfo = document.getElementById('bankAccountInfo');  // 이제 id를 사용하여 선택합니다.
+//     let receiptPlaceInfo = document.getElementById('receiptPlaceInfo');  // 이제 id를 사용하여 선택합니다.
+//
+//     recipientDiv.style.display = 'block';
+//     compareArea.style.display = 'none';
+//     if (selectedPaymentMethod === 'selectAccount') {
+//         bankAccountInfo.style.display = 'block';
+//         receiptPlaceInfo.style.display = 'none';
+//     } else if (selectedPaymentMethod === 'selectWesternUnion') {
+//         bankAccountInfo.style.display = 'none';
+//         receiptPlaceInfo.style.display = 'block';
+//     }
+// }
+
+
+function proceedToNextStep() {
     let recipientDiv = document.getElementById('recipientDiv');
     let compareArea = document.querySelector('.compare_area');
-    let bankAccountInfo = document.getElementById('bankAccountInfo');  // 이제 id를 사용하여 선택합니다.
-    let receiptPlaceInfo = document.getElementById('receiptPlaceInfo');  // 이제 id를 사용하여 선택합니다.
+    let bankAccountInfo = document.getElementById('bankAccountInfo');
+    let receiptPlaceInfo = document.getElementById('receiptPlaceInfo');
 
     recipientDiv.style.display = 'block';
     compareArea.style.display = 'none';
@@ -358,7 +376,6 @@ function nextStep(event) {
         receiptPlaceInfo.style.display = 'block';
     }
 }
-
 
 
 

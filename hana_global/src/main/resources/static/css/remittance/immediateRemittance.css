@@ -125,7 +125,7 @@
     gap: 20px
 }
 
-.selectAccount, .selectWallet {
+.selectAccount, .selectWesternUnion {
     background-color: #ffffff;
     border: 3px solid #ddd;
     padding: 20px;
@@ -139,7 +139,7 @@
     justify-content: center;
 }
 
-.selectAccount:hover, .selectWallet:hover {
+.selectAccount:hover, .selectWesternUnion:hover {
     box-shadow: inset 0 0 10px #018085;
     /*border-radius: 4px;*/
     cursor: pointer; /* 선택 가능한 모양으로 변경 */
@@ -148,11 +148,11 @@
     width: 90px;
     height: 90px;
 }
-.selectAccount p, .selectWallet p {
+.selectAccount p, .selectWesternUnion p {
     font-size: 14px;
     text-align: center;
 }
-.selectAccount span, .selectWallet span {
+.selectAccount span, .selectWesternUnion span {
     font-size: 16px;
     font-weight: bold;
     color: #018085;
@@ -381,14 +381,13 @@ input[type="text"] {
 
 /* 수취인 정보 시작 ================================================*/
 .recipientDiv {
-    /*grid-column: span 3;*/
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
     padding-bottom: 20px;
     border-radius: 8px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    /*flex-direction: column;*/
+    /*align-items: center;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     background-color: #f4f3ef;
@@ -401,4 +400,199 @@ input[type="text"] {
 tbody, td, tfoot, th, thead, tr {
      border-style: none;
 }
+.btn-area2 {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
 /* 수취인 정보 끝 ================================================*/
+
+/* 송금완료창 시작 ========================================================*/
+.remittance-complete {
+    /*border-top: 1px solid black;*/
+    /*border-bottom: 1px solid black;*/
+    /*padding-bottom: 20px;*/
+    /*border-radius: 8px;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;*/
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    width: 100%;
+    /*background-color: #f4f3ef;*/
+}
+
+.bg {
+    background-color: #018085;
+    /*width: 480px;*/
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 40px;
+    border-radius: 30px;
+}
+
+.card {
+    background-color: white;
+    width: 100%;
+    float: left;
+    margin-top: 30px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 80px 30px 25px 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card__success {
+    position: absolute;
+    top: -50px;
+    left: 325px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: #60c878;
+    border: 5px solid white;
+}
+
+.card__success i {
+    color: white;
+    line-height: 100px;
+    font-size: 45px;
+}
+
+/*.ion-checkmark:before {*/
+/*    content: "\f121";*/
+/*}*/
+
+.card__msg {
+    text-transform: uppercase;
+    color: #55585b;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.card__submsg {
+    color: #959a9e;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+
+.card__body {
+    background-color: #f8f6f6;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 30px;
+    float: left;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.card__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    top: 7px;
+}
+
+.card__recipient-info {
+    display: inline-block;
+}
+
+.card__recipient {
+    color: #232528;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.card__email {
+    color: #838890;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.card__price {
+    color: #232528;
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+.card__price span {
+    font-size: 60%;
+}
+
+.card__method {
+    color: #d3cece;
+    text-transform: uppercase;
+    text-align: left;
+    font-size: 11px;
+    margin-bottom: 5px;
+    height: 10px;
+}
+
+.card__payment {
+    background-color: white;
+    border-radius: 4px;
+    width: 100%;
+    height: 70px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__credit-card {
+    width: 50px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.card__card-details {
+    display: inline-block;
+    text-align: left;
+}
+
+.card__card-type {
+    text-transform: uppercase;
+    color: #232528;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+.card__card-number {
+    color: #838890;
+    font-size: 12px;
+    margin-top: 0px;
+}
+
+.card__tags {
+    clear: both;
+    padding-top: 15px;
+}
+
+.card__tag {
+    text-transform: uppercase;
+    background-color: #f8f6f6;
+    box-sizing: border-box;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-size: 10px;
+    color: #d3cece;
+}
+
+
+
+
+
+/* 송금완료창 끝 ========================================================*/

@@ -319,15 +319,18 @@ function displayBalance() {
     let balanceNumber = parseFloat(balance);
     let formattedBalance = formatNumber(balanceNumber);
 
-    // 잔액을 표시할 span 엘리먼트를 찾아서 잔액을 설정합니다
+    // 잔액을 표시할 span 엘리먼트를 찾아서 잔액을 설정
     let balanceDisplayElement = document.getElementById('balanceDisplay');
-    let balanceRow = document.getElementById('balanceRow');  // 잔액 표시 tr 엘리먼트를 찾습니다.
+    let balanceRow = document.getElementById('balanceRow');  // 잔액 표시 tr
+    let passwordRow = document.getElementById('passwordRow');  // 비밀번호 표시 tr
 
     if (selectElement.value) {  // 계좌가 선택되었는지 확인
         balanceDisplayElement.textContent = formattedBalance;
         balanceRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
+        passwordRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
     } else {
         balanceRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
+        passwordRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
     }
 
     const buttonArea = document.querySelector('.btn-area2');
@@ -340,11 +343,20 @@ function displayBalance() {
 // 수취인 정보 입력 시작 =====================================================
 function nextStep(event) {
     event.preventDefault();
-    let authenticateDiv = document.getElementById('recipientDiv');
+    let recipientDiv = document.getElementById('recipientDiv');
     let compareArea = document.querySelector('.compare_area');
-    // authenticate div를 보이게 설정
-    authenticateDiv.style.display = 'block';
+    let bankAccountInfo = document.getElementById('bankAccountInfo');  // 이제 id를 사용하여 선택합니다.
+    let receiptPlaceInfo = document.getElementById('receiptPlaceInfo');  // 이제 id를 사용하여 선택합니다.
+
+    recipientDiv.style.display = 'block';
     compareArea.style.display = 'none';
+    if (selectedPaymentMethod === 'selectAccount') {
+        bankAccountInfo.style.display = 'block';
+        receiptPlaceInfo.style.display = 'none';
+    } else if (selectedPaymentMethod === 'selectWesternUnion') {
+        bankAccountInfo.style.display = 'none';
+        receiptPlaceInfo.style.display = 'block';
+    }
 }
 
 

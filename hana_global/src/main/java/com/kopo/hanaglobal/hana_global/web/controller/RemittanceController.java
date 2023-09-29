@@ -54,8 +54,9 @@ public class RemittanceController {
 
         model.addAttribute("defaultCurrencyCode", defaultCurrencyCode);
 
-        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
-        model.addAttribute("walletKRW", walletKRW);
+//        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        model.addAttribute("walletList", walletList);
 
         List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
 //        for (ExchangeRate e : exchangeRateList){
@@ -72,6 +73,42 @@ public class RemittanceController {
         responseMap.put("selectedCountry", country);
         responseMap.put("selectedPaymentMethod", payment);
         System.out.println("선택된 국가와 결제방식은 : " + country + " " + payment);
+        return ResponseEntity.ok().body(responseMap);
+    }
+
+    @PostMapping("/selectAccountInfo")
+    public ResponseEntity<Map<String, String>> selectAccountInfo(
+            @RequestParam("recipientName") String recipientName,
+            @RequestParam("address") String address,
+            @RequestParam("routingNo") String routingNo,
+            @RequestParam("accountNo") String accountNo) {
+
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("recipientName", recipientName);
+        responseMap.put("address", address);
+        responseMap.put("routingNo", routingNo);
+        responseMap.put("accountNo", accountNo);
+
+        // Optionally, log or process the received information
+        System.out.println("Received account info: " + responseMap.toString());
+
+        return ResponseEntity.ok().body(responseMap);
+    }
+
+    @PostMapping("/selectPaymentPlaceInfo")
+    public ResponseEntity<Map<String, String>> selectPaymentPlaceInfo(
+            @RequestParam("recipientName") String recipientName,
+            @RequestParam("address") String address,
+            @RequestParam("paymentPlace") String paymentPlace) {
+
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("recipientName", recipientName);
+        responseMap.put("address", address);
+        responseMap.put("paymentPlace", paymentPlace);
+
+        // Optionally, log or process the received information
+        System.out.println("Received payment place info: " + responseMap.toString());
+
         return ResponseEntity.ok().body(responseMap);
     }
 }

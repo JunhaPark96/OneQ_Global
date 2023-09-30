@@ -253,7 +253,7 @@
                                                                      style="width: 30px; height: 30px"
                                                                      alt="국기" class="flag">
                                                                 <em class="currency"></em>
-                                                                <em id="price", class="price"></em>
+                                                                <em id="price" , class="price"></em>
                                                             </span>
                                         </td>
                                     </tr>
@@ -288,8 +288,8 @@
                                                     <c:forEach items="${accountList}" var="account">
                                                         <option value="${account.acNo}" data-account="${account}"
                                                                 data-balance="${account.balance}"
-                                                                data-balance="${account.balance}"
-                                                                data-password="${account.acPasswd}">
+                                                                data-password="${account.acPasswd}"
+                                                                data-acNo="${account.acNo}">
                                                                 ${account.acNo}
                                                         </option>
                                                     </c:forEach>
@@ -525,9 +525,9 @@
                                     <p class="card__email"></p>
                                 </div>
 
-                                <p class="card__price">송금금액 <span>[송금통화] [송금금액]</span></p>
-                                <p class="card__price">수취인 <span> [수취인이름]</span></p>
-                                <p class="card__price">수취국가 <span>[수취국가이름]</span></p>
+                                <p class="card__price">송금금액 <span></span></p>
+                                <p class="card__price">수취인 <span> </span></p>
+                                <p class="card__price">수취국가 <span></span></p>
                                 <button>
                                     송금추적
                                 </button>
@@ -551,7 +551,7 @@
 
                     </div>
                 </div>
-                <%--                송금 완료창 시작--%>
+                <%--                송금 완료창 끝--%>
         </div>
 
 
@@ -620,8 +620,9 @@
     // 송금방식
     let selectedPaymentMethod = null;
 
+    let selectedCountry = null;
+
     function initializeSelectionAndListeners() {
-        let selectedCountry = null;
 
         // let selectedPaymentMethod = null;
 
@@ -714,9 +715,10 @@
         console.log("계좌비밀번호 ", accountPassword);
 
         remittanceDTO.walletSeq = selectedAccountOption.getAttribute('data-walletSeq');
-        remittanceDTO.senderAC = selectedAccountOption.getAttribute('data-acNo');
+        remittanceDTO.senderAc = selectedAccountOption.getAttribute('data-acNo');
         remittanceDTO.remitAmount = paymentAmount;
         remittanceDTO.receivableAmount = document.getElementById('price').textContent;
+        console.log("송금계좌는 ", remittanceDTO.senderAc);
 
         if (password !== accountPassword) {
             alert('Incorrect password!');
@@ -746,33 +748,48 @@
             console.log(recipientName);
             let address = $('#addressDetail').val() + ', ' + $('#addressCity').val() + ', ' + $('#addressState').val();
             console.log(address);
+
+            remittanceDTO.sender = member.name;
+            remittanceDTO.recipient = recipientName;
+            remittanceDTO.currencyCode = document.getElementById('currencyName').textContent;
+            remittanceDTO.address = address;
+
             if (selectedPaymentMethod === 'selectAccount') {
                 let routingNo = $('#routingNo').val();
                 let accountNo = $('#accountNo').val();
                 console.log("보낼 routing No은 ", routingNo);
                 console.log("보낼 accountNo은 ", accountNo);
 
-                remittanceDTO.sender = member.name;
-                remittanceDTO.recipient = recipientName;
                 remittanceDTO.recipientAc = accountNo;
-                remittanceDTO.currencyCode = document.getElementById('currencyName').textContent;
-                remittanceDTO.address = address;
                 remittanceDTO.bankCode = routingNo;
-                console.log("담긴 정보는" , remittanceDTO);
+                console.log("담긴 정보는", remittanceDTO);
                 // 여기서 DTO 객체를 만들고 필드를 설정
 
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectAccountInfo',
                     type: 'POST',
                     data: {
-                        recipientName: recipientName,
-                        address: address,
-                        routingNo: routingNo,
-                        accountNo: accountNo
+                        'address': remittanceDTO.address,
+                        'bankCode': remittanceDTO.bankCode,
+                        'currencyCode': remittanceDTO.currencyCode,
+                        'receivableAmount': remittanceDTO.receivableAmount,
+                        'recipient': remittanceDTO.recipient,
+                        'recipientAc': remittanceDTO.recipientAc,
+                        'remitAmount': remittanceDTO.remitAmount,
+                        'sender': remittanceDTO.sender,
+                        'senderAc': remittanceDTO.senderAc,
+                        'walletSeq': remittanceDTO.walletSeq,
+                        'selectedCountry': selectedCountry
                     },
                     success: function (response, jqXHR) {
                         if (response.success) {
                             document.querySelector('.remittance-complete').style.display = 'block';
+                            $('.card__price:contains("송금금액") span').text(response.currencyCode + ' ' + response.receivableAmount);
+                            $('.card__price:contains("수취인") span').text(response.recipient);
+                            $('.card__price:contains("수취국가") span').text(response.country);
+                            $('.card__card-type').text('Hana Wallet');  // 예를 들어, '월렛'으로 설정
+                            $('.card__card-number').text(response.senderAc);  // 서버 응답에서 월렛 번호 가져오기
+
                             document.querySelector('.recipientDiv').style.display = 'none';
                         } else {
                             alert('Error: ' + jqXHR.responseText);
@@ -791,15 +808,28 @@
                     url: '${pageContext.request.contextPath}/selectPaymentPlaceInfo',
                     type: 'POST',
                     data: {
-                        recipientName: recipientName,
-                        address: address,
-                        paymentPlace: paymentPlace
+                        'address': remittanceDTO.address,
+                        'bankCode': remittanceDTO.bankCode,
+                        'currencyCode': remittanceDTO.currencyCode,
+                        'receivableAmount': remittanceDTO.receivableAmount,
+                        'recipient': remittanceDTO.recipient,
+                        'recipientAc': remittanceDTO.recipientAc,
+                        'remitAmount': remittanceDTO.remitAmount,
+                        'sender': remittanceDTO.sender,
+                        'senderAc': remittanceDTO.senderAc,
+                        'walletSeq': remittanceDTO.walletSeq,
+                        'selectedCountry': selectedCountry,
+                        'paymentPlace': paymentPlace,
                     },
                     success: function (response, jqXHR) {
                         if (response.success) {
-                            // $('.remittance-complete').show();
                             document.querySelector('.remittance-complete').style.display = 'block';
                             document.querySelector('.recipientDiv').style.display = 'none';
+                            $('.card__price:contains("송금금액") span').text(response.currencyCode + ' ' + response.receivableAmount);
+                            $('.card__price:contains("수취인") span').text(response.recipient);
+                            $('.card__price:contains("수취국가") span').text(response.country);
+                            $('.card__card-type').text('Hana Wallet');  // 예를 들어, '월렛'으로 설정
+                            $('.card__card-number').text(response.senderAc);  // 서버 응답에서 월렛 번호 가져오기
                         } else {
                             console.log(jqXHR);
                             alert('Error: ' + jqXHR.responseText);

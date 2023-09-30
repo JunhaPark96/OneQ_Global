@@ -101,7 +101,8 @@ public class RemittanceController {
 
     @PostMapping("/selectAccountInfo")
     public ResponseEntity<Map<String, String>> selectAccountInfo(
-            @ModelAttribute RemittanceDTO remittanceDTO) {
+            @ModelAttribute RemittanceDTO remittanceDTO,
+            @RequestParam("selectedCountry") String country) {
 
         String address = remittanceDTO.getAddress();
         String bankCode= remittanceDTO.getBankCode();
@@ -114,33 +115,57 @@ public class RemittanceController {
         String senderAc = remittanceDTO.getSenderAc();
         int walletSeq = remittanceDTO.getWalletSeq();
 
+        System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
+                + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
+                + recipient + " 수령인계좌번호는 " + recipientAc
+        + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
+
+
+        // html 요소에 보여줄 데이터
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
-        responseMap.put("recipientName", recipient);
-        responseMap.put("address", address);
-//        responseMap.put("routingNo", routingNo);
-//        responseMap.put("accountNo", accountNo);
-
-        // Optionally, log or process the received information
+        responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());
+        responseMap.put("receivableAmount", remittanceDTO.getReceivableAmount());
+        responseMap.put("recipient", remittanceDTO.getRecipient());
+        responseMap.put("country", country);
+        responseMap.put("senderAc", remittanceDTO.getSenderAc());
         System.out.println("Received account info: " + responseMap.toString());
-
         return ResponseEntity.ok().body(responseMap);
     }
 
     @PostMapping("/selectPaymentPlaceInfo")
     public ResponseEntity<Map<String, String>> selectPaymentPlaceInfo(
-            @RequestParam("recipientName") String recipientName,
-            @RequestParam("address") String address,
+            @ModelAttribute RemittanceDTO remittanceDTO,
+            @RequestParam("selectedCountry") String country,
             @RequestParam("paymentPlace") String paymentPlace) {
 
+        String address = remittanceDTO.getAddress();
+        String bankCode= remittanceDTO.getBankCode();
+        String currencyCode = remittanceDTO.getCurrencyCode();
+        String receivableAmount = remittanceDTO.getReceivableAmount();
+        String recipient = remittanceDTO.getRecipient();
+        String recipientAc = remittanceDTO.getRecipientAc();
+        String remitAmount = remittanceDTO.getRemitAmount();
+        String sender = remittanceDTO.getSender();
+        String senderAc = remittanceDTO.getSenderAc();
+        int walletSeq = remittanceDTO.getWalletSeq();
+
+        System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
+                + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
+                + recipient + " 수령인계좌번호는 " + recipientAc
+                + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
+
+
+        // html 요소에 보여줄 데이터
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
-        responseMap.put("recipientName", recipientName);
-        responseMap.put("address", address);
+        responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());
+        responseMap.put("receivableAmount", remittanceDTO.getReceivableAmount());
+        responseMap.put("recipient", remittanceDTO.getRecipient());
+        responseMap.put("country", country);
+        responseMap.put("senderAc", remittanceDTO.getSenderAc());
         responseMap.put("paymentPlace", paymentPlace);
-
-        // Optionally, log or process the received information
-        System.out.println("Received payment place info: " + responseMap.toString());
+        System.out.println("Received account info: " + responseMap.toString());
 
         return ResponseEntity.ok().body(responseMap);
     }

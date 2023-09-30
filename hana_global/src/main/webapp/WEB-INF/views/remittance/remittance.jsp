@@ -284,16 +284,16 @@
                                                     style="height: 45px;">
                                                 <option value="" selected disabled>Choose Payment Method</option>
 
-                                                <optgroup label="Accounts">
-                                                    <c:forEach items="${accountList}" var="account">
-                                                        <option value="${account.acNo}" data-account="${account}"
-                                                                data-balance="${account.balance}"
-                                                                data-password="${account.acPasswd}"
-                                                                data-acNo="${account.acNo}">
-                                                                ${account.acNo}
-                                                        </option>
-                                                    </c:forEach>
-                                                </optgroup>
+<%--                                                <optgroup label="Accounts">--%>
+<%--                                                    <c:forEach items="${accountList}" var="account">--%>
+<%--                                                        <option value="${account.acNo}" data-account="${account}"--%>
+<%--                                                                data-balance="${account.balance}"--%>
+<%--                                                                data-password="${account.acPasswd}"--%>
+<%--                                                                data-acNo="${account.acNo}">--%>
+<%--                                                                ${account.acNo}--%>
+<%--                                                        </option>--%>
+<%--                                                    </c:forEach>--%>
+<%--                                                </optgroup>--%>
 
                                                 <optgroup label="Hana Wallet">
                                                     <c:forEach items="${walletList}" var="wallet">
@@ -533,7 +533,7 @@
                                 </button>
                                 <p class="card__method">Payment method</p>
                                 <div class="card__payment">
-                                    <img src="./images/myAccount.png" class="card__credit-card">
+                                    <img src="./images/walletIcon.png" class="card__credit-card">
                                     <div class="card__card-details">
                                         <p class="card__card-type">[계좌 또는 월렛]</p>
                                         <p class="card__card-number">[계좌 또는 월렛 번호]</p>
@@ -619,13 +619,10 @@
 
     // 송금방식
     let selectedPaymentMethod = null;
-
+    let nationality = null;
     let selectedCountry = null;
 
     function initializeSelectionAndListeners() {
-
-        // let selectedPaymentMethod = null;
-
         function selectCountry(country) {
             selectedCountry = country;
             console.log("선택된 국가는", selectedCountry);
@@ -651,6 +648,8 @@
                             document.getElementById('countryName').textContent = countryInfo.nationality;
                             document.getElementById('currencyName').textContent = countryInfo.currencyCode;
                             document.querySelector('.nation').src = countryInfo.imagePath;
+                            nationality = countryInfo.nationality;
+                            console.log("국가이름은 ", nationality);
                         }
                     }
                     if (data.selectedPaymentMethod === 'selectAccount') {
@@ -659,9 +658,11 @@
                     } else if (data.selectedPaymentMethod == 'selectWesternUnion') {
                         document.querySelector('.compare_area').style.display = 'block';
                         document.querySelector('.selectCurAndPayment').style.display = 'none';
+                        document.getElementById('currencyName').textContent = 'USD';
+                        document.getElementById('countryName').textContent = 'United States';
+                        document.querySelector('.nation').src = './images/walletIcon_USD.png';
                     }
                     console.log("선택된 송금 방식은 ", selectedPaymentMethod);
-
                 },
                 error: function (jqXHR) {
                     alert(jqXHR.responseText); // 서버에서 반환된 에러 메시지를 표시
@@ -729,14 +730,7 @@
             alert('Insufficient funds!');
             return;
         }
-
-        // let data = {
-        //     account_no: accountNo,
-        //     account_password: password,
-        //     account_balance: paymentAmount
-        // };
         proceedToNextStep();
-        // 서버에 비밀번호와 계좌 잔액 확인 요청을 보냅니다.
     }
 
     // 최종 컨트롤러
@@ -779,7 +773,7 @@
                         'sender': remittanceDTO.sender,
                         'senderAc': remittanceDTO.senderAc,
                         'walletSeq': remittanceDTO.walletSeq,
-                        'selectedCountry': selectedCountry
+                        'selectedCountry': nationality
                     },
                     success: function (response, jqXHR) {
                         if (response.success) {
@@ -818,7 +812,7 @@
                         'sender': remittanceDTO.sender,
                         'senderAc': remittanceDTO.senderAc,
                         'walletSeq': remittanceDTO.walletSeq,
-                        'selectedCountry': selectedCountry,
+                        'selectedCountry': nationality,
                         'paymentPlace': paymentPlace,
                     },
                     success: function (response, jqXHR) {

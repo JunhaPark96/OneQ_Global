@@ -96,9 +96,6 @@ public class RemittanceController {
 //        }
 //        return ResponseEntity.ok().body(response);
 //    }
-
-
-
     @PostMapping("/selectAccountInfo")
     public ResponseEntity<Map<String, String>> selectAccountInfo(
             @ModelAttribute RemittanceDTO remittanceDTO,
@@ -119,6 +116,8 @@ public class RemittanceController {
                 + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
         + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
+
+
 
 
         // html 요소에 보여줄 데이터
@@ -150,6 +149,8 @@ public class RemittanceController {
         String senderAc = remittanceDTO.getSenderAc();
         int walletSeq = remittanceDTO.getWalletSeq();
 
+
+
         System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
                 + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
@@ -169,6 +170,4 @@ public class RemittanceController {
 
         return ResponseEntity.ok().body(responseMap);
     }
-
-//    @PostMapping("complete")
 }

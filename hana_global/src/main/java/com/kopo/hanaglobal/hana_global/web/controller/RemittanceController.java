@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
@@ -100,17 +101,25 @@ public class RemittanceController {
 
     @PostMapping("/selectAccountInfo")
     public ResponseEntity<Map<String, String>> selectAccountInfo(
-            @RequestParam("recipientName") String recipientName,
-            @RequestParam("address") String address,
-            @RequestParam("routingNo") String routingNo,
-            @RequestParam("accountNo") String accountNo) {
+            @ModelAttribute RemittanceDTO remittanceDTO) {
+
+        String address = remittanceDTO.getAddress();
+        String bankCode= remittanceDTO.getBankCode();
+        String currencyCode = remittanceDTO.getCurrencyCode();
+        String receivableAmount = remittanceDTO.getReceivableAmount();
+        String recipient = remittanceDTO.getRecipient();
+        String recipientAc = remittanceDTO.getRecipientAc();
+        String remitAmount = remittanceDTO.getRemitAmount();
+        String sender = remittanceDTO.getSender();
+        String senderAc = remittanceDTO.getSenderAc();
+        int walletSeq = remittanceDTO.getWalletSeq();
 
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
-        responseMap.put("recipientName", recipientName);
+        responseMap.put("recipientName", recipient);
         responseMap.put("address", address);
-        responseMap.put("routingNo", routingNo);
-        responseMap.put("accountNo", accountNo);
+//        responseMap.put("routingNo", routingNo);
+//        responseMap.put("accountNo", accountNo);
 
         // Optionally, log or process the received information
         System.out.println("Received account info: " + responseMap.toString());
@@ -135,4 +144,6 @@ public class RemittanceController {
 
         return ResponseEntity.ok().body(responseMap);
     }
+
+//    @PostMapping("complete")
 }

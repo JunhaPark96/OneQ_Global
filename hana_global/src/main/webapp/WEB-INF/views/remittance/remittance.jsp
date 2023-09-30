@@ -253,7 +253,7 @@
                                                                      style="width: 30px; height: 30px"
                                                                      alt="국기" class="flag">
                                                                 <em class="currency"></em>
-                                                                <em class="price">10</em>
+                                                                <em id="price", class="price"></em>
                                                             </span>
                                         </td>
                                     </tr>
@@ -287,7 +287,9 @@
                                                 <optgroup label="Accounts">
                                                     <c:forEach items="${accountList}" var="account">
                                                         <option value="${account.acNo}" data-account="${account}"
-                                                                data-balance="${account.balance}" data-balance="${account.balance}" data-password="${account.acPasswd}">
+                                                                data-balance="${account.balance}"
+                                                                data-balance="${account.balance}"
+                                                                data-password="${account.acPasswd}">
                                                                 ${account.acNo}
                                                         </option>
                                                     </c:forEach>
@@ -297,7 +299,10 @@
                                                     <c:forEach items="${walletList}" var="wallet">
 
                                                         <option value="${wallet.currencyCode}" data-wallet="${wallet}"
-                                                                data-balance="${wallet.balance}">
+                                                                data-balance="${wallet.balance}"
+                                                                data-password="${wallet.walletPw}"
+                                                                data-walletSeq="${wallet.walletSeq}"
+                                                                data-acNo="${wallet.acNo}">
                                                                 ${wallet.currencyCode}
                                                         </option>
                                                     </c:forEach>
@@ -552,8 +557,6 @@
 
         </form>
     </div>
-
-
     <footer>
     </footer>
 </div>
@@ -575,19 +578,35 @@
         sellRate: ${rate.sellRate}
     };
     </c:forEach>
-    console.log("통화코드는 ", exchangeRates["VND"].currencyCode);
-    // 컨트롤러에서 제공하는 객체 정보를 JavaScript 변수로 저장
-    let walletInfo = {
-        walletSeq: "${walletKRW.walletSeq}",
-        userSeq: "${walletKRW.userSeq}",
-        balance: "${walletKRW.balance}",
-        walletPw: "${walletKRW.walletPw}",
-        currencyCode: "${walletKRW.currencyCode}",
-        currency: "${walletKRW.currency}"
+    // console.log("통화코드는 ", exchangeRates["VND"].currencyCode);
+    let walletInfoList = {};
+    <c:forEach var="wallet" items="${walletList}">
+    walletInfoList["${wallet.currencyCode}"] = {
+        walletSeq: ${wallet.walletSeq},
+        acNo: "${wallet.acNo}",
+        userSeq: ${wallet.userSeq},
+        balance: ${wallet.balance},
+        walletPw: "${wallet.walletPw}",
+        currencyCode: "${wallet.currencyCode}",
+        currency: "${wallet.currency}"
     };
+    </c:forEach>
+    console.log("월렛 정보는 ", walletInfoList);
+    let member = {
+        userSeq: "${currentMember.userSeq}",
+        name: "${currentMember.name}",
+    };
+    let accountInfoList = {};
+    <c:forEach var="account" items="${accountList}">
+    accountInfoList["${account.acNo}"] = {
+        acNo: "${account.acNo}",
+        userSeq: "${account.userSeq}",
+        acPasswd: "${account.acPasswd}",
+        balance: "${account.balance}"
+    };
+    </c:forEach>
 
     console.log(exchangeRates);  // 테스트: 월렛 정보를 콘솔에 출력
-    console.log(walletInfo);  // 테스트: 월렛 정보를 콘솔에 출력
     // 1 단계: 나라선택 및 결제방식 선택
     let countriesInfo;
     fetch('./json/country.json')
@@ -596,7 +615,9 @@
             countriesInfo = data.countries;
         });
 
+    let remittanceDTO = {};
 
+    // 송금방식
     let selectedPaymentMethod = null;
 
     function initializeSelectionAndListeners() {
@@ -673,18 +694,29 @@
 
     function nextStep(event) {
         event.preventDefault();
-
         let selectedAccountOption = document.getElementById('selectAccountForm').selectedOptions[0];
-        let accountNo = document.getElementById('selectAccountForm').value;
+        // let accountNo = document.getElementById('selectAccountForm').value;
         let password = document.getElementById('account_password').value;
-        let paymentAmount = document.getElementById('paymentAmount').value;
+        let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        let paymentAmount = parseFloat(paymentAmountStr);
+        // let paymentAmount = parseFloat(document.getElementById('paymentAmount').innerText);
+        // console.log(parseFloat(document.getElementById('paymentAmount').innerText));
+
+        // let paymentAmount = document.getElementById('paymentAmount').innerText;
         let accountBalance = parseFloat(selectedAccountOption.getAttribute('data-balance'));
         let accountPassword = selectedAccountOption.getAttribute('data-password');
+        // let walletBalance = parseFloat(selectedAccountOption)
         console.log("선택된 계좌는 ", selectedAccountOption);
+        // console.log("선택된 월렛 번호는 ", accountNo);
         console.log("입력한 비밀번호는 ", password);
         console.log("지불할금액은 ", paymentAmount);
         console.log("계좌잔액 ", accountBalance);
         console.log("계좌비밀번호 ", accountPassword);
+
+        remittanceDTO.walletSeq = selectedAccountOption.getAttribute('data-walletSeq');
+        remittanceDTO.senderAC = selectedAccountOption.getAttribute('data-acNo');
+        remittanceDTO.remitAmount = paymentAmount;
+        remittanceDTO.receivableAmount = document.getElementById('price').textContent;
 
         if (password !== accountPassword) {
             alert('Incorrect password!');
@@ -696,31 +728,13 @@
             return;
         }
 
-        let data = {
-            account_no: accountNo,
-            account_password: password,
-            account_balance: paymentAmount
-        };
+        // let data = {
+        //     account_no: accountNo,
+        //     account_password: password,
+        //     account_balance: paymentAmount
+        // };
         proceedToNextStep();
         // 서버에 비밀번호와 계좌 잔액 확인 요청을 보냅니다.
-        <%--$.ajax({--%>
-        <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>
-        <%--    type: 'POST',--%>
-        <%--    data: data,--%>
-        <%--    success: function(response) {--%>
-        <%--        if (response.success) {--%>
-        <%--            // 비밀번호와 계좌 잔액이 올바른 경우 다음 단계로 진행합니다.--%>
-        <%--            proceedToNextStep();--%>
-        <%--        } else {--%>
-        <%--            // 에러 메시지를 사용자에게 표시합니다.--%>
-        <%--            alert(response.errorMessage);--%>
-        <%--        }--%>
-        <%--    },--%>
-        <%--    error: function(jqXHR, status, error) {--%>
-        <%--        console.error(error);--%>
-        <%--        alert('An error occurred while verifying the account.');--%>
-        <%--    }--%>
-        <%--});--%>
     }
 
     // 최종 컨트롤러
@@ -732,17 +746,24 @@
             console.log(recipientName);
             let address = $('#addressDetail').val() + ', ' + $('#addressCity').val() + ', ' + $('#addressState').val();
             console.log(address);
-
             if (selectedPaymentMethod === 'selectAccount') {
                 let routingNo = $('#routingNo').val();
                 let accountNo = $('#accountNo').val();
                 console.log("보낼 routing No은 ", routingNo);
                 console.log("보낼 accountNo은 ", accountNo);
 
+                remittanceDTO.sender = member.name;
+                remittanceDTO.recipient = recipientName;
+                remittanceDTO.recipientAc = accountNo;
+                remittanceDTO.currencyCode = document.getElementById('currencyName').textContent;
+                remittanceDTO.address = address;
+                remittanceDTO.bankCode = routingNo;
+                console.log("담긴 정보는" , remittanceDTO);
+                // 여기서 DTO 객체를 만들고 필드를 설정
+
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectAccountInfo',
                     type: 'POST',
-                    // dataType: 'json',
                     data: {
                         recipientName: recipientName,
                         address: address,
@@ -769,7 +790,6 @@
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectPaymentPlaceInfo',
                     type: 'POST',
-                    // dataType: 'json',
                     data: {
                         recipientName: recipientName,
                         address: address,
@@ -794,6 +814,25 @@
         });
     });
 
+
+    <%--$.ajax({--%>
+    <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>
+    <%--    type: 'POST',--%>
+    <%--    data: data,--%>
+    <%--    success: function(response) {--%>
+    <%--        if (response.success) {--%>
+    <%--            // 비밀번호와 계좌 잔액이 올바른 경우 다음 단계로 진행합니다.--%>
+    <%--            proceedToNextStep();--%>
+    <%--        } else {--%>
+    <%--            // 에러 메시지를 사용자에게 표시합니다.--%>
+    <%--            alert(response.errorMessage);--%>
+    <%--        }--%>
+    <%--    },--%>
+    <%--    error: function(jqXHR, status, error) {--%>
+    <%--        console.error(error);--%>
+    <%--        alert('An error occurred while verifying the account.');--%>
+    <%--    }--%>
+    <%--});--%>
 </script>
 
 </body>

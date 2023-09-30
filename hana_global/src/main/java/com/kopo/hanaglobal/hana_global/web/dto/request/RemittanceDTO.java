@@ -12,11 +12,12 @@ public class RemittanceDTO {
     private String recipient;
     private String senderAc;
     private String recipientAc;
-    private BigDecimal remitAmount;
+    private String remitAmount; // 원화
+    private String receivableAmount; // 외화
+    private String currencyCode;
+    private String address;
+    private String bankCode;
     private String tradeDate;
     private String status;
-    private String currencyCode;
-    private String bank;
-    private String mtcn;
-    private BigDecimal dailyLimit;
+    private String dailyLimit;
 }

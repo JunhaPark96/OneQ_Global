@@ -12,8 +12,8 @@ public class RemittanceDTO {
     private String recipient;
     private String senderAc;
     private String recipientAc;
-    private String remitAmount; // 원화
-    private String receivableAmount; // 외화
+    private Integer remitAmount; // 원화
+    private Integer receivableAmount; // 외화
     private String currencyCode;
     private String address;
     private String bankCode;

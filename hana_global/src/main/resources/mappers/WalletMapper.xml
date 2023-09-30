@@ -81,4 +81,11 @@
                  JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
         WHERE HW.USER_SEQ = #{userSeq}
     </select>
+
+    <insert id="insertRemittance" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO">
+        insert into remittance (remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status)
+        values (remittance_seq.nextval, #{walletSeq}, #{sender}, #{recipient}, #{senderAc}, #{remitAmount}, #{receivableAmount}, #{currencyCode}, #{address}, 'W')
+    </insert>
+
+
 </mapper>

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,10 +105,10 @@ public class RemittanceController {
         String address = remittanceDTO.getAddress();
         String bankCode= remittanceDTO.getBankCode();
         String currencyCode = remittanceDTO.getCurrencyCode();
-        String receivableAmount = remittanceDTO.getReceivableAmount();
+        Integer receivableAmount = remittanceDTO.getReceivableAmount();
         String recipient = remittanceDTO.getRecipient();
         String recipientAc = remittanceDTO.getRecipientAc();
-        String remitAmount = remittanceDTO.getRemitAmount();
+        Integer remitAmount = remittanceDTO.getRemitAmount();
         String sender = remittanceDTO.getSender();
         String senderAc = remittanceDTO.getSenderAc();
         int walletSeq = remittanceDTO.getWalletSeq();
@@ -124,7 +125,7 @@ public class RemittanceController {
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
         responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());
-        responseMap.put("receivableAmount", remittanceDTO.getReceivableAmount());
+        responseMap.put("receivableAmount", String.valueOf(remittanceDTO.getReceivableAmount()));
         responseMap.put("recipient", remittanceDTO.getRecipient());
         responseMap.put("country", country);
         responseMap.put("senderAc", remittanceDTO.getSenderAc());
@@ -138,30 +139,31 @@ public class RemittanceController {
             @RequestParam("selectedCountry") String country,
             @RequestParam("paymentPlace") String paymentPlace) {
 
-        String address = remittanceDTO.getAddress();
-        String bankCode= remittanceDTO.getBankCode();
-        String currencyCode = remittanceDTO.getCurrencyCode();
-        String receivableAmount = remittanceDTO.getReceivableAmount();
-        String recipient = remittanceDTO.getRecipient();
-        String recipientAc = remittanceDTO.getRecipientAc();
-        String remitAmount = remittanceDTO.getRemitAmount();
-        String sender = remittanceDTO.getSender();
-        String senderAc = remittanceDTO.getSenderAc();
         int walletSeq = remittanceDTO.getWalletSeq();
-
-
+        String sender = remittanceDTO.getSender();
+        String recipient = remittanceDTO.getRecipient();
+        String senderAc = remittanceDTO.getSenderAc();
+        String recipientAc = remittanceDTO.getRecipientAc();
+        Integer remitAmount = remittanceDTO.getRemitAmount();
+        Integer receivableAmount = remittanceDTO.getReceivableAmount();
+        String address = remittanceDTO.getAddress();
+        String currencyCode = remittanceDTO.getCurrencyCode();
+        String bankCode= remittanceDTO.getBankCode();
 
         System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
                 + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
                 + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
 
+        // 선택한 월렛에서 금액 차감
+        // 해외송금 데이터 넣기
+        walletService.doRemittance(remittanceDTO);
 
         // html 요소에 보여줄 데이터
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
         responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());
-        responseMap.put("receivableAmount", remittanceDTO.getReceivableAmount());
+        responseMap.put("receivableAmount", String.valueOf(remittanceDTO.getReceivableAmount()));
         responseMap.put("recipient", remittanceDTO.getRecipient());
         responseMap.put("country", country);
         responseMap.put("senderAc", remittanceDTO.getSenderAc());

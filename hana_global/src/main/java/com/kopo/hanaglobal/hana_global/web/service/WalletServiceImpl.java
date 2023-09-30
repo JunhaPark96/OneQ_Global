@@ -2,6 +2,7 @@ package com.kopo.hanaglobal.hana_global.web.service;
 
 import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
@@ -178,8 +179,6 @@ public class WalletServiceImpl implements WalletService {
         System.out.println("월렛 외화 추가: " + newWalletCurrencyDTO.toString());
     }
 
-
-
     @Override
     public Wallet findWalletByUserSeqAndCurrencyCode(int userSeq, String currencyCode) {
         Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(userSeq, currencyCode);
@@ -290,4 +289,32 @@ public class WalletServiceImpl implements WalletService {
         }
         return autoExchangeDTOS;
     }
+
+    // 송금기능
+    @Transactional
+    public void doRemittance(RemittanceDTO remittanceDTO){
+        Wallet wallet = walletRepository.findWalletByWalletNo(remittanceDTO.getWalletSeq());
+        Account account = accountRepository.getAccountByAcNo(remittanceDTO.getSenderAc());
+        Integer amount = remittanceDTO.getRemitAmount();
+        // 월렛 돈 차감
+        processKrwDeduction(wallet, account, amount);
+
+        //해외송금내역 추가
+        walletRepository.insertRemittance(remittanceDTO);
+        // 일일한도 감소
+
+    }
+
+//    public RemittanceDTO createRemittanceDTO() {
+//        RemittanceDTO remittanceDTO =
+//        WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
+//        walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
+//        walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
+//        walletWithdrawDTO.setTransactionAmount(new BigDecimal(krwAmount));
+//        walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
+//        walletWithdrawDTO.setWithdrawCur("KRW");
+//        walletWithdrawDTO.setWithdrawName("won");
+//        return walletWithdrawDTO;
+//    }
 }
+

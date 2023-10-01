@@ -399,3 +399,90 @@ function proceedToNextStep() {
 //         toggleText.textContent = 'close'; // 텍스트를 '닫기'로 변경
 //     }
 // }
+
+// 이메일 보내기 시작 =====================================
+// function sendEmail() {
+//     var selectedValue = document.querySelector('input[name="remittanceRadio"]:checked').value;
+//     var details = remittanceList.find(remittance => remittance.remitSeq.toString() === selectedValue);
+//
+//     if (details) {
+//         getCountryName(details.currencyCode).then(countryName => {
+//             var emailContent = `
+//                 <html>
+//                 <head>
+//                     <style>
+//                         .modal-content {
+//     background-color: #f9f9f9; /* 모달 배경색 */
+//     border-radius: 8px; /* 모달 모서리 둥글게 */
+// }
+//
+// .modal-header {
+//     background-color: #007BFF; /* 헤더 배경색 */
+//     color: white; /* 헤더 텍스트 색상 */
+// }
+//
+// .modal-footer {
+//     background-color: #e9ecef; /* 푸터 배경색 */
+// }
+//
+// .modal-body {
+//     padding: 20px; /* 본문 패딩 */
+//     font-size: 1rem; /* 폰트 크기 */
+//     line-height: 1.5; /* 라인 높이 */
+// }
+//
+// .modal-details {
+//     margin-bottom: 10px; /* 상세 정보 마진 */
+// }
+//
+// .btn-secondary {
+//     background-color: #007BFF; /* 버튼 색상 */
+// }
+//
+// .modal-details-title {
+//     font-weight: bold; /* 상세 정보 제목 볼드 */
+//     margin-bottom: 5px; /* 상세 정보 제목 마진 */
+// }
+//
+// .modal-details-content {
+//     margin-left: 10px; /* 상세 정보 내용 마진 */
+// }
+//                     </style>
+//                 </head>
+//                 <body>
+//                     <div class="modal-details">
+//                         <div class="modal-details-title">[${details.status == 'W' ? '송금 진행 중' : details.status == 'N' ? '수취 대기' : '수취 완료'}]</div>
+//                         <div class="modal-details-content">
+//                             <p>Remittance Information</p>
+//                             <p>MTCN: ${details.remitSeq}</p>
+//                             <p>Sender: ${details.sender}</p>
+//                             <p>Sender's Country: South of Korea</p>
+//                             <p>Remittance Amount: ${details.currencyCode} ${details.receivableAmount}</p>
+//                         </div>
+//                         <div class="modal-details-title">Recipient Information</div>
+//                         <div class="modal-details-content">
+//                             <p>Recipient: ${details.recipient}</p>
+//                             <p>Recipient's Country: ${countryName || 'Unknown'}</p>
+//                         </div>
+//                     </div>
+//                 </body>
+//                 </html>
+//             `;
+//
+//             $.ajax({
+//                 url: '/send-email',  // 'send-email' endpoint를 서버에서 설정해야 합니다.
+//                 type: 'POST',
+//                 contentType: 'application/json',
+//                 data: JSON.stringify({ content: emailContent, to: 'njk116@naver.com', subject: 'Remittance Details' }),
+//                 success: function(response) {
+//                     alert('Email sent successfully');
+//                 },
+//                 error: function(error) {
+//                     alert('Failed to send email');
+//                 }
+//             });
+//         });
+//     }
+// }
+
+// 이메일 보내기 끝 =====================================

@@ -51,6 +51,9 @@ dependencies {
 	// coolsms
 //	implementation 'net.nurigo:sdk:4.3.0'
 	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+
+//	이메일
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {

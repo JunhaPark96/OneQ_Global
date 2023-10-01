@@ -1,5 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.Util.EmailService;
+import com.kopo.hanaglobal.hana_global.web.dto.request.EmailDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
@@ -29,13 +31,14 @@ public class RemittanceController {
     private MemberService memberService;
     private WalletService walletService;
     private ExchangeService exchangeService;
-
+    private EmailService emailService;
     @Autowired
-    public RemittanceController(AccountService accountService, MemberService memberService, WalletService walletService, ExchangeService exchangeService) {
+    public RemittanceController(AccountService accountService, MemberService memberService, WalletService walletService, ExchangeService exchangeService, EmailService emailService) {
         this.accountService = accountService;
         this.memberService = memberService;
         this.walletService = walletService;
         this.exchangeService = exchangeService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/remittance")
@@ -181,5 +184,11 @@ public class RemittanceController {
         }
         model.addAttribute("remittanceList", remittanceDTOList);
         return "/remittance/remittanceTrace";
+    }
+
+    @PostMapping("/send-email")
+    public String sendEmail(@RequestBody EmailDTO emailRequest) {
+        emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getContent());
+        return "Email sent successfully";
     }
 }

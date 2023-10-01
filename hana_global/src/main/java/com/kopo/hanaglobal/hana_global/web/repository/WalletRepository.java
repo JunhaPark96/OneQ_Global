@@ -49,4 +49,5 @@ public interface WalletRepository {
 
     public void insertRemittance(RemittanceDTO remittanceDTO);
 
+    public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
 }

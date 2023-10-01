@@ -521,22 +521,22 @@
                             <div class="card__body">
 
                                 <div class="card__recipient-info">
-                                    <p class="card__recipient">상대방이 받을 때 까지 약 3~5일 소요되며, 송금도착 후 자동송금 신청이 가능합니다</p>
+                                    <p class="card__recipient">The transfer will be completed in approximately 1 minute, and you can track the real-time transfer status below. </p>
                                     <p class="card__email"></p>
                                 </div>
 
-                                <p class="card__price">송금금액 <span></span></p>
-                                <p class="card__price">수취인 <span> </span></p>
-                                <p class="card__price">수취국가 <span></span></p>
-                                <button>
-                                    송금추적
+                                <p class="card__price">Transfer Amount <span></span></p>
+                                <p class="card__price">Recipient  <span> </span></p>
+                                <p class="card__price">Recipient Country <span></span></p>
+                                <button onclick="remittanceTrace(event)">
+                                    Trace Transfer
                                 </button>
                                 <p class="card__method">Payment method</p>
                                 <div class="card__payment">
                                     <img src="./images/walletIcon.png" class="card__credit-card">
                                     <div class="card__card-details">
-                                        <p class="card__card-type">[계좌 또는 월렛]</p>
-                                        <p class="card__card-number">[계좌 또는 월렛 번호]</p>
+                                        <p class="card__card-type"></p>
+                                        <p class="card__card-number"></p>
                                     </div>
                                 </div>
 
@@ -559,7 +559,6 @@
     </div>
     <footer>
     </footer>
-</div>
 </div>
 
 <script src="./js/remittance.js"></script>
@@ -778,9 +777,9 @@
                     success: function (response, jqXHR) {
                         if (response.success) {
                             document.querySelector('.remittance-complete').style.display = 'block';
-                            $('.card__price:contains("송금금액") span').text(response.currencyCode + ' ' + response.receivableAmount);
-                            $('.card__price:contains("수취인") span').text(response.recipient);
-                            $('.card__price:contains("수취국가") span').text(response.country);
+                            $('.card__price:contains("Transfer Amount") span').text(response.currencyCode + ' ' + response.receivableAmount);
+                            $('.card__price:contains("Recipient") span').text(response.recipient);
+                            $('.card__price:contains("Receipient Country") span').text(response.country);
                             $('.card__card-type').text('Hana Wallet');  // 예를 들어, '월렛'으로 설정
                             $('.card__card-number').text(response.senderAc);  // 서버 응답에서 월렛 번호 가져오기
 
@@ -819,9 +818,9 @@
                         if (response.success) {
                             document.querySelector('.remittance-complete').style.display = 'block';
                             document.querySelector('.recipientDiv').style.display = 'none';
-                            $('.card__price:contains("송금금액") span').text(response.currencyCode + ' ' + response.receivableAmount);
-                            $('.card__price:contains("수취인") span').text(response.recipient);
-                            $('.card__price:contains("수취국가") span').text(response.country);
+                            $('.card__price:contains("Transfer Amount") span').text(response.currencyCode + ' ' + response.receivableAmount);
+                            $('.card__price:contains("Recipient") span').text(response.recipient);
+                            $('.card__price:contains("Recipient Country") span').text(response.country);
                             $('.card__card-type').text('Hana Wallet');  // 예를 들어, '월렛'으로 설정
                             $('.card__card-number').text(response.senderAc);  // 서버 응답에서 월렛 번호 가져오기
                         } else {
@@ -838,6 +837,10 @@
         });
     });
 
+    function remittanceTrace(event){
+        event.preventDefault();
+        window.location.href = '${pageContext.request.contextPath}/remittanceTrace';
+    }
 
     <%--$.ajax({--%>
     <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>

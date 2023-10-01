@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.service;
 
+import com.kopo.hanaglobal.hana_global.web.Util.RandomNumberGenerator;
 import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
@@ -300,21 +301,15 @@ public class WalletServiceImpl implements WalletService {
         processKrwDeduction(wallet, account, amount);
 
         //해외송금내역 추가
+        remittanceDTO.setRemitSeq(RandomNumberGenerator.generateRandomNumber(9));
         walletRepository.insertRemittance(remittanceDTO);
         // 일일한도 감소
-
     }
 
-//    public RemittanceDTO createRemittanceDTO() {
-//        RemittanceDTO remittanceDTO =
-//        WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
-//        walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
-//        walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
-//        walletWithdrawDTO.setTransactionAmount(new BigDecimal(krwAmount));
-//        walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
-//        walletWithdrawDTO.setWithdrawCur("KRW");
-//        walletWithdrawDTO.setWithdrawName("won");
-//        return walletWithdrawDTO;
-//    }
+    @Override
+    public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq){
+        List<RemittanceDTO> remittanceDTOList = walletRepository.getRemittanceListByWalletSeq(walletSeq);
+        return remittanceDTOList;
+    }
 }
 

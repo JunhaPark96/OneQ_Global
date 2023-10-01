@@ -119,8 +119,6 @@ public class RemittanceController {
         + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
 
 
-
-
         // html 요소에 보여줄 데이터
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
@@ -171,5 +169,17 @@ public class RemittanceController {
         System.out.println("Received account info: " + responseMap.toString());
 
         return ResponseEntity.ok().body(responseMap);
+    }
+
+    @GetMapping("/remittanceTrace")
+    public String remittanceTrance(@ModelAttribute("currentMember") Member member, Model model){
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
+        System.out.println(wallet.toString());
+        List<RemittanceDTO> remittanceDTOList = walletService.getRemittanceListByWalletSeq(wallet.getWalletSeq());
+        for (RemittanceDTO r : remittanceDTOList){
+            System.out.println(r.toString());
+        }
+        model.addAttribute("remittanceList", remittanceDTOList);
+        return "/remittance/remittanceTrace";
     }
 }

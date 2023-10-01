@@ -21,8 +21,10 @@
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="content">
         <dl class="description-box">
-            <dt class="desc-1">홈페이지 가입고객 이용안내</dt>
-            <dd class="desc-2">하나은행 홈페이지에서 회원가입하시면 계좌조회서비스를 이용하실 수 있습니다.<br>계좌이체/금융상품 신규 등의 거래를 원하시면 영업점에 방문하여 '인터넷뱅킹' 서비스를 가입하시기 바랍니다.</dd>
+<%--            <dt class="desc-1">홈페이지 가입고객 이용안내</dt>--%>
+            <dt class="desc-1">Online Banking Registration Guide for Customers</dt>
+<%--            <dd class="desc-2">하나은행 홈페이지에서 회원가입하시면 계좌조회서비스를 이용하실 수 있습니다.<br>계좌이체/금융상품 신규 등의 거래를 원하시면 영업점에 방문하여 '인터넷뱅킹' 서비스를 가입하시기 바랍니다.</dd>--%>
+            <dd class="desc-2">You can access account inquiry services by registering as a member on Hana Bank's website.<br>If you wish to conduct transactions such as account transfers or opening financial products, please visit a branch and sign up for 'Internet Banking' service.</dd>
         </dl>
 
         <ol class="step-box">

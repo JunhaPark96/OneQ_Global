@@ -41,4 +41,5 @@ public interface WalletService {
     public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq);
 
     public void doRemittance(RemittanceDTO remittanceDTO);
+    public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
 }

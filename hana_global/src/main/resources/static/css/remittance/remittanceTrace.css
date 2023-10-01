@@ -36,16 +36,26 @@
 }
 
 .btn-secondary {
-    background-color: #007BFF; /* 버튼 색상 */
+    background-color: #018085; /* 버튼 색상 */
 }
 
 .modal-details-title {
-    font-weight: bold; /* 상세 정보 제목 볼드 */
-    margin-bottom: 5px; /* 상세 정보 제목 마진 */
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .modal-details-content {
-    margin-left: 10px; /* 상세 정보 내용 마진 */
+    margin-left: 10px;
 }
 
+.step {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.current-step {
+    background-color: #e0f7fa;
+    font-weight: bold;
+}
 /* 모달창 css 끝 ===========================================*/

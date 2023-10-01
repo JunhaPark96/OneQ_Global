@@ -45,7 +45,7 @@
                             class="col-12 text-center border-0 pt-3 pb-3 fs-5 bg-hanagreen"
                             style="font-family: hanaM; color: #ffffff; border-radius: 10px 0px 0px 0px"
                             onclick="click_hold_history()">
-                        송금내역
+                        Remittance History
                     </button>
                 </div>
                 <table class="table table-bordered">
@@ -82,8 +82,8 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${remittance.status eq 'Y'}">Completed</c:when>
-                                    <c:when test="${remittance.status eq 'N'}">Failed</c:when>
-                                    <c:when test="${remittance.status eq 'W'}">In Progress</c:when>
+                                    <c:when test="${remittance.status eq 'N'}">In Progress</c:when>
+                                    <c:when test="${remittance.status eq 'W'}">Awaiting Recipient</c:when>
                                     <c:otherwise>Unknown</c:otherwise>
                                 </c:choose>
                             </td>
@@ -93,7 +93,7 @@
                 </table>
 
                 <div>
-                    <button onclick="showRemittanceDetails()">송금 알리기</button>
+                    <button onclick="showRemittanceDetails()">Notify Recipient</button>
                 </div>
             </div>
         </div>
@@ -116,6 +116,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="email" id="emailAddress" placeholder="Email Address" required>
                         <%--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Send Email</button>--%>
                         <button type="button" class="btn btn-secondary" onclick="sendEmail()">Send Email</button>
 
@@ -182,17 +183,20 @@
         if (details) {
             getCountryName(details.currencyCode).then(countryName => {
                 const modalContent = document.getElementById('modalContent');
-                const statusText = details.status == 'W' ? '송금 진행 중' : details.status == 'N' ? '수취 대기' : '수취 완료';
+                const status = details.status;
+                const statusText = status == 'W' ? 'Awaiting Recipient' : status == 'N' ? 'In Progress' : 'Completed';
                 const htmlString =
-                    "<div class='modal-details-title'>[" + statusText + "]</div>" +
+                    "<div class='step " + (status == 'N' ? "current-step" : "") + "'>In Progress</div>" +
+                    "<div class='step " + (status == 'W' ? "current-step" : "") + "'>Awaiting Recipient</div>" +
+                    "<div class='step " + (status == 'C' ? "current-step" : "") + "'>Completed</div>" +
+                    "<div class='modal-details-title'>[Remittance Information]</div>" +
                     "<div class='modal-details-content'>" +
-                    "<p>Remittance Information</p>" +
                     "<p>MTCN: " + details.remitSeq + "</p>" +
                     "<p>Sender: " + details.sender + "</p>" +
                     "<p>Sender's Country: South of Korea</p>" +
                     "<p>Remittance Amount: " + details.currencyCode + " " + details.receivableAmount + "</p>" +
                     "</div>" +
-                    "<div class='modal-details-title'>Recipient Information</div>" +
+                    "<div class='modal-details-title'>[Recipient Information]</div>" +
                     "<div class='modal-details-content'>" +
                     "<p>Recipient: " + details.recipient + "</p>" +
                     "<p>Recipient's Country: " + (countryName || 'Unknown') + "</p>" +
@@ -205,88 +209,53 @@
                 remittanceModal.show();
             });
         }
-
     }
 
 
     // 이메일 보내기
     function sendEmail() {
-        var selectedValue = document.querySelector('input[name="remittanceRadio"]:checked').value;
-        var details = remittanceList.find(remittance => remittance.remitSeq.toString() === selectedValue);
-
+        let selectedValue = document.querySelector('input[name="remittanceRadio"]:checked').value;
+        let details = remittanceList.find(remittance => remittance.remitSeq.toString() === selectedValue);
+        // 입력받은 이메일 주소
+        let emailAddress = document.getElementById('emailAddress').value;
         if (details) {
             getCountryName(details.currencyCode).then(countryName => {
-                var emailContent = `
-                <html>
-                <head>
-                    <style>
-                        .modal-content {
-    background-color: #f9f9f9; /* 모달 배경색 */
-    border-radius: 8px; /* 모달 모서리 둥글게 */
-}
-
-.modal-header {
-    background-color: #007BFF; /* 헤더 배경색 */
-    color: white; /* 헤더 텍스트 색상 */
-}
-
-.modal-footer {
-    background-color: #e9ecef; /* 푸터 배경색 */
-}
-
-.modal-body {
-    padding: 20px; /* 본문 패딩 */
-    font-size: 1rem; /* 폰트 크기 */
-    line-height: 1.5; /* 라인 높이 */
-}
-
-.modal-details {
-    margin-bottom: 10px; /* 상세 정보 마진 */
-}
-
-.btn-secondary {
-    background-color: #007BFF; /* 버튼 색상 */
-}
-
-.modal-details-title {
-    font-weight: bold; /* 상세 정보 제목 볼드 */
-    margin-bottom: 5px; /* 상세 정보 제목 마진 */
-}
-
-.modal-details-content {
-    margin-left: 10px; /* 상세 정보 내용 마진 */
-}
-                    </style>
-                </head>
-                <body>
-                    <div class="modal-details">
-                        <div class="modal-details-title">[${details.status == 'W' ? '송금 진행 중' : details.status == 'N' ? '수취 대기' : '수취 완료'}]</div>
-                        <div class="modal-details-content">
-                            <p>Remittance Information</p>
-                            <p>MTCN: ${details.remitSeq}</p>
-                            <p>Sender: ${details.sender}</p>
-                            <p>Sender's Country: South of Korea</p>
-                            <p>Remittance Amount: ${details.currencyCode} ${details.receivableAmount}</p>
-                        </div>
-                        <div class="modal-details-title">Recipient Information</div>
-                        <div class="modal-details-content">
-                            <p>Recipient: ${details.recipient}</p>
-                            <p>Recipient's Country: ${countryName || 'Unknown'}</p>
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `;
+                let emailContent =
+                    '<html>' +
+                    '<body>' +
+                    '<div style="margin-bottom: 10px;">' +
+                    '<div style="font-weight: bold; margin-bottom: 5px;">[' +
+                    (details.status == 'W' ? 'Awaiting Recipient' : details.status == 'N' ? 'In Progress' : 'Completed') +
+                    ']</div>' +
+                    '<div style="margin-left: 10px;">' +
+                    '<div style="font-weight: bold; margin-bottom: 5px;">Remittance Information</div>' +
+                    '<p>MTCN: ' + details.remitSeq + '</p>' +
+                    '<p>Sender: ' + details.sender + '</p>' +
+                    '<p>Sender\'s Country: South of Korea</p>' +
+                    '<p>Remittance Amount: ' + details.currencyCode + ' ' + details.receivableAmount + '</p>' +
+                    '</div>' +
+                    '<div style="font-weight: bold; margin-bottom: 5px;">Recipient Information</div>' +
+                    '<div style="margin-left: 10px;">' +
+                    '<p>Recipient: ' + details.recipient + '</p>' +
+                    '<p>Recipient\'s Country: ' + (countryName || 'Unknown') + '</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</body>' +
+                    '</html>';
 
                 $.ajax({
-                    url: '/send-email',  // 'send-email' endpoint를 서버에서 설정해야 합니다.
+                    url: '/send-email',
                     type: 'POST',
                     contentType: 'application/json',
-                    data: JSON.stringify({ content: emailContent, to: 'njk116@gmail.com', subject: 'Remittance Details' }),
-                    success: function(response) {
+                    data: JSON.stringify({
+                        content: emailContent,
+                        to: emailAddress,
+                        subject: 'Western Union Receipt'
+                    }),
+                    success: function (response) {
                         alert('Email sent successfully');
                     },
-                    error: function(error) {
+                    error: function (error) {
                         alert('Failed to send email');
                     }
                 });

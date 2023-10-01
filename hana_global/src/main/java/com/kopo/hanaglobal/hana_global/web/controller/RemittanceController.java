@@ -189,6 +189,6 @@ public class RemittanceController {
     @PostMapping("/send-email")
     public String sendEmail(@RequestBody EmailDTO emailRequest) {
         emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getContent());
-        return "Email sent successfully";
+        return "/remittance/remittanceTrace";
     }
 }

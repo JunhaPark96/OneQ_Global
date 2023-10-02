@@ -93,7 +93,7 @@ public class WalletServiceImpl implements WalletService {
         Account account = getAccountByAcNo(fromWallet);
         Wallet targetWallet = getWalletByUserAndCurrency(fromWallet, currencyCode);
 
-        processKrwDeduction(fromWallet, account, krwAmount);
+        processKrwDeduction(fromWallet, account, krwAmount, "E");
 
         processForeignAddition(fromWallet, targetWallet, currencyCode, foreignAmount, sourceCurrencyName);
     }
@@ -135,7 +135,7 @@ public class WalletServiceImpl implements WalletService {
         return walletDepositDTO;
     }
 
-    public void processKrwDeduction(Wallet fromWallet, Account account, Integer krwAmount) {
+    public void processKrwDeduction(Wallet fromWallet, Account account, Integer krwAmount, String transactionType) {
         // 만약 월렛에 돈이 없으면, 계좌에서 차감 후 월렛에 돈을 충전.
         if (fromWallet.getBalance().compareTo(BigDecimal.valueOf(krwAmount)) < 0) {
             // 계좌에서 차감 후 월렛에 돈을 충전
@@ -149,16 +149,16 @@ public class WalletServiceImpl implements WalletService {
         }
         walletRepository.deductWalletBalance(fromWallet.getUserSeq(), krwAmount, "KRW");
 
-        WalletHistoryDTO walletWithdrawDTO = createWithdrawDTO(fromWallet, krwAmount);
+        WalletHistoryDTO walletWithdrawDTO = createWithdrawDTO(fromWallet, krwAmount, transactionType);
         walletRepository.insertWithdrawWalletHist(walletWithdrawDTO);
         System.out.println("환전 출금 내역 추가: " + walletWithdrawDTO.toString());
     }
-    public WalletHistoryDTO createWithdrawDTO(Wallet fromWallet, Integer krwAmount) {
+    public WalletHistoryDTO createWithdrawDTO(Wallet fromWallet, Integer krwAmount, String transactionType) {
         WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
         walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
         walletWithdrawDTO.setBalance(fromWallet.getBalance().subtract(new BigDecimal(krwAmount)));
         walletWithdrawDTO.setTransactionAmount(new BigDecimal(krwAmount));
-        walletWithdrawDTO.setTransactionType("E"); // E는 환전을 의미
+        walletWithdrawDTO.setTransactionType(transactionType); // E는 환전을 의미
         walletWithdrawDTO.setWithdrawCur("KRW");
         walletWithdrawDTO.setWithdrawName("won");
         return walletWithdrawDTO;
@@ -298,7 +298,7 @@ public class WalletServiceImpl implements WalletService {
         Account account = accountRepository.getAccountByAcNo(remittanceDTO.getSenderAc());
         Integer amount = remittanceDTO.getRemitAmount();
         // 월렛 돈 차감
-        processKrwDeduction(wallet, account, amount);
+        processKrwDeduction(wallet, account, amount, "T");
 
         //해외송금내역 추가
         remittanceDTO.setRemitSeq(RandomNumberGenerator.generateRandomNumber(9));

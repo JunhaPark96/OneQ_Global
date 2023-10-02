@@ -136,9 +136,7 @@ public class RemittanceController {
 
     @PostMapping("/selectPaymentPlaceInfo")
     public ResponseEntity<Map<String, String>> selectPaymentPlaceInfo(
-            @ModelAttribute RemittanceDTO remittanceDTO,
-            @RequestParam("selectedCountry") String country,
-            @RequestParam("paymentPlace") String paymentPlace) {
+            @ModelAttribute RemittanceDTO remittanceDTO) {
 
         int walletSeq = remittanceDTO.getWalletSeq();
         String sender = remittanceDTO.getSender();
@@ -150,11 +148,14 @@ public class RemittanceController {
         String address = remittanceDTO.getAddress();
         String currencyCode = remittanceDTO.getCurrencyCode();
         String bankCode= remittanceDTO.getBankCode();
+        String countryName = remittanceDTO.getCountryName();
+        String paymentPlace = remittanceDTO.getPaymentPlace();
 
         System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
                 + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
-                + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
+                + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq
+        + " 나라이름은 " + countryName + " 수취장소는 " + paymentPlace);
 
         // 선택한 월렛에서 금액 차감
         // 해외송금 데이터 넣기
@@ -166,7 +167,7 @@ public class RemittanceController {
         responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());
         responseMap.put("receivableAmount", String.valueOf(remittanceDTO.getReceivableAmount()));
         responseMap.put("recipient", remittanceDTO.getRecipient());
-        responseMap.put("country", country);
+        responseMap.put("country", countryName);
         responseMap.put("senderAc", remittanceDTO.getSenderAc());
         responseMap.put("paymentPlace", paymentPlace);
         System.out.println("Received account info: " + responseMap.toString());

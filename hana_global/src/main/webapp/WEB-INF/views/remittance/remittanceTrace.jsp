@@ -189,7 +189,7 @@
                     "<div class='step " + (status == 'N' ? "current-step" : "") + "'>In Progress</div>" +
                     "<div class='step " + (status == 'W' ? "current-step" : "") + "'>Awaiting Recipient</div>" +
                     "<div class='step " + (status == 'C' ? "current-step" : "") + "'>Completed</div>" +
-                    "<div class='modal-details-title'>[Remittance Information]</div>" +
+                    "<div class='modal-details-title'>[Sender Information]</div>" +
                     "<div class='modal-details-content'>" +
                     "<p>MTCN: " + details.remitSeq + "</p>" +
                     "<p>Sender: " + details.sender + "</p>" +

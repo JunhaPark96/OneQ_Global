@@ -25,7 +25,7 @@
         <ul>
             <li><a href="${pageContext.request.contextPath}/walletInfo"> My Wallet </a></li>
             <li><a href="${pageContext.request.contextPath}/topUp">Load Wallet</a></li>
-            <li><a href="${pageContext.request.contextPath}/accountTransfer">Wallet Transaction Details</a></li>
+            <li><a href="${pageContext.request.contextPath}/walletTransactionDetail">Wallet Transaction Details</a></li>
         </ul>
     </li>
     <li>

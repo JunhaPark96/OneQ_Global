@@ -83,12 +83,12 @@
     </select>
 
     <insert id="insertRemittance" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO">
-        insert into remittance (remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status)
-        values (#{remitSeq}, #{walletSeq}, #{sender}, #{recipient}, #{senderAc}, #{remitAmount}, #{receivableAmount}, #{currencyCode}, #{address}, 'W')
+        insert into remittance (remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status, country_name, payment_place)
+        values (#{remitSeq}, #{walletSeq}, #{sender}, #{recipient}, #{senderAc}, #{remitAmount}, #{receivableAmount}, #{currencyCode}, #{address}, 'W', #{countryName}, #{paymentPlace})
     </insert>
 
     <select id="getRemittanceListByWalletSeq">
-        SELECT remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status, trade_date
+        SELECT remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status, trade_date, country_name, payment_place
         FROM remittance
         WHERE wallet_seq = #{walletSeq}
     </select>

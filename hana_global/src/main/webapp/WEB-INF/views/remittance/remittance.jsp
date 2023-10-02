@@ -657,9 +657,9 @@
                     } else if (data.selectedPaymentMethod == 'selectWesternUnion') {
                         document.querySelector('.compare_area').style.display = 'block';
                         document.querySelector('.selectCurAndPayment').style.display = 'none';
-                        document.getElementById('currencyName').textContent = 'USD';
-                        document.getElementById('countryName').textContent = 'United States';
-                        document.querySelector('.nation').src = './images/walletIcon_USD.png';
+                        // document.getElementById('currencyName').textContent = 'USD';
+                        // document.getElementById('countryName').textContent = 'United States';
+                        // document.querySelector('.nation').src = './images/walletIcon_USD.png';
                     }
                     console.log("선택된 송금 방식은 ", selectedPaymentMethod);
                 },
@@ -718,7 +718,9 @@
         remittanceDTO.senderAc = selectedAccountOption.getAttribute('data-acNo');
         remittanceDTO.remitAmount = paymentAmount;
         remittanceDTO.receivableAmount = document.getElementById('price').textContent;
+        remittanceDTO.countryName = document.getElementById('countryName').textContent;
         console.log("송금계좌는 ", remittanceDTO.senderAc);
+        console.log("최종나라이름은 ", remittanceDTO.countryName);
 
         if (password !== accountPassword) {
             alert('Incorrect password!');
@@ -796,6 +798,7 @@
                 });
             } else if (selectedPaymentMethod === 'selectWesternUnion') {
                 let paymentPlace = $('#receiptCity').val() + ', ' + $('#receiptState').val();
+                remittanceDTO.paymentPlace = paymentPlace;
                 console.log("paymentPlace는 ", paymentPlace);
                 $.ajax({
                     url: '${pageContext.request.contextPath}/selectPaymentPlaceInfo',
@@ -811,8 +814,8 @@
                         'sender': remittanceDTO.sender,
                         'senderAc': remittanceDTO.senderAc,
                         'walletSeq': remittanceDTO.walletSeq,
-                        'selectedCountry': nationality,
-                        'paymentPlace': paymentPlace,
+                        'countryName': remittanceDTO.countryName,
+                        'paymentPlace': remittanceDTO.paymentPlace,
                     },
                     success: function (response, jqXHR) {
                         if (response.success) {

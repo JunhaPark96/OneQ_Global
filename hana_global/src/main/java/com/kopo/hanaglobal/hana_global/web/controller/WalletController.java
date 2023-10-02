@@ -3,6 +3,7 @@ package com.kopo.hanaglobal.hana_global.web.controller;
 import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
@@ -99,5 +100,11 @@ public class WalletController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("walletTransactionDetail")
+    public String walletTransactionDetail(@ModelAttribute("currentMember") Member member, Model model){
+        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        model.addAttribute("walletList", walletList);
+        return "/wallet/walletTransactionDetail";
+    }
 
 }

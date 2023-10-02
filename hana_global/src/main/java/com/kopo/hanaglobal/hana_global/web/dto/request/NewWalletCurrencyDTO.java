@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class NewWalletCurrencyDTO {
+    private int walletSeq;
     private int userSeq;
     private String acNo;
     private String walletPw;

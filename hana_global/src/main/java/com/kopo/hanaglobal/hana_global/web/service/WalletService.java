@@ -3,6 +3,7 @@ package com.kopo.hanaglobal.hana_global.web.service;
 import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import org.apache.ibatis.annotations.Param;
@@ -38,8 +39,13 @@ public interface WalletService {
     // 자동환전 삽입
     public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO);
 
-    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq);
+    public List<AutoExchangeDTO> getAutoExchangeListByUserSeq(int userSeq);
+
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int walletSeq);
 
     public void doRemittance(RemittanceDTO remittanceDTO);
     public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
+
+    public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq);
+    
 }

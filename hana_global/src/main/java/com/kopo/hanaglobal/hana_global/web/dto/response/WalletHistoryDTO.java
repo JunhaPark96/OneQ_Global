@@ -19,4 +19,5 @@ public class WalletHistoryDTO {
     private String withdrawName;
     private String depositCur;
     private String depositName;
+    private String tradeDate;
 }

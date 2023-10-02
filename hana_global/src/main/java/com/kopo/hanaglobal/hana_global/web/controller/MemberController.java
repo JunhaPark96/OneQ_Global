@@ -132,7 +132,7 @@ public class MemberController {
         Account account = accountService.getAccountByAcNo(wallet.getAcNo());
 
 //        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
-        List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByWalletSeq(member.getUserSeq());
+        List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByUserSeq(member.getUserSeq());
 
         model.addAttribute("autoExchangeList", autoExchangeDTOList);
         model.addAttribute("account", account);

@@ -45,9 +45,11 @@ public interface WalletRepository {
 
     public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO);
 
-    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq);
+    public List<AutoExchangeDTO> getAutoExchangeListByUserSeq(int userSeq);
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int walletSeq);
 
     public void insertRemittance(RemittanceDTO remittanceDTO);
 
     public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
+    public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq);
 }

@@ -19,6 +19,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.kopo.hanaglobal.hana_global.web.Util.NewHanaWallet.generateWalletNumber;
+import static com.kopo.hanaglobal.hana_global.web.Util.RandomNumberGenerator.generateRandomNumber;
+
 @Service
 public class WalletServiceImpl implements WalletService {
     private WalletRepository walletRepository;
@@ -119,8 +122,9 @@ public class WalletServiceImpl implements WalletService {
         } else if (targetWallet.getCurrencyCode() != null) { // 월렛에 해당 외화가 있으면 update
             walletRepository.addWalletBalance(targetWallet.getUserSeq(), foreignAmount, targetWallet.getCurrencyCode());
         }
+        Wallet newTargetWallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
         // 외화 입금에 대한 내역
-        WalletHistoryDTO walletDepositDTO = createDepositDTO(targetWallet, currencyCode, foreignAmount, sourceCurrencyName);
+        WalletHistoryDTO walletDepositDTO = createDepositDTO(newTargetWallet, currencyCode, foreignAmount, sourceCurrencyName);
         walletRepository.insertDepositWalletHist(walletDepositDTO);
         System.out.println("환전 입금 내역 추가: " + walletDepositDTO.toString());
     }
@@ -167,6 +171,8 @@ public class WalletServiceImpl implements WalletService {
     private void addWalletNewCur(Wallet wallet, String currencyCode, String sourceCurrencyName, Integer foreignAmount) {
         // 월렛 외화 추가
         NewWalletCurrencyDTO newWalletCurrencyDTO = new NewWalletCurrencyDTO();
+        int generatedWalletSeq = generateWalletNumber();
+        newWalletCurrencyDTO.setWalletSeq(generatedWalletSeq);
         newWalletCurrencyDTO.setUserSeq(wallet.getUserSeq());
         newWalletCurrencyDTO.setAcNo(wallet.getAcNo());
         newWalletCurrencyDTO.setWalletPw(wallet.getWalletPw());
@@ -283,8 +289,17 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int userSeq){
-        List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByWalletSeq(userSeq);
+    public List<AutoExchangeDTO> getAutoExchangeListByUserSeq(int userSeq){
+        List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByUserSeq(userSeq);
+        for (AutoExchangeDTO a : autoExchangeDTOS) {
+            System.out.println("자동환전 리스트는 " + a);
+        }
+        return autoExchangeDTOS;
+    }
+
+    @Override
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int walletSeq){
+        List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByWalletSeq(walletSeq);
         for (AutoExchangeDTO a : autoExchangeDTOS) {
             System.out.println("자동환전 리스트는 " + a);
         }
@@ -301,7 +316,7 @@ public class WalletServiceImpl implements WalletService {
         processKrwDeduction(wallet, account, amount, "T");
 
         //해외송금내역 추가
-        remittanceDTO.setRemitSeq(RandomNumberGenerator.generateRandomNumber(9));
+        remittanceDTO.setRemitSeq(generateRandomNumber(9));
         walletRepository.insertRemittance(remittanceDTO);
         // 일일한도 감소
     }
@@ -311,5 +326,12 @@ public class WalletServiceImpl implements WalletService {
         List<RemittanceDTO> remittanceDTOList = walletRepository.getRemittanceListByWalletSeq(walletSeq);
         return remittanceDTOList;
     }
+
+    @Override
+    public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq){
+        List<WalletHistoryDTO> walletHistoryDTOList = walletRepository.getWholeWalletHistory(walletSeq);
+        return walletHistoryDTOList;
+    }
+
 }
 

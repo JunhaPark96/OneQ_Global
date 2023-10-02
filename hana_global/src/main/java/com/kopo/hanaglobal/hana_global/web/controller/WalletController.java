@@ -1,8 +1,10 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.CurrencyRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO;
+import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.ExchangeRate;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
@@ -40,26 +42,27 @@ public class WalletController {
     }
 
     @GetMapping("/topUp")
-    public String getWalletInfo(){
+    public String getWalletInfo() {
         System.out.println("wallet 자동 충전 페이지입니다");
         return "/wallet/topUp";
     }
 
     @GetMapping("/walletInfo")
-    public String walletInfo(@ModelAttribute("currentMember")Member member, Model model){
+    public String walletInfo(@ModelAttribute("currentMember") Member member, Model model) {
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         model.addAttribute("selectedWallet", wallet);
         System.out.println("현재 멤버는 : " + member.toString());
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
-        for (Wallet w : walletList){
+        for (Wallet w : walletList) {
             System.out.println("wallet 정보는: " + w.toString());
         }
         model.addAttribute("walletList", walletList);
         return "/wallet/walletInfo";
     }
+
     @PostMapping("loadWallet")
     @ResponseBody
-    public ResponseEntity loadWallet(@ModelAttribute("currentMember") Member member, @RequestParam("loadAmount") Integer loadAmount, @RequestParam("walletPasswd") String walletPasswd){
+    public ResponseEntity loadWallet(@ModelAttribute("currentMember") Member member, @RequestParam("loadAmount") Integer loadAmount, @RequestParam("walletPasswd") String walletPasswd) {
         try {
             walletService.loadWallet(member.getUserSeq(), loadAmount, walletPasswd);
             return ResponseEntity.ok().body("Load Success!");
@@ -69,7 +72,7 @@ public class WalletController {
     }
 
     @GetMapping("/recurExchange")
-    public String getSelectedWallet(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model){
+    public String getSelectedWallet(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model) {
         // 선택한 통화코드의 wallet 불러오기
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), currencyCode);
         model.addAttribute("selectedWallet", wallet);
@@ -87,7 +90,7 @@ public class WalletController {
 
         return "/wallet/recurExchange"; // recurExchange.jsp 페이지로 이동
     }
-    
+
     // 환율 새로고침
     @GetMapping("/getLatestExchangeRate")
     public ResponseEntity<Map<String, Object>> getExchangeRate(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode) {
@@ -100,11 +103,38 @@ public class WalletController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("walletTransactionDetail")
-    public String walletTransactionDetail(@ModelAttribute("currentMember") Member member, Model model){
+    @GetMapping("/walletTransactionDetail")
+    public String walletTransactionDetail(@ModelAttribute("currentMember") Member member, Model model) {
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         model.addAttribute("walletList", walletList);
+        model.addAttribute("wallet", wallet);
+        System.out.println(wallet.toString());
         return "/wallet/walletTransactionDetail";
     }
 
+    @PostMapping("/getWholeWalletHistory")
+    public ResponseEntity<List<WalletHistoryDTO>> getWholeWalletHistory(@RequestBody Map<String, String> request) {
+        String walletNo = request.get("walletNo");
+        System.out.println(walletNo);
+        int walletSeq = Integer.parseInt(walletNo);
+        List<WalletHistoryDTO> walletHistoryDTOList = walletService.getWholeWalletHistory(walletSeq);
+//        for (WalletHistoryDTO w : walletHistoryDTOList) {
+//            System.out.println(w.toString());
+//        }
+        return ResponseEntity.ok(walletHistoryDTOList);
+    }
+    
+    // 자동환전내역
+    @PostMapping("/getExchangeHist")
+    public ResponseEntity<List<AutoExchangeDTO>> getExchangeHist(@RequestBody Map<String, String> request, @ModelAttribute("currentMember") Member member) {
+        String walletNo = request.get("walletNo");
+        System.out.println(walletNo);
+        int walletSeq = Integer.parseInt(walletNo);
+        List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByWalletSeq(walletSeq);
+        for (AutoExchangeDTO w : autoExchangeDTOList) {
+            System.out.println(w.toString());
+        }
+        return ResponseEntity.ok(autoExchangeDTOList);
+    }
 }

@@ -67,7 +67,7 @@
 
     <insert id="insertWalletNewCurrency" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.NewWalletCurrencyDTO">
         INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW, BALANCE, CURRENCY_CODE, CURRENCY, PRIME_RATE)
-        VALUES (hana_wallet_seq.nextval, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100)
+        VALUES (#{walletSeq}, #{userSeq}, #{acNo}, #{walletPw}, #{balance}, #{currencyCode}, #{currency}, 100)
     </insert>
 
     <insert id="insertAutoExchange" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.AutoExchangeDTO">
@@ -75,11 +75,18 @@
         values (auto_exchange_seq.nextval, #{walletSeq}, 'KRW', #{targetCurCode}, #{exchangeAmount}, #{exchangeDate}, #{lowerBound})
     </insert>
 
-    <select id="getAutoExchangeListByWalletSeq">
+    <select id="getAutoExchangeListByUserSeq">
         SELECT AE.ae_seq, AE.wallet_seq, AE.base_cur_code, AE.target_cur_code, AE.exchange_amount, AE.exchange_date, AE.lower_bound, AE.STATUS
         FROM HANA_WALLET HW
                  JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
         WHERE HW.USER_SEQ = #{userSeq}
+    </select>
+
+    <select id="getAutoExchangeListByWalletSeq">
+        SELECT AE.ae_seq, AE.wallet_seq, AE.base_cur_code, AE.target_cur_code, AE.exchange_amount, AE.exchange_date, AE.lower_bound, AE.STATUS
+        FROM HANA_WALLET HW
+                 JOIN AUTO_EXCHANGE AE ON HW.WALLET_SEQ = AE.WALLET_SEQ
+        WHERE HW.WALLET_SEQ = #{walletSeq}
     </select>
 
     <insert id="insertRemittance" parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO">
@@ -90,6 +97,12 @@
     <select id="getRemittanceListByWalletSeq">
         SELECT remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status, trade_date, country_name, payment_place
         FROM remittance
+        WHERE wallet_seq = #{walletSeq}
+    </select>
+
+    <select id="getWholeWalletHistory">
+        SELECT wallet_trans_no, wallet_seq, balance, transaction_amount, transaction_type, withdraw_cur, withdraw_name, deposit_cur, deposit_name, trade_date
+        FROM hana_wallet_hist
         WHERE wallet_seq = #{walletSeq}
     </select>
 </mapper>

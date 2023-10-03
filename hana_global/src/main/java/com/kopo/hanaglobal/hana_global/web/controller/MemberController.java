@@ -156,23 +156,29 @@ public class MemberController {
 
     @Transactional
     @PostMapping("/processOpenAccount")
-    public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO){
+    public String processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO, Model model){
         // 임시 멤버 생성
         try {
             memberService.insertTemporaryMember(openAccountDTO);
         } catch (Exception e) {
             // 예외 처리 로직
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+            return "/member/openAccount";
         }
 
-        System.out.println("회원정보: " + memberService.toString());
         int userSeq = memberService.findUserSeqByID(openAccountDTO.getId());
         System.out.println(userSeq);
+        Member member = memberService.findMemberById(userSeq);
+        System.out.println("회원정보: " + member.toString());
+        model.addAttribute("member", member);
         // 임시 계좌 생성
-        accountService.createTemporaryAccount(userSeq);
-        System.out.println("계좌정보: " + accountService.toString());
-        return ResponseEntity.ok("Account processed successfully");
+        String acNo = accountService.createTemporaryAccount(userSeq);
+        Account account = accountService.getAccountByAcNo(acNo);
+        System.out.println("계좌정보: " + account.toString());
+        model.addAttribute("account", account);
+//        return ResponseEntity.ok("Account processed successfully");
+        return "/member/completeAccount";
     }
 
     @GetMapping("/completeAccount")

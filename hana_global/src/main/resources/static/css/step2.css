@@ -148,6 +148,8 @@
     transition: background-color 0.3s;
     width: 120px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 /* 모달 css */

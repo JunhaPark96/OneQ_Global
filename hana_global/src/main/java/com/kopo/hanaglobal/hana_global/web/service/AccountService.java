@@ -24,5 +24,5 @@ public interface AccountService {
 
     Account getAccountByAcNo(String acNo);
 
-    void createTemporaryAccount(int userSeq);
+    String createTemporaryAccount(int userSeq);
 }

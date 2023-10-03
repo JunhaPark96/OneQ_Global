@@ -34,7 +34,7 @@
             <form id="frm" name="step2-form" action="/signUp_STEP3" method="post" enctype="multipart/form-data">
                 <section>
                     <div class="titArea">
-                        <h2 class="titH3">신분증 정보</h2>
+                        <h2 class="titH3">Identification Information</h2>
                     </div>
                     <table class="tableY formTbl">
                         <colgroup>
@@ -43,19 +43,19 @@
                         </colgroup>
                         <tbody>
                         <tr>
-                            <td class="th">본인 신분증</td>
+                            <td class="th">Personal Identification</td>
                             <td>
                                 <div class="idCardCerti" id="idCardCerti1">
                                     <div class="uniformImg"><img src="./images/registerEx.png" alt=""></div>
                                     <div class="form">
                                         <div class="uploadField">
-                                            <label for="idCardImage">신분증 이미지 업로드:</label>
+                                            <label for="idCardImage">Upload Identification Image:</label>
                                             <input type="file" id="idCardImage" name="idCardImage" accept="image/*"
                                                    onchange="previewImage(event)">
-                                            <span class="txt">신분증 이미지를 업로드해주세요.</span>
+                                            <span class="txt">Please upload your identification image.</span>
                                         </div>
                                         <div class="btn_a" onclick="openModal()">
-                                            <a id="certificateModalOpen">인증하기</a>
+                                            <a id="certificateModalOpen">Authenticate</a>
                                             <%--                                            <a id="certificateModalOpener">인증하기</a>--%>
                                         </div>
                                         <br/>

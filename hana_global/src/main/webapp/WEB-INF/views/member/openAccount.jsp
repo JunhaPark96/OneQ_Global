@@ -85,7 +85,7 @@
                 <label for="branch">Hana Bank Branch:</label>
                 <select name="branch" id="branch" >
                     <option value="">Hana Bank Branch</option>
-                    <option value="branch1">Branch 1</option>
+                    <option value="branch1">66 EULJI-RO JUNG-GU SEOUL</option>
                     <!-- ...other branches... -->
                 </select>
                 <button onclick="nextStep()">OK</button>

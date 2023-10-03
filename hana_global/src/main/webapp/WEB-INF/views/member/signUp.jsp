@@ -37,10 +37,10 @@
                 </div>
                 <div class="txt-box">
                     <dl>
-                        <dt>약관동의</dt>
+                        <dt>Agreement</dt>
                         <dd>
                             <ul class="txt-box-depth1">
-                                <li>전자금융거래이용약관 등 관련 약관에 동의합니다.</li>
+                                <li>Agree to the terms and conditions of electronic financial transactions.</li>
                             </ul>
                         </dd>
                     </dl>
@@ -60,10 +60,10 @@
                 </div>
                 <div class="txt-box">
                     <dl>
-                        <dt>계좌등록 및 본인확인</dt>
+                        <dt>Account Registration and Identity Verification</dt>
                         <dd>
                             <ul class="txt-box-depth1">
-                                <li>조회서비스를 신청하실 계좌번호, 계좌비밀번호, 생년월일(8자리)를 등록 후 인증서 또는 본인명의 휴대폰 인증을 합니다.</li>
+                                <li>Apply for the account number for the inquiry service, register the account password, and verify the mobile phone number with a certificate or personal mobile phone.</li>
                             </ul>
                         </dd>
                     </dl>
@@ -83,10 +83,10 @@
                 </div>
                 <div class="txt-box">
                     <dl>
-                        <dt>정보입력</dt>
+                        <dt>Information Input</dt>
                         <dd>
                             <ul class="txt-box-depth1">
-                                <li>성명, 인터넷뱅킹 로그인 시 사용할 이용자ID, 이용자비밀번호를 등록합니다.</li>
+                                <li>Register your name, user ID for internet banking login, and user password.</li>
                             </ul>
                         </dd>
                     </dl>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="txt-box">
                     <dl>
-                        <dt>회원가입완료</dt>
+                        <dt>Membership Registration Completed</dt>
                         <dd>
                             <ul class="txt-box-depth1">
                                 <li></li>
@@ -125,7 +125,7 @@
         <div class="btn-area mt10">
             <span class=" btn-pack btn-type-3c ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
 <%--                TODO: 링크 경로 바꾸기--%>
-                <a href="/signUp_STEP1" class="">신규회원가입 바로가기</a></span>
+                <a href="/signUp_STEP1" class="">Go to New Membership Registration</a></span>
         </div>
 
     </div>

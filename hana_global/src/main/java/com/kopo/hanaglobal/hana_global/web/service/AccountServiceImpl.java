@@ -27,7 +27,7 @@ public class AccountServiceImpl implements AccountService{
     }
     public void createNewAccount(String acPasswd, int userSeq) {
         Account newAccount = new Account();
-        newAccount.setAcNo("CA" + RandomStringUtils.randomNumeric(8)); // CA + random 8 digit number
+        newAccount.setAcNo(RandomStringUtils.randomNumeric(14));
         newAccount.setUserSeq(userSeq); // Set the user sequence number
         newAccount.setAcName("주계좌");
         newAccount.setAcPasswd(acPasswd);
@@ -38,7 +38,7 @@ public class AccountServiceImpl implements AccountService{
 
     // 임시계좌생성
     @Override
-    public void createTemporaryAccount(int userSeq){
+    public String createTemporaryAccount(int userSeq){
         Account tempAccount = new Account();
         tempAccount.setAcNo(RandomStringUtils.randomNumeric(14));
         tempAccount.setAcName("Smart Access");
@@ -46,6 +46,7 @@ public class AccountServiceImpl implements AccountService{
         tempAccount.setStatus(0);
 
         accountRepository.createTemporaryAccount(tempAccount);
+        return tempAccount.getAcNo();
     }
 
     @Override

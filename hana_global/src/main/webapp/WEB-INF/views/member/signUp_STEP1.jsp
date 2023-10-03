@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-12
-  Time: 오후 4:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -37,7 +30,7 @@
         <div class="content">
             <%--        약관 헤더 박스--%>
             <div class="title-area clearfix">
-                <h3 class="fleft">전자금융거래 기본약관</h3>
+                <h3 class="fleft">Electronic Financial Transactions Terms and Conditions</h3>
 
             </div>
             <%--        약관 내용 박스--%>
@@ -250,7 +243,7 @@ ARS 무료 500 원
 
             <%--        약관 헤더 박스--%>
             <div class="title-area clearfix">
-                <h3 class="fleft">개인정보처리방침</h3>
+                <h3 class="fleft">Privacy Policy</h3>
             </div>
             <%--        약관 내용 박스--%>
             <div class="agree-box" tabindex="0">

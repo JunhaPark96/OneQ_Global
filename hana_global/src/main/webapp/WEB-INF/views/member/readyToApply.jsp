@@ -31,7 +31,7 @@
                             <li>Will arrive in Korea in the next 14 days or;</li>
                             <li>Have arrived in Korea in the past three months</li>
                         </ul>
-                        <p><b>Please ensure your travel plans have been confirmed before you open an account. For more information, please visit <a data-tracker-type="richtext" href="https://www.kebhana.com/" style="color: #018085">hanabank.com/movingtokorea</a>.</b></p>
+                        <p><b>Please ensure your travel plans have been confirmed before you open an account. For more information, please visit <a data-tracker-type="richtext" href="https://www.kebhana.com/cont/util/util04/util0401/index.jsp" style="color: #018085">hanabank.com/movingtokorea</a>.</b></p>
                         <p>You won’t be able to deposit funds or make account transactions until you’ve verified your ID at a Hana Bank branch in Korea.&nbsp;</p>
                         <p>You'll need to provide your ID for verification within 20 days of opening your account or your account may automatically close. You can reapply at any Hana Bank branch.</p>
                         <p></p>

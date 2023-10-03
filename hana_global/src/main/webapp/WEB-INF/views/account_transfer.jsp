@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-21
-  Time: 오전 9:01
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -47,12 +40,12 @@
                                 </thead>
                                 <tbody>
                                 <tr class="text border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;계좌선택</th>
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Select Account</th>
                                     <td>
                                         <select class="form-select border-3 w-50" name="senderAccountNo"
                                                 id="selectAccountForm"
                                                 onchange="changeBalance()" style="height: 45px;">
-                                            <option value="" selected disabled>계좌를 선택하세요.</option>
+                                            <option value="" selected disabled>Select an account.</option>
                                             <c:forEach items="${accountList}" var="account">
                                                 <option value="${account.acNo}" data-balance="${account.balance}">
                                                     (${account.acNo})
@@ -65,7 +58,7 @@
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;잔액</th>
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Balance</th>
                                     <td>
                                         <div class="btnArea" id="btnFclArea">
                                             <p class="text-center align-middle" id="accountBalance"></p>
@@ -74,15 +67,15 @@
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;비밀번호</th>
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Password</th>
                                     <td>
                                         <input type="password" name="account_password" id="account_password"
-                                               placeholder="계좌 비밀번호" maxlength="4"/>
+                                               placeholder="Account Password" maxlength="4"/>
                                     </td>
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;송금 금액</th>
+                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Transfer Amount</th>
                                     <td>
                                         <%--                                    TODO: 계좌 연결, 금액 입력 받기--%>
                                         <%--                                    <input type="hidden" name="transfer_amount" id="transfer_amount" value="">--%>
@@ -137,7 +130,7 @@
                             </thead>
                             <tbody>
                             <tr class="text">
-                                <th scope="row" class="text-center align-middle">은행선택</th>
+                                <th scope="row" class="text-center align-middle">Bank Selection</th>
                                 <td>
                                     <select name="receiverBank" class="form-select border-3 w-50"
                                             id="receiverBankSelect">
@@ -208,15 +201,15 @@
                             </tr>
 
                             <tr>
-                                <th scope="row" class="text-center align-middle">계좌번호</th>
+                                <th scope="row" class="text-center align-middle">Account Number</th>
                                 <td>
                                     <div class="btnArea text-center align-middle" id="receiverAccountArea">
                                         <%--                                        <p class="text-center align-middle">--%>
                                         <%--                                            690-11-028690--%>
                                         <%--                                        </p>--%>
                                         <input type="text" name="recipientAccountNo" id="recipientAccountNo"
-                                               placeholder="계좌번호 입력"/>
-                                        <input type="button" class="btn btn-primary" id="checkReceiverBtn" value="조회"
+                                               placeholder="Enter account number"/>
+                                        <input type="button" class="btn btn-primary" id="checkReceiverBtn" value="Check"
                                                onclick="fetchReceiverName()">
                                     </div>
                                 </td>
@@ -239,7 +232,7 @@
 
                         <!-- ... 기타 입력 필드 ... -->
                         <div class="btnArea justify-content-center " id="acc_trans_inquiry">
-                            <input type="submit" id="btnNext" class="btn_p" value="송금 하기">
+                            <input type="submit" id="btnNext" class="btn_p" value="Send Money">
                         </div>
                         </form>
                     </div>

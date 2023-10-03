@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -19,8 +22,6 @@
 
 </head>
 <body>
-<%= request.getAttribute("account") %>
-<%= request.getAttribute("member") %>
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area" style="margin-left: 15%; margin-right: 15%;">
@@ -122,8 +123,6 @@
                                 </div>
                                 <div class="portfolio-cell-data">
                                     <span class="visually-hidden ng-binding">Account type</span>
-                                    ${'TEST EL'}
-                                    ${account}
                                     ${account.acName}
                                 </div>
                             </div>

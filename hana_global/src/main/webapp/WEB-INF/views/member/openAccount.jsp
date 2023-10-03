@@ -150,29 +150,26 @@
             id: document.getElementsByName('ID')[0].value,
             passwd: document.getElementsByName('password')[0].value,
             email: document.getElementsByName('email')[0].value,
-            countrySP: selectedOption.value,  // 국가 코드
-            nationality: selectedOption.textContent,  // 국가 이름
+            countrySP: selectedOption.value,
+            nationality: selectedOption.textContent,
             contact: document.getElementsByName('phoneNumber')[0].value,
             jibunAddress: document.getElementsByName('address')[0].value,
             birthDate: document.getElementsByName('dob')[0].value
-
         };
 
-        fetch('/processOpenAccount', {
+        $.ajax({
+            url: '/processOpenAccount',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.text())
-            .then(data => {
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(data, textStatus, jqXHR) {
                 console.log('Success:', data);
-                window.location.href = '/completeAccount';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                window.location.href = data;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', errorThrown);
+            }
+        });
     }
 
     const steps = document.querySelectorAll('.step');

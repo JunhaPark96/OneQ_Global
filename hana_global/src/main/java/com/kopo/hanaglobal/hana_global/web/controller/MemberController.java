@@ -156,33 +156,36 @@ public class MemberController {
 
     @Transactional
     @PostMapping("/processOpenAccount")
-    public String processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO, Model model){
-        // 임시 멤버 생성
+    public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO, HttpSession session){
         try {
             memberService.insertTemporaryMember(openAccountDTO);
         } catch (Exception e) {
-            // 예외 처리 로직
             e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-            return "/member/openAccount";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("/member/openAccount");
         }
 
         int userSeq = memberService.findUserSeqByID(openAccountDTO.getId());
-        System.out.println(userSeq);
         Member member = memberService.findMemberById(userSeq);
-        System.out.println("회원정보: " + member.toString());
-        model.addAttribute("member", member);
-        // 임시 계좌 생성
+
         String acNo = accountService.createTemporaryAccount(userSeq);
         Account account = accountService.getAccountByAcNo(acNo);
-        System.out.println("계좌정보: " + account.toString());
-        model.addAttribute("account", account);
-//        return ResponseEntity.ok("Account processed successfully");
-        return "/member/completeAccount";
+
+        session.setAttribute("member", member);
+        session.setAttribute("account", account);
+
+        return ResponseEntity.ok("/completeAccount");
     }
 
+
     @GetMapping("/completeAccount")
-    public String completeAccount(){
+    public String completeAccount(Model model, HttpSession session){
+        // 세션에서 데이터를 받아와서 모델에 추가
+        model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("account", session.getAttribute("account"));
+        // 필요시 세션에서 데이터 제거
+        session.removeAttribute("member");
+        session.removeAttribute("account");
+
         return "/member/completeAccount";
     }
 }

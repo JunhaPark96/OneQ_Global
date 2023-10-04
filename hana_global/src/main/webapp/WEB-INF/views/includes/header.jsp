@@ -88,7 +88,7 @@
             <c:choose>
                 <c:when test="${currentMember.name == 'ADMIN'}">
                     <div class="signin">
-                        <a href="${pageContext.request.contextPath}/dashboard"> <spring:message
+                        <a href="${pageContext.request.contextPath}/userManagement"> <spring:message
                                 code="link.dashboard" text="default text"/> </a>
                     </div>
                 </c:when>

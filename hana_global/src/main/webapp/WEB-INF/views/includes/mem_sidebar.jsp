@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">--%>
-<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>--%>
-<%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
+    <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">--%>
+    <%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>--%>
+    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
 
     <!-- CSS Files -->
-    <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="./css/bootstrap/demo.css" rel="stylesheet" />
+    <link href="./css/bootstrap/demo.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/mem_sidebar.css" rel="stylesheet"/>
     <title>myPage sidebar</title>
@@ -28,12 +28,12 @@
 <body>
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-<%--        <a href="" class="simple-text logo-mini">--%>
-            <div class="logo-image-small logo-mini">
-                <img src="./images/mascort.png">
-            </div>
-            <!-- <p>CT</p> -->
-<%--        </a>--%>
+        <%--        <a href="" class="simple-text logo-mini">--%>
+        <div class="logo-image-small logo-mini">
+            <img src="./images/mascort.png">
+        </div>
+        <!-- <p>CT</p> -->
+        <%--        </a>--%>
         <a href="" class="simple-text logo-normal">
             <c:choose>
                 <c:when test="${currentMember.name == 'ADMIN'}">
@@ -55,16 +55,32 @@
                 </a>
             </li>
             <li>
-                <a href="./user.html">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>Edit Profile</p>
-                </a>
+                <c:choose>
+                    <c:when test="${currentMember.name == 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/userManagement">
+                            <i class="nc-icon nc-single-02"></i>
+                            <p>Manage Users</p>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="./user.html">
+                            <i class="nc-icon nc-single-02"></i>
+                            <p>Edit Profile</p>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/profile">
-                    <i class="nc-icon nc-diamond"></i>
-                    <p>계좌연동</p>
-                </a>
+                <c:choose>
+                    <c:when test="${not currentMember.name == 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/profile">
+                            <i class="nc-icon nc-diamond"></i>
+                            <p>계좌연동</p>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/branch">
@@ -73,14 +89,22 @@
                 </a>
             </li>
             <li>
-                <a href="./notifications.html">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>송금예약</p>
-                </a>
+                <c:choose>
+                    <c:when test="${not currentMember.name == 'ADMIN'}">
+                        <a href="./notifications.html">
+                            <i class="nc-icon nc-bell-55"></i>
+                            <p>송금예약</p>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
+
             </li>
         </ul>
     </div>
-    <div id="sidebarToggleButton" style="display: none; position: absolute; top: 50%; left: 12px; transform: translate(-100%, -50%);">
+    <div id="sidebarToggleButton"
+         style="display: none; position: absolute; top: 50%; left: 12px; transform: translate(-100%, -50%);">
         <button class="btn btn-primary" style="padding-left: 5px; padding-right: 5px">☰</button>
     </div>
 </div>
@@ -132,29 +156,55 @@
 <%--</div>--%>
 
 <script>
-    $(document).ready(function() {
-        let isSidebarVisible = true;
+    $(document).ready(function () {
 
+        // Sidebar toggle 동작
+        let isSidebarVisible = true;
         function toggleSidebar() {
             if (isSidebarVisible) {
-                $('.sidebar').animate({ width: '0px' }, 400, function() {
+                $('.sidebar').animate({width: '0px'}, 400, function () {
                     $('.sidebar-wrapper').hide();
-                    $('#sidebarToggleButton').show();  // 사이드바가 접힌 후 버튼을 보여줍니다.
+                    $('#sidebarToggleButton').show();
                 });
-                $('iframe[name="bizBranch"]').animate({ width: '1100px' }, 400);
-                $('iframe[name="bizBranch"]').animate({ height: '800px' }, 400);
+                $('iframe[name="bizBranch"]').animate({width: '1100px'}, 400);
+                $('iframe[name="bizBranch"]').animate({height: '800px'}, 400);
             } else {
-                $('#sidebarToggleButton').hide();  // 사이드바가 펼쳐지기 전에 버튼을 숨깁니다.
+                $('#sidebarToggleButton').hide();
                 $('.sidebar-wrapper').show();
-                $('.sidebar').animate({ width: '250px' }, 400);
-                $('iframe[name="bizBranch"]').animate({ width: '900px' }, 400);
-                $('iframe[name="bizBranch"]').animate({ height: '600px' }, 400);
+                $('.sidebar').animate({width: '250px'}, 400);
+                $('iframe[name="bizBranch"]').animate({width: '900px'}, 400);
+                $('iframe[name="bizBranch"]').animate({height: '600px'}, 400);
             }
             isSidebarVisible = !isSidebarVisible;
         }
+        $('.logo').on('click', toggleSidebar);
+        $('#sidebarToggleButton').on('click', toggleSidebar);
 
-        $('.logo').on('click', toggleSidebar);  // 사이드바 클릭시 토글 함수 실행
-        $('#sidebarToggleButton').on('click', toggleSidebar);  // 버튼 클릭시에도 토글 함수 실행
+    });
+    $(document).ready(function () {
+
+        function setActiveFromLocalStorage() {
+            let activeLinkIndex = localStorage.getItem('activeLinkIndex');
+            if (activeLinkIndex !== null) {
+                $(".nav li").removeClass('active');
+                $(".nav li").eq(activeLinkIndex).addClass('active');
+            }
+        }
+
+        // 페이지 로드 시 저장된 항목에 스타일 적용
+        setActiveFromLocalStorage();
+
+        // li 항목 클릭 시 스타일 변경 및 로컬 스토리지에 저장
+        $(".nav li a").click(function (event) {
+            console.log("Link clicked");
+            event.preventDefault();
+            $(".nav li").removeClass('active');
+            $(this).parent().addClass('active');
+            const index = $(".nav li a").index($(this));  // 클릭된 항목의 인덱스를 구합니다.
+            localStorage.setItem('activeLinkIndex', index);  // 클릭된 항목의 인덱스를 로컬 스토리지에 저장합니다.
+            console.log(localStorage.getItem('activeLinkIndex'));  // 페이지 로드 시 로컬 스토리지의 값을 출력
+            window.location.href = $(this).attr('href');  // 클릭된 항목의 링크로 이동합니다.
+        });
     });
 
 

@@ -26,7 +26,11 @@
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/bootstrap/bootstrap2.min.css" rel="stylesheet"/>
     <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
-
+    <style>
+        .btn-link.dropdown-toggle::after {
+            color: #2d9646; /* 부트스트랩의 기본 초록색 */
+        }
+    </style>
     <title>월렛 확인</title>
 </head>
 <body>
@@ -147,7 +151,7 @@
     window.onload = function () {
         ajax_whole_history();
         ajax_exchange_hist();
-        ajax_remittance_hist();
+        // ajax_remittance_hist();
     }
 
     const whole_history = document.getElementById('whole_history');
@@ -226,6 +230,19 @@
             }
         })
     }
+
+    let currentFilterType = '';  // 기본적으로 모든 거래를 보기
+
+    // function filterByTransactionType() {
+    //     const selectedType = document.getElementById('filterTransactionType').value;
+    //     currentFilterType = selectedType;
+    //     ajax_whole_history();  // 필터링.
+    // }
+    function filterByTransactionType(selectedType) { // <-- 파라미터를 추가
+        currentFilterType = selectedType;
+        ajax_whole_history();  // 필터링.
+    }
+
     // 전체내역
     function change_whole_history(data) {
         $('#div_whole_history').empty();
@@ -239,13 +256,34 @@
             str += '<tr class="fs-5 text-black-50">'
             str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">거래 번호</th>'
             str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">거래 금액 </th>'
-            str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">거래 유형</th>'
+
+            str += '<th class="text-center border-1 position-relative" style="font-family: hanaM; background-color: #eceff1; border-color: #c7c7c7">'; // position-relative 추가
+            str += '거래 유형';
+
+            str += `<div class="dropdown" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">`; // 위치 조정 스타일 추가
+            str += '<button class="btn btn-link dropdown-toggle p-0" style="font-size: 1.3rem;" type="button" id="transactionTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+            str += '</button>';
+
+            str += `<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="transactionTypeDropdown">`; // dropdown-menu-right 추가
+            str += `<li><a class="dropdown-item" href="#" onclick="filterByTransactionType('');">모두</a></li>`;
+            str += `<li class="dropdown-item" style="cursor: pointer" onclick="filterByTransactionType('A');">계좌</li>`; // cursor: auto에서 cursor: pointer로 변경
+            str += `<li class="dropdown-item" onclick="filterByTransactionType('E');">환전</li>`;
+            str += `<li class="dropdown-item" onclick="filterByTransactionType('T');">송금</li>`;
+            str += `</ul>`;
+
+            str += '</div>';  // 불필요한 </div> 태그 제거
+            str += '</th>';
+
+
+
             str += '<th class="text-center border-1" style="font-family:hanaM;background-color: #eceff1; border-color: #c7c7c7">현재 잔액</th>'
             str += '<th class="text-center border-1" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">통화</th>'
             str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">거래 일시</th>'  // New column header for tradeDate
             str += '</tr>'
             str += '</thead>'
             str += '<tbody>'
+            data = data.filter(history => !currentFilterType || history.transactionType === currentFilterType);
+
             data.forEach(function (history) {
                 str += '<tr class="border-1 border-start-0 border-end-0 text-center bg-white" style="border-color: #c7c7c7">'
                 str += '<td class="text-hanagreen border-1 border-start-0 text-black-50 fs-5 align-middle" style="border-color: #c7c7c7;font-family: hanaM">'
@@ -273,6 +311,9 @@
             $('#div_whole_history').append(str);
         }
     }
+
+
+
     // 자동환전
     function ajax_exchange_hist() {
         let r_walletNo = $('#radio_Group input:radio:checked').val();

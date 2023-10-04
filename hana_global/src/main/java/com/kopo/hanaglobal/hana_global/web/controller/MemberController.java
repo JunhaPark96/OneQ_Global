@@ -140,7 +140,7 @@ public class MemberController {
         // 원화 월렛
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         Account account = accountService.getAccountByAcNo(wallet.getAcNo());
-
+        System.out.println("선택된 계좌는 " + account);
         //List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByUserSeq(member.getUserSeq());
 

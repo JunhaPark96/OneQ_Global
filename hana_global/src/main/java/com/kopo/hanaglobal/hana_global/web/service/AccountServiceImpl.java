@@ -27,7 +27,8 @@ public class AccountServiceImpl implements AccountService{
     }
     public void createNewAccount(String acPasswd, int userSeq) {
         Account newAccount = new Account();
-        newAccount.setAcNo(RandomStringUtils.randomNumeric(14));
+        String randomPart = RandomStringUtils.randomNumeric(11);
+        newAccount.setAcNo("412" + randomPart);
         newAccount.setUserSeq(userSeq); // Set the user sequence number
         newAccount.setAcName("주계좌");
         newAccount.setAcPasswd(acPasswd);
@@ -142,4 +143,13 @@ public class AccountServiceImpl implements AccountService{
     public Account getAccountByAcNo(String acNo){
         return accountRepository.getAccountByAcNo(acNo);
     }
+
+    @Override
+    public Account findFirstAccountByMemberId(int userSeq) {
+        List<Account> accounts = accountRepository.findAccountByMemberId(userSeq);
+        return accounts.isEmpty() ? null : accounts.get(0);  // 첫 번째 계좌를 반환
+    }
+
+
+
 }

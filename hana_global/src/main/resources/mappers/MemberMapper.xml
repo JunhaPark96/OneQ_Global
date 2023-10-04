@@ -34,7 +34,9 @@
         INSERT INTO member (user_seq, email, id, passwd, name,  country_sp, nationality, birth_date, gender, contact, jibun_address, status)
         VALUES (MEMBER_SEQ.NEXTVAL, #{email}, #{id}, #{passwd}, #{name},  #{countrySP}, #{nationality} ,#{birthDate}, 'M', #{contact}, #{jibunAddress}, 'N')
     </insert>
-    <!-- <select id="findMemberByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
-         select * from member where ac_no =
-     </select>-->
+    <update id="approveMember">
+        UPDATE MEMBER
+        SET status = 'Y'
+        WHERE user_seq = #{userSeq}
+    </update>
 </mapper>

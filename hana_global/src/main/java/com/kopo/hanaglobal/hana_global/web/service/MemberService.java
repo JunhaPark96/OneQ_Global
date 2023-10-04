@@ -24,4 +24,6 @@ public interface MemberService {
     public boolean isVerifySms(String userInput, HttpSession session);
 
     public void insertTemporaryMember(OpenAccountDTO openAccountDTO);
+    public void approveMember(int userSeq);
+
 }

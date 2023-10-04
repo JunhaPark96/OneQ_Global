@@ -7,6 +7,7 @@ import com.kopo.hanaglobal.hana_global.web.dto.request.RemittanceDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO;
 import com.kopo.hanaglobal.hana_global.web.dto.response.WalletHistoryDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
+import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.WalletRepository;
@@ -332,6 +333,7 @@ public class WalletServiceImpl implements WalletService {
         List<WalletHistoryDTO> walletHistoryDTOList = walletRepository.getWholeWalletHistory(walletSeq);
         return walletHistoryDTOList;
     }
+
 
 }
 

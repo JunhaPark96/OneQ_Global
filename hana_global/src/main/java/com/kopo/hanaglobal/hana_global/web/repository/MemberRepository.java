@@ -20,4 +20,6 @@ public interface MemberRepository {
     public Member findUserSeqByID(String id);
 
     public void insertTemporaryMember(OpenAccountDTO openAccountDTO);
+
+    public void approveMember(int userSeq);
 }

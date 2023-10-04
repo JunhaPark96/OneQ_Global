@@ -146,5 +146,10 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
-
+    @Override
+    public void approveMember(int userSeq){
+        Member member = memberRepository.findMemberById(userSeq);
+        memberRepository.approveMember(member.getUserSeq());
+        System.out.println("바뀐 멤버 권한은 " + member.getStatus());
+    }
 }

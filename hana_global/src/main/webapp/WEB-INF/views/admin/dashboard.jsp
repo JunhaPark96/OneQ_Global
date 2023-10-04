@@ -27,60 +27,6 @@
         </div>
 
         <div class="main-info">
-          <div class="row justify-content-start">
-            <div class="col-md-4 gradient-custom text-center text-black">
-            </div>
-            <div class="col-md-10 ">
-              <div class="card-body pe-5">
-                <div class="row">
-                  <div class="col-12">
-                    <h5>Linked Account</h5>
-                    <h6>Hana Bank</h6>
-                  </div>
-                  <div class="account-image">
-                    <div class="myAccount"></div>
-                  </div>
-                </div>
-                <hr class="mt-0 mb-3">
-                <div class="col-grid">
-                  <div class="grid-left">
-                    <div class="row" >
-                      <div class="text-start">Depositor name
-                        <h6> ${currentMember.name}</h6>
-                      </div>
-
-                    </div>
-                    <div class="row" >
-                      <div class="text-start">Account Number
-                        <h6> 1110312422</h6>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="col grid-right">
-                    <div class="row">
-                      <div class="text-start">Account Type
-                        <h6 > 주거래</h6>
-                      </div>
-
-                    </div>
-                    <div class="row">
-                      <div class="text-start">Account Balance
-                        <h6> asd</h6>
-                      </div>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="modify-wrapper">
-                <div class="locRight">
-                  Modify
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
 

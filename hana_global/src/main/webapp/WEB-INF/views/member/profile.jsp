@@ -59,14 +59,14 @@
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
                                     <h5>
-                                        BirthDate<br><small>19${fn:substring(currentMember.registNo, 0, 2)}-${fn:substring(currentMember.registNo, 2, 4)}-${fn:substring(currentMember.registNo, 4, 6)}</small>
+                                        BirthDate<br><small>${currentMember.birthDate}</small>
                                     </h5>
                                 </div>
                                 <%--                                    <div class="col-lg-3 col-md-6 col-6 mr-auto">--%>
                                 <%--                                        <h5>Address<br><small>수원시 어쩌구 저쩌구 어쩌구</small></h5>--%>
                                 <%--                                    </div>--%>
                                 <div class="col-lg-3 col-md-6 col-6 mr-auto">
-                                    <h5>Branch<br><small>Hana Branch</small></h5>
+                                    <h5>Branch<br><small>66 EULJI-RO JUNG-GU SEOUL</small></h5>
                                 </div>
                                 <div class="col-lg-3 col-md-6 col-6 mr-auto">
                                     <h5>VISA<br><small>E-2</small></h5>
@@ -102,7 +102,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="text-start">Account Number
-                                                <h6> ${account.acNo}</h6>
+                                                <h6> ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}</h6>
                                             </div>
 
                                         </div>
@@ -134,58 +134,66 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="exchange-info">
+                <c:if test="${currentMember.status == 'Y'}">
+                    <div class="exchange-info">
                         <div class="title-text">
                             Waiting List for Automatic Exchange Reservations<br/><br/>
                         </div>
-                    <c:forEach items="${autoExchangeList}" var="autoWallet" varStatus="loop" begin="0">
-                        <c:if test="${autoWallet.status == 'W'}">
-                        <div class="card card-stats" >
-                            <div class="card-header" style="overflow: hidden;"> <!-- overflow: hidden; 스타일을 추가하여 float에 의한 레이아웃 문제를 해결합니다. -->
-                                <div style="float: left;"> <!-- float: left; 스타일을 추가하여 텍스트를 왼쪽으로 정렬합니다. -->
-                                    <h6>Automatic Exchange at Target Rate</h6>
-                                </div>
-                                <div style="float: right;"> <!-- float: right; 스타일을 추가하여 버튼을 오른쪽으로 정렬합니다. -->
-                                    <button onclick="deleteReservation(${autoWallet.aeSeq})" style="border: none; background: none;">
-                                        <img src="./images/recycle-bin.png" style="width: 20px">
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body" style="margin-top: 0px">
-                                <div class="row" style="margin-right: 0px">
-                                    <div class="col-7">
-                                        <div class="icon-big text-start icon-warning" style="line-height: 20px">
-                                            <i class=""></i>
-                                            If it drops below ${autoWallet.lowerBound} Won  <br/>
-                                            Recharge <span style="color: #51cbce; font-weight: 700"> ${autoWallet.targetCurCode} ${autoWallet.exchangeAmount} </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 col-md-5">
-                                        <div class="numbers mt-3">
-                                            <p class="card-category">Currency</p>
-                                            <p class="card-title walletCell" data-currency="${autoWallet.targetCurCode}">
-                                                    ${autoWallet.targetCurCode}
-                                            <p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer ">
-                                <hr>
-                                <div class="stats">
-                                    <i class="fa fa-calendar-o"></i>
-                                    End Date ${autoWallet.exchangeDate} <a href="${pageContext.request.contextPath}/walletInfo" style="font-weight: bold; padding-left: 120px"> modify </a>
-                                </div>
-                            </div>
-                        </div>
-                        </c:if>
-                    </c:forEach>
-                </div>
+                        <c:forEach items="${autoExchangeList}" var="autoWallet" varStatus="loop" begin="0">
+                            <c:if test="${autoWallet.status == 'W'}">
 
-                <div class="remittance-info">
-                    remittance
-                </div>
+                                <div class="card card-stats">
+                                    <div class="card-header" style="overflow: hidden;">
+                                        <!-- overflow: hidden; 스타일을 추가하여 float에 의한 레이아웃 문제를 해결합니다. -->
+                                        <div style="float: left;"> <!-- float: left; 스타일을 추가하여 텍스트를 왼쪽으로 정렬합니다. -->
+                                            <h6>Automatic Exchange at Target Rate</h6>
+                                        </div>
+                                        <div style="float: right;"> <!-- float: right; 스타일을 추가하여 버튼을 오른쪽으로 정렬합니다. -->
+                                            <button onclick="deleteReservation(${autoWallet.aeSeq})"
+                                                    style="border: none; background: none;">
+                                                <img src="./images/recycle-bin.png" style="width: 20px">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" style="margin-top: 0px">
+                                        <div class="row" style="margin-right: 0px">
+                                            <div class="col-7">
+                                                <div class="icon-big text-start icon-warning" style="line-height: 20px">
+                                                    <i class=""></i>
+                                                    If it drops below ${autoWallet.lowerBound} Won <br/>
+                                                    Recharge <span
+                                                        style="color: #51cbce; font-weight: 700"> ${autoWallet.targetCurCode} ${autoWallet.exchangeAmount} </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-7 col-md-5">
+                                                <div class="numbers mt-3">
+                                                    <p class="card-category">Currency</p>
+                                                    <p class="card-title walletCell"
+                                                       data-currency="${autoWallet.targetCurCode}">
+                                                            ${autoWallet.targetCurCode}
+                                                    <p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer ">
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-calendar-o"></i>
+                                            End Date ${autoWallet.exchangeDate} <a
+                                                href="${pageContext.request.contextPath}/walletInfo"
+                                                style="font-weight: bold; padding-left: 120px"> modify </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+
+                    <div class="remittance-info">
+                        remittance
+                    </div>
+                </c:if>
             </div>
         </div>
 

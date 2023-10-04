@@ -38,14 +38,15 @@ public class MemberController {
     private ExchangeService exchangeService;
 
     @Autowired
-    public MemberController(MemberService memberService, AccountService accountService, WalletService walletService, ExchangeService exchangeService){
+    public MemberController(MemberService memberService, AccountService accountService, WalletService walletService, ExchangeService exchangeService) {
         this.memberService = memberService;
         this.accountService = accountService;
         this.walletService = walletService;
         this.exchangeService = exchangeService;
     }
+
     @GetMapping("/boardlist")
-    public ModelAndView getMemberAll(){
+    public ModelAndView getMemberAll() {
         ModelAndView mav = new ModelAndView("/boardlist");
         List<Member> memberList = memberService.getMemberAll();
         mav.addObject("memberList", memberList);
@@ -54,7 +55,7 @@ public class MemberController {
 
     // 회원가입 페이지
     @GetMapping("/signup")
-    public String signUp(Model model){
+    public String signUp(Model model) {
         model.addAttribute("Member", new Member());
         System.out.println("회원가입 페이지 이동");
         return "member/signUp";
@@ -95,7 +96,7 @@ public class MemberController {
 
     // 로그인 페이지
     @GetMapping("/signin")
-    public String signIn(Model model){
+    public String signIn(Model model) {
         model.addAttribute("loginDTO", new LoginDTO());
         System.out.println("로그인 페이지 이동");
         return "member/signIn";
@@ -103,15 +104,15 @@ public class MemberController {
 
     // 로그인
     @PostMapping("/signin")
-    public String loginProcess(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, Errors errors, Model model, HttpSession session){
-        if (errors.hasErrors()){ // 로그인 실패 시
+    public String loginProcess(@Valid @ModelAttribute("loginDTO") LoginDTO loginDTO, Errors errors, Model model, HttpSession session) {
+        if (errors.hasErrors()) { // 로그인 실패 시
             System.out.println("로그인 실패");
             return "member/signIn";
         } else {    // 로그인 성공 시
             Member member = memberService.signIn(loginDTO);
 //            System.out.println(member);
             // 멤버가 없는 경우
-            if (member == null){
+            if (member == null) {
                 System.out.println("id와 비밀번호를 확인해 주세요");
                 model.addAttribute("loginMsg", "id 또는 비밀번호를 확인해주세요");
                 return "member/signIn";
@@ -126,12 +127,21 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
-    public String getProfile(@ModelAttribute("currentMember") Member member, Model model){
+    public String getProfile(@ModelAttribute("currentMember") Member member, Model model) {
+        // 임시회원 체크
+        if ("N".equals(member.getStatus())) {
+            // 임시회원인 경우 처리 로직 (예: 에러 메시지를 모델에 추가)
+            model.addAttribute("error", "Temporary members cannot access wallet information.");
+            Account account = accountService.findAccountByUserSeq(member.getUserSeq());
+            model.addAttribute("account", account);
+            return "/member/profile";
+        }
+
         // 원화 월렛
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         Account account = accountService.getAccountByAcNo(wallet.getAcNo());
 
-//        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        //List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByUserSeq(member.getUserSeq());
 
         model.addAttribute("autoExchangeList", autoExchangeDTOList);
@@ -139,24 +149,31 @@ public class MemberController {
         return "/member/profile";
     }
 
+    @GetMapping("/branch")
+    public String getBranch(){
+
+        return "/member/branch";
+    }
+
     @GetMapping("/dashboard")
-    public String getDashBoard(@ModelAttribute("currentMember") Member member){
+    public String getDashBoard(@ModelAttribute("currentMember") Member member) {
 
         return "/admin/dashboard";
     }
 
     @GetMapping("/readyToApply")
-    public String readyToApply(){
+    public String readyToApply() {
         return "/member/readyToApply";
     }
+
     @GetMapping("/openAccount")
-    public String openAccount(){
+    public String openAccount() {
         return "/member/openAccount";
     }
 
     @Transactional
     @PostMapping("/processOpenAccount")
-    public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO, HttpSession session){
+    public ResponseEntity<String> processOpenAccount(@RequestBody OpenAccountDTO openAccountDTO, HttpSession session) {
         try {
             memberService.insertTemporaryMember(openAccountDTO);
         } catch (Exception e) {
@@ -178,7 +195,7 @@ public class MemberController {
 
 
     @GetMapping("/completeAccount")
-    public String completeAccount(Model model, HttpSession session){
+    public String completeAccount(Model model, HttpSession session) {
         // 세션에서 데이터를 받아와서 모델에 추가
         model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("account", session.getAttribute("account"));

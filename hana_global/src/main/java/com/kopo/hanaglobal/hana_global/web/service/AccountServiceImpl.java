@@ -59,6 +59,11 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
+    public Account findAccountByUserSeq(int userSeq){
+        return accountRepository.findAccountByUserSeq(userSeq);
+    }
+
+    @Override
     public List<MemberAccDTO> findMemberAccounts(int memberId) {
         Member member = memberRepository.findMemberById(memberId);
 //        System.out.println(member.getUserSeq());

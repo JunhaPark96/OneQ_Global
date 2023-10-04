@@ -46,6 +46,12 @@
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
         FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
     </select>
+
+    <select id="findAccountByUserSeq" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account"
+            parameterType="int">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT where user_seq = #{userSeq}
+    </select>
     
     <select id="getAccountByAcNo" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account" parameterType="String">
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status

@@ -87,6 +87,11 @@ public class AccountController {
 
     @GetMapping("/accountTransfer")
     public String AccountTransfer(@ModelAttribute("currentMember") Member member, Model model) {
+        if ("N".equals(member.getStatus())) {
+            model.addAttribute("error", "Temporary members cannot access this page.");
+            return "error_page";  // 에러 페이지나 안내 페이지로 리다이렉트
+        }
+
         System.out.println("현재 멤버는 " + member.toString());
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
         for (Account account : accountList){
@@ -95,6 +100,7 @@ public class AccountController {
         model.addAttribute("accountList", accountList);
         return "account_transfer";
     }
+
 
     @PostMapping("/accountTransfer")
     @ResponseBody

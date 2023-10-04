@@ -16,17 +16,25 @@
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/mem_sidebar.css" rel="stylesheet"/>
     <title>myPage sidebar</title>
+    <style>
+        /*.sidebar {*/
+        /*    overflow-x: hidden; !* 애니메이션 중에 사이드바 내용이 외부로 나오지 않도록 설정 *!*/
+        /*}*/
+        a::before, a::after {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-            <div class="logo-image-small">
+<%--        <a href="" class="simple-text logo-mini">--%>
+            <div class="logo-image-small logo-mini">
                 <img src="./images/mascort.png">
             </div>
             <!-- <p>CT</p> -->
-        </a>
-        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+<%--        </a>--%>
+        <a href="" class="simple-text logo-normal">
             <c:choose>
                 <c:when test="${currentMember.name == 'ADMIN'}">
                     ADMIN
@@ -59,9 +67,9 @@
                 </a>
             </li>
             <li>
-                <a href="./map.html">
+                <a href="${pageContext.request.contextPath}/branch">
                     <i class="nc-icon nc-pin-3"></i>
-                    <p>자동환전</p>
+                    <p>Branch</p>
                 </a>
             </li>
             <li>
@@ -71,6 +79,9 @@
                 </a>
             </li>
         </ul>
+    </div>
+    <div id="sidebarToggleButton" style="display: none; position: absolute; top: 50%; left: 12px; transform: translate(-100%, -50%);">
+        <button class="btn btn-primary" style="padding-left: 5px; padding-right: 5px">☰</button>
     </div>
 </div>
 
@@ -119,5 +130,35 @@
 <%--        </div>--%>
 <%--    </nav>--%>
 <%--</div>--%>
+
+<script>
+    $(document).ready(function() {
+        let isSidebarVisible = true;
+
+        function toggleSidebar() {
+            if (isSidebarVisible) {
+                $('.sidebar').animate({ width: '0px' }, 400, function() {
+                    $('.sidebar-wrapper').hide();
+                    $('#sidebarToggleButton').show();  // 사이드바가 접힌 후 버튼을 보여줍니다.
+                });
+                $('iframe[name="bizBranch"]').animate({ width: '1100px' }, 400);
+                $('iframe[name="bizBranch"]').animate({ height: '800px' }, 400);
+            } else {
+                $('#sidebarToggleButton').hide();  // 사이드바가 펼쳐지기 전에 버튼을 숨깁니다.
+                $('.sidebar-wrapper').show();
+                $('.sidebar').animate({ width: '250px' }, 400);
+                $('iframe[name="bizBranch"]').animate({ width: '900px' }, 400);
+                $('iframe[name="bizBranch"]').animate({ height: '600px' }, 400);
+            }
+            isSidebarVisible = !isSidebarVisible;
+        }
+
+        $('.logo').on('click', toggleSidebar);  // 사이드바 클릭시 토글 함수 실행
+        $('#sidebarToggleButton').on('click', toggleSidebar);  // 버튼 클릭시에도 토글 함수 실행
+    });
+
+
+
+</script>
 </body>
 </html>

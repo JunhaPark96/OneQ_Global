@@ -14,6 +14,7 @@ public interface AccountRepository {
 
     public List<Account> findAccountByMemberId(int memberId);
 
+    public Account findAccountByUserSeq(int userSeq);
     public List<AccountHistoryResponseDTO> getTransactionHistoryByAcNo(@Param("acNo") String acNo);
 
     public Account getAccountByAcNo(String acNo);

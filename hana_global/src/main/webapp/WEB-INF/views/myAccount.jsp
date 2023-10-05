@@ -1,12 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Account" %>
-<%--Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-19
-  Time: 오후 3:47
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

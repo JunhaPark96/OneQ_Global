@@ -119,9 +119,9 @@ public class WalletController {
         System.out.println(walletNo);
         int walletSeq = Integer.parseInt(walletNo);
         List<WalletHistoryDTO> walletHistoryDTOList = walletService.getWholeWalletHistory(walletSeq);
-//        for (WalletHistoryDTO w : walletHistoryDTOList) {
-//            System.out.println(w.toString());
-//        }
+        for (WalletHistoryDTO w : walletHistoryDTOList) {
+            System.out.println(w.toString());
+        }
         return ResponseEntity.ok(walletHistoryDTOList);
     }
     
@@ -132,9 +132,9 @@ public class WalletController {
         System.out.println(walletNo);
         int walletSeq = Integer.parseInt(walletNo);
         List<AutoExchangeDTO> autoExchangeDTOList = walletService.getAutoExchangeListByWalletSeq(walletSeq);
-        for (AutoExchangeDTO w : autoExchangeDTOList) {
-            System.out.println(w.toString());
-        }
+//        for (AutoExchangeDTO w : autoExchangeDTOList) {
+//            System.out.println(w.toString());
+//        }
         return ResponseEntity.ok(autoExchangeDTOList);
     }
 }

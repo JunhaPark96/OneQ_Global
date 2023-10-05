@@ -6047,9 +6047,9 @@ textarea.form-control-lg {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15%;
+    width: 0%;
     padding: 0;
-    color: #fff;
+    color: black;
     text-align: center;
     background: none;
     border: 0;

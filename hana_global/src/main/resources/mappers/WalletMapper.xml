@@ -104,5 +104,6 @@
         SELECT wallet_trans_no, wallet_seq, balance, transaction_amount, transaction_type, withdraw_cur, withdraw_name, deposit_cur, deposit_name, trade_date
         FROM hana_wallet_hist
         WHERE wallet_seq = #{walletSeq}
+        ORDER BY TRADE_DATE DESC
     </select>
 </mapper>

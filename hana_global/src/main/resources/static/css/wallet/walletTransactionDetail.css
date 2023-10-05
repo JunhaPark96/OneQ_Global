@@ -1,0 +1,14 @@
+
+
+/*.carousel-inner {*/
+/*    display: flex;*/
+/*}*/
+
+/*.carousel-item {*/
+/*    flex: 0 0 33.33%;*/
+/*    max-width: 33.33%;*/
+/*}*/
+.carousel-control-prev, .carousel-control-next {
+    color: black;
+    width: 0%; /* 기존 값에서 너비를 줄여서 양 끝으로 버튼을 이동시킵니다. */
+}

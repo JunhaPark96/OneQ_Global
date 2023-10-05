@@ -34,7 +34,7 @@
             <li><a href="/exchange">Exchange Rate</a></li>
             <li><a href="${pageContext.request.contextPath}/doExchange?currency=KRW">Exchange</a></li>
 <%--            <li><a href="/exchange">Exchange history</a></li>--%>
-            <li><a href="/exchange">Recurring Exchange</a></li>
+            <li><a href="/walletInfo">Recurring Exchange</a></li>
         </ul>
     </li>
     <li>

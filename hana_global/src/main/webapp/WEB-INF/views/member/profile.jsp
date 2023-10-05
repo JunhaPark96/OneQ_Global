@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyProfile</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet"/>

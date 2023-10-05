@@ -13,6 +13,8 @@
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/profile.css" rel="stylesheet">

@@ -98,6 +98,7 @@
         SELECT remit_seq, wallet_seq, sender, recipient, sender_ac, remit_amount, receivable_amount, currency_code, address, status, trade_date, country_name, payment_place
         FROM remittance
         WHERE wallet_seq = #{walletSeq}
+        ORDER BY TRADE_DATE DESC
     </select>
 
     <select id="getWholeWalletHistory">

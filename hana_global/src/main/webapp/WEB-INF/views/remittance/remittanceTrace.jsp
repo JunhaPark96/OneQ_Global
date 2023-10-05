@@ -1,19 +1,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <%--   data tables--%>
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <%--    <script src="./js/wallet.js"></script>--%>
     <link href="./css/service-main.css" rel="stylesheet"/>
     <link href="./css/nav.css" rel="stylesheet"/>
@@ -40,10 +43,10 @@
                     Remittance</strong>
                 </div>
                 <br/>
-                <div class="col-12 d-flex p-0" style="background-color: #eceff1; border-radius: 10px 10px 0px 0px">
+                <div class="col-12 d-flex p-0 mb-4" style="background-color: #eceff1; border-radius: 10px 10px 0px 0px">
                     <button id="hold_history" type="button"
                             class="col-12 text-center border-0 pt-3 pb-3 fs-5 bg-hanagreen"
-                            style="font-family: hanaM; color: #ffffff; border-radius: 10px 0px 0px 0px"
+                            style="font-family: hanaM; color: #ffffff; border-radius: 10px 10px 0px 0px"
                             onclick="click_hold_history()">
                         Remittance History
                     </button>
@@ -68,14 +71,16 @@
                     <%--                    td: mtcn(임의로 생성된 9자리번호), sender, Korea Republic of, currencyCode, recipient, json에 통화코드와 매핑된 국가이름, status(승인상태),--%>
                     <c:forEach var="remittance" items="${remittanceList}">
                         <tr>
-                            <td><input type="radio" name="remittanceRadio" value="${remittance.remitSeq}"/></td>
+                            <td><input type="checkbox" name="remittanceRadio" id="" value="${remittance.remitSeq}"/></td>
                                 <%--                                <td>${remittance.remitSeq}</td>  --%>
                             <td>${remittance.sender}</td>
                             <td>${remittance.senderAc}</td>
-                            <td>Korea Republic of</td>  <!-- 임의의 값 -->
+<%--                                ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}--%>
+                            <td>South of Korea</td>  <!-- 임의의 값 -->
                             <td>${remittance.currencyCode}</td>
                             <td>${remittance.recipient}</td>
-                            <td>${remittance.remitAmount}</td>
+                            <td><fmt:formatNumber value="${remittance.remitAmount}" type="number"
+                                                  pattern="#,##0"/></td>
                             <td>${remittance.tradeDate}</td>
                                 <%--                                <td class="recipient-country" data-currency-code="${remittance.currencyCode}">--%>
                             </td>
@@ -92,7 +97,7 @@
                     </tbody>
                 </table>
 
-                <div>
+                <div class="btnWrapper">
                     <button onclick="showRemittanceDetails()">Notify Recipient</button>
                 </div>
             </div>
@@ -191,15 +196,15 @@
                     "<div class='step " + (status == 'C' ? "current-step" : "") + "'>Completed</div>" +
                     "<div class='modal-details-title'>[Sender Information]</div>" +
                     "<div class='modal-details-content'>" +
-                    "<p>MTCN: " + details.remitSeq + "</p>" +
-                    "<p>Sender: " + details.sender + "</p>" +
-                    "<p>Sender's Country: South of Korea</p>" +
-                    "<p>Remittance Amount: " + details.currencyCode + " " + details.receivableAmount + "</p>" +
+                    "<p><span class='modal-details-key'>MTCN:</span> <span class='modal-details-value'>" + details.remitSeq + "</span></p>" +
+                    "<p><span class='modal-details-key'>Sender:</span> <span class='modal-details-value'>" + details.sender + "</span></p>" +
+                    "<p><span class='modal-details-key'>Sender's Country:</span> <span class='modal-details-value'>South of Korea</span></p>" +
+                    "<p><span class='modal-details-key'>Remittance Amount:</span> <span class='modal-details-value'>" + details.currencyCode + " " + details.receivableAmount + "</span></p>" +
                     "</div>" +
                     "<div class='modal-details-title'>[Recipient Information]</div>" +
                     "<div class='modal-details-content'>" +
-                    "<p>Recipient: " + details.recipient + "</p>" +
-                    "<p>Recipient's Country: " + (countryName || 'Unknown') + "</p>" +
+                    "<p><span class='modal-details-key'>Recipient:</span> <span class='modal-details-value'>" + details.recipient + "</span></p>" +
+                    "<p><span class='modal-details-key'>Recipient's Country:</span> <span class='modal-details-value'>" + (countryName || 'Unknown') + "</span></p>" +
                     "</div>";
 
                 modalContent.innerHTML = htmlString;
@@ -263,6 +268,15 @@
         }
     }
 
+
+    $(document).ready(function () {
+        $('.table').DataTable({
+            "paging": true,
+            "searching": false,
+            "ordering": false,
+            "info": true
+        });
+    });
 </script>
 </body>
 </html>

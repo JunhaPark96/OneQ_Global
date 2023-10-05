@@ -14,6 +14,7 @@
     <link href="./css/profile.css" rel="stylesheet">
     <link href="./css/app-modern.min.css" rel="stylesheet">
     <script src="./js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="./css/bootstrap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
     <%--    차트 js--%>

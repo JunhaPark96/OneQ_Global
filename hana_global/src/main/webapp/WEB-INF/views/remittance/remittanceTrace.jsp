@@ -71,11 +71,12 @@
                     <%--                    td: mtcn(임의로 생성된 9자리번호), sender, Korea Republic of, currencyCode, recipient, json에 통화코드와 매핑된 국가이름, status(승인상태),--%>
                     <c:forEach var="remittance" items="${remittanceList}">
                         <tr>
-                            <td><input type="checkbox" name="remittanceRadio" id="" value="${remittance.remitSeq}"/></td>
+                            <td><input type="checkbox" name="remittanceRadio" id="" value="${remittance.remitSeq}"/>
+                            </td>
                                 <%--                                <td>${remittance.remitSeq}</td>  --%>
                             <td>${remittance.sender}</td>
                             <td>${remittance.senderAc}</td>
-<%--                                ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}--%>
+                                <%--                                ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}--%>
                             <td>South of Korea</td>  <!-- 임의의 값 -->
                             <td>${remittance.currencyCode}</td>
                             <td>${remittance.recipient}</td>
@@ -218,6 +219,53 @@
 
 
     // 이메일 보내기
+    // function sendEmail() {
+    //     let selectedValue = document.querySelector('input[name="remittanceRadio"]:checked').value;
+    //     let details = remittanceList.find(remittance => remittance.remitSeq.toString() === selectedValue);
+    //     // 입력받은 이메일 주소
+    //     let emailAddress = document.getElementById('emailAddress').value;
+    //     if (details) {
+    //         getCountryName(details.currencyCode).then(countryName => {
+    //             let emailContent =
+    //                 '<html>' +
+    //                 '<body>' +
+    //                 '<div style="margin-bottom: 10px;">' +
+    //                 '<div style="font-weight: bold; margin-bottom: 5px; color: #555;">[Remittance Information]</div>' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">MTCN:</span> ' + details.remitSeq + '</p>' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">Sender:</span> ' + details.sender + '</p>' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">Sender\'s Country:</span> South of Korea</p>' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">Remittance Amount:</span> ' + details.currencyCode + ' ' + details.receivableAmount + '</p>' +
+    //                 '</div>' +
+    //                 '<div style="font-weight: bold; margin-bottom: 5px; color: #555;">[Recipient Information]</div>' +
+    //                 '<div style="margin-left: 10px;">' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">Recipient:</span> ' + details.recipient + '</p>' +
+    //                 '<p style="font-size: 1rem; color: black; line-height: 1.2;"><span style="color: #555;">Recipient\'s Country:</span> ' + (countryName || 'Unknown') + '</p>' +
+    //                 '</div>' +
+    //                 '</div>' +
+    //                 '</body>' +
+    //                 '</html>';
+    //
+    //
+    //             $.ajax({
+    //                 url: '/send-email',
+    //                 type: 'POST',
+    //                 contentType: 'application/json',
+    //                 data: JSON.stringify({
+    //                     content: emailContent,
+    //                     to: emailAddress,
+    //                     subject: 'Western Union Receipt'
+    //                 }),
+    //                 success: function (response) {
+    //                     alert('Email sent successfully');
+    //                 },
+    //                 error: function (error) {
+    //                     alert('Failed to send email');
+    //                 }
+    //             });
+    //         });
+    //     }
+    // }
+
     function sendEmail() {
         let selectedValue = document.querySelector('input[name="remittanceRadio"]:checked').value;
         let details = remittanceList.find(remittance => remittance.remitSeq.toString() === selectedValue);
@@ -227,26 +275,95 @@
             getCountryName(details.currencyCode).then(countryName => {
                 let emailContent =
                     '<html>' +
+                    '<head>' +
+                    '<style>' +
+                    // 인라인 CSS 스타일을 적용합니다.
+                    '.modal-content {' +
+                    '    border-radius: 8px;' +
+                    '    background-color: #01646f;' +
+                    '    color: #fff;' +
+                    '    border-radius: 15px;' +
+                    '    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);' +
+                    '    overflow: hidden;' +
+                    '}' +
+                    '.modal-header {' +
+                    '    color: white;' +
+                    '    border-bottom: 2px solid #014a63;' +
+                    '    background-color: #01646f;' +
+                    '    padding-left: 60px;' +
+                    '}' +
+                    '.modal-header h5 {' +
+                    '    font-weight: bold;' +
+                    '    font-size: 1.5rem;' +
+                    '}' +
+                    '.modal-body {' +
+                    '    padding: 20px 30px;' +
+                    '    font-size: 1rem;' +
+                    '    line-height: 1.5;' +
+                    '    background-color: white;' +
+                    '    color: black;' +
+                    '    border: 1px solid black;' +
+                    '}' +
+                    '.modal-details {' +
+                    '    margin-bottom: 10px;' +
+                    '    margin-top: 20px;' +
+                    '}' +
+                    '.modal-details-title {' +
+                    '    font-size: 1.2rem;' +
+                    '    font-weight: bold;' +
+                    '    margin-bottom: 10px;' +
+                    '    padding-bottom: 10px;' +
+                    '    border-bottom: 2px solid #014a63;' +
+                    '    color: black;' +
+                    '}' +
+                    '.modal-details-content {' +
+                    '    font-size: 1rem;' +
+                    '    color: black;' +
+                    '    line-height: 1.2;' +
+                    '    margin-top: 20px;' +
+                    '}' +
+                    /* 키에 대한 스타일 */
+                    '.modal-details-key {' +
+                    '    color: #555;' +            /* 글자색 */
+                    '    display: inline-block;' +     /* 인라인 표시 */
+                    '    margin-right: 5px;' +         /* 오른쪽 여백 */
+                    '}' +
+                    /* 내용에 대한 스타일 */
+                    '.modal-details-value {' +
+                    '    font-weight: bold;' +          /* 굵은 폰트 스타일 */
+                    '    color: #333;' +            /* 조금 더 연한 글자 색상 */
+                    '}' +
+                    '</style>' +
+                    '</head>' +
                     '<body>' +
-                    '<div style="margin-bottom: 10px;">' +
-                    '<div style="font-weight: bold; margin-bottom: 5px;">[' +
-                    (details.status == 'W' ? 'Awaiting Recipient' : details.status == 'N' ? 'In Progress' : 'Completed') +
-                    ']</div>' +
-                    '<div style="margin-left: 10px;">' +
-                    '<div style="font-weight: bold; margin-bottom: 5px;">Remittance Information</div>' +
-                    '<p>MTCN: ' + details.remitSeq + '</p>' +
-                    '<p>Sender: ' + details.sender + '</p>' +
-                    '<p>Sender\'s Country: South of Korea</p>' +
-                    '<p>Remittance Amount: ' + details.currencyCode + ' ' + details.receivableAmount + '</p>' +
+                    '<div class="modal-content">' +
+                    '<div class="modal-header">' +
+                    '<h5 style="font-weight: bold; font-size: 1.5rem;">Remittance Details</h5>' +
                     '</div>' +
-                    '<div style="font-weight: bold; margin-bottom: 5px;">Recipient Information</div>' +
-                    '<div style="margin-left: 10px;">' +
-                    '<p>Recipient: ' + details.recipient + '</p>' +
-                    '<p>Recipient\'s Country: ' + (countryName || 'Unknown') + '</p>' +
+                    '<div class="modal-body">' +
+                    '<div style="background-color: white; color: black; padding: 20px 30px; font-size: 1rem; line-height: 1.5;">' +
+                    '<div>' +
+                    'You have received an international remittance via Western Union. Below are the details for your reference.' +
+                    '</div>' +
+                    '<div id="modalContent" class="modal-details">' +
+                    "<div class='modal-details-title'>[Sender Information]</div>" +
+                    "<div class='modal-details-content'>" +
+                    "<p><span class='modal-details-key'>MTCN:</span> <span class='modal-details-value'>" + details.remitSeq + "</span></p>" +
+                    "<p><span class='modal-details-key'>Sender:</span> <span class='modal-details-value'>" + details.sender + "</span></p>" +
+                    "<p><span class='modal-details-key'>Sender's Country:</span> <span class='modal-details-value'>South of Korea</span></p>" +
+                    "<p><span class='modal-details-key'>Remittance Amount:</span> <span class='modal-details-value'>" + details.currencyCode + " " + details.receivableAmount + "</span></p>" +
+                    "</div>" +
+                    "<div class='modal-details-title'>[Recipient Information]</div>" +
+                    "<div class='modal-details-content'>" +
+                    "<p><span class='modal-details-key'>Recipient:</span> <span class='modal-details-value'>" + details.recipient + "</span></p>" +
+                    "<p><span class='modal-details-key'>Recipient's Country:</span> <span class='modal-details-value'>" + (countryName || 'Unknown') + "</span></p>" +
+                    "</div>" +
+                    '</div>' +
                     '</div>' +
                     '</div>' +
                     '</body>' +
                     '</html>';
+
 
                 $.ajax({
                     url: '/send-email',

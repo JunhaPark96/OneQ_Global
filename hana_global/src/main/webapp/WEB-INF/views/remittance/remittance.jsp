@@ -164,40 +164,35 @@
 
                 <%--          환전 계산 시작 --%>
                 <div class="compare_area" style="display: none">
-                    <div class="fs-5" style="color: #bdbdbd">Remittance / <strong
+                    <div class="fs-5 mb-5" style="color: #bdbdbd">Remittance / <strong
                             style="color: #000000">Calculation</strong></div>
-                    Remittance by Wallet
-                    <div class="compare_section">
+                    <div class="compare_section mb-5">
                         <%--                    Source 통화 섹션 --%>
-                        <div class="fr_info">
+                        <div class="fr_info me-3">
                             <div id="ds_sel" class="sbox">
                                 <div class="selectbox_box _select_box">
                                     <div class="selectbox_label _trigger">
-                                                                        <span class="nation_usd _flag">
-                                                                            <img src="./images/walletIcon_KRW.png"
-                                                                                 class="_img"
-                                                                                 width="35px"
-                                                                                 height="30px">
-                                                                        </span>
+                                        <span class="nation_usd _flag">
+                                            <img src="./images/walletIcon_KRW.png" class="_img"
+                                                 width="35px" height="30px">
+                                        </span>
                                         <label class="_text">Korea <em> KRW</em></label>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="input_box _input_box">
-                                                                <span id="drt_from_span" class="input">
-                                                                    <input id="ds_from_money" maxlength="15" type="text"
-                                                                           style="ime-mode:disabled;"
-                                                                           value="1"
-                                                                           class="_input input_text">
-                                                                </span>
+                                <span id="drt_from_span" class="input">
+                                    <input id="ds_from_money" maxlength="15" type="text"
+                                           style="ime-mode:disabled;" value="1" class="_input input_text">
+                                </span><br/>
                                 <span class="recite _recite" id="sourceCurrencyName"></span>
                             </div>
                         </div>
                         <%--                    Conversion 아이콘 --%>
-                        <span class="ico_same"><span class="blind">=</span></span>
+                        <span class="ico_same"><span class="blind"><img src="./images/equals_sign.png" class="equal_icon"> </span></span>
                         <%--                    Target 통화 섹션--%>
-                        <div class="fr_info">
+                        <div class="fr_info ms-3">
                             <div id="ds_sel2" class="sbox _select_box">
                                 <div class="selectbox_box">
                                     <div class="selectbox_label _trigger">
@@ -211,27 +206,24 @@
                                 </div>
                             </div>
                             <div class="input_box _input_box">
-                                                                <span id="drt_to_span" class="input">
-                                                                    <input id="ds_to_money" type="text"
-                                                                           style="ime-mode:disabled;"
-                                                                           value=""
-                                                                           class="_input input_text">
-                                                                </span>
+                                <span id="drt_to_span" class="input">
+                                    <input id="ds_to_money" type="text" style="ime-mode:disabled;"
+                                           value="" class="_input input_text">
+                                </span><br/>
                                 <span class="recite _recite result" id="targetCurrencyName"></span>
                             </div>
                         </div>
                         <p class="cal_txt _noservice"></p>
-                    </div>
-                    <div class="btn-area" style="text-align: right">
-                        <div class="toggleExchangeRate" onclick="toggleRateInfo()">
+                        <div class="btn-area">
+                            <div class="toggleExchangeRate" onclick="toggleRateInfo()">
+                            </div>
+                            <span class="btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
+                                <button type="button" class="" id="calExchange">Calculate </button>
+                            </span>
                         </div>
-                        <span class=" btn-pack btn-type-3c ui-btn-pack-button ui-set-btn-pack ui-set-btn-pack-event">
-                                                            <button type="button" class=""
-                                                                    id="calExchange">Calculate </button>
-                                                        </span>
                     </div>
                     <%--        결제 정보 미리보기 시작    --%>
-                    <div class="col previewPayment" style="display: none">
+                    <div class="col previewPayment ms-5" style="display: none">
                         <div class="banking-wrap input-focus-wrap">
                             <div class="title-cont">
                                 <h5>Confirm the amount before making remittance</h5>
@@ -245,7 +237,7 @@
                                     </colgroup>
 
                                     <tbody>
-                                    <tr>
+                                    <tr class="mb-5">
                                         <th>Foreign exchange application amount</th>
                                         <td>
                                                             <span class="txt">
@@ -257,11 +249,11 @@
                                                             </span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr class="mb-5">
                                         <th>Transfer Fee</th>
                                         <td><span class="txt"><em>5,000 won</em></span></td>
                                     </tr>
-                                    <tr>
+                                    <tr class="mb-5">
                                         <th>The amount you will be paying(Won)</th>
                                         <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em
                                                 class="point" id="paymentAmount"></em></span></td>
@@ -284,16 +276,16 @@
                                                     style="height: 45px;">
                                                 <option value="" selected disabled>Choose Payment Method</option>
 
-<%--                                                <optgroup label="Accounts">--%>
-<%--                                                    <c:forEach items="${accountList}" var="account">--%>
-<%--                                                        <option value="${account.acNo}" data-account="${account}"--%>
-<%--                                                                data-balance="${account.balance}"--%>
-<%--                                                                data-password="${account.acPasswd}"--%>
-<%--                                                                data-acNo="${account.acNo}">--%>
-<%--                                                                ${account.acNo}--%>
-<%--                                                        </option>--%>
-<%--                                                    </c:forEach>--%>
-<%--                                                </optgroup>--%>
+                                                <%--                                                <optgroup label="Accounts">--%>
+                                                <%--                                                    <c:forEach items="${accountList}" var="account">--%>
+                                                <%--                                                        <option value="${account.acNo}" data-account="${account}"--%>
+                                                <%--                                                                data-balance="${account.balance}"--%>
+                                                <%--                                                                data-password="${account.acPasswd}"--%>
+                                                <%--                                                                data-acNo="${account.acNo}">--%>
+                                                <%--                                                                ${account.acNo}--%>
+                                                <%--                                                        </option>--%>
+                                                <%--                                                    </c:forEach>--%>
+                                                <%--                                                </optgroup>--%>
 
                                                 <optgroup label="Hana Wallet">
                                                     <c:forEach items="${walletList}" var="wallet">
@@ -521,12 +513,13 @@
                             <div class="card__body">
 
                                 <div class="card__recipient-info">
-                                    <p class="card__recipient">The transfer will be completed in approximately 1 minute, and you can track the real-time transfer status below. </p>
+                                    <p class="card__recipient">The transfer will be completed in approximately 1 minute,
+                                        and you can track the real-time transfer status below. </p>
                                     <p class="card__email"></p>
                                 </div>
 
                                 <p class="card__price">Transfer Amount <span></span></p>
-                                <p class="card__price">Recipient  <span> </span></p>
+                                <p class="card__price">Recipient <span> </span></p>
                                 <p class="card__price">Recipient Country <span></span></p>
                                 <button onclick="remittanceTrace(event)">
                                     Trace Transfer
@@ -840,7 +833,7 @@
         });
     });
 
-    function remittanceTrace(event){
+    function remittanceTrace(event) {
         event.preventDefault();
         window.location.href = '${pageContext.request.contextPath}/remittanceTrace';
     }

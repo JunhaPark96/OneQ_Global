@@ -24,7 +24,7 @@
         <a href="${pageContext.request.contextPath}/walletInfo" style="padding-left: 15px">Hana Wallet</a>
         <ul>
             <li><a href="${pageContext.request.contextPath}/walletInfo"> My Wallet </a></li>
-            <li><a href="${pageContext.request.contextPath}/topUp">Load Wallet</a></li>
+<%--            <li><a href="${pageContext.request.contextPath}/topUp">Load Wallet</a></li>--%>
             <li><a href="${pageContext.request.contextPath}/walletTransactionDetail">Wallet Transaction Details</a></li>
         </ul>
     </li>

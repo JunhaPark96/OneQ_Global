@@ -1,4 +1,8 @@
 <%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
+<%@ page import="org.springframework.web.context.WebApplicationContext" %>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@ page import="org.springframework.web.servlet.LocaleResolver" %>
+<%@ page import="java.util.Locale" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -9,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
     <link href="./css/header.css" rel="stylesheet"/>
 
     <!-- App css -->
@@ -19,6 +22,12 @@
 
 </head>
 <body>
+<%
+    WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(application);
+    LocaleResolver localeResolver = wac.getBean(LocaleResolver.class);
+    Locale currentLocale = localeResolver.resolveLocale(request);
+    String currentLang  = currentLocale.getLanguage();
+%>
 <div class="header">
     <div class="logo">
         <a href="/">
@@ -138,31 +147,40 @@
 </div>
 
 <script>
+
     $(document).ready(function () {
-        // 기본 언어와 이미지 설정
-        const defaultImg = './images/flags/us.jpg';
-        const defaultText = 'English';
+        const langMap = {
+            'en': './images/flags/us.jpg',
+            'ko': './images/flags/kr.jpg',
+            'de': './images/flags/germany.jpg',
+            'it': './images/flags/italy.jpg',
+            'es': './images/flags/spain.jpg',
+            'ru': './images/flags/russia.jpg'
+        };
 
-        document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + defaultImg + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + defaultText + '</span>';
+        const langTextMap = {
+            'en': 'English',
+            'ko': '한국어',
+            'de': 'Deutsch',
+            'it': 'Italiano',
+            'es': 'Español',
+            'ru': 'Русский'
+        };
 
-        $(".dropdown-item").click(function () {
-            // 클릭한 아이템의 이미지와 텍스트 가져오기
+        const defaultLang = '<%= currentLang %>';
+        if (defaultLang in langMap) {
+            const imgSrc = langMap[defaultLang];
+            const langText = langTextMap[defaultLang] || defaultLang;
+            document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + imgSrc + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + langText + '</span>';
+        }
+
+        $(".dropdown-item").click(function (event) {
             let selectedImg = $(this).find('img').attr('src');
             let selectedText = $(this).find('span').text();
-
-            // 메인 버튼의 이미지와 텍스트 업데이트
-            <%--$(".dropdown-toggle").html(`<img src="${selectedImg}" alt="user-image" class="mr-1" height="12"> <span class="align-middle">${selectedText}</span>`);--%>
             document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + selectedImg + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + selectedText + '</span>';
-            // 드롭다운 메뉴 숨기기
-            $(".dropdown-menu").hide();
-        });
-
-        $(document).click(function (e) {
-            if (!$(e.target).closest('.dropdown').length) {
-                $(".dropdown-menu").hide();
-            }
         });
     });
+
 
 
 </script>

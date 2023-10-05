@@ -200,7 +200,6 @@
     </div>
 </div>
 <footer>
-    dd
 </footer>
 </div>
 </body>

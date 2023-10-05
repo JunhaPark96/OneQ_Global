@@ -12,3 +12,21 @@
     color: black;
     width: 0%; /* 기존 값에서 너비를 줄여서 양 끝으로 버튼을 이동시킵니다. */
 }
+th {
+    height: 60px; /* 원하는 높이 값으로 조정 가능 */
+    white-space: nowrap;  /* 내용이 래핑되지 않도록 설정 */
+    text-overflow: ellipsis;  /* 내용이 길 경우 ...로 표시 */
+}
+th {
+    min-height: 50px;
+    max-height: 60px;
+}
+.dropdown-menu {
+    z-index: 1050; /* 기존보다 높은 값으로 설정 */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* 기본 상태: 드롭다운 메뉴 숨김 */
+

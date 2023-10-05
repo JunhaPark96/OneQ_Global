@@ -49,20 +49,20 @@
                 <ul class="dropdown-menu"> <!-- "dropdown-menu" 클래스 추가 -->
                     <!-- 기본으로 보이는 "English" 항목 -->
                     <li>
-                        <a href="?lang=ko" class="dropdown-item ">
+                        <a href="?lang=ko" class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
                             <img src="./images/flags/kr.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="align-middle">Korean</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?lang=en" class="dropdown-item notify-item selected">
+                        <a href="?lang=en" class="dropdown-item notify-item selected" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
                             <img src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="">English</span>
                         </a>
                     </li>
                     <!-- 나머지 언어 항목들 -->
                     <li>
-                        <a href="?lang=de" class="dropdown-item notify-item">
+                        <a href="?lang=de" class="dropdown-item notify-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
                             <img src="./images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="align-middle">German</span>
                         </a>

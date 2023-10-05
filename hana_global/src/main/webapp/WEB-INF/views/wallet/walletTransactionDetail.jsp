@@ -25,7 +25,7 @@
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/bootstrap/bootstrap2.min.css" rel="stylesheet"/>
-    <link href="./css/walletTransactionDetail.css" rel="stylesheet"/>
+    <link href="./css/wallet/walletTransactionDetail.css" rel="stylesheet"/>
     <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
     <style>
         .btn-link.dropdown-toggle::after {
@@ -102,7 +102,7 @@
             width: 40px; /* 아이콘 크기 설정. 필요에 따라 조정 가능 */
             height: 40px;
             border-radius: 50%; /* 원형으로 만들기 위한 설정 */
-            overflow: hidden; /* 이미지가 원 밖으로 나가지 않게 설정 */
+            /*overflow: hidden; !* 이미지가 원 밖으로 나가지 않게 설정 *!*/
         }
 
         .wallet-card .country-icon img {
@@ -357,7 +357,18 @@
             currentFilterType = selectedType;
             ajax_whole_history();  // 필터링.
         }
-
+        function getTransactionTypeName(type) {
+            switch (type) {
+                case 'E':
+                    return 'Exchange';
+                case 'A':
+                    return 'Account';
+                case 'T':
+                    return 'Remittance';
+                default:
+                    return type;  // 기본값 (만약 알 수 없는 transactionType이 들어올 경우를 대비)
+            }
+        }
         // 전체내역
         function change_whole_history(data) {
             $('#div_whole_history').empty();
@@ -366,32 +377,38 @@
             } else {
                 let str = '';
                 str += '<table class="table border-0 table-hover text-end mt-3 border-top">';
-                str += '<colgroup><col width=16%><col width=16%><col width=16%><col width=16%><col width=16%><col width=20%></colgroup>'; // Update colgroup to accommodate new column
+                str += '<colgroup><col width=16%><col width=16%><col width=16%><col width=16%><col width=16%><col width=20%></colgroup>';
                 str += '<thead>';
                 str += '<tr class="text-black-50">';
-                str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Transaction Number</th>';
-                // str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Transaction Amount</th>';
-                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Withdrawal Amount</th>'; // Modified
-                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Deposit Amount</th>'; // Added
+                str += '<th class="text-center border-1 border-start-0 text-nowrap" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Transaction No.</th>';
+                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Withdrawal Amount</th>';
+                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Deposit Amount</th>';
+
                 str += '<th class="text-center border-1 position-relative" style="font-family: hanaM; background-color: #eceff1; border-color: #c7c7c7">';
-                str += 'Transaction Type';
-                str += `<div class="dropdown" style="position: absolute; right: 5px; top: 50%; transform: translateY(-50%);">`;
-                str += '<button class="btn btn-link dropdown-toggle p-0" style="font-size: 1.3rem;" type="button" id="transactionTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                str += '<div style="display: inline-block;">Transaction Type</div>';
+                str += `<div class="dropdown" style="display: inline-block; vertical-align: middle;">`;
+                str += '<button class="btn btn-link dropdown-toggle p-0" style="font-size: 1.3rem; vertical-align: middle;" type="button" id="transactionTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 str += '</button>';
-                str += `<ul class="dropdown-menu dropdown-menu-right" aria-labelledby="transactionTypeDropdown">`;
-                str += `<li><a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('');">All</a></li>`;
+                str += `<ul class="dropdown-menu" aria-labelledby="transactionTypeDropdown" style="left: 70%; transform: translateX(-90%) translateY(5%); transition: all 0.5s ease;">`;
+                str += `<li><a class="dropdown-item" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('');">All</a></li>`;
                 str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('A');">Account</li>`;
                 str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('E');">Exchange</li>`;
-                str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('T');">Transfer</li>`;
+                str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('T');">Remittance</li>`;
                 str += `</ul>`;
                 str += '</div>';
                 str += '</th>';
+
+
                 str += '<th class="text-center border-1" style="font-family:hanaM;background-color: #eceff1; border-color: #c7c7c7">Balance</th>';
                 str += '<th class="text-center border-1" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">Currency</th>';
-                str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">Transaction Date</th>'; // New column header for tradeDate
+                str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">Transaction Date</th>';
                 str += '</tr>';
                 str += '</thead>';
                 str += '<tbody>';
+
+// (나머지 코드는 그대로 유지)
+
+
                 data = data.filter(history => !currentFilterType || history.transactionType === currentFilterType);
 
                 const startIndex = (currentPage - 1) * itemsPerPage;
@@ -413,7 +430,7 @@
                     str += history.depositCur ? history.transactionAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : "-";
                     str += '</td>';
                     str += '<td class="border-1 text-black-50 align-middle" style="border-color: #c7c7c7; font-family: hanaM">';
-                    str += history.transactionType;
+                    str += getTransactionTypeName(history.transactionType);
                     str += '</td>';
                     str += '<td class="border-1 align-middle" style="border-color: #c7c7c7; font-family: hanaM; color: #616161">';
                     str += history.balance.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -469,7 +486,7 @@
                 str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Exchange Deadline</th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Amount </th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Currency</th>';
-                str += '<th class="text-center border-1" style="font-family:hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Rate</th>';
+                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Rate</th>';
                 str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">Status</th>';
                 str += '</tr>';
                 str += '</thead>';

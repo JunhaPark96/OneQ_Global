@@ -71,7 +71,7 @@
                     <%--                    td: mtcn(임의로 생성된 9자리번호), sender, Korea Republic of, currencyCode, recipient, json에 통화코드와 매핑된 국가이름, status(승인상태),--%>
                     <c:forEach var="remittance" items="${remittanceList}">
                         <tr>
-                            <td><input type="checkbox" name="remittanceRadio" id="" value="${remittance.remitSeq}"/>
+                            <td><input type="radio" name="remittanceRadio" id="" value="${remittance.remitSeq}"/>
                             </td>
                                 <%--                                <td>${remittance.remitSeq}</td>  --%>
                             <td>${remittance.sender}</td>

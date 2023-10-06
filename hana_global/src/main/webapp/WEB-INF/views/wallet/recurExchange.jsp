@@ -144,7 +144,7 @@
 
             <%--         사용자에게 제공하는 정보 끝   --%>
             <div class="col pt-1 settingRecurring">
-                <form action="${pageContext.request.contextPath}/walletTransactionDetail" method="post">
+                <form action="${pageContext.request.contextPath}/autoExchange" method="post">
                     <table class="table table-hover mb-3 border-light">
                         <%--                        <tbody>--%>
                         <%--                        <tr>--%>

@@ -134,6 +134,6 @@ public class ExchangeController {
     public String handleAutoExchange(@ModelAttribute("currentMember") Member member, @ModelAttribute AutoExchangeDTO autoExchangeDTO){
         walletService.insertAutoExchange(autoExchangeDTO);
 
-        return "/wallet/walletInfo";
+        return "redirect:/walletTransactionDetail";
     }
 }

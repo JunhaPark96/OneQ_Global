@@ -12,6 +12,7 @@
     <link href="css/header.css" rel="stylesheet"/>
     <link href="css/TTF.css" rel="stylesheet"/>
     <link href="css/login.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="./js/main.js"></script>
 

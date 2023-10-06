@@ -387,9 +387,9 @@
                 str += '<th class="text-center border-1 position-relative" style="font-family: hanaM; background-color: #eceff1; border-color: #c7c7c7">';
                 str += '<div style="display: inline-block;">Transaction Type</div>';
                 str += `<div class="dropdown" style="display: inline-block; vertical-align: middle;">`;
-                str += '<button class="btn btn-link dropdown-toggle p-0" style="font-size: 1.3rem; vertical-align: middle;" type="button" id="transactionTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                str += '<button id="dropdown-btn" class="btn btn-link dropdown-toggle p-0" style="font-size: 1.3rem; vertical-align: middle;" type="button" id="transactionTypeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                 str += '</button>';
-                str += `<ul class="dropdown-menu" aria-labelledby="transactionTypeDropdown" style="left: 70%; transform: translateX(-90%) translateY(5%); transition: all 0.5s ease;">`;
+                str += `<ul class="dropdown-menu" aria-labelledby="transactionTypeDropdown" style="left: 70%; transform: translateX(-90%) translateY(1%); transition: all 0.5s ease;">`;
                 str += `<li><a class="dropdown-item" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('');">All</a></li>`;
                 str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('A');">Account</li>`;
                 str += `<li class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''" onclick="filterByTransactionType('E');">Exchange</li>`;
@@ -448,7 +448,17 @@
                 $('#div_whole_history').append(str);
             }
         }
+        const button = document.querySelector('.dropdown');
 
+        button.addEventListener('click', () => {
+            const dropdown = document.querySelector('#dropdown-btn');
+            dropdown.style.display = 'block';
+        });
+
+        button.addEventListener('blur', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = '';
+        });
 
         // 자동환전
         function ajax_exchange_hist() {

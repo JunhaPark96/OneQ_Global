@@ -141,7 +141,7 @@
                                 <td>${firstAccountForMembers[member.userSeq].acNo}</td>
                                 <td>${member.nationality}</td>
                                 <td>${member.signupDate}</td>
-                                <td>
+                                <td style="text-align: center">
                                     <c:choose>
                                         <c:when test="${member.status == 'N'}">
                                             <button class="btn btn-warning"
@@ -189,7 +189,7 @@
 <script>
 
     function approveMember(userSeq, btnElement) {
-        let isApproved = confirm("회원의 계좌를 활성화 하시겠습니까?");
+        let isApproved = confirm("Do you want to activate this member's account?");
         if (isApproved) {
             $.post("/approveMember", {userSeq: userSeq}, function (response) {
                 if (response.success === "true") {

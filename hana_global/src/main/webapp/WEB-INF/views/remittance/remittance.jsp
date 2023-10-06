@@ -151,7 +151,7 @@
                                     </div>
                                 </div>
                                 <div class="selectWesternUnion" id="selectWesternUnion" onclick="closeModal()">
-                                    <div><img src="./images/walletIcon.png" class="paymentImage" alt=""></div>
+                                    <div><img src="./images/western_union.png" class="paymentImage2" alt=""></div>
                                     <div>
                                         <p>Remittance with <br/> <span>Western Union</span></p>
                                     </div>
@@ -164,7 +164,7 @@
 
                 <%--          환전 계산 시작 --%>
                 <div class="compare_area" style="display: none">
-                    <div class="fs-5 mb-5" style="color: #bdbdbd">Remittance / <strong
+                    <div class="fs-4 mb-5 mt-2" style="color: #bdbdbd">Remittance / <strong
                             style="color: #000000">Calculation</strong></div>
                     <div class="compare_section mb-5">
                         <%--                    Source 통화 섹션 --%>
@@ -230,13 +230,13 @@
                             </div>
                             <br/>
                             <div class="banking-cont">
-                                <table summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
+                                <table class="mb-5" summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
                                     <%--                                <caption>결제정보1</caption>--%>
                                     <colgroup>
                                         <col style="width: 500px"/>
                                     </colgroup>
 
-                                    <tbody>
+                                    <tbody class="fs-5" style="line-height: 40px;">
                                     <tr class="mb-5">
                                         <th>Foreign exchange application amount</th>
                                         <td>
@@ -304,16 +304,18 @@
                                         </td>
                                     </tr>
                                     <tr style="display: none" id="balanceRow">
-                                        <th>Available Withdrawal</th>
+                                        <th>
+                                            Available Withdrawal
+                                        </th>
                                         <td>
                                             <span class="txt" id="balanceDisplay"></span>
                                         </td>
                                     </tr>
-                                    <tr style="display: none" id="passwordRow">
+                                    <tr class="input_box" style="display: none" id="passwordRow">
                                         <th scope="row" class="text-start align-middle">Password</th>
                                         <td>
                                             <input type="password" name="account_password" id="account_password"
-                                                   placeholder="password" maxlength="6"/>
+                                                   placeholder="password" maxlength="6" style="height: 35px"/>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -339,11 +341,11 @@
 
                 <%--         수취인 정보 입력   --%>
                 <div class="recipientDiv" id="recipientDiv" style="display: none">
-                    <div class="fs-5" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Recipient
+                    <div class="fs-5 mt-2" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Recipient
                         Information Entry</strong></div>
                     <div class="col-md-12">
-                        <div class="card-body pe-5">
-                            <table class="table" style="background-color: #f4f3ef;">
+                        <div class="card-body pe-5 ps-3">
+                            <table class="table" >
                                 <tbody style="border-style: none">
                                 <!-- Recipient's Name -->
                                 <tr class="border-white">
@@ -361,12 +363,12 @@
                                 </tr>
                                 <tr>
                                     <th scope="row" class="text-start align-middle" style="color: red">
-                                        &nbsp;&nbsp;Note
+                                        &nbsp;&nbsp;
                                     </th>
                                     <td>
 
                                         <div>
-                                            <span class="fs-5"> <strong style="color: #000000; font-size: 14px">Please specify exact name written in your passport</strong></span>
+                                            <span class="fs-5"> <strong style="color: #000000; font-size: 14px"><span style="color: red">Note </span> Please specify exact name written in your passport</strong></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -394,7 +396,7 @@
                                 <tr class="border-white">
                                     <th scope="row" class="text-start align-middle">&nbsp;&nbsp;State</th>
                                     <td>
-                                        <select class="form-select border-3 w-60" name="addressState" id="addressState"
+                                        <select class="form-select border-3 w-50" name="addressState" id="addressState"
                                                 style="height: 45px; width: 50%;">
                                             <option value="" selected disabled>State</option>
                                             <option value="AB">Alberta</option>
@@ -463,7 +465,7 @@
                                         </th>
                                     </tr>
                                     <tr class="border-white">
-                                        <th scope="row" class="text-start align-middle">&nbsp;&nbsp;City</th>
+                                        <th scope="row" class="text-start align-middle" style="padding-right: 48px; ">&nbsp;&nbsp;City</th>
                                         <td>
                                             <input type="text" name="receiptCity" id="receiptCity"
                                                    placeholder="City"/>
@@ -479,11 +481,12 @@
 
                                     </tbody>
                                 </table>
-                                WU빠른해외송금은 수취국가의 취급점에 방문하여 수취 가능합니다. 전세계 55만개 취급점의 위치와 수취 방법은 아래 링크에서 확인 가능
+                                Western Union’s global transfer network is the largest in the world, with more than 500,000 agent locations in 200 countries and territories across the globe.
+                                <a href="https://www.westernunion.com/us/en/agent-locator.html" target="_blank">Find locations</a>
                             </div>
 
 
-                            <div class="btn-area2 mt15 mb30">
+                            <div class="btn-area2 mt15 mb30 mt-4">
                                         <span class="btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
                                             <a href="${pageContext.request.contextPath}/walletInfo" id="buttonCancel"
                                                class="">Prev</a></span>

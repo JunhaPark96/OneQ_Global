@@ -27,11 +27,8 @@
 </head>
 <body>
 <div class="sidebar" data-color="white" data-active-color="danger">
-    <div class="logo">
+    <div class="logo" style="display: flex; justify-content: space-around">
         <%--        <a href="" class="simple-text logo-mini">--%>
-        <div class="logo-image-small logo-mini">
-            <img src="./images/mascort.png">
-        </div>
         <!-- <p>CT</p> -->
         <%--        </a>--%>
         <a href="" class="simple-text logo-normal">
@@ -44,6 +41,9 @@
                 </c:otherwise>
             </c:choose>
         </a>
+        <div class="logo-image-small logo-mini">
+            <img src="./images/mascort.png" style="width: 45px; height: 45px;">
+        </div>
 
     </div>
     <div class="sidebar-wrapper">

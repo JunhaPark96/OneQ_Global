@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @SessionAttributes("currentMember")
@@ -43,11 +42,27 @@ public class AdminController {
         Map<String, Integer> countryMemberCounts = new HashMap<>();  // 국가별 회원 수를 저장할 맵
         for (Member member : memberList) {
             // 멤버의 국가별로 카운트 증가
+            System.out.println("회원 국가는 " + member.getNationality());
             countryMemberCounts.put(member.getNationality(), countryMemberCounts.getOrDefault(member.getNationality(), 0) + 1);
-
             Account firstAccount = accountService.findFirstAccountByMemberId(member.getUserSeq());
             firstAccountForMembers.put(member.getUserSeq(), firstAccount);
             System.out.println(firstAccountForMembers.toString());
+        }
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(countryMemberCounts.entrySet());
+        // 국가별 회원 수를 value 기반으로 내림차순 정렬하고 상위 4개만 선택
+        countryMemberCounts = countryMemberCounts.entrySet()
+                .stream()
+                .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())) // 내림차순 정렬
+                .limit(4) // 상위 4개 항목만 선택
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue,
+                        LinkedHashMap::new // 순서 보장
+                ));
+        // 국가별 회원 수 상위 4개의 나라와 그들의 회원 수 출력
+        for (Map.Entry<String, Integer> entry : countryMemberCounts.entrySet()) {
+            System.out.println("Country: " + entry.getKey() + ", Members: " + entry.getValue());
         }
 //        for (Member m : memberList){
 //            System.out.println(m.toString());

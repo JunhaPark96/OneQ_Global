@@ -318,19 +318,28 @@ function displayBalance() {
     // 숫자 포맷팅
     let balanceNumber = parseFloat(balance);
     let formattedBalance = formatNumber(balanceNumber);
-
     // 잔액을 표시할 span 엘리먼트를 찾아서 잔액을 설정
     let balanceDisplayElement = document.getElementById('balanceDisplay');
     let balanceRow = document.getElementById('balanceRow');  // 잔액 표시 tr
     let passwordRow = document.getElementById('passwordRow');  // 비밀번호 표시 tr
+    let balanceThElement = balanceRow.querySelector('th');
 
-    if (selectElement.value) {  // 계좌가 선택되었는지 확인
+    if (selectElement.value) {
         balanceDisplayElement.textContent = formattedBalance;
-        balanceRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
-        passwordRow.style.display = '';  // 잔액 표시 tr 엘리먼트를 보이게 합니다.
+        balanceRow.style.display = '';
+        passwordRow.style.display = '';
+
+        let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        let paymentAmount = parseFloat(paymentAmountStr);
+
+        if (balanceNumber < paymentAmount) {
+            balanceThElement.innerHTML = 'Available Withdrawal <img src="./images/red_warning_icon.png" alt="Warning Icon" style="vertical-align: middle; width: 27px; height: 27px;"><span style="color: red;">Insufficient Funds</span>';
+        } else {
+            balanceThElement.innerHTML = 'Available Withdrawal <img src="./images/green_check_icon.png" alt="Check Icon" style="vertical-align: middle; width: 27px; height: 27px;">';
+        }
     } else {
-        balanceRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
-        passwordRow.style.display = 'none';  // 잔액 표시 tr 엘리먼트를 숨깁니다.
+        balanceRow.style.display = 'none';
+        passwordRow.style.display = 'none';
     }
 
     const buttonArea = document.querySelector('.btn-area2');

@@ -148,6 +148,13 @@
     width: 90px;
     height: 90px;
 }
+.paymentImage2{
+    width: 75px;
+    height: 75px;
+    border-radius: 1rem;
+    margin-bottom: 5px;
+    margin-top: 11px;
+}
 .selectAccount p, .selectWesternUnion p {
     font-size: 14px;
     text-align: center;
@@ -242,8 +249,8 @@
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 450px;
-    background-color: #f4f3ef;
+    height: 650px;
+    /*background-color: #f4f3ef;*/
     /*justify-content: space-between;*/
 }
 .compare_section{
@@ -420,11 +427,11 @@ input[type="text"] {
     /*align-items: center;*/
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    background-color: #f4f3ef;
+    /*background-color: #f4f3ef;*/
 }
 
 .table {
-    --bs-table-bg: #f4f3ef;
+    /*--bs-table-bg: #f4f3ef;*/
 }
 
 tbody, td, tfoot, th, thead, tr {
@@ -437,6 +444,24 @@ tbody, td, tfoot, th, thead, tr {
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+.recipientDiv input[type="text"] {
+    width: 100%;
+    min-width: 250px;
+    max-width: 350px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 2px solid #059196;
+    background-color: #ffffff;
+    font-size: 16px;
+}
+/* input box 스타일링 */
+.input_box input {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 /* 수취인 정보 끝 ================================================*/
 

@@ -6,6 +6,7 @@
     <select id="getMemberAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member">
         SELECT *
         FROM member
+        ORDER BY signup_date desc
     </select>
     <select id="findMemberById" resultType="com.kopo.hanaglobal.hana_global.web.entity.Member" parameterType="int">
         SELECT user_seq as userSeq, email, id, passwd, name, regist_no as registNo, signup_date as signupDate, country_sp as countrySP, nationality, birth_date as birthDate, gender, contact, ROAD_ADDRESS as roadAddress, JIBUN_ADDRESS as jibunAddress, status

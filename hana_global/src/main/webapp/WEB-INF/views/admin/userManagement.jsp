@@ -85,7 +85,7 @@
                         </div>
                         <div class="div-left" style="display: grid; grid-area: div-left;">
                             <c:forEach var="entry" items="${countryMemberCounts}">
-                                <h5 class="mb-1 mt-0 font-weight-normal">${entry.key}</h5>
+                                <h6 class="mb-1 mt-0 font-weight-normal">${entry.key}</h6>
                                 <div class="progress-w-percent">
                                     <span class="progress-value font-weight-bold">${entry.value}k </span>
                                     <div class="progress progress-sm">
@@ -103,33 +103,6 @@
 <%--                                </div>--%>
 <%--                            </div>--%>
 
-<%--                            <h5 class="mb-1 mt-0 font-weight-normal">San Francisco</h5>--%>
-<%--                            <div class="progress-w-percent">--%>
-<%--                                <span class="progress-value font-weight-bold">39k </span>--%>
-<%--                                <div class="progress progress-sm">--%>
-<%--                                    <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39"--%>
-<%--                                         aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <h5 class="mb-1 mt-0 font-weight-normal">Sydney</h5>--%>
-<%--                            <div class="progress-w-percent">--%>
-<%--                                <span class="progress-value font-weight-bold">25k </span>--%>
-<%--                                <div class="progress progress-sm">--%>
-<%--                                    <div class="progress-bar" role="progressbar" style="width: 39%;" aria-valuenow="39"--%>
-<%--                                         aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-
-<%--                            <h5 class="mb-1 mt-0 font-weight-normal">Singapore</h5>--%>
-<%--                            <div class="progress-w-percent mb-0">--%>
-
-<%--                                <span class="progress-value font-weight-bold">61k </span>--%>
-<%--                                <div class="progress progress-sm">--%>
-<%--                                    <div class="progress-bar" role="progressbar" style="width: 61%;" aria-valuenow="61"--%>
-<%--                                         aria-valuemin="0" aria-valuemax="100"></div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
                         </div>
                         <div class="div-right" style="display: grid; grid-area: div-right; ">
                             <div class="mb-4 mt-4">
@@ -143,16 +116,16 @@
 
 
             <div class="user-info">
-                <h2>회원관리</h2>
+                <h2>User Management</h2>
                 <table class="table table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th>선택</th>
-                        <th>아이디</th>
-                        <th>성명</th>
-                        <th>계좌번호</th>
-                        <th>국가</th>
-                        <th>신청일</th>
+                    <tr style="text-align: center">
+                        <th>Select</th>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Account Number</th>
+                        <th>Country</th>
+                        <th>Application Date</th>
 <%--                        <th>승인상태</th>--%>
                         <th id="statusHeader" class="sort-header">승인상태</th>
                     </tr>
@@ -162,7 +135,7 @@
                         <c:if test="${member.id != 'admin'}">
 
                             <tr>
-                                <td><input type="radio" name="selectedMember" value="${member.userSeq}"></td>
+                                <td><input style="text-align: center" type="radio" name="selectedMember" value="${member.userSeq}"></td>
                                 <td>${member.id}</td>
                                 <td>${member.name}</td>
                                 <td>${firstAccountForMembers[member.userSeq].acNo}</td>

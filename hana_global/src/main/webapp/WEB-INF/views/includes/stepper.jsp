@@ -22,7 +22,8 @@
           1
         </button>
         <div class="step-title">
-          약관동의
+<%--          약관동의--%>
+          Agreement
         </div>
       </div>
       <div class="step-item">
@@ -31,7 +32,8 @@
           2
         </button>
         <div class="step-title">
-          계좌등록
+<%--          계좌등록--%>
+          Identity Verification
         </div>
       </div>
       <div class="step-item">
@@ -40,7 +42,8 @@
           3
         </button>
         <div class="step-title">
-          본인확인
+<%--          본인확인--%>
+          Personal Info
         </div>
       </div>
       <div class="step-item">
@@ -49,7 +52,8 @@
           4
         </button>
         <div class="step-title">
-          정보입력
+<%--          정보입력--%>
+          Login Info
         </div>
       </div>
       <div class="step-item">
@@ -58,7 +62,8 @@
           5
         </button>
         <div class="step-title">
-          가입완료
+<%--          가입완료--%>
+          Register Complete
         </div>
       </div>
     </div>

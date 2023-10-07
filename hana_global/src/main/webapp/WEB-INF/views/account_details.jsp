@@ -52,13 +52,13 @@
                     <div class="card-body pe-5">
                         <table class="table table-hover mb-3 border-light">
                             <tr>
-                                <th scope="col" class="h5 text-black-50 border-light" style="width: 15%"></th>
+                                <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
                                 <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="text">
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Account Selection</th>
+                                <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Account Selection</th>
                                 <td>
                                     <select class="form-select border-3 w-50" name="withdrawAccountNo"
                                             id="selectAccountForm"
@@ -66,7 +66,7 @@
                                         <option value="" selected disabled>Select Account</option>
                                         <c:forEach items="${accountList}" var="account">
                                             <option value="${account.acNo}" data-balance="${account.balance}">
-                                                (${account.acNo})
+                                                (${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)})
                                             </option>
                                         </c:forEach>
                                     </select>
@@ -74,7 +74,7 @@
                             </tr>
                             <%--                            기간 조회--%>
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Date Range</th>
+                                <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Date Range</th>
                                 <td class="tbl_left">
                                     <div class="tbl_in">
                                         <input type="text" id="inqStrDt" name="inqStrDt" readonly>
@@ -91,7 +91,7 @@
                             </tr>
                             <%--                            거래 유형 선택--%>
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Transaction Type</th>
+                                <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Transaction Type</th>
                                 <td>
                                     <input type="hidden" name="transaction_type" id="transaction_type" value="">
                                     <button type="button" class="btn bg-white border-1 me-2 pushButton border-2"
@@ -107,7 +107,7 @@
                             </tr>
 
                             <tr>
-                                <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Balance</th>
+                                <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Balance</th>
                                 <td>
                                     <div class="btnArea" id="btnFclArea">
                                         <p class="text-center align-middle" id="accountBalance">
@@ -186,7 +186,7 @@
                             '<td>' + data[i].tradeDate + '</td>' +
                             '<td>' + data[i].transactionAmount + ' won</td>' +
                             '<td>' + transactionTypeText + '</td>' +
-                            '<td>' + data[i].balance + ' won</td>' +
+                            '<td>' + data[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' won</td>' +
                             '<td>' + data[i].participant + '</td>' +
                             '<td>' + data[i].participantAccount + '</td>' +
                             '</tr>');

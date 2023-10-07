@@ -35,13 +35,13 @@
                             <form action="${pageContext.request.contextPath}/accountTransfer" method="post">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="h5 text-black-50 border-light" style="width: 15%"></th>
+                                    <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
                                     <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr class="text border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Select Account</th>
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Select Account</th>
                                     <td>
                                         <select class="form-select border-3 w-50" name="senderAccountNo"
                                                 id="selectAccountForm"
@@ -49,7 +49,7 @@
                                             <option value="" selected disabled>Select an account.</option>
                                             <c:forEach items="${accountList}" var="account">
                                                 <option value="${account.acNo}" data-balance="${account.balance}">
-                                                    (${account.acNo})
+                                                    (${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)})
                                                 </option>
                                             </c:forEach>
                                             <%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
@@ -59,7 +59,7 @@
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Balance</th>
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Balance</th>
                                     <td>
                                         <div class="btnArea" id="btnFclArea">
                                             <p class="text-center align-middle" id="accountBalance"></p>
@@ -68,7 +68,7 @@
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Password</th>
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Password</th>
                                     <td>
                                         <input type="password" name="account_password" id="account_password"
                                                placeholder="Account Password" maxlength="4"/>
@@ -76,7 +76,7 @@
                                 </tr>
 
                                 <tr class="border-light">
-                                    <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Transfer Amount</th>
+                                    <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Transfer Amount</th>
                                     <td>
                                         <%--                                    TODO: 계좌 연결, 금액 입력 받기--%>
                                         <%--                                    <input type="hidden" name="transfer_amount" id="transfer_amount" value="">--%>
@@ -125,13 +125,13 @@
                     <div class="card-body pe-5">
                         <table class="table table-hover mb-3 border-light">
                             <tr>
-                                <th scope="col" class="h5 text-black-50 border-light" style="width: 15%"></th>
+                                <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
                                 <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="text">
-                                <th scope="row" class="text-center align-middle">Bank Selection</th>
+                                <th scope="row" class="text-start align-middle">Bank Selection</th>
                                 <td>
                                     <select name="receiverBank" class="form-select border-3 w-50"
                                             id="receiverBankSelect">
@@ -202,7 +202,7 @@
                             </tr>
 
                             <tr>
-                                <th scope="row" class="text-center align-middle">Account Number</th>
+                                <th scope="row" class="text-start align-middle">Account Number</th>
                                 <td>
                                     <div class="btnArea text-center align-middle" id="receiverAccountArea">
                                         <%--                                        <p class="text-center align-middle">--%>
@@ -217,7 +217,7 @@
                             </tr>
 
                             <tr>
-                                <th scope="row" class="text-center align-middle">Recipient</th>
+                                <th scope="row" class="text-start align-middle">Recipient</th>
                                 <td id="receiverName">Please check the account number.</td>
                             </tr>
 
@@ -248,11 +248,32 @@
 </footer>
 
 <script>
+    // function fetchReceiverName() {
+    //     // For demonstration purposes, let's assume "박준하" is the name associated with the given account number.
+    //     // In a real-world scenario, you would make an AJAX request to a server to fetch the actual account holder's name.
+    //     document.getElementById('receiverName').textContent = "Danniel O'Laery";
+    // }
     function fetchReceiverName() {
-        // For demonstration purposes, let's assume "박준하" is the name associated with the given account number.
-        // In a real-world scenario, you would make an AJAX request to a server to fetch the actual account holder's name.
-        document.getElementById('receiverName').textContent = "Danniel O'Laery";
+        const accountNo = $("#recipientAccountNo").val();
+        console.log("계좌번호는", accountNo);
+        $.ajax({
+            url: '/getReceiverName',
+            type: 'POST',
+            data: { accountNo: accountNo },
+            dataType: 'json',
+            success: function(data) {
+                if (data && data.receiverName) {
+                    $('#receiverName').text(data.receiverName);
+                } else {
+                    console.error('Failed to load account owner\'s name. ');
+                }
+            },
+            error: function(error) {
+                console.error('서버에 요청하는 중 오류가 발생했습니다:', error);
+            }
+        });
     }
+
 </script>
 <script>
 

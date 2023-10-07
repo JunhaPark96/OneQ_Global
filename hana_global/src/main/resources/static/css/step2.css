@@ -9,18 +9,33 @@
     margin-bottom: 10px;
 }
 .uniformImg {
-    overflow: hidden;  /* 이미지가 이 컨테이너를 벗어나지 않도록 합니다. */
-    max-height: 200px; /* 적절한 높이를 설정합니다. 필요에 따라 값을 조절해주세요. */
+    overflow: hidden;
+    max-height: 250px;
     max-width: 400px;
     padding-bottom: 20px;
 }
 
 .uniformImg img {
     display: block;
-    max-width: 100%;   /* 이미지의 최대 너비를 부모 요소의 100%로 제한합니다. */
-    height: auto;      /* 이미지의 높이를 자동으로 조절하여 원본 비율을 유지합니다. */
+    max-width: 100%;
+    height: auto;
+}
+.custom-file-label {
+    padding: 10px 0px 10px 0px;
+    /*background-color: #007BFF;*/
+    color: black;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 15px rgba(1, 128, 133, 0.1) inset; /* 입체감 부각 */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    width: 100px;
+    text-align: center;
 }
 
+.custom-file-label:hover {
+    background-color: rgb(128, 128, 128);
+}
 .txt{
     padding-top: 10px;
 }
@@ -92,7 +107,7 @@
 
 .uploadField .txt {
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 13px;
     color: #777;
 }
 

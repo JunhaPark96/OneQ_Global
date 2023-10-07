@@ -3,6 +3,7 @@
 <%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Account" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
 <head>
@@ -179,12 +180,13 @@
                                             <div class="col text-end">
                                                 <h4 class="text-start">Account Number</h4>
                                                 <p class="text-muted p-border" style="font-size:22px">
-                                                        ${account.acNo}</p>
+                                                        ${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)}</p>
                                             </div>
                                             <div class="col">
                                                 <h4 class="text-start">Balance</h4>
                                                 <p class="text-muted text-end p-border" style="font-size:20px">
-                                                        ${account.balance} Won</p>
+                                                    <fmt:formatNumber value="${account.balance}" type="number"
+                                                                      pattern="#,##0"/> Won</p>
                                             </div>
                                             <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
                                                     <%--                                            <input style="margin-top:-30px;margin-left: 30px !important;"--%>

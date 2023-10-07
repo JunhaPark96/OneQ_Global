@@ -7,6 +7,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @SessionAttributes("currentMember")
@@ -123,5 +126,15 @@ public class AccountController {
     public String transferComplete() {
         System.out.println("transfer완료 페이지");
         return "transferComplete";
+    }
+
+    @PostMapping("/getReceiverName")
+    public ResponseEntity<Map<String, String>> getReceiverName(@RequestParam("accountNo") String acNo){
+        Account account = accountService.getAccountByAcNo(acNo);
+        Member member = memberService.findMemberById(account.getUserSeq());
+        String receiverName = member.getName();
+        Map<String, String> result = new HashMap<>();
+        result.put("receiverName", receiverName);
+        return ResponseEntity.ok(result);
     }
 }

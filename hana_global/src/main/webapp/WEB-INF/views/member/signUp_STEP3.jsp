@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-14
-  Time: 오후 5:33
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -72,9 +65,9 @@
             <input type="hidden" id="foreignRegNo" name="foreignRegNo" value="${sessionScope.foreignRegNo}">
                 <section>
                     <div class="titArea">
-                        <h2>휴대폰 본인확인</h2>
+                        <h2>Mobile Authentication</h2>
                         <div class="title-area clearfix">
-                            <h3 class="fleft">고객정보</h3>
+                            <h3 class="fleft">Customer Information</h3>
                             <div class="infor mt4">
                             </div>
                         </div>
@@ -88,7 +81,7 @@
                         <tbody>
                         <%--                        성명 입력--%>
                         <tr>
-                            <td class="th">성명</td>
+                            <td class="th">Full Name</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" title="성명 입력" id="userName"
@@ -98,7 +91,7 @@
                         </tr>
                         <%--                        외국인 등록번호 입력--%>
                         <tr>
-                            <td class="th">생년월일/성별</td>
+                            <td class="th">BirthDate/Gender</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" style="max-width: 120px" maxlength="6"
@@ -112,7 +105,7 @@
 
                         <%--                        휴대폰 번호 시작--%>
                         <tr>
-                            <td class="th">통신사 선택</td>
+                            <td class="th">Carrier</td>
                             <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
@@ -121,9 +114,9 @@
                                         <option value="SKT">SKT</option>
                                         <option value="KT">KT</option>
                                         <option value="LG">LG U+</option>
-                                        <option value="SKT_MVNO">SKT 알뜰폰</option>
-                                        <option value="KT_MVNO">KT 알뜰폰</option>
-                                        <option value="LG_MVNO">LG U+ 알뜰폰</option>
+                                        <option value="SKT_MVNO">SKT Budget</option>
+                                        <option value="KT_MVNO">KT Budget</option>
+                                        <option value="LG_MVNO">LG U+ Budget</option>
                                     </select>
                                 </div>
                             </td>
@@ -132,29 +125,29 @@
                         <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
                         <%--                        휴대폰 번호 시작--%>
                         <tr>
-                            <td class="th">휴대폰 번호</td>
+                            <td class="th">Mobile No.</td>
                             <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
                                     <input type="text" id="mobileDigit" name="mobileDigit" class="ipt notDel uiAct"
                                            maxlength="11" title="휴대전화 국번 입력">
-                                    <button id="requestCodeButton" name="requestCodeButton" class="btn_p">인증요청</button>
+                                    <button id="requestCodeButton" name="requestCodeButton" class="btn_p">Send</button>
                                 </div>
                             </td>
                         </tr>
                         <%--                        휴대폰 번호 끝--%>
 <%--                       coolsms 문자 인증 시작--%>
                         <tr id="phoneCodeInput" hidden>
-                            <td class="th">인증번호 입력</td>
+                            <td class="th">Authenticate</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" id="phoneCode" name="phoneCode" class="ipt uiAct"
                                            maxlength="6" title="인증번호 입력">
                                     <button id="phoneCodeSubmitButton" name="phoneCodeSubmitButton" class="btn_p" hidden>인증확인</button>
                                 </div>
-                                <div id="InvalidPhoneNumber" class="error-message" hidden>유효하지 않은 휴대폰 번호입니다.</div>
-                                <div id="InvalidCode" class="error-message" hidden>유효하지 않은 인증번호입니다.</div>
-                                <div id="validCode" class="success-message" hidden>인증번호 확인 완료!</div>
+                                <div id="InvalidPhoneNumber" class="error-message" hidden>Invalid mobile number.</div>
+                                <div id="InvalidCode" class="error-message" hidden>Invalid authentication code.</div>
+                                <div id="validCode" class="success-message" hidden>Authentication code verified!</div>
                             </td>
                         </tr>
 <%--                       coolsms 문자 인증 끝--%>
@@ -164,11 +157,14 @@
 
                 <section>
                     <div class="titArea">
-                        <h2>고객정보 변경을 위한 기본 정보 입력</h2>
-                        <h3 class="titH3">신청인 정보</h3>
+<%--                        <h2>고객정보 변경을 위한 기본 정보 입력</h2>--%>
+                        <h2>Basic Information for Customer Details</h2>
+<%--                        <h3 class="titH3">신청인 정보</h3>--%>
+                        <h3 class="titH3">Applicant Information</h3>
                         <div class="title-area clearfix">
                             <div class="infor mt4">
-                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
+<%--                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>--%>
+                                <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>
                             </div>
                         </div>
                     </div>
@@ -181,7 +177,8 @@
                         <tbody>
 <%--                        이메일 시작--%>
                         <tr>
-                            <td class="th">이메일</td>
+<%--                            <td class="th">이메일</td>--%>
+                            <td class="th">Email*</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="email" class="ipt uiAct" title="이메일 입력" id="emailId"
@@ -193,7 +190,8 @@
 
                         <!-- 국적 -->
                         <tr>
-                            <td class="th">국적</td>
+<%--                            <td class="th">국적</td>--%>
+                            <td class="th">Nationality*</td>
                             <td>
                                 <div class="iptWrap">
 <%--                                    <select class="ipt uiAct" title="국가선택" id="nationality" name="nationality"--%>
@@ -235,7 +233,8 @@
 
                         <!-- 국가코드 -->
                         <tr>
-                            <td class="th">국가코드</td>
+<%--                            <td class="th">국가코드</td>--%>
+                            <td class="th">Country Code*</td>
                             <td>
                                 <div class="iptWrap">
                                     <input type="text" class="ipt uiAct" title="국가코드" id="countryCode"
@@ -246,12 +245,12 @@
 
                         <%--주소 시작--%>
                         <tr>
-                            <td class="th"><b>주소</b></td>
+                            <td class="th"><b>Address*</b></td>
                             <td>
                                 <div class="iptWrap">
                                     <div class="postcodeContainer">
                                         <input type="text" class="ipt uiAct" id="postcode" name="sample4_postcode"
-                                               placeholder="우편번호">
+                                               placeholder="ZipCode">
                                         <button class="valiButton" onclick="sample4_execDaumPostcode(event)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -259,14 +258,10 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <input type="text" class="ipt uiAct" id="roadAddress" name="roadAddress"
-                                           placeholder="도로명주소"><br>
-                                    <input type="text" class="ipt uiAct" id="jibunAddress" name="jibunAddress"
-                                           placeholder="지번주소"><br>
-                                    <input type="text" class="ipt uiAct" id="detailAddress" name="detailAddress"
-                                           placeholder="상세주소"><br>
-                                    <input type="text" class="ipt uiAct" id="extraAddress" name="extraAddress"
-                                           placeholder="참고항목">
+                                    <input type="text" class="ipt uiAct" id="roadAddress" name="roadAddress" placeholder="Street Address"><br>
+                                    <input type="text" class="ipt uiAct" id="jibunAddress" name="jibunAddress" placeholder="Parcel Address"><br>
+                                    <input type="text" class="ipt uiAct" id="detailAddress" name="detailAddress" placeholder="Detailed Address"><br>
+                                    <input type="text" class="ipt uiAct" id="extraAddress" name="extraAddress" placeholder="Reference Item">
                                 </div>
                             </td>
                         </tr>
@@ -278,8 +273,8 @@
 
                 <section class="certContain">
                     <div class="btnArea" id="btnFclArea">
-                        <a href="/signUp_STEP2" id="btnCancel" class="btn_s">이전</a>
-                        <button type="submit" id="btnNext" class="btn_p">다음</button>
+                        <a href="/signUp_STEP2" id="btnCancel" class="btn_s">Prev</a>
+                        <button type="submit" id="btnNext" class="btn_p">Next</button>
                     </div>
                 </section>
             </form>

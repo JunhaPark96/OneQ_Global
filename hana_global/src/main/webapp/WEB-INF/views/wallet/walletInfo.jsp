@@ -237,7 +237,7 @@
 
         // NaN 확인 (parseInt에서 유효하지 않은 값이 입력되면 NaN을 반환합니다)
         if (isNaN(loadAmount)) {
-            alert("loadAmount 값을 확인해주세요.");
+            alert("Please Check Load Amount again.");
             return;
         }
 
@@ -252,7 +252,7 @@
             success: function(response) {
                 alert(response); // "충전 성공!" 또는 서버에서 반환된 다른 메시지를 표시
                 closeModal();
-                location.reload(); // 월렛 정보를 업데이트하기 위해 페이지를 다시 로드합니다.
+                location.reload(); // 월렛 정보를 업데이트하기 위해 페이지를 다시 로드.
             },
             error: function(jqXHR) {
                 alert(jqXHR.responseText); // 서버에서 반환된 에러 메시지를 표시

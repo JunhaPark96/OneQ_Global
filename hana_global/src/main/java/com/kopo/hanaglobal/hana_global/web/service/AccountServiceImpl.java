@@ -30,7 +30,7 @@ public class AccountServiceImpl implements AccountService{
         String randomPart = RandomStringUtils.randomNumeric(11);
         newAccount.setAcNo("412" + randomPart);
         newAccount.setUserSeq(userSeq); // Set the user sequence number
-        newAccount.setAcName("주계좌");
+        newAccount.setAcName("Hana Demand");
         newAccount.setAcPasswd(acPasswd);
         newAccount.setStatus(1);
 

@@ -67,6 +67,9 @@ public class WalletController {
             walletService.loadWallet(member.getUserSeq(), loadAmount, walletPasswd);
             return ResponseEntity.ok().body("Load Success!");
         } catch (Exception e) {
+            if(e.getMessage().equals("간편비밀번호가 틀렸습니다.")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect quick password.");
+            }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }

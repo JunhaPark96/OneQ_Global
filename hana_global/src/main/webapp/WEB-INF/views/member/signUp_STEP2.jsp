@@ -46,12 +46,13 @@
                             <td class="th">Personal Identification</td>
                             <td>
                                 <div class="idCardCerti" id="idCardCerti1">
-                                    <div class="uniformImg"><img src="./images/registerEx.png" alt=""></div>
+                                    <div class="uniformImg"><img src="./images/alien_register.png" alt=""></div>
                                     <div class="form">
                                         <div class="uploadField">
-                                            <label for="idCardImage">Upload Identification Image:</label>
+                                            <label for="idCardImage">Upload Identification Image</label>
                                             <input type="file" id="idCardImage" name="idCardImage" accept="image/*"
-                                                   onchange="previewImage(event)">
+                                                   onchange="previewImage(event)" style="display: none;">
+                                            <label for="idCardImage" class="custom-file-label">Upload File</label>
                                             <span class="txt">Please upload your identification image.</span>
                                         </div>
                                         <div class="btn_a" onclick="openModal()">
@@ -220,7 +221,7 @@ OCR API 호출: 사용자가 모달에서 'Authenticate' 버튼을 클릭하면,
             document.getElementById("loadingScreen").style.display = "none";
 
             // Alert user
-            alert('인증이 완료되었습니다');
+            alert('Authentication has been completed');
             document.getElementById("registrationForm").submit();
             // Store input values in hidden fields
         }, 2000);  // 2 seconds delay

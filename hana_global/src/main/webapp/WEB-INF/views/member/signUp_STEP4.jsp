@@ -48,11 +48,13 @@
         <input type="hidden" id="detailAddress" name="detailAddress" value="${sessionScope.detailAddress}">
         <section>
           <div class="titArea">
-            <h2>로그인 정보 입력</h2>
+<%--            <h2>로그인 정보 입력</h2>--%>
+            <h2>Enter Login Details</h2>
             <div class="title-area clearfix">
-              <h3 class="fleft">이메일 패스워드</h3>
+<%--              <h3 class="fleft">이메일 패스워드</h3>--%>
+              <h3 class="fleft">ID & Password</h3>
               <div class="infor mt4">
-                <span class="asterisk">필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
+                <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>
               </div>
             </div>
           </div>
@@ -65,7 +67,7 @@
 
             <tbody>
             <tr>
-              <td class="th">아이디</td>
+              <td class="th">ID*</td>
               <td>
                 <div class="iptWrap">
                   <input type="text" class="ipt uiAct" title="아이디 입력" id="userId"
@@ -75,7 +77,7 @@
             </tr>
 
             <tr>
-              <td class="th">비밀번호</td>
+              <td class="th">Password*</td>
               <td>
                 <div class="iptWrap">
                   <input type="password" class="ipt uiAct"
@@ -85,7 +87,7 @@
             </tr>
 
             <tr>
-              <td class="th">비밀번호 확인</td>
+              <td class="th">Confirm Password*</td>
               <td>
                 <div class="iptWrap">
                   <input type="password" class="ipt uiAct"
@@ -99,11 +101,11 @@
         </section>
         <section class="account-password-section">
           <div class="titArea">
-            <h2>간편 비밀번호 설정</h2>
+            <h2>Account Information</h2>
             <div class="title-area clearfix">
-              <h3 class="fleft">계좌 정보</h3>
+              <h3 class="fleft">Set Quick Password</h3>
               <div class="infor mt4">
-                <span class="asterisk">필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>
+                <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>
               </div>
             </div>
           </div>
@@ -116,17 +118,17 @@
             <tbody>
 
             <tr>
-              <td class="th">간편 비밀번호</td>
+              <td class="th">Password</td>
               <td>
                 <div class="iptWrap">
-                  <input type="text" class="ipt uiAct" title="간편비밀번호 설정" id="acPasswd"
+                  <input type="password" class="ipt uiAct" title="간편비밀번호 설정" id="acPasswd"
                          name="acPasswd" maxlength="4">
                 </div>
               </td>
             </tr>
 
             <tr>
-              <td class="th">비밀번호 확인</td>
+              <td class="th">Confirm Password</td>
               <td>
                 <div class="iptWrap" >
                   <input type="password" class="ipt uiAct" title="국적 입력" id="acPasswdConfirm"
@@ -141,8 +143,8 @@
 
         <section class="certContain">
           <div class="btnArea" id="btnFclArea">
-            <a href="/signUp_STEP3" id="btnCancel" class="btn_s">이전</a>
-            <button type="submit" id="btnNext" class="btn_p">다음</button>
+            <a href="/signUp_STEP3" id="btnCancel" class="btn_s">Prev</a>
+            <button type="submit" id="btnNext" class="btn_p">Next</button>
           </div>
         </section>
       </form>

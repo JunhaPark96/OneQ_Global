@@ -2,7 +2,7 @@ function changeBalance() {
     let select = document.getElementById("selectAccountForm");
     let selectedOption = select.options[select.selectedIndex];
     let balance = selectedOption.getAttribute("data-balance");
-    document.getElementById("accountBalance").innerText = balance;
+    document.getElementById("accountBalance").innerText = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 document.addEventListener("DOMContentLoaded", function () {

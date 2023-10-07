@@ -239,7 +239,7 @@ public class MainController {
         System.out.println("계좌정보: " + accountService.toString());
         // 월렛 생성
         Account account = accountService.findAccountByUserSeq(userSeq);
-        walletService.createNewWallet(userSeq, account.getAcNo(), userPasswd);
+        walletService.createNewWallet(userSeq, account.getAcNo(), "000000");
         System.out.println("월렛정보: " + walletService.toString());
         return "member/signUp_STEP5";
     }

@@ -9,7 +9,7 @@
     transition: border-color 0.3s;
 }
 .account-password-section .iptWrap .ipt {
-    width: 10%;  /* 원하는 너비로 설정하세요. */
+    width: 15%;  /* 원하는 너비로 설정하세요. */
 }
 
 .txt{
@@ -137,7 +137,7 @@ select.ipt.mini, .setPhone select.ipt {
 }
 
 .iptWrap .ipt.uiAct#gender {
-    max-width: 27px;
+    max-width: 30px;
     border: none;
     border-bottom: 1px solid #000;
     border-radius: 0px;

@@ -67,7 +67,7 @@
                 </div>
                 <div class="login-option">
                     <div>
-                        <a href="${pageContext.request.contextPath}/openAccount"> open account </a>
+                        <a href="${pageContext.request.contextPath}/readyToApply"> open account </a>
                     </div>
                     <div>
                         <a href="${pageContext.request.contextPath}/openAccount"> forget your password? </a>

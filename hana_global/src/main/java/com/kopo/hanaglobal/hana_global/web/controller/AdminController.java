@@ -2,6 +2,7 @@ package com.kopo.hanaglobal.hana_global.web.controller;
 
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
+import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
@@ -81,6 +82,11 @@ public class AdminController {
             memberService.approveMember(userSeq);
             response.put("success", "true");
             response.put("message", "Successfully approved!");
+            // 권한을 승인하면 월렛도 자동생성
+            Account account = accountService.findAccountByUserSeq(userSeq);
+            walletService.createNewWallet(userSeq, account.getAcNo(), "123456");
+            Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(userSeq, "KRW");
+            System.out.println("월렛정보는: " + wallet.toString());
         } catch (Exception e){
             response.put("success", "false");
             response.put("message", "Failed to approve due to an exception.");

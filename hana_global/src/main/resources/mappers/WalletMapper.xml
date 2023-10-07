@@ -5,8 +5,8 @@
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.WalletRepository">
 <!--    계좌개설/회원가입 시 wallet 자동 생성-->
     <insert id="createNewWallet" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Wallet">
-        INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ as userSeq, AC_NO as acNo, WALLET_PW as walletPw)
-        VALUES (HANA_WALLET_SEQ.NEXTVAL,  #{userSeq}, #{acNo}, #{walletPw})
+        INSERT INTO HANA_WALLET(WALLET_SEQ, USER_SEQ, AC_NO, WALLET_PW)
+        VALUES (#{walletSeq}, #{userSeq}, #{acNo}, #{walletPw})
     </insert>
 
 <!--    월렛번호로 월렛 찾기-->

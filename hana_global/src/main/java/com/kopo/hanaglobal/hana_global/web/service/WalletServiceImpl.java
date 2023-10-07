@@ -11,6 +11,7 @@ import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
 import com.kopo.hanaglobal.hana_global.web.repository.AccountRepository;
 import com.kopo.hanaglobal.hana_global.web.repository.WalletRepository;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,18 +35,24 @@ public class WalletServiceImpl implements WalletService {
         this.accountRepository = accountRepository;
     }
 
-
     @Override
     public void createNewWallet(int userSeq, String acNo, String walletPw) {
         Wallet newWallet = new Wallet();
+        int generatedWalletSeq = generateWalletNumber();
+        newWallet.setWalletSeq(generatedWalletSeq);
         newWallet.setUserSeq(userSeq);
         newWallet.setAcNo(acNo);
         newWallet.setWalletPw(walletPw);
-
-        walletRepository.createNewWallet(newWallet);
+        try {
+            walletRepository.createNewWallet(newWallet);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
+
     @Override
-    public Wallet findWalletByWalletNo(int walletSeq){
+    public Wallet findWalletByWalletNo(int walletSeq) {
         Wallet wallet = walletRepository.findWalletByWalletNo(walletSeq);
         System.out.println("서비스에서 가져온 월렛은 " + wallet.toString());
         return wallet;
@@ -83,9 +90,10 @@ public class WalletServiceImpl implements WalletService {
         // 월렛 내역 추가
         addWalletHistory(wallet, amount);
     }
+
     // 환전기능 - 계좌금액 차감, 월렛 통화 충전
     @Override
-    public void doExchange(String walletSeqStr, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName){
+    public void doExchange(String walletSeqStr, String currencyCode, String password, Integer krwAmount, Integer foreignAmount, String sourceCurrencyName) {
         int walletSeq;
         try {
             walletSeq = Integer.parseInt(walletSeqStr);
@@ -101,9 +109,11 @@ public class WalletServiceImpl implements WalletService {
 
         processForeignAddition(fromWallet, targetWallet, currencyCode, foreignAmount, sourceCurrencyName);
     }
+
     public Wallet getWalletBySeq(int walletSeq) {
         return walletRepository.findWalletByWalletNo(walletSeq);
     }
+
     public Account getAccountByAcNo(Wallet fromWallet) {
         return accountRepository.getAccountByAcNo(fromWallet.getAcNo());
     }
@@ -116,6 +126,7 @@ public class WalletServiceImpl implements WalletService {
 //        }
 //        return wallet;
     }
+
     public void processForeignAddition(Wallet fromWallet, Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {
         // 외화 충전
         if (targetWallet == null) { // 월렛에 해당 외화가 없으면 insert
@@ -129,6 +140,7 @@ public class WalletServiceImpl implements WalletService {
         walletRepository.insertDepositWalletHist(walletDepositDTO);
         System.out.println("환전 입금 내역 추가: " + walletDepositDTO.toString());
     }
+
     public WalletHistoryDTO createDepositDTO(Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {
         WalletHistoryDTO walletDepositDTO = new WalletHistoryDTO();
         walletDepositDTO.setWalletSeq(targetWallet.getWalletSeq());
@@ -158,6 +170,7 @@ public class WalletServiceImpl implements WalletService {
         walletRepository.insertWithdrawWalletHist(walletWithdrawDTO);
         System.out.println("환전 출금 내역 추가: " + walletWithdrawDTO.toString());
     }
+
     public WalletHistoryDTO createWithdrawDTO(Wallet fromWallet, Integer krwAmount, String transactionType) {
         WalletHistoryDTO walletWithdrawDTO = new WalletHistoryDTO();
         walletWithdrawDTO.setWalletSeq(fromWallet.getWalletSeq());
@@ -202,6 +215,7 @@ public class WalletServiceImpl implements WalletService {
         if (!wallet.getWalletPw().equals(password)) throw new RuntimeException("간편비밀번호가 틀렸습니다.");
         return wallet;
     }
+
     // 계좌 유효성 체크
     @Override
     public Account validateAccountAndRetrieve(Wallet wallet, Integer amount) {
@@ -209,6 +223,7 @@ public class WalletServiceImpl implements WalletService {
         if (account.getBalance() < amount) throw new RuntimeException("계좌 잔액이 부족합니다.");
         return account;
     }
+
     private void deductFromAccount(Account account, Integer amount) {
         // 계좌에서 출금
         System.out.println("계좌 출금 전: " + account.toString());
@@ -219,6 +234,7 @@ public class WalletServiceImpl implements WalletService {
         accountRepository.deductAccountBalance(account.getAcNo(), amount);
         System.out.println("계좌 출금 후: " + account.toString());
     }
+
     public class InsufficientBalanceException extends RuntimeException {
         public InsufficientBalanceException(String message) {
             super(message);
@@ -226,7 +242,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public void deductWalletBalance(Wallet wallet, Integer amount){
+    public void deductWalletBalance(Wallet wallet, Integer amount) {
         System.out.println("월렛 출금 전: " + wallet.toString());
         walletRepository.deductWalletBalance(wallet.getUserSeq(), amount, wallet.getCurrencyCode());
         System.out.println("월렛 출금 후: " + wallet.toString());
@@ -253,7 +269,8 @@ public class WalletServiceImpl implements WalletService {
         insertAccHistByWallet(accountHistoryDTO);
         System.out.println("계좌 거래내역 추가: " + accountHistoryDTO.toString());
     }
-    public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO){
+
+    public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO) {
         accountRepository.insertAccHistByWallet(accountHistoryResponseDTO);
     }
 
@@ -284,13 +301,13 @@ public class WalletServiceImpl implements WalletService {
 
     // 자동환전 테이블 삽입
     @Override
-    public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO){
+    public void insertAutoExchange(AutoExchangeDTO autoExchangeDTO) {
         walletRepository.insertAutoExchange(autoExchangeDTO);
         System.out.println("자동환전 삽입은 " + autoExchangeDTO.toString());
     }
 
     @Override
-    public List<AutoExchangeDTO> getAutoExchangeListByUserSeq(int userSeq){
+    public List<AutoExchangeDTO> getAutoExchangeListByUserSeq(int userSeq) {
         List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByUserSeq(userSeq);
         for (AutoExchangeDTO a : autoExchangeDTOS) {
             System.out.println("자동환전 리스트는 " + a);
@@ -299,7 +316,7 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int walletSeq){
+    public List<AutoExchangeDTO> getAutoExchangeListByWalletSeq(int walletSeq) {
         List<AutoExchangeDTO> autoExchangeDTOS = walletRepository.getAutoExchangeListByWalletSeq(walletSeq);
         for (AutoExchangeDTO a : autoExchangeDTOS) {
             System.out.println("자동환전 리스트는 " + a);
@@ -309,7 +326,7 @@ public class WalletServiceImpl implements WalletService {
 
     // 송금기능
     @Transactional
-    public void doRemittance(RemittanceDTO remittanceDTO){
+    public void doRemittance(RemittanceDTO remittanceDTO) {
         Wallet wallet = walletRepository.findWalletByWalletNo(remittanceDTO.getWalletSeq());
         Account account = accountRepository.getAccountByAcNo(remittanceDTO.getSenderAc());
         Integer amount = remittanceDTO.getRemitAmount();
@@ -323,13 +340,13 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
-    public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq){
+    public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq) {
         List<RemittanceDTO> remittanceDTOList = walletRepository.getRemittanceListByWalletSeq(walletSeq);
         return remittanceDTOList;
     }
 
     @Override
-    public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq){
+    public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq) {
         List<WalletHistoryDTO> walletHistoryDTOList = walletRepository.getWholeWalletHistory(walletSeq);
         return walletHistoryDTOList;
     }

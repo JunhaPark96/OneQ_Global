@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @ToString
 public class Wallet {
-    private int walletTransNo;
     private int walletSeq;
     private int userSeq;
     private String acNo;

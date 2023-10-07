@@ -577,21 +577,25 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .card__price {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     color: #232528;
     font-size: 20px;
     margin: 15px 0;
 }
 
 .card__price span {
-    font-size: 60%;
+    font-size: 100%;
+    font-weight: 600;
 }
 
 .card__method {
     color: #d3cece;
     text-transform: uppercase;
     text-align: left;
-    font-size: 11px;
-    margin-bottom: 5px;
+    font-size: 15px;
+    margin-bottom: 15px;
     height: 10px;
 }
 
@@ -615,6 +619,7 @@ tbody, td, tfoot, th, thead, tr {
 .card__card-details {
     display: inline-block;
     text-align: left;
+    margin-top: 15px;
 }
 
 .card__card-type {
@@ -646,8 +651,18 @@ tbody, td, tfoot, th, thead, tr {
     color: #d3cece;
 }
 
+.remittanceTrace{
+    border-radius: 2rem;
+    padding: 10px;
+    background-color: #018085;
+    color: white;
+    box-shadow: inset 0 0 10px;
+    border: white;
+}
 
-
+.remittanceTrace:hover {
+    background-color: #016c75;
+}
 
 
 /* 송금완료창 끝 ========================================================*/

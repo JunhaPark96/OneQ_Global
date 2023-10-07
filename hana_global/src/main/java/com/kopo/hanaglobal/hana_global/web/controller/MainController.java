@@ -1,7 +1,9 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.service.AccountService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
+import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,12 @@ import java.util.Locale;
 public class MainController {
     private MemberService memberService;
     private AccountService accountService;
-
+    private WalletService walletService;
     @Autowired
-    public MainController(MemberService memberService, AccountService accountService) {
+    public MainController(MemberService memberService, AccountService accountService, WalletService walletService) {
         this.memberService = memberService;
         this.accountService = accountService;
+        this.walletService = walletService;
     }
 
     @GetMapping("/")
@@ -190,7 +193,7 @@ public class MainController {
         session.setAttribute("roadAddress", roadAddress);
         session.setAttribute("jibunAddress", jibunAddress);
         session.setAttribute("detailAddress", detailAddress);
-        // 여기서 form으로부터 받은 데이터를 처리할 수 있습니다.
+        // 여기서 form으로부터 받은 데이터를 처리
 
         System.out.println("성별: " + session.getAttribute("gender"));
         System.out.println("생년월일: " + session.getAttribute("birthDate"));
@@ -233,8 +236,11 @@ public class MainController {
         int userSeq = memberService.findUserSeqByID(userId);
         System.out.println("userSeq: " + userSeq);
         accountService.createNewAccount(acPasswd, userSeq);
-        System.out.println(accountService.toString());
-
+        System.out.println("계좌정보: " + accountService.toString());
+        // 월렛 생성
+        Account account = accountService.findAccountByUserSeq(userSeq);
+        walletService.createNewWallet(userSeq, account.getAcNo(), userPasswd);
+        System.out.println("월렛정보: " + walletService.toString());
         return "member/signUp_STEP5";
     }
 

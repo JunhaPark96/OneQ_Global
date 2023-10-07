@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Hana2.0+B&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Hana2.0+H&display=swap" rel="stylesheet"/>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <link href="./css/bootstrap/bootstrap2.min.css" rel="stylesheet"/>
     <link href="./css/main.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
@@ -164,7 +165,7 @@
                         <div class="alert-text ng-binding" id="portfolio-footer-alert"
                              data-ng-bind-html="content.portfolioFooterText | formatString:pageData.NetbankId">Your HANA
                             GLOBAL
-                            client ID is ${member.id}. You will need this to log back into HANA GLOBAL.
+                            client ID is  <span style="font-weight:bold; text-decoration:underline;">${member.id}</span>. You will need this to log back into HANA GLOBAL.
                         </div>
                     </div>
                 </div>

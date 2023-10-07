@@ -194,7 +194,6 @@
             $.post("/approveMember", {userSeq: userSeq}, function (response) {
                 if (response.success === "true") {
                     alert(response.message);
-
                     // 버튼 상태를 'Complete'로 변경
                     btnElement.textContent = "Complete";
                     btnElement.classList.remove("btn-warning");

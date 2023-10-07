@@ -517,14 +517,14 @@
 
                                 <div class="card__recipient-info">
                                     <p class="card__recipient">The transfer will be completed in approximately 1 minute,
-                                        and you can track the real-time transfer status below. </p>
+                                        and you can track <br/>the real-time transfer status below. </p>
                                     <p class="card__email"></p>
                                 </div>
 
                                 <p class="card__price">Transfer Amount <span></span></p>
                                 <p class="card__price">Recipient <span> </span></p>
                                 <p class="card__price">Recipient Country <span></span></p>
-                                <button onclick="remittanceTrace(event)">
+                                <button class="mb-4 remittanceTrace" onclick="remittanceTrace(event)">
                                     Trace Transfer
                                 </button>
                                 <p class="card__method">Payment method</p>

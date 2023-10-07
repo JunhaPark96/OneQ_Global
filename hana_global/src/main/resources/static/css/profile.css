@@ -48,8 +48,7 @@ body {
     display: grid;
     grid-template-areas:
     "user-info main-info"
-    "exchange-info remittance-info "
-;
+    "exchange-info exchange-info";
     column-gap: 20px;
     row-gap: 20px;
     /*overflow: hidden;*/
@@ -213,6 +212,11 @@ body {
 
 
 /* 자동환전 시작 --------------------------------*/
+.card-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}
 .title-text{
     font-size: 20px;
     font-weight: bold;

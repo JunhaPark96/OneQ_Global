@@ -1,0 +1,129 @@
+.footer {
+    position: relative;
+    padding: 20px;
+    color: black;
+    margin: 0 10% 0 10%;
+    border-top: 5px solid #059196;
+    border-bottom: 5px solid #059196;
+    /*box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);*/
+}
+
+.footer::before, .footer::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 5px;
+    z-index: -1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer::before {
+    top: -5px; /* Above the top border */
+}
+
+.footer::after {
+    bottom: -5px; /* Below the bottom border */
+}
+
+.f12_ar {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 20px; /* Added margin for spacing between the paragraph and the links below */
+}
+
+.crop-area li:not(:last-child)::after {
+    content: '|';
+    margin: 0 10px;
+}
+
+
+.f_left {
+    float: none; /* Changed from float left to none for it to take full width */
+}
+
+.f_down {
+    clear: both; /* Clearing any floated elements above */
+    display: flex;
+    justify-content: space-around;
+}
+
+.crop-area {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.crop-area li {
+    display: inline-block;
+}
+
+.crop-area li a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.crop-area li a:hover {
+    color: #bdc3c7;
+}
+
+.selectbox_easy.hide ul {
+    display: none;
+}
+
+.selectbox_easy ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    border: 1px solid #7f8c8d;
+    background-color: #ecf0f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.selectbox_easy ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.selectbox_easy ul li a:hover {
+    background-color: #bdc3c7;
+}
+
+.selectbox_easy button {
+    background: none;
+    border: none;
+    /*color: #ecf0f1;*/
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.selectbox_easy button:hover {
+    color: #bdc3c7;
+}
+
+.selectbox_easy_exc button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 1px solid #7f8c8d;
+    background-color: #018085;
+    color: #2c3e50;
+    border-radius: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.selectbox_easy_exc button:hover {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}

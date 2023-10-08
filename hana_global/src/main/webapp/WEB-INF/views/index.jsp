@@ -16,6 +16,7 @@
     <link href="css/TTF.css" rel="stylesheet"/>
     <link href="css/main.css" rel="stylesheet">
 
+
     <script src="./js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -138,9 +139,7 @@
             </div>
         </div>
     </div>
-    <footer>
-<%--        게시판 링크: <a href="${pageContext.request.contextPath}/boardlist"> 게시판 </a>--%>
-    </footer>
+    <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </div>
 
 </body>

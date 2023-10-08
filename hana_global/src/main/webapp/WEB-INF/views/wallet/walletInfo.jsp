@@ -7,12 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="./js/wallet.js"></script>
     <link href="./css/service-main.css" rel="stylesheet"/>
@@ -203,9 +203,154 @@
             </div>
         </div>
     </div>
+<%--    모달 창 끝--%>
+
+<%--    비밀번호 설정 모달 시작--%>
+    <!-- Password Modal -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Set New Password</h5>
+                    <!-- 모달 닫기 버튼 제거
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    -->
+                </div>
+                <h6 id="passwordPrompt">To use wallet services, you need to set a password for the first time.</h6>
+
+                <div class="modal-body" style="width: 100%">
+                        <div class="password-panel text-center mb-3">
+                            <div class="password-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                            <input type="password" class="form-control" id="paymentPassword" hidden="hidden"
+                                   readonly>
+                        </div>
+                        <div class="keypad">
+                            <button class="btn btn-light keypad-btn" data-value="1">1</button>
+                            <button class="btn btn-light keypad-btn" data-value="2">2</button>
+                            <button class="btn btn-light keypad-btn" data-value="3">3</button>
+                            <button class="btn btn-light keypad-btn" data-value="4">4</button>
+                            <button class="btn btn-light keypad-btn" data-value="5">5</button>
+                            <button class="btn btn-light keypad-btn" data-value="6">6</button>
+                            <button class="btn btn-light keypad-btn" data-value="7">7</button>
+                            <button class="btn btn-light keypad-btn" data-value="8">8</button>
+                            <button class="btn btn-light keypad-btn" data-value="9">9</button>
+                            <button class="btn btn-danger keypad-btn-delete">C</button>
+                            <button class="btn btn-light keypad-btn" data-value="0">0</button>
+                            <button class="btn btn-light keypad-btn-delete">⬅</button>
+                        </div>
+                </div>
+                <div class="modal-footer" style="width: 100%">
+                    <button type="button" class="btn btn-primary" id="confirmPayment" style="background-color: #018085">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%--    비밀번호 설정 모달 끝--%>
 </div>
 </body>
+<%--비밀번호 설정 스크립트 --%>
+<script>
+    <c:if test="${showPasswordModal}">
+    $(document).ready(function() {
+        $("#passwordModal").modal('show');
+    });
+    </c:if>
 
+    $(document).ready(function() {
+        let tempPassword = "";  // 비밀번호를 임시로 저장할 변수
+        $('#confirmPayment').on('click', function() {
+            let currentPasswordVal = $('#paymentPassword').val();
+
+            if (currentPasswordVal.length !== 6) {
+                alert("6자리 비밀번호를 모두 입력해주세요.");
+                return;
+            }
+            // 첫 번째 입력인 경우
+            if (tempPassword == "") {
+                tempPassword = currentPasswordVal;  // 첫 번째 입력값 저장
+                $('#paymentPassword').val('');  // 입력 필드 초기화
+                updateDots('');  // dot도 초기화
+                $('#passwordPrompt').text('Please enter your password again to confirm.');
+            }
+            // 두 번째 입력인 경우
+            else {
+                if (tempPassword == currentPasswordVal) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/changeWalletPassword",
+                        data: {
+                            walletPw: tempPassword,
+                        },
+                        success: function(response) {
+                            // 서버에서 성공 응답을 받았을 때 수행할 코드
+                            $("#passwordModal").modal('hide');  // 모달 창 닫기
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            // 서버에서 에러 응답을 받았을 때 수행할 코드
+                            alert("An error occurred while setting the password. Please try again.");
+                        }
+                    });
+                    alert("Password setting is complete.");
+                    $("#passwordModal").modal('hide');  // 모달 창 닫기
+                } else {
+                    alert("Passwords do not match. Please enter again.");
+                    tempPassword = "";  // 임시 저장된 비밀번호 초기화
+                    $('#paymentPassword').val('');  // 입력 필드 초기화
+                    updateDots('');  // dot도 초기화
+                }
+            }
+        });
+
+        // 숫자 버튼 클릭 이벤트
+        $('.keypad-btn').on('click', function() {
+            console.log('Number button clicked:', $(this).data('value'));
+            let currentVal = $('#paymentPassword').val();
+            // 6자리가 넘지 않도록 설정
+            if (currentVal.length < 6) {
+                let newVal = currentVal + $(this).data('value');
+                $('#paymentPassword').val(newVal);
+                updateDots(newVal);
+            }
+        });
+
+        // ⬅ 버튼 클릭 이벤트
+        $('.keypad-btn-delete').on('click', function() {
+            console.log('Backspace button clicked');
+            let currentVal = $('#paymentPassword').val();
+            let newVal = currentVal.slice(0, -1);
+            $('#paymentPassword').val(newVal);
+            updateDots(newVal);
+        });
+
+        // C 버튼 클릭 이벤트
+        $('.btn-danger.keypad-btn-delete').on('click', function() {
+            console.log('Clear button clicked');
+            $('#paymentPassword').val('');
+            updateDots('');
+        });
+
+        function updateDots(val) {
+            $('.dot').removeClass('dot-filled');
+            for (let i = 0; i < val.length; i++) {
+                $('.dot').eq(i).addClass('dot-filled');
+            }
+        }
+
+    });
+
+
+</script>
+<%--비밀번호 설정 스크립트 끝--%>
 <script>
     // 모달 열기 함수
     function openModal(walletSeq) {
@@ -222,11 +367,21 @@
 
     // 금액 선택
     function selectAmount(amount) {
-        document.getElementById('loadAmount').value = amount;
+        const inputField = document.getElementById('loadAmount');
+        // 현재 입력값을 가져오기
+        let currentAmount = parseInt(inputField.value, 10);
+        // NaN일 경우 0으로 초기화
+        if (isNaN(currentAmount)) {
+            currentAmount = 0;
+        }
+        // 기존 값에 새로운 값을 더하기
+        const newAmount = currentAmount + parseInt(amount, 10);
+        inputField.value = newAmount;
     }
 
+
     document.getElementById("loadWallet").addEventListener("click", function() {
-        // 이 위치에서 walletSeq 값을 다시 가져옵니다.
+        // 이 위치에서 walletSeq 값을 다시 가져옴
         let walletSeq = document.getElementById("myModal").getAttribute("data-wallet-id");
 
         let loadAmount = document.getElementById('loadAmount').value;

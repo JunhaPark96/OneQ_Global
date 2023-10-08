@@ -47,5 +47,6 @@ public interface WalletService {
     public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
 
     public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq);
-    
+
+    public void changeWalletPassword(String walletPw, int userSeq);
 }

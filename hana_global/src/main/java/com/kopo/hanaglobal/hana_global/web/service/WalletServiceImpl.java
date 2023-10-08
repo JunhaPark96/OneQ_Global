@@ -351,6 +351,11 @@ public class WalletServiceImpl implements WalletService {
         return walletHistoryDTOList;
     }
 
-
+    @Override
+    public void changeWalletPassword(String walletPw, int userSeq){
+        walletRepository.changeWalletPassword(walletPw, userSeq);
+        Wallet wallet = walletRepository.findWalletByWalletNo(userSeq);
+        System.out.println("바뀐 월렛 비밀번호는 " + wallet.toString());
+    }
 }
 

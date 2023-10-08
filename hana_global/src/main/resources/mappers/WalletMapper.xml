@@ -107,4 +107,10 @@
         WHERE wallet_seq = #{walletSeq}
         ORDER BY TRADE_DATE DESC
     </select>
+
+    <update id="changeWalletPassword">
+        UPDATE HANA_WALLET
+        SET WALLET_PW = #{walletPw}
+        WHERE user_seq = #{userSeq}
+    </update>
 </mapper>

@@ -12,9 +12,9 @@ function closeModal() {
 }
 
 // 금액 선택
-function selectAmount(amount) {
-    document.getElementById('loadAmount').value = amount;
-}
+// function selectAmount(amount) {
+//     document.getElementById('loadAmount').value = amount;
+// }
 
 // document.getElementById("loadWallet").addEventListener("click", function() {
 //     // 이 위치에서 walletSeq 값을 다시 가져옵니다.

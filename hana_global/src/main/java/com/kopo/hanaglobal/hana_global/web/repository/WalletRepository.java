@@ -52,4 +52,7 @@ public interface WalletRepository {
 
     public List<RemittanceDTO> getRemittanceListByWalletSeq(int walletSeq);
     public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq);
+
+//    public void changeWalletPassword(String walletPw, int userSeq);
+    public void changeWalletPassword(@Param("walletPw") String walletPw, @Param("userSeq") int userSeq);
 }

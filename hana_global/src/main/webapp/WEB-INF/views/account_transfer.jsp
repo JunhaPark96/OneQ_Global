@@ -26,13 +26,12 @@
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2 class="h2-account">Account Transfer</h2>
-
             <%--                        송금구역--%>
-            <div class="account_transaction withdraw-card">
-                <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
-                    <div class="card-body pe-5">
-                        <table class="table table-hover mb-3 border-light">
-                            <form action="${pageContext.request.contextPath}/accountTransfer" method="post">
+            <form action="${pageContext.request.contextPath}/processAccountTransfer" method="post">
+                <div class="account_transaction withdraw-card">
+                    <div class="col-md-12>                                                                                                                                                                                                                                                                      ">
+                        <div class="card-body pe-5">
+                            <table class="table table-hover mb-3 border-light">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
@@ -103,147 +102,137 @@
                                             <input type="text" name="transfer_amount" id="transfer_amount"
                                                    value="10000"/>
                                             KRW
-
                                         </div>
                                     </td>
                                 </tr>
                                 </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <%--                    보내는사람 입력 끝--%>
-            <div class="arrow-box">
-
-                <div class="arrow-div">
-                    <%--                TODO: 아래화살표 이미지--%>
-                </div>
-            </div>
-            <%--                    받는사람 입력--%>
-            <div class="account_transaction deposit-card">
-                <div class="col-md-12">
-                    <div class="card-body pe-5">
-                        <table class="table table-hover mb-3 border-light">
-                            <tr>
-                                <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
-                                <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="text">
-                                <th scope="row" class="text-start align-middle">Bank Selection</th>
-                                <td>
-                                    <select name="receiverBank" class="form-select border-3 w-50"
-                                            id="receiverBankSelect">
-                                        <option value="">Please select.</option>
-                                        <option value="081" selected="selected">HANA BANK</option>
-                                        <option value="039">THE GYOENGNAM BANK LTD</option>
-                                        <option value="034">THE KWANGJU BANK LTD</option>
-                                        <option value="004">KOOKMIN BANK</option>
-                                        <option value="003">INDUSTRIAL BANK OF KOREA</option>
-                                        <option value="011">NATIONAL AGRICULTURAL COOPERATIVE FEDERATION</option>
-                                        <option value="031">THE DAEGU BANK LTD</option>
-                                        <option value="055">DEUTSCHE BANK</option>
-                                        <option value="032">THE BANK OF PUSAN,LTD</option>
-                                        <option value="002">KOREA DEVELOPMENT BANK</option>
-                                        <option value="050">KOREA FEDERATION OF MUTUAL SAVINGS</option>
-                                        <option value="045">FEDERATION OF COMMUNITY CREDIT COOPERATIVES</option>
-                                        <option value="007">Suhyup Bank</option>
-                                        <option value="048">CREDIT UNION</option>
-                                        <option value="088">SHINHAN BANK</option>
-                                        <option value="020">WOORI BANK</option>
-                                        <option value="071">POST - OFFICE</option>
-                                        <option value="037">THE JEONBUK BANK LTD</option>
-                                        <option value="035">THE BANK OF CHEJU,LTD</option>
-                                        <option value="090">kakaobank</option>
-                                        <option value="089">K bank</option>
-                                        <option value="027">CITI BANK</option>
-                                        <option value="060">BANK OF AMERICA</option>
-                                        <option value="054">HSBC BANK</option>
-                                        <option value="057">JP Morgan Chase</option>
-                                        <option value="023">Standard Chartered BANK</option>
-                                        <option value="270">Hana Securities co., Ltd.</option>
-                                        <option value="261">Kyobo Securities Co., Ltd,</option>
-                                        <option value="267">Daishin Securities Co., Ltd.,</option>
-                                        <option value="238">MIRAE ASSET SECURITIES CO., LTD.</option>
-                                        <option value="279">DB Financial Investment Co.,Ltd.</option>
-                                        <option value="209">Yuanta Securities Korea co., Ltd.</option>
-                                        <option value="287">Meritz Securities Co., Ltd.,</option>
-                                        <option value="290">Bookook Securities Co., Ltd.,</option>
-                                        <option value="240">Samsung Securities Co., Ltd.,</option>
-                                        <option value="291">Shinyoung Securities Co., Ltd.,</option>
-                                        <option value="278">Shinhan Securities Co., Ltd.,</option>
-                                        <option value="247">NH Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="280">Eugene Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="264">Kiwoom Securities Co., Ltd.,</option>
-                                        <option value="262">HI Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="243">Korea Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="269">Hanwha Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="218">KB Securities co., Ltd.</option>
-                                        <option value="265">E*BEST Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="263">Hyundai Motor Securities Co., Ltd.</option>
-                                        <option value="292">CAPE Investment &amp; Securities Co., Ltd.</option>
-                                        <option value="266">SK Securities Co., Ltd.,</option>
-                                        <option value="064">NATIONAL FORESTRY COOPERATIVE FEDERATION</option>
-                                        <option value="062">Industrial and Commercial Bank of China</option>
-                                        <option value="063">Bank of China Seoul Branch</option>
-                                        <option value="067">China Construction Bank</option>
-                                        <option value="061">BNP PARIBAS CORPORATE &amp; INVESTMENT BANKING</option>
-                                        <option value="294">Korea Foss Securities Co.,Ltd</option>
-                                        <option value="227">DAOL Investment &amp; Securities</option>
-                                        <option value="224">BNK Investment &amp; Securities Co., Ltd.,</option>
-                                        <option value="288">kakaopay securities Corp.</option>
-                                        <option value="225">IBK Securities Co., Ltd.</option>
-                                        <option value="271">Toss Securities Co., Ltd</option>
-                                        <option value="092">Toss Innovation Co.,Ltd</option>
-                                        <option value="221">SANGSNAGIN INVESTMENT &amp; SECURITIES CO.,LTD.</option>
-                                    </select>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row" class="text-start align-middle">Account Number</th>
-                                <td>
-                                    <div class="btnArea text-center align-middle" id="receiverAccountArea">
-                                        <%--                                        <p class="text-center align-middle">--%>
-                                        <%--                                            690-11-028690--%>
-                                        <%--                                        </p>--%>
-                                        <input type="text" name="recipientAccountNo" id="recipientAccountNo"
-                                               placeholder="Enter account number"/>
-                                        <input type="button" class="btn btn-primary" id="checkReceiverBtn" value="Check"
-                                               onclick="fetchReceiverName()">
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <th scope="row" class="text-start align-middle">Recipient</th>
-                                <td id="receiverName">Please check the account number.</td>
-                            </tr>
-
-
-                            </tbody>
-                        </table>
-
-                        <%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
-                        <%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
-                        <%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
-                        <%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
-                        <%--                        </div>--%>
-
-                        <!-- ... 기타 입력 필드 ... -->
-                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">
-                            <input type="submit" id="btnNext" class="btn_p" value="Send Money">
+                            </table>
                         </div>
-                        </form>
                     </div>
                 </div>
-            </div>
-            <%--                    받는사람 입력 끝--%>
+                <%--                    보내는사람 입력 끝--%>
+                <div class="arrow-box">
+                    <div class="arrow-div">
+                        <%--                TODO: 아래화살표 이미지--%>
+                    </div>
+                </div>
+                <%--                    받는사람 입력--%>
+                <div class="account_transaction deposit-card">
+                    <div class="col-md-12">
+                        <div class="card-body pe-5">
+                            <table class="table table-hover mb-3 border-light">
+                                <tr>
+                                    <th scope="col" class="h5 text-black-50 border-light" style="width: 21%"></th>
+                                    <th scope="col" class="h5 text-dark border-light" style="width: 85%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="text">
+                                    <th scope="row" class="text-start align-middle">Bank Selection</th>
+                                    <td>
+                                        <select name="receiverBank" class="form-select border-3 w-50"
+                                                id="receiverBankSelect">
+                                            <option value="">Please select.</option>
+                                            <option value="081" selected="selected">HANA BANK</option>
+                                            <option value="039">THE GYOENGNAM BANK LTD</option>
+                                            <option value="034">THE KWANGJU BANK LTD</option>
+                                            <option value="004">KOOKMIN BANK</option>
+                                            <option value="003">INDUSTRIAL BANK OF KOREA</option>
+                                            <option value="011">NATIONAL AGRICULTURAL COOPERATIVE FEDERATION</option>
+                                            <option value="031">THE DAEGU BANK LTD</option>
+                                            <option value="055">DEUTSCHE BANK</option>
+                                            <option value="032">THE BANK OF PUSAN,LTD</option>
+                                            <option value="002">KOREA DEVELOPMENT BANK</option>
+                                            <option value="050">KOREA FEDERATION OF MUTUAL SAVINGS</option>
+                                            <option value="045">FEDERATION OF COMMUNITY CREDIT COOPERATIVES</option>
+                                            <option value="007">Suhyup Bank</option>
+                                            <option value="048">CREDIT UNION</option>
+                                            <option value="088">SHINHAN BANK</option>
+                                            <option value="020">WOORI BANK</option>
+                                            <option value="071">POST - OFFICE</option>
+                                            <option value="037">THE JEONBUK BANK LTD</option>
+                                            <option value="035">THE BANK OF CHEJU,LTD</option>
+                                            <option value="090">kakaobank</option>
+                                            <option value="089">K bank</option>
+                                            <option value="027">CITI BANK</option>
+                                            <option value="060">BANK OF AMERICA</option>
+                                            <option value="054">HSBC BANK</option>
+                                            <option value="057">JP Morgan Chase</option>
+                                            <option value="023">Standard Chartered BANK</option>
+                                            <option value="270">Hana Securities co., Ltd.</option>
+                                            <option value="261">Kyobo Securities Co., Ltd,</option>
+                                            <option value="267">Daishin Securities Co., Ltd.,</option>
+                                            <option value="238">MIRAE ASSET SECURITIES CO., LTD.</option>
+                                            <option value="279">DB Financial Investment Co.,Ltd.</option>
+                                            <option value="209">Yuanta Securities Korea co., Ltd.</option>
+                                            <option value="287">Meritz Securities Co., Ltd.,</option>
+                                            <option value="290">Bookook Securities Co., Ltd.,</option>
+                                            <option value="240">Samsung Securities Co., Ltd.,</option>
+                                            <option value="291">Shinyoung Securities Co., Ltd.,</option>
+                                            <option value="278">Shinhan Securities Co., Ltd.,</option>
+                                            <option value="247">NH Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="280">Eugene Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="264">Kiwoom Securities Co., Ltd.,</option>
+                                            <option value="262">HI Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="243">Korea Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="269">Hanwha Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="218">KB Securities co., Ltd.</option>
+                                            <option value="265">E*BEST Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="263">Hyundai Motor Securities Co., Ltd.</option>
+                                            <option value="292">CAPE Investment &amp; Securities Co., Ltd.</option>
+                                            <option value="266">SK Securities Co., Ltd.,</option>
+                                            <option value="064">NATIONAL FORESTRY COOPERATIVE FEDERATION</option>
+                                            <option value="062">Industrial and Commercial Bank of China</option>
+                                            <option value="063">Bank of China Seoul Branch</option>
+                                            <option value="067">China Construction Bank</option>
+                                            <option value="061">BNP PARIBAS CORPORATE &amp; INVESTMENT BANKING</option>
+                                            <option value="294">Korea Foss Securities Co.,Ltd</option>
+                                            <option value="227">DAOL Investment &amp; Securities</option>
+                                            <option value="224">BNK Investment &amp; Securities Co., Ltd.,</option>
+                                            <option value="288">kakaopay securities Corp.</option>
+                                            <option value="225">IBK Securities Co., Ltd.</option>
+                                            <option value="271">Toss Securities Co., Ltd</option>
+                                            <option value="092">Toss Innovation Co.,Ltd</option>
+                                            <option value="221">SANGSNAGIN INVESTMENT &amp; SECURITIES CO.,LTD.</option>
+                                        </select>
+                                    </td>
+                                </tr>
 
+                                <tr>
+                                    <th scope="row" class="text-start align-middle">Account Number</th>
+                                    <td>
+                                        <div class="btnArea text-center align-middle" id="receiverAccountArea">
+                                            <input type="text" name="recipientAccountNo" id="recipientAccountNo"
+                                                   placeholder="Enter account number"/>
+                                            <input type="button" class="btn btn-primary" id="checkReceiverBtn"
+                                                   value="Check"
+                                                   onclick="fetchReceiverName()">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row" class="text-start align-middle">Recipient</th>
+                                    <td id="receiverName">Please check the account number.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
+                            <%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
+                            <%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
+                            <%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
+                            <%--                        </div>--%>
+
+                            <!-- ... 기타 입력 필드 ... -->
+                            <div class="btnArea justify-content-center " id="acc_trans_inquiry">
+                                <input type="submit" id="btnNext" class="btn_p" value="Send Money">
+                            </div>
+            </form>
         </div>
     </div>
 </div>
+<%--                    받는사람 입력 끝--%>
 <footer>
 </footer>
 
@@ -259,16 +248,16 @@
         $.ajax({
             url: '/getReceiverName',
             type: 'POST',
-            data: { accountNo: accountNo },
+            data: {accountNo: accountNo},
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 if (data && data.receiverName) {
                     $('#receiverName').text(data.receiverName);
                 } else {
                     console.error('Failed to load account owner\'s name. ');
                 }
             },
-            error: function(error) {
+            error: function (error) {
                 console.error('서버에 요청하는 중 오류가 발생했습니다:', error);
             }
         });
@@ -276,8 +265,6 @@
 
 </script>
 <script>
-
-
     function selectAmount(amount) {
         document.getElementById('transfer_amount').value = amount;
     }

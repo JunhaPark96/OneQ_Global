@@ -51,6 +51,11 @@ public class WalletController {
     public String walletInfo(@ModelAttribute("currentMember") Member member, Model model) {
         Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         model.addAttribute("selectedWallet", wallet);
+        // 최초의 월렛 비밀번호 설정
+        if("000000".equals(wallet.getWalletPw())) {
+            model.addAttribute("showPasswordModal", true);
+        }
+
         System.out.println("현재 멤버는 : " + member.toString());
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         for (Wallet w : walletList) {
@@ -140,4 +145,22 @@ public class WalletController {
 //        }
         return ResponseEntity.ok(autoExchangeDTOList);
     }
+
+    @PostMapping("/changeWalletPassword")
+    public ResponseEntity<Map<String, String>> changeWalletPassword(
+            @ModelAttribute("currentMember") Member member, @RequestParam("walletPw") String walletPw){
+        Map<String, String> response = new HashMap<>();
+        int userSeq = member.getUserSeq();
+        try {
+            walletService.changeWalletPassword(walletPw, userSeq);
+            response.put("status", "success");
+            response.put("message", "비밀번호 변경 성공");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("status", "error");
+            response.put("message", "비밀번호 변경 중 오류 발생: " + e.getMessage());
+        }
+        return ResponseEntity.ok(response);
+    }
+
 }

@@ -105,28 +105,37 @@ public class AccountController {
     }
 
 
-    @PostMapping("/accountTransfer")
-    @ResponseBody
+    @PostMapping("/processAccountTransfer")
     public String transferProcess(
             @RequestParam("senderAccountNo") String senderAccountNo,
             @RequestParam("recipientAccountNo") String recipientAccountNo,
-            @RequestParam("transfer_amount") Integer transfer_amount){
-
+            @RequestParam("transfer_amount") Integer transfer_amount,
+            Model model){
 //        이체 기능
         try {
             accountService.accountTransfer(senderAccountNo, recipientAccountNo, transfer_amount);
-            return "redirect:/transferComplete";
+            Account targetAccount = accountService.getAccountByAcNo(recipientAccountNo);
+            model.addAttribute("targetAccount", targetAccount);
+            Member targetMember = memberService.findMemberById(targetAccount.getUserSeq());
+            model.addAttribute("targetMember", targetMember);
+            model.addAttribute("transferAmount", transfer_amount);
+            return "transferComplete";
         } catch (Exception e) {
             e.printStackTrace();
-            return "이체 실패: " + e.getMessage();
+            return "error_page";
         }
     }
 
     @GetMapping("/transferComplete")
     public String transferComplete() {
-        System.out.println("transfer완료 페이지");
+        System.out.println("transfer 완료 페이지");
         return "transferComplete";
     }
+
+//    @PostMapping("transferComplete")
+//    public ResponseEntity<Map<String, String>> transferComplete(){
+//
+//    }
 
     @PostMapping("/getReceiverName")
     public ResponseEntity<Map<String, String>> getReceiverName(@RequestParam("accountNo") String acNo){

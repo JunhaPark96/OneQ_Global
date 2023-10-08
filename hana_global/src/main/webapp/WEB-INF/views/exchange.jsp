@@ -131,7 +131,6 @@
         $('#exchange_rate_tbl thead').hide(); // 처음엔 숨기기
 
         $('#btnNext').click(function () {
-
             let inqStrDt = document.getElementById('inqDt').value;
             let currency = document.getElementById('selectCurrency').value;
 

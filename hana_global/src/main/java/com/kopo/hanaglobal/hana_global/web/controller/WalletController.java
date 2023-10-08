@@ -146,6 +146,23 @@ public class WalletController {
         return ResponseEntity.ok(autoExchangeDTOList);
     }
 
+    // 자동환전 삭제
+    @PostMapping("/removeAutoExchange")
+    public ResponseEntity<Map<String, Object>> removeAutoExchange(
+            @ModelAttribute("currentMember") Member member, @RequestParam("aeSeq") int aeSeq) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            walletService.removeAutoExchange(aeSeq);
+            response.put("success", true);
+            response.put("message", "Successfully removed the auto exchange.");
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Failed to remove the auto exchange.");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+
     @PostMapping("/changeWalletPassword")
     public ResponseEntity<Map<String, String>> changeWalletPassword(
             @ModelAttribute("currentMember") Member member, @RequestParam("walletPw") String walletPw){

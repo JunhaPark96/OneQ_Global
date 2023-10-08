@@ -49,4 +49,6 @@ public interface WalletService {
     public List<WalletHistoryDTO> getWholeWalletHistory(int walletSeq);
 
     public void changeWalletPassword(String walletPw, int userSeq);
+
+    public void removeAutoExchange(int aeSeq);
 }

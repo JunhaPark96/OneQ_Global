@@ -190,14 +190,12 @@
                         <div class="card-wrapper">
                             <c:forEach items="${autoExchangeList}" var="autoWallet" varStatus="loop" begin="0">
                                 <c:if test="${autoWallet.status == 'W'}">
-                                    <div class="card card-stats">
+                                    <div class="card card-stats" data-aeSeq="${autoWallet.aeSeq}">
                                         <div class="card-header" style="overflow: hidden;">
-                                            <!-- overflow: hidden; 스타일을 추가하여 float에 의한 레이아웃 문제를 해결합니다. -->
-                                            <div style="float: left;"> <!-- float: left; 스타일을 추가하여 텍스트를 왼쪽으로 정렬합니다. -->
+                                            <div style="float: left;">
                                                 <h6>Automatic Exchange at Target Rate</h6>
                                             </div>
                                             <div style="float: right;">
-                                                <!-- float: right; 스타일을 추가하여 버튼을 오른쪽으로 정렬합니다. -->
                                                 <button onclick="deleteReservation(${autoWallet.aeSeq})"
                                                         style="border: none; background: none;">
                                                     <img src="./images/recycle-bin.png" style="width: 20px">
@@ -250,5 +248,34 @@
 <footer>
 </footer>
 </div>
+
+<script>
+    function deleteReservation(aeSeq) {
+        $.ajax({
+            type: "POST",
+            url: "removeAutoExchange",
+            data: {
+                aeSeq: aeSeq
+            },
+            success: function(response) {
+                if (response.success) {
+                    // 화면에서 해당 카드를 제거
+                    $(`[data-aeSeq='${aeSeq}']`).remove();
+                    alert("Delete Complete");
+                    location.reload();
+                } else {
+                    // 에러 메시지를 표시
+                    alert(response.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 서버와의 통신에 실패한 경우 에러를 표시
+                alert("Error deleting the reservation.");
+            }
+        });
+    }
+
+</script>
+
 </body>
 </html>

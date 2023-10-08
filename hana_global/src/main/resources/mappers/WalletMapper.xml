@@ -113,4 +113,9 @@
         SET WALLET_PW = #{walletPw}
         WHERE user_seq = #{userSeq}
     </update>
+
+    <delete id="removeAutoExchange">
+        DELETE FROM AUTO_EXCHANGE
+        WHERE AE_SEQ = #{aeSeq}
+    </delete>
 </mapper>

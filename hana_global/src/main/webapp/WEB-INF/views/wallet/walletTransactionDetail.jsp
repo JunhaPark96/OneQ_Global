@@ -70,7 +70,7 @@
             background-size: cover;
         }
 
-    /*    월렛*/
+        /*    월렛*/
         .wallet-card {
             background-color: #f6f6f6; /* 약간의 회색 톤으로 배경을 설정 */
             border: 1px solid #f61212;
@@ -95,6 +95,7 @@
         .wallet-card h5, .wallet-card div {
             margin-bottom: 8px;
         }
+
         .wallet-card .country-icon {
             position: absolute; /* 절대 위치 설정 */
             top: 3px; /* 오른쪽 상단에 위치하도록 설정 */
@@ -142,7 +143,8 @@
                                             <div class="border border-4 p-2 rounded box mb-2 bg-white col-4 wallet-card "
                                                  style="border-color: #e0e0e0 !important; position: relative;">
                                                 <div class="country-icon">
-                                                    <img src="./images/walletIcon_${wallet.currencyCode}.png" alt="${wallet.currencyCode} Icon">
+                                                    <img src="./images/walletIcon_${wallet.currencyCode}.png"
+                                                         alt="${wallet.currencyCode} Icon">
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input mt-2" type="radio"
@@ -357,6 +359,7 @@
             currentFilterType = selectedType;
             ajax_whole_history();  // 필터링.
         }
+
         function getTransactionTypeName(type) {
             switch (type) {
                 case 'E':
@@ -369,6 +372,7 @@
                     return type;  // 기본값 (만약 알 수 없는 transactionType이 들어올 경우를 대비)
             }
         }
+
         // 전체내역
         function change_whole_history(data) {
             $('#div_whole_history').empty();
@@ -448,6 +452,7 @@
                 $('#div_whole_history').append(str);
             }
         }
+
         const button = document.querySelector('.dropdown');
 
         button.addEventListener('click', () => {
@@ -489,10 +494,12 @@
                 $('#div_exchange_hist').append('<div class="fs-3 w-100 h-100 text-black-50" style="display: flex; align-items: center; justify-content: center; font-family: hanaM">자동환전 내역이 없습니다.</div>');
             } else {
                 let str = '';
+                str += '<button id="deleteSelected" class="float-right">Delete Selected</button>';
                 str += '<table class="table border-0 table-hover text-end mt-3 border-top">';
                 str += '<colgroup><col width=20%><col width=20%><col width=20%><col width=20%><col width=20%></colgroup>';
                 str += '<thead>';
                 str += '<tr class="fs-5 text-black-50">';
+                str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;"><input type="checkbox" id="selectAll"></th>';
                 str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Exchange Deadline</th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Amount </th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Currency</th>';
@@ -503,6 +510,7 @@
                 str += '<tbody>';
                 data.forEach(function (exchange) {
                     str += '<tr class="border-1 border-start-0 border-end-0 text-center" style="border-color: #c7c7c7;background-color: ' + (exchange.status == 'S' ? '#e6f7ff' : exchange.status == 'W' ? '#fff5e5' : '#fde2e2') + ';">';
+                    str += '<td class="text-center border-1 border-start-0"><input type="checkbox" class="rowCheckbox"></td>';
                     str += '<td class="text-black-50 border-1 border-start-0 fs-5 align-middle" style="border-color: #c7c7c7;font-family: hanaM">';
                     str += exchange.exchangeDate.toString().substring(0, 11);
                     str += '</td>';
@@ -542,6 +550,18 @@
             });
         });
 
+    </script>
+<%--    자동환전 삭제--%>
+    <script>
+        $('#selectAll').click(function() {
+            $('.rowCheckbox').prop('checked', $(this).prop('checked'));
+        });
+
+        $('#deleteSelected').click(function() {
+            $('.rowCheckbox:checked').each(function() {
+                $(this).closest('tr').remove();
+            });
+        });
     </script>
 </body>
 </html>

@@ -55,4 +55,6 @@ public interface WalletRepository {
 
 //    public void changeWalletPassword(String walletPw, int userSeq);
     public void changeWalletPassword(@Param("walletPw") String walletPw, @Param("userSeq") int userSeq);
+
+    public void removeAutoExchange(int aeSeq);
 }

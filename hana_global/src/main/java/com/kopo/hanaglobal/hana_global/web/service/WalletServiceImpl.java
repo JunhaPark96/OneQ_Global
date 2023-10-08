@@ -357,5 +357,11 @@ public class WalletServiceImpl implements WalletService {
         Wallet wallet = walletRepository.findWalletByWalletNo(userSeq);
         System.out.println("바뀐 월렛 비밀번호는 " + wallet.toString());
     }
+
+    @Override
+    public void removeAutoExchange(int aeSeq){
+        walletRepository.removeAutoExchange(aeSeq);
+        System.out.println("자동환전 삭제 완료");
+    }
 }
 

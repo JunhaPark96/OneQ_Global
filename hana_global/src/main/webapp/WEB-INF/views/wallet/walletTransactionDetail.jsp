@@ -381,8 +381,8 @@
                 str += '<thead>';
                 str += '<tr class="text-black-50">';
                 str += '<th class="text-center border-1 border-start-0 text-nowrap" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Transaction No.</th>';
-                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Withdrawal Amount</th>';
-                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Deposit Amount</th>';
+                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Withdrawal</th>';
+                str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Deposit</th>';
 
                 str += '<th class="text-center border-1 position-relative" style="font-family: hanaM; background-color: #eceff1; border-color: #c7c7c7">';
                 str += '<div style="display: inline-block;">Transaction Type</div>';

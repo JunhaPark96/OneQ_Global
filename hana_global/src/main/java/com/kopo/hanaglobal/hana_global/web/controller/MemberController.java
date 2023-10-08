@@ -114,7 +114,7 @@ public class MemberController {
             // 멤버가 없는 경우
             if (member == null) {
                 System.out.println("id와 비밀번호를 확인해 주세요");
-                model.addAttribute("loginMsg", "id 또는 비밀번호를 확인해주세요");
+                model.addAttribute("loginMsg", "Please check your ID or password");
                 return "member/signIn";
             } else { // 멤버가 있고, 로그인 입력을 제대로 한 경우
                 System.out.println("로그인 성공");

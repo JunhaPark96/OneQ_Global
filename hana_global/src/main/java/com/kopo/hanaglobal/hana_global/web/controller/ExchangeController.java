@@ -88,7 +88,7 @@ public class ExchangeController {
         model.addAttribute("accountList", accountList);
 
         String defaultCurrencyCode = CountryCurrencyMapping.getCurrencyCodeByCountryCode(member.getCountrySP());
-
+        System.out.println("사용자의 국적 통화는 " + defaultCurrencyCode);
         if (selectedCurrency != null && !selectedCurrency.trim().isEmpty()) {
             // 사용자가 특정 외화 월렛을 선택한 경우, 해당 통화를 기본 통화로 설정
             defaultCurrencyCode = selectedCurrency;

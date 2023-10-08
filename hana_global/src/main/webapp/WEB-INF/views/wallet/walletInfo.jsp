@@ -49,10 +49,10 @@
                         <div class="col-grid">
                             <div class="grid-left">
                                 <div class="row" style="height: 50px">
-                                    <div class="col d-flex">
-                                        <h6>Depositor name <br>
-                                            <span class="text-bold"> ${currentMember.name}</span>
+                                    <div class="col ">
+                                        <h6 >Depositor name
                                         </h6>
+                                            <p class="text-bold"> ${currentMember.name}</p>
                                     </div>
                                 </div>
 
@@ -60,7 +60,7 @@
                             <div class="col grid-right">
                                 <div class="col">
                                     <h6 class="text-start">Account Number</h6>
-                                    <p class="text-muted">${selectedWallet.acNo}</p>
+                                    <p class="text-muted">${selectedWallet.acNo.substring(0, 3)}-${selectedWallet.acNo.substring(3, 9)}-${selectedWallet.acNo.substring(9, 14)}</p>
                                     <div class="locRight">
                                         Modify
                                     </div>

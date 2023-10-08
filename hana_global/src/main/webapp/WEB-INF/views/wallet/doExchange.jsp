@@ -368,7 +368,6 @@
         const finalAmountWithoutDecimal = Math.round(adjustedAmount);
         const finalAmount = Math.round(finalAmountWithoutDecimal / 10) * 10;
 
-
         // previewPayment 영역을 업데이트
         const previewElem = document.querySelector(".previewPayment .banking-cont table tbody");
 
@@ -401,7 +400,6 @@
 
         // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
         // document.getElementById("selectedAccountInfo").value = selectedValue;
-
         // 잔액 정보 업데이트
         document.getElementById("accountBalance").textContent = selectedBalance;
     }

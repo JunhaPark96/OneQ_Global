@@ -36,7 +36,7 @@
 <body>
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
-    <div class="main-area">
+    <div class="main-area" style="margin-right: 10%;">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2 class="h2-account">View Account Transaction History</h2>
@@ -184,11 +184,11 @@
                         let transactionTypeText = data[i].transactionType == '0' ? 'Deposit' : 'Withdrawal';
                         $('#transactionHistoryTable tbody').append('<tr>' +
                             '<td>' + data[i].tradeDate + '</td>' +
-                            '<td>' + data[i].transactionAmount + ' won</td>' +
+                            '<td>' + data[i].transactionAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + ' won</td>' +
                             '<td>' + transactionTypeText + '</td>' +
                             '<td>' + data[i].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' won</td>' +
                             '<td>' + data[i].participant + '</td>' +
-                            '<td>' + data[i].participantAccount + '</td>' +
+                            '<td>' + data[i].participantAccount.substring(0, 3) + '-' + data[i].participantAccount.substring(3, 9) + '-' + data[i].participantAccount.substring(9, 14) + '</td>' +
                             '</tr>');
                     }
                 },

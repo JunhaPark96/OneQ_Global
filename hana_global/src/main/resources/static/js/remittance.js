@@ -142,61 +142,6 @@ window.addEventListener('click', (event) => {
 // 환율계산 시작 ========================================================================
 
 // 2단계 환율계산
-
-// 환율 계산 함수
-function calculateExchange(remittanceRate) {
-    // ds_from_money 필드에서 원화 금액 가져오기
-    const krwAmount = parseFloat(document.getElementById('ds_from_money').value) || 1;
-    const currencyCode = document.getElementById('currencyName').textContent;
-    let targetAmount;
-
-    if (currencyCode === 'JPY' || currencyCode === 'VND') {
-        targetAmount = (krwAmount / remittanceRate) * 100;
-    } else {
-        targetAmount = krwAmount / remittanceRate;
-    }
-    console.log("현재 입력된 원화는 ", krwAmount);
-
-    if (!isNaN(krwAmount)) {
-        // 금액이 유효하면 환율 계산
-        // const targetAmount = krwAmount / remittanceRate;
-        // 결과를 ds_to_money 필드에 표시
-        // document.getElementById('ds_to_money').value = targetAmount.toFixed(2);
-        document.getElementById('ds_to_money').value = formatNumber(targetAmount.toFixed(2));
-
-        // 통화의 이름과 금액을 targetCurrencyName 필드에 표시
-        const currencyCode = document.getElementById('currencyName').textContent;
-        const currencyName = currencyUnits[currencyCode] || currencyCode;
-        console.log("현재 입력된 통화이름 ", currencyName);
-        // document.getElementById('targetCurrencyName').textContent = targetAmount.toFixed(2) + ' ' + currencyName;
-        document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
-        document.getElementById('targetCurrencyName').textContent = formatNumber(parseFloat(targetAmount.toFixed(2))) + ' ' + currencyName;
-        // document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
-
-    }
-}
-
-function selectCurrency(currencyCode) {
-    // 국가의 환율 정보 가져오기
-    const rateInfo = exchangeRates[currencyCode];
-    console.log("선택된국가의 환율은 ", rateInfo);
-    if (rateInfo) {
-        // 환율 정보가 있으면 환율 계산을 위해 이 정보를 사용
-        console.log("선택된국가의 송금환율은 ", rateInfo.remittance);
-        calculateExchange(rateInfo.remittance);
-    } else {
-        console.error("환율 정보를 찾을 수 없습니다");
-    }
-}
-
-// ds_from_money 필드의 input 이벤트에 대한 리스너 추가
-document.getElementById('ds_from_money').addEventListener('input', function () {
-    // 사용자가 입력할 때마다 환율 계산 실행
-    const currencyCode = document.getElementById('currencyName').textContent;
-    console.log("통화코드는 ", currencyCode);
-    selectCurrency(currencyCode);
-});
-
 const currencyUnits = {
     "AED": "dirham",
     "DZD": "dinar",
@@ -247,21 +192,167 @@ const currencyUnits = {
     "VND": "dong"
 };
 
-// ds_from_money 필드의 input 이벤트에 대한 리스너 추가
-document.getElementById('ds_from_money').addEventListener('input', function() {
-    const krwAmount = document.getElementById('ds_from_money').value.replace(/,/g, '');
-    // const targetAmount = document.getElementById('ds_to_money').value.replace(/,/g, '');
-    document.getElementById('ds_from_money').value = formatNumber(krwAmount);
-    // document.getElementById('ds_to_money').value = formatNumber(targetAmount);
+// 환율 계산 함수
+
+function calculateExchangeFromKRW(remittanceRate) {
+    // ds_from_money 필드에서 원화 금액 가져오기
+    const krwAmount = parseFloat(document.getElementById('ds_from_money').value.replace(/,/g, '')) || 0;
     const currencyCode = document.getElementById('currencyName').textContent;
-    console.log("통화코드는 ", currencyCode);
-    selectCurrency(currencyCode);
+
+    const targetAmount = (currencyCode === 'JPY' || currencyCode === 'VND') ?
+        (krwAmount / remittanceRate) * 100 : krwAmount / remittanceRate;
+
+    if (!isNaN(krwAmount)) {
+        document.getElementById('ds_to_money').value = formatNumber(targetAmount.toFixed(2));
+
+        const currencyName = currencyUnits[currencyCode] || currencyCode;
+        document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
+        document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
+    }
+}
+
+function calculateExchangeToKRW(remittanceRate) {
+    const foreignAmount = parseFloat(document.getElementById('ds_to_money').value.replace(/,/g, '')) || 0;
+    const currencyCode = document.getElementById('currencyName').textContent;
+
+    const krwAmount = (currencyCode === 'JPY' || currencyCode === 'VND') ?
+        (foreignAmount * remittanceRate) / 100 : foreignAmount * remittanceRate;
+
+    if (!isNaN(foreignAmount)) {
+        document.getElementById('ds_from_money').value = formatNumber(krwAmount.toFixed(2));
+        const currencyName = currencyUnits[currencyCode] || currencyCode;
+        document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
+        document.getElementById('targetCurrencyName').textContent = formatNumber(foreignAmount.toFixed(2)) + ' ' + currencyName;
+    }
+}
+
+document.getElementById('ds_from_money').addEventListener('input', function() {
+    const currencyCode = document.getElementById('currencyName').textContent;
+    const remittanceRate = selectCurrency(currencyCode);
+    calculateExchangeFromKRW(remittanceRate);
 });
 
-// 숫자 포맷
+document.getElementById('ds_to_money').addEventListener('input', function() {
+    const currencyCode = document.getElementById('currencyName').textContent;
+    const remittanceRate = selectCurrency(currencyCode);
+    calculateExchangeToKRW(remittanceRate);
+});
+
 function formatNumber(num) {
     return num.toLocaleString('en-US');
 }
+
+function selectCurrency(currencyCode) {
+    const rateInfo = exchangeRates[currencyCode];
+    if (rateInfo) {
+        return rateInfo.remittance;
+    } else {
+        console.error("환율 정보를 찾을 수 없습니다");
+        return null;
+    }
+}
+
+// function calculateExchange(remittanceRate) {
+//     // ds_from_money 필드에서 원화 금액 가져오기
+//     const krwAmount = parseFloat(document.getElementById('ds_from_money').value) || 1;
+//     const currencyCode = document.getElementById('currencyName').textContent;
+//     let targetAmount;
+//
+//     if (currencyCode === 'JPY' || currencyCode === 'VND') {
+//         targetAmount = (krwAmount / remittanceRate) * 100;
+//     } else {
+//         targetAmount = krwAmount / remittanceRate;
+//     }
+//     console.log("현재 입력된 원화는 ", krwAmount);
+//
+//     if (!isNaN(krwAmount)) {
+//         // 금액이 유효하면 환율 계산
+//         // const targetAmount = krwAmount / remittanceRate;
+//         // 결과를 ds_to_money 필드에 표시
+//         // document.getElementById('ds_to_money').value = targetAmount.toFixed(2);
+//         document.getElementById('ds_to_money').value = formatNumber(targetAmount.toFixed(2));
+//
+//         // 통화의 이름과 금액을 targetCurrencyName 필드에 표시
+//         const currencyCode = document.getElementById('currencyName').textContent;
+//         const currencyName = currencyUnits[currencyCode] || currencyCode;
+//         console.log("현재 입력된 통화이름 ", currencyName);
+//         // document.getElementById('targetCurrencyName').textContent = targetAmount.toFixed(2) + ' ' + currencyName;
+//         document.getElementById('sourceCurrencyName').textContent = formatNumber(krwAmount) + ' won';
+//         document.getElementById('targetCurrencyName').textContent = formatNumber(parseFloat(targetAmount.toFixed(2))) + ' ' + currencyName;
+//         // document.getElementById('targetCurrencyName').textContent = formatNumber(targetAmount.toFixed(2)) + ' ' + currencyName;
+//
+//     }
+// }
+//
+// function selectCurrency(currencyCode) {
+//     // 국가의 환율 정보 가져오기
+//     const rateInfo = exchangeRates[currencyCode];
+//     console.log("선택된국가의 환율은 ", rateInfo);
+//     if (rateInfo) {
+//         // 환율 정보가 있으면 환율 계산을 위해 이 정보를 사용
+//         console.log("선택된국가의 송금환율은 ", rateInfo.remittance);
+//         calculateExchange(rateInfo.remittance);
+//         return rateInfo.remittance;  // remittanceRate 반환
+//     } else {
+//         console.error("환율 정보를 찾을 수 없습니다");
+//         return null;
+//     }
+// }
+//
+// // ds_from_money 필드의 input 이벤트에 대한 리스너 추가
+// document.getElementById('ds_from_money').addEventListener('input', function () {
+//     // 사용자가 입력할 때마다 환율 계산 실행
+//     const currencyCode = document.getElementById('currencyName').textContent;
+//     console.log("통화코드는 ", currencyCode);
+//     selectCurrency(currencyCode);
+// });
+//
+//
+// // ds_from_money 필드의 input 이벤트에 대한 리스너 추가
+// document.getElementById('ds_from_money').addEventListener('input', function() {
+//     const krwAmount = document.getElementById('ds_from_money').value.replace(/,/g, '');
+//     // const targetAmount = document.getElementById('ds_to_money').value.replace(/,/g, '');
+//     document.getElementById('ds_from_money').value = formatNumber(krwAmount);
+//     // document.getElementById('ds_to_money').value = formatNumber(targetAmount);
+//     const currencyCode = document.getElementById('currencyName').textContent;
+//     console.log("통화코드는 ", currencyCode);
+//     selectCurrency(currencyCode);
+// });
+//
+// // ds_to_money 필드 input 이벤트
+// document.getElementById('ds_to_money').addEventListener('input', function() {
+//     // ds_to_money 필드에서 타겟 통화 금액 가져오기
+//     const foreignAmount = parseFloat(this.value.replace(/,/g, '')) || 0;
+//     const currencyCode = document.getElementById('currencyName').textContent;
+//     const remittanceRate = selectCurrency(currencyCode);  // selectCurrency로부터 remittanceRate를 가져옵니다.
+//
+//     if (!remittanceRate) {
+//         console.error("송금 환율 정보를 가져오는데 실패했습니다.");
+//         return;
+//     }
+//     let krwAmount;
+//
+//     if (currencyCode === 'JPY' || currencyCode === 'VND') {
+//         krwAmount = (foreignAmount * remittanceRate) / 100;
+//     } else {
+//         krwAmount = foreignAmount * remittanceRate;
+//     }
+//
+//     // 금액이 유효하면 원화로의 환율 계산
+//     if (!isNaN(foreignAmount)) {
+//         // 결과를 ds_from_money 필드에 표시
+//         document.getElementById('ds_from_money').value = formatNumber(krwAmount.toFixed(2));
+//
+//         // 원화 금액을 sourceCurrencyName 필드에 표시
+//         document.getElementById('sourceCurrencyName').textContent = formatNumber(parseFloat(krwAmount.toFixed(2))) + ' won';
+//     }
+// });
+//
+//
+// // 숫자 포맷
+// function formatNumber(num) {
+//     return num.toLocaleString('en-US');
+// }
 
 
 // 환율계산 끝========================================================================

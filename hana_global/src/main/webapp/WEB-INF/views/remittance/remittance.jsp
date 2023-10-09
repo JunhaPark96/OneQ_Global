@@ -190,7 +190,8 @@
                             </div>
                         </div>
                         <%--                    Conversion 아이콘 --%>
-                        <span class="ico_same"><span class="blind"><img src="./images/equals_sign.png" class="equal_icon"> </span></span>
+                        <span class="ico_same"><span class="blind"><img src="./images/equals_sign.png"
+                                                                        class="equal_icon"> </span></span>
                         <%--                    Target 통화 섹션--%>
                         <div class="fr_info ms-3">
                             <div id="ds_sel2" class="sbox _select_box">
@@ -233,13 +234,13 @@
                                 <table class="mb-5" summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
                                     <%--                                <caption>결제정보1</caption>--%>
                                     <colgroup>
-                                        <col style="width: 500px"/>
+                                        <col style="width: 400px"/>
                                     </colgroup>
 
                                     <tbody class="fs-5" style="line-height: 40px;">
                                     <tr class="mb-5">
-                                        <th>Foreign exchange application amount</th>
-                                        <td>
+                                        <th>Foreign exchange application amount<br/></th>
+                                        <td style="text-align: right">
                                                             <span class="txt">
                                                                 <img src="./images/walletIcon_.png"
                                                                      style="width: 30px; height: 30px"
@@ -249,19 +250,24 @@
                                                             </span>
                                         </td>
                                     </tr>
+<%--                                    <tr class="mb-5">--%>
+<%--                                        <th>Amount</th>--%>
+<%--                                        <td style="font-size: 11px; line-height: 12px;">--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
                                     <tr class="mb-5">
-                                        <th>Transfer Fee</th>
-                                        <td><span class="txt"><em>5,000 won</em></span></td>
+                                        <th>Estimated Fee</th>
+                                        <td style="text-align: right"><span class="txt"><em>5,000 won</em></span></td>
                                     </tr>
                                     <tr class="mb-5">
-                                        <th>The amount you will be paying(Won)</th>
-                                        <td><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em
+                                        <th>Estimated Withdrawal Amount (Won)</th>
+                                        <td style="text-align: right"><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em
                                                 class="point" id="paymentAmount"></em></span></td>
                                     </tr>
 
                                     <tr>
                                         <th>Payment method</th>
-                                        <td>
+                                        <td >
                                             <span class="txt"></span>
                                             <%--                                                                                                        <select id="selectAccountForm" name="account" onchange="displayBalance()">--%>
                                             <%--                                                                                                            <option value="">-- Select an account --</option>--%>
@@ -272,7 +278,7 @@
                                             <%--                                                                                                            </c:forEach>--%>
                                             <%--                                                                                                        </select>--%>
                                             <select class="form-select border-3 w-60" name="senderAccountNo"
-                                                    id="selectAccountForm" onchange="displayBalance()"
+                                                    id="selectAccountForm" onchange="displayBalance(); updateRateAndCurrencyInfo();"
                                                     style="height: 45px;">
                                                 <option value="" selected disabled>Choose Payment Method</option>
 
@@ -303,17 +309,33 @@
                                             </select>
                                         </td>
                                     </tr>
+                                    <%--                                    우대율에 따른 할인 금액--%>
+                                    <%-- 우대율에 따른 할인 금액 --%>
+<%--                                    <tr id="anticipatedPrimeRow" style="display: none">--%>
+<%--                                        <th style="line-height: 22px;">Anticipated Prime<br/>--%>
+<%--                                            Amount--%>
+<%--                                        </th>--%>
+<%--                                        <td style="font-size: 14px; line-height: 15px; text-align: right">--%>
+<%--                                            <span class="txt"><em class="primeRate"></em></span><br/>--%>
+<%--                                            <span class="txt">Non-preferential exchange rate <em class="curCode"></em> </span><br/>--%>
+<%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span><br/>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span>&ndash;%&gt;--%>
+<%--                                            <span class="txt">Preferential exchange rate <em class="curCode"></em><em class="preferentialRateValue"></em></span><br/>--%>
+<%--                                            <span class="txt"><em class="KRW"></em></span><br/>--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
+
                                     <tr style="display: none" id="balanceRow">
                                         <th>
                                             Available Withdrawal
                                         </th>
-                                        <td>
+                                        <td style="text-align: right">
                                             <span class="txt" id="balanceDisplay"></span>
                                         </td>
                                     </tr>
                                     <tr class="input_box" style="display: none" id="passwordRow">
                                         <th scope="row" class="text-start align-middle">Password</th>
-                                        <td>
+                                        <td style="text-align: right">
                                             <input type="password" name="account_password" id="account_password"
                                                    placeholder="password" maxlength="6" style="height: 35px"/>
                                         </td>
@@ -345,7 +367,7 @@
                         Information Entry</strong></div>
                     <div class="col-md-12">
                         <div class="card-body pe-5 ps-3">
-                            <table class="table" >
+                            <table class="table">
                                 <tbody style="border-style: none">
                                 <!-- Recipient's Name -->
                                 <tr class="border-white">
@@ -368,7 +390,8 @@
                                     <td>
 
                                         <div>
-                                            <span class="fs-5"> <strong style="color: #000000; font-size: 14px"><span style="color: red">Note </span> Please specify exact name written in your passport</strong></span>
+                                            <span class="fs-5"> <strong style="color: #000000; font-size: 14px"><span
+                                                    style="color: red">Note </span> Please specify exact name written in your passport</strong></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -465,7 +488,9 @@
                                         </th>
                                     </tr>
                                     <tr class="border-white">
-                                        <th scope="row" class="text-start align-middle" style="padding-right: 48px; ">&nbsp;&nbsp;City</th>
+                                        <th scope="row" class="text-start align-middle" style="padding-right: 48px; ">
+                                            &nbsp;&nbsp;City
+                                        </th>
                                         <td>
                                             <input type="text" name="receiptCity" id="receiptCity"
                                                    placeholder="City"/>
@@ -481,8 +506,10 @@
 
                                     </tbody>
                                 </table>
-                                Western Union’s global transfer network is the largest in the world, with more than 500,000 agent locations in 200 countries and territories across the globe.
-                                <a href="https://www.westernunion.com/us/en/agent-locator.html" target="_blank">Find locations</a>
+                                Western Union’s global transfer network is the largest in the world, with more than
+                                500,000 agent locations in 200 countries and territories across the globe.
+                                <a href="https://www.westernunion.com/us/en/agent-locator.html" target="_blank">Find
+                                    locations</a>
                             </div>
 
 
@@ -583,7 +610,8 @@
         balance: ${wallet.balance},
         walletPw: "${wallet.walletPw}",
         currencyCode: "${wallet.currencyCode}",
-        currency: "${wallet.currency}"
+        currency: "${wallet.currency}",
+        primeRate: "${wallet.primeRate}"
     };
     </c:forEach>
     console.log("월렛 정보는 ", walletInfoList);
@@ -841,6 +869,7 @@
         window.location.href = '${pageContext.request.contextPath}/remittanceTrace';
     }
 
+
     <%--$.ajax({--%>
     <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>
     <%--    type: 'POST',--%>
@@ -860,6 +889,68 @@
     <%--    }--%>
     <%--});--%>
 </script>
+<script>
+    // 우대율 계산
+    // function updateRateAndCurrencyInfo() {
+    //     const targetCurrencyCode = document.getElementById("currencyName").textContent;
+    //
+    //     // 환전할 금액 가져오기 (필요한 경우 사용)
+    //     const targetAmount = document.getElementById("ds_to_money").value;
+    //     const selectedWallet = walletInfoList[targetCurrencyCode];
+    //
+    //     // 통화코드와 우대율 요소 선택
+    //     const currencyCodeElements = document.querySelectorAll(".curCode");
+    //     const primeRateElement = document.querySelector(".primeRate");
+    //
+    //     // 해외 송금 환율 가져오기
+    //     const remittanceRate = selectCurrency(targetCurrencyCode);
+    //     // 우대율 적용 환율 계산
+    //     const preferentialExchangeRate = calculatePreferentialExchangeRate(remittanceRate, selectedWallet.primeRate);
+    //
+    //     const exchangedAmountUSD = parseFloat(targetAmount) / remittanceRate;
+    //     // const anticipatedPrimeAmount = (remittanceRate - preferentialExchangeRate) * exchangedAmountUSD;
+    //     const anticipatedPrimeAmount = (remittanceRate - preferentialExchangeRate) * exchangedAmountUSD;
+    //     const feeAmount = 5000;
+    //     const estimatedWithdrawalAmount = parseFloat(targetAmount) + anticipatedPrimeAmount - feeAmount;
+    //
+    //     // 통화코드 업데이트
+    //     currencyCodeElements.forEach(element => {
+    //         if (element) {
+    //             element.textContent = "" + targetCurrencyCode + "";
+    //         }
+    //     });
+    //
+    //     // 우대율 업데이트
+    //     if (primeRateElement && selectedWallet && selectedWallet.primeRate) {
+    //         primeRateElement.textContent = "Prime Exchange Rate " + selectedWallet.primeRate + "%";
+    //     }
+    //     // 해외 송금 환율 업데이트
+    //     const nonPreferentialRateElement = document.querySelector(".txt:nth-child(3) em");
+    //     if (nonPreferentialRateElement) {
+    //         nonPreferentialRateElement.textContent = "" + targetCurrencyCode + " 1 = KRW " + formatNumber(remittanceRate);
+    //     }
+    //
+    //     // 우대율 적용 환율 업데이트
+    //     const preferentialRateElement = document.querySelector(".txt .preferentialRateValue");
+    //     if (preferentialRateElement) {
+    //         preferentialRateElement.textContent = formatNumber(preferentialExchangeRate);
+    //     }
+    //     // 해당 <tr> 보이기
+    //     const anticipatedPrimeRow = document.getElementById("anticipatedPrimeRow");
+    //     // const anticipatedPrimeAmount = (remittanceRate - preferentialExchangeRate) * exchangedAmountUSD;
+    //
+    //     if (anticipatedPrimeRow) {
+    //         anticipatedPrimeRow.style.display = 'table-row'; // 또는 'block'
+    //     }
+    //     document.getElementById('paymentAmount').textContent = formatNumber(estimatedWithdrawalAmount) + ' won';
+    //     document.querySelector('.txt em.KRW').textContent = 'KRW ' + formatNumber(anticipatedPrimeAmount);
+    //
+    // }
+    // function calculatePreferentialExchangeRate(baseRate, primeRate) {
+    //     const discountAmount = (primeRate / 100) * (baseRate - 1);
+    //     return baseRate - discountAmount;
+    // }
 
+</script>
 </body>
 </html>

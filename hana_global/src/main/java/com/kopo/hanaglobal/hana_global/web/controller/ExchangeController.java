@@ -53,7 +53,6 @@ public class ExchangeController {
         }
         return exchangeRateHistList;
     }
-
     //    navbar에서 환전 페이지 이동 시
 //    @GetMapping("/doExchange")
 //    public String doExchange(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model) {

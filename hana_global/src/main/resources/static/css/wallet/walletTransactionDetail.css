@@ -30,3 +30,7 @@ th {
 }
 /* 기본 상태: 드롭다운 메뉴 숨김 */
 
+.deleteRowBtn:hover {
+    background-color: #c0392b;
+    cursor: pointer;
+}

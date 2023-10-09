@@ -24,11 +24,14 @@
     <link href="./css/wallet/flags.css" rel="stylesheet"/>
 
     <%--    캘린더--%>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
-
+    <%--    차트 js--%>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
     <title>월렛 확인</title>
 </head>
 <body>
@@ -50,7 +53,7 @@
                     <div class="cardElem1">
                         <a href="${pageContext.request.contextPath}/accountInfo">
                             <fmt:formatNumber value="${selectedWallet.balance}" type="number" pattern="#,##0"/>
-                             ${selectedWallet.currency} </a>
+                            ${selectedWallet.currency} </a>
                     </div>
                     <div class="baseRateNote">
                         baseRate
@@ -58,13 +61,15 @@
                     <div class="cardElem2">
                         <c:choose>
                             <c:when test="${selectedWallet.currencyCode == 'JPY' || selectedWallet.currencyCode == 'VND'}">
-                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = <span style="color: red"> ${currencyCode.baseRate} Won </span> </span>
+                                <span class="rateInfo">${selectedWallet.currencyCode} 100 = <span
+                                        style="color: red"> ${currencyCode.baseRate} Won </span> </span>
                                 <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
                                     <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
                                 </button>
                             </c:when>
                             <c:otherwise>
-                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = <span style="color: red"> ${currencyCode.baseRate} Won </span></span>
+                                <span class="rateInfo">${selectedWallet.currencyCode} 1 = <span
+                                        style="color: red"> ${currencyCode.baseRate} Won </span></span>
                                 <button id="updateRateBtn" style="background: none; border: none; cursor: pointer;">
                                     <img src="./images/update.png" alt="새로고침" width="20px" style="margin-bottom: 3px">
                                 </button>
@@ -85,60 +90,60 @@
             <%--            월렛 카드 구역 끝   --%>
             <%--         사용자에게 제공하는 정보 시작   --%>
             <div class="showBalance">
-                <div class="balanceInfo col pt-1">
-                    <div class="walletBalance">
-                        Hana Wallet Balance (${walletKRW.currency})
-                        <fmt:formatNumber value="${walletKRW.balance}" type="number" pattern="#,##0"/>
-                    </div>
-                    <div class="usdBalance">
-                        USD Converted Balance
-                    </div>
-                    <div class="conversionOption">
-                        option: 해당국적의 환율로도 보여주기
-                    </div>
-                </div>
-<%--                계좌 구역 시작--%>
-                <div class="row justify-content-start">
-                    <div class="col-md-4 gradient-custom text-center text-black">
-                    </div>
+                <%--                <div class="balanceInfo col pt-1">--%>
+                <%--                    <div class="walletBalance">--%>
+                <%--                        Hana Wallet Balance (${walletKRW.currency})--%>
+                <%--                        <fmt:formatNumber value="${walletKRW.balance}" type="number" pattern="#,##0"/>--%>
+                <%--                    </div>--%>
+                <%--                    <div class="usdBalance">--%>
+                <%--                        USD Converted Balance--%>
+                <%--                    </div>--%>
+                <%--                    <div class="conversionOption">--%>
+                <%--                        option: 해당국적의 환율로도 보여주기--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+                <%--&lt;%&ndash;                계좌 구역 시작&ndash;%&gt;--%>
+                <%--                <div class="row justify-content-start">--%>
+                <%--                    <div class="col-md-4 gradient-custom text-center text-black">--%>
+                <%--                    </div>--%>
 
-                    <div class="col-md-8 ">
-                        <div class="card-body pe-5">
-                            <div class="row">
-                                <div class="col-5">
-                                    <h6>Linked Account</h6>
-                                    <h6>Hana Bank</h6>
-                                </div>
-                                <div class="account-image">
-                                    <div class="myAccount"></div>
-                                </div>
-                            </div>
-                            <hr class="mt-0 mb-3">
-                            <div class="col-grid">
-                                <div class="grid-left">
-                                    <div class="row" style="height: 50px">
-                                        <div class="col d-flex">
-                                            <h6>Depositor name <br>
-                                                <span class="text-bold"> Jane Smith</span>
-                                            </h6>
-                                        </div>
-                                    </div>
+                <%--                    <div class="col-md-8 ">--%>
+                <%--                        <div class="card-body pe-5">--%>
+                <%--                            <div class="row">--%>
+                <%--                                <div class="col-5">--%>
+                <%--                                    <h6>Linked Account</h6>--%>
+                <%--                                    <h6>Hana Bank</h6>--%>
+                <%--                                </div>--%>
+                <%--                                <div class="account-image">--%>
+                <%--                                    <div class="myAccount"></div>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                            <hr class="mt-0 mb-3">--%>
+                <%--                            <div class="col-grid">--%>
+                <%--                                <div class="grid-left">--%>
+                <%--                                    <div class="row" style="height: 50px">--%>
+                <%--                                        <div class="col d-flex">--%>
+                <%--                                            <h6>Depositor name <br>--%>
+                <%--                                                <span class="text-bold"> Jane Smith</span>--%>
+                <%--                                            </h6>--%>
+                <%--                                        </div>--%>
+                <%--                                    </div>--%>
 
-                                </div>
-                                <div class="col grid-right">
-                                    <div class="col">
-                                        <h6 class="text-start">Account Number</h6>
-                                        <p class="text-muted">${selectedWallet.acNo}</p>
-                                        <div class="locRight">
-                                            Modify
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                <%--                                </div>--%>
+                <%--                                <div class="col grid-right">--%>
+                <%--                                    <div class="col">--%>
+                <%--                                        <h6 class="text-start">Account Number</h6>--%>
+                <%--                                        <p class="text-muted">${selectedWallet.acNo}</p>--%>
+                <%--                                        <div class="locRight">--%>
+                <%--                                            Modify--%>
+                <%--                                        </div>--%>
+                <%--                                    </div>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
+                <canvas id="exchangeRateChart" width="400" height="300"></canvas>
             </div>
             <%--                계좌 구역 끝--%>
 
@@ -211,8 +216,10 @@
                     <div class="btnArea text-start align-middle">
                         <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic
                             charging if it is lower or equal to the set exchange rate<br/><br/>
-                            When automatic currency conversion is initiated upon payment, a fee of 1% will be applied.<br/>
-                            If the target exchange rate is not reached, it will be automatically canceled on the last day.
+                            When automatic currency conversion is initiated upon payment, a fee of 1% will be
+                            applied.<br/>
+                            If the target exchange rate is not reached, it will be automatically canceled on the last
+                            day.
                         </p>
                     </div>
 
@@ -234,7 +241,99 @@
         </footer>
     </div>
 </div>
+<%-- 환율 그래프 --%>
+<script>
+    let myChart;
+    let currencyCode = "${currencyCode.currencyCode}";
+    $(document).ready(function () {
+        initializeChart();  // 페이지 로드 시 차트를 초기화합니다.
 
+        function initializeChart() {
+            let currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜
+            // let currency = document.getElementById('selectCurrency').value;  // 선택된 통화 코드
+            let currency = currencyCode;
+            console.log("현재날짜", currentDate);
+            console.log("선택된 통화", currency);
+            $.ajax({
+                url: '${pageContext.request.contextPath}/exchange/lastSixMonths',
+                method: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    currency: currency,
+                    endDate: currentDate
+                }),
+                success: function (data) {
+                    console.log(data);
+                    let rateDates = [];
+                    let baseRates = [];
+                    console.log(rateDates);
+                    console.log(baseRates);
+
+                    for (let i = 0; i < data.length; i++) {
+                        let rawDate = data[i].rateDate;
+                        let formattedDate = new Date(rawDate).toISOString().split('T')[0];
+                        rateDates.push(formattedDate);
+                        baseRates.push(data[i].baseRate);
+                    }
+
+                    let ctx = document.getElementById('exchangeRateChart').getContext('2d');
+                    if (myChart) {
+                        myChart.destroy();
+                    }
+                    myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: rateDates,
+                            datasets: [{
+                                label: 'Base Rate',
+                                data: baseRates,
+                                borderColor: 'rgb(75, 192, 192)',
+                                borderWidth: 1,
+                                fill: true,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                pointRadius: 0,
+                                pointHitRadius: 10
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        },
+                        plugins: {
+                            zoom: {
+                                pan: {
+                                    enabled: true,
+                                    mode: 'xy',
+                                    speed: 0.1,
+                                    threshold: 10
+                                },
+                                zoom: {
+                                    enabled: true,
+                                    drag: true,
+                                    mode: 'xy',
+                                    speed: 0.1,
+                                    threshold: 2,
+                                    sensitivity: 3
+                                }
+                            }
+                        }
+                    });
+                    myChart.options.plugins.zoom.zoom.enabled = true;
+                    myChart.options.plugins.zoom.pan.enabled = true;
+                },
+                error: function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert('Error code: ' + jqXHR.status + '. Error message: ' + jqXHR.responseText);
+                }
+            });
+        }
+    });
+
+</script>
+<%-- 환율 그래프 끝--%>
 <script>
     $(document).ready(function () {
         $('#updateRateBtn').on('click', function () {
@@ -285,7 +384,8 @@
         let customRate = document.getElementById('customRateInput').value;
         document.getElementById('selectedRate').value = customRate;
     }
-    $(document).ready(function() {
+
+    $(document).ready(function () {
         updateHiddenInput(); // 페이지 로딩 시 함수 호출하여 초기값 설정
     });
 

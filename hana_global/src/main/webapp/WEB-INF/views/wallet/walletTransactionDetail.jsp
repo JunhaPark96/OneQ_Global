@@ -494,23 +494,23 @@
                 $('#div_exchange_hist').append('<div class="fs-3 w-100 h-100 text-black-50" style="display: flex; align-items: center; justify-content: center; font-family: hanaM">자동환전 내역이 없습니다.</div>');
             } else {
                 let str = '';
-                str += '<button id="deleteSelected" class="float-right">Delete Selected</button>';
                 str += '<table class="table border-0 table-hover text-end mt-3 border-top">';
                 str += '<colgroup><col width=20%><col width=20%><col width=20%><col width=20%><col width=20%></colgroup>';
                 str += '<thead>';
                 str += '<tr class="fs-5 text-black-50">';
-                str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;"><input type="checkbox" id="selectAll"></th>';
+                // str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;"></th>';
                 str += '<th class="text-center border-1 border-start-0" style="background-color: #eceff1; border-color: #c7c7c7; font-family: hanaM;">Exchange Deadline</th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Amount </th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Currency</th>';
                 str += '<th class="text-center border-1" style="font-family: hanaM;background-color: #eceff1; border-color: #c7c7c7">Target Rate</th>';
                 str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7">Status</th>';
+                str += '<th class="text-center border-1 border-end-0" style="font-family:hanaM; background-color: #eceff1; border-color: #c7c7c7"></th>';
                 str += '</tr>';
                 str += '</thead>';
                 str += '<tbody>';
                 data.forEach(function (exchange) {
-                    str += '<tr class="border-1 border-start-0 border-end-0 text-center" style="border-color: #c7c7c7;background-color: ' + (exchange.status == 'S' ? '#e6f7ff' : exchange.status == 'W' ? '#fff5e5' : '#fde2e2') + ';">';
-                    str += '<td class="text-center border-1 border-start-0"><input type="checkbox" class="rowCheckbox"></td>';
+                    console.log("Current exchange.aeSeq:", exchange.aeSeq);
+                    str += '<tr class="border-1 border-start-0 border-end-0 text-center" data-aeSeq="' + exchange.aeSeq + '" style="border-color: #c7c7c7;background-color: ' + (exchange.status == 'S' ? '#e6f7ff' : exchange.status == 'W' ? '#fff5e5' : '#fde2e2') + ';">';
                     str += '<td class="text-black-50 border-1 border-start-0 fs-5 align-middle" style="border-color: #c7c7c7;font-family: hanaM">';
                     str += exchange.exchangeDate.toString().substring(0, 11);
                     str += '</td>';
@@ -523,17 +523,65 @@
                     str += '<td class="border-1 text-dark align-middle fs-5 text-black-50" style="font-family: hanaM; border-color: #c7c7c7">';
                     str += exchange.lowerBound.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
                     str += '</td>';
-                    str += '<td class="text-black-50 align-middle" style="font-family: hanaM">';
+                    str += '<td class="border-1 text-black-50 align-middle" style="font-family: hanaM; border-color: #c7c7c7">';
                     str += exchange.status == 'S' ? 'Completed' : exchange.status == 'W' ? 'Pending' : 'Failed';
                     str += '</td>';
+                    str += '<td><button class="deleteRowBtn" style="background-color: #e74c3c; color: #ffffff; border: none; border-radius: 5px; padding: 5px 10px;">Delete</button></td>';
                     str += '</tr>';
                 });
                 str += '</tbody>';
                 str += '</table>';
                 $('#div_exchange_hist').append(str);
+                // 선택 자동환전 삭제
+                attachRowDeleteEventListener();
             }
         }
 
+    </script>
+<%--    자동환전 삭제--%>
+    <script>
+        function getSelectedAeSeqs() {
+            let selectedAeSeqs = [];
+            $('.rowCheckbox:checked').each(function() {
+                // let aeSeq = $(this).closest('tr').data('aeSeq');
+                let aeSeq = $(this).closest('tr').data('aeSeq');
+
+                selectedAeSeqs.push(aeSeq);
+            });
+            return selectedAeSeqs;
+        }
+
+        function attachRowDeleteEventListener() {
+            $('#div_exchange_hist').on('click', '.deleteRowBtn', function() {
+                console.log("Clicked row:", $(this).closest('tr'));
+                // let aeSeq = $(this).closest('tr').data('aeSeq');
+                let aeSeq = $(this).closest('tr').attr('data-aeSeq');
+                console.log("Clicked row's aeSeq:", aeSeq);
+                console.log("Deleting aeSeq:", aeSeq);
+                $.ajax({
+                    type: "POST",
+                    url: "removeAutoExchange",
+                    data: {
+                        aeSeq: aeSeq
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert("Delete Complete");
+                            location.reload();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert("Error deleting the reservation.");
+                    }
+                });
+            });
+        }
+
+
+    </script>
+    <script>
         // 국가별 이미지
         $(document).ready(function () {
             $('#radio_Group .form-check-input').on('change', function () {
@@ -547,19 +595,6 @@
 
                 const imagePath = countryImages[currencyCode] || '';  // 해당 통화 코드에 맞는 이미지 경로 가져오기
                 $('.country-image').css('background-image', `url(${imagePath})`);  // 국가 이미지 변경
-            });
-        });
-
-    </script>
-<%--    자동환전 삭제--%>
-    <script>
-        $('#selectAll').click(function() {
-            $('.rowCheckbox').prop('checked', $(this).prop('checked'));
-        });
-
-        $('#deleteSelected').click(function() {
-            $('.rowCheckbox:checked').each(function() {
-                $(this).closest('tr').remove();
             });
         });
     </script>

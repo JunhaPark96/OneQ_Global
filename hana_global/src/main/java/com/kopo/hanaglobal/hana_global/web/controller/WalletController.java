@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +97,9 @@ public class WalletController {
         model.addAttribute("lowestRateLastMonth", exchangeService.getExchangeRateForPeriod(requestDTO, Period.ofMonths(1)));
         model.addAttribute("lowestRateLastWeek", exchangeService.getExchangeRateForPeriod(requestDTO, Period.ofWeeks(1)));
 
+        // 환율 그래프용 날짜
+        LocalDate currentDate = LocalDate.now();
+        model.addAttribute("currentDate", currentDate);
         return "/wallet/recurExchange"; // recurExchange.jsp 페이지로 이동
     }
 
@@ -161,6 +165,25 @@ public class WalletController {
         }
         return ResponseEntity.ok(response);
     }
+
+//    @PostMapping("/removeAutoExchanges")
+//    public ResponseEntity<Map<String, Object>> removeAutoExchanges(
+//            @ModelAttribute("currentMember") Member member, @RequestBody List<Integer> aeSeqs) {
+//        Map<String, Object> response = new HashMap<>();
+//
+//        try {
+//            for (int aeSeq : aeSeqs) {
+//                walletService.removeAutoExchange(aeSeq);
+//            }
+//            response.put("success", true);
+//            response.put("message", "Successfully removed the auto exchanges.");
+//        } catch (Exception e) {
+//            response.put("success", false);
+//            response.put("message", "Failed to remove the auto exchanges.");
+//        }
+//
+//        return ResponseEntity.ok(response);
+//    }
 
 
     @PostMapping("/changeWalletPassword")

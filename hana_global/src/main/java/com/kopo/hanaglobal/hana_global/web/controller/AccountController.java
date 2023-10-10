@@ -26,18 +26,19 @@ public class AccountController {
     private MemberService memberService;
 
     @Autowired
-    public AccountController(AccountService accountService, MemberService memberService){
+    public AccountController(AccountService accountService, MemberService memberService) {
         this.accountService = accountService;
         this.memberService = memberService;
     }
 
     @GetMapping("/accountInfo")
     public String AccountInfo(@ModelAttribute("currentMember") Member member, Model model) {
-//        Member member = (Member)session.getAttribute("currentMember");
         System.out.println("현재 멤버는 " + member.toString());
         List<MemberAccDTO> memberAccDTOList = accountService.findMemberAccounts(member.getUserSeq());
-        for (MemberAccDTO memberAccDTO : memberAccDTOList){
-            System.out.println("멤버의 계좌 정보는 " + memberAccDTO.toString());
+        for (MemberAccDTO a : memberAccDTOList) {
+            System.out.println("멤버의 계좌 정보는 " + a.toString());
+            AccountHistoryResponseDTO accountHistoryResponse = accountService.lastTransactionDate(a.getAcNo());
+            model.addAttribute("accountHist", accountHistoryResponse);
         }
         model.addAttribute("memberAccDTO", memberAccDTOList);
         return "myAccount";
@@ -48,7 +49,7 @@ public class AccountController {
 //        Member member = (Member)session.getAttribute("currentMember");
 //        System.out.println("현재 멤버는 " + member.toString());
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
-        for (Account account : accountList){
+        for (Account account : accountList) {
             System.out.println(account.toString());
         }
         model.addAttribute("accountList", accountList);
@@ -97,7 +98,7 @@ public class AccountController {
 
         System.out.println("현재 멤버는 " + member.toString());
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
-        for (Account account : accountList){
+        for (Account account : accountList) {
             System.out.println(account.toString());
         }
         model.addAttribute("accountList", accountList);
@@ -110,7 +111,7 @@ public class AccountController {
             @RequestParam("senderAccountNo") String senderAccountNo,
             @RequestParam("recipientAccountNo") String recipientAccountNo,
             @RequestParam("transfer_amount") Integer transfer_amount,
-            Model model){
+            Model model) {
 //        이체 기능
         try {
             accountService.accountTransfer(senderAccountNo, recipientAccountNo, transfer_amount);
@@ -138,7 +139,7 @@ public class AccountController {
 //    }
 
     @PostMapping("/getReceiverName")
-    public ResponseEntity<Map<String, String>> getReceiverName(@RequestParam("accountNo") String acNo){
+    public ResponseEntity<Map<String, String>> getReceiverName(@RequestParam("accountNo") String acNo) {
         Account account = accountService.getAccountByAcNo(acNo);
         Member member = memberService.findMemberById(account.getUserSeq());
         String receiverName = member.getName();

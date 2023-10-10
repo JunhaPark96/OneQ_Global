@@ -41,6 +41,9 @@ public class ExchangeController {
     @ResponseBody
     public List<ExchangeRateHistDTO> getExchangeRateHist(@RequestBody ExchangeRateHistRequestDTO requestDTO) {
         List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateHist(requestDTO);
+        for (ExchangeRateHistDTO e : exchangeRateHistList){
+            System.out.println("오늘의 환율은 " + e.toString());
+        }
         return exchangeRateHistList;
     }
 
@@ -48,9 +51,9 @@ public class ExchangeController {
     @ResponseBody
     public List<ExchangeRateHistDTO> getExchangeRateForLastSixMonths(@RequestBody CurrencyRequestDTO request) {
         List<ExchangeRateHistDTO> exchangeRateHistList = exchangeService.getExchangeRateForLastSixMonths(request);
-        for (ExchangeRateHistDTO e : exchangeRateHistList) {
-            System.out.println("최근 6개월간 내역은: " + e.toString());
-        }
+//        for (ExchangeRateHistDTO e : exchangeRateHistList) {
+//            System.out.println("최근 6개월간 내역은: " + e.toString());
+//        }
         return exchangeRateHistList;
     }
     //    navbar에서 환전 페이지 이동 시

@@ -174,9 +174,17 @@
                                             <div class="col text-end">
                                                 <h4 class="text-start">Last Transaction Date</h4>
                                                 <p class="text-muted p-border" style="font-size:22px">
-                                                    2023-08-19
-                                                        <%--${account.getLastTransactionDate()}--%></p>
+                                                    <c:choose>
+                                                        <c:when test="${not empty accountHist.tradeDate}">
+                                                            ${accountHist.tradeDate}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            -
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </p>
                                             </div>
+
                                             <div class="col text-end">
                                                 <h4 class="text-start">Account Number</h4>
                                                 <p class="text-muted p-border" style="font-size:22px">

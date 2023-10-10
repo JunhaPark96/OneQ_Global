@@ -11,18 +11,29 @@
 <!--        FROM exchange_rate_hist-->
 <!--        WHERE TO_CHAR(rate_date, 'YYYY/MM/DD') = #{inqDt} AND currency_code = #{currency}-->
 <!--    </select>-->
+<!--    <select id="getExchangeRateHist" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"-->
+<!--            parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO">-->
+<!--        SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,-->
+<!--               base_rate, prev_rate, usd_conversion_rate, round-->
+<!--        FROM exchange_rate_hist-->
+<!--        WHERE rate_date = (-->
+<!--            SELECT MAX(rate_date)-->
+<!--            FROM exchange_rate_hist-->
+<!--            WHERE currency_code = #{currency}-->
+<!--        )-->
+<!--          AND currency_code = #{currency}-->
+<!--    </select>-->
     <select id="getExchangeRateHist" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"
             parameterType="com.kopo.hanaglobal.hana_global.web.dto.request.ExchangeRateHistRequestDTO">
         SELECT currency_code, rate_date, buy_rate, sell_rate, remittance, receiving,
-               base_rate, prev_rate, usd_conversion_rate
+               base_rate, prev_rate, usd_conversion_rate, round
         FROM exchange_rate_hist
-        WHERE rate_date = (
-            SELECT MAX(rate_date)
-            FROM exchange_rate_hist
-            WHERE currency_code = #{currency}
-        )
+        WHERE TRUNC(rate_date) = TO_DATE(#{inqDt}, 'YYYY-MM-DD')
           AND currency_code = #{currency}
+        ORDER BY RATE_DATE DESC
     </select>
+
+
 
 
     <select id="getExchangeRateForLastSixMonths" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.ExchangeRateHistDTO"

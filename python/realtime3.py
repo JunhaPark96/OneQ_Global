@@ -35,7 +35,7 @@ class ExchangeRealtime:
             return False
     # 최신환율이 아닌 환율은 이동
     def move_data_to_history(self):
-        if not self.connection or not self.connection.isconnected():
+        if not self.connection or not self.isconnected():
             self.connect_to_oracle
         cursor = self.connection.cursor()
         # 기존의 EXCHANGE_RATE 데이터를 EXCHANGE_RATE_HIST 테이블로 복사합니다.

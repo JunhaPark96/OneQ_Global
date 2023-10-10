@@ -82,7 +82,9 @@
                                    data-popup-height="800" data-popup-title="Welcome"
                                    data-ng-bind-html="content.readAndPrintButtonText"
                                    data-ng-popup-window="/netbank/EO.Onboarding/Migrants/WelcomeLetter.aspx?RID=krHO7GDP9E62KDv7XqyVeA&amp;SID=dOYJMccDHBo%3d"
-                                   target="Welcome">Read and print</a>
+                                   target="Welcome">
+<%--                                    Read and print--%>
+                                </a>
                             </div>
                             <!-- end welcome-letter-step1 -->
                         </div>
@@ -92,7 +94,7 @@
                             <div class="welcome-letter-step" id="welcome-letter-step2">
                                 <div data-ng-bind-html="content.arrivalBody" id="arrival-info" class="ng-binding"><h2>
                                     When you
-                                    arrive in Australia</h2>
+                                    arrive in Korea</h2> <!-- 나라 이름 변경 -->
                                     <div class="subtitle">Visit your chosen branch to identify yourself for full access
                                         to your
                                         account.<br><br>Please bring the following documents and information with you:
@@ -108,9 +110,9 @@
                                     account,
                                     or your account may automatically close. You can reapply at any CommBank branch.
                                 </div>
-                               <!-- end welcome-letter-step2 -->
-                            </div>
+                            </div> <!-- end welcome-letter-step2 -->
                         </div>
+                    </div>
                     </div>
                     <br/>
                     <!-- start portfolio-wrapper -->

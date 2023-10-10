@@ -80,4 +80,15 @@
         INSERT INTO ACCOUNT_HISTORY (ACC_HIST_NO, AC_NO, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, PARTICIPANT, PARTICIPANT_ACCOUNT)
         VALUES (ACCOUNT_HISTORY_SEQ.NEXTVAL, #{acNo}, #{balance}, #{transactionAmount}, #{transactionType}, #{participant}, #{participantAccount})
     </insert>
+
+    <select id="lastTransactionDate" resultType="com.kopo.hanaglobal.hana_global.web.dto.response.AccountHistoryResponseDTO" parameterType="String">
+        SELECT TRADE_DATE
+        FROM (
+        SELECT TRADE_DATE
+        FROM ACCOUNT_HISTORY
+        WHERE ac_no = #{acNo}
+        ORDER BY TRADE_DATE DESC
+        ) WHERE ROWNUM &lt;= 1
+    </select>
+
 </mapper>

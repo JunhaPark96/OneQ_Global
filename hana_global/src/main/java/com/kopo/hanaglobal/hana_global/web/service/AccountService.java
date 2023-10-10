@@ -29,4 +29,6 @@ public interface AccountService {
 
     public Account findFirstAccountByMemberId(int userSeq);
 
+    public AccountHistoryResponseDTO lastTransactionDate(String acNo);
+
 }

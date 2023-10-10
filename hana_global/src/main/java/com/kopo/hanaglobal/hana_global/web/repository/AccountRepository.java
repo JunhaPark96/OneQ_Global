@@ -33,4 +33,6 @@ public interface AccountRepository {
     public void insertAccHistByWallet(AccountHistoryResponseDTO accountHistoryResponseDTO);
 
     public void createTemporaryAccount(Account account);
+
+    public AccountHistoryResponseDTO lastTransactionDate(String acNo);
 }

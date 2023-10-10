@@ -95,6 +95,7 @@
                 <table id="exchange_rate_tbl" class="table table-striped table-hover table-bordered">
                     <thead class="table-dark">
                     <tr>
+                        <th>Round</th>
                         <th>Currency</th>
                         <th>Rate Date</th>
                         <th>Buy Rate</th>
@@ -151,10 +152,17 @@
                     // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
                         let rawDate = data[i].rateDate;
+                        let dateObj = new Date(rawDate);
+                        let hours = String(dateObj.getHours()).padStart(2, '0');
+                        let minutes = String(dateObj.getMinutes()).padStart(2, '0');
+                        let seconds = String(dateObj.getSeconds()).padStart(2, '0');
+                        let formattedTime = hours + ":" + minutes + ":" + seconds;
+
                         let formattedDate = new Date(rawDate).toISOString().split('T')[0];
                         $('#exchange_rate_tbl tbody').append('<tr>' +
+                            '<td>' + data[i].round + '</td>' +
                             '<td>' + data[i].currencyCode + '</td>' +
-                            '<td>' + formattedDate + '</td>' +
+                            '<td>' + formattedTime + '</td>' +
                             '<td>' + data[i].buyRate + '</td>' +
                             '<td>' + data[i].sellRate + '</td>' +
                             '<td>' + data[i].remittance + '</td>' +

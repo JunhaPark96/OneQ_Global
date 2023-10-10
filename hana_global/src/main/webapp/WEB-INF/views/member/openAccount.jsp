@@ -13,6 +13,12 @@
     <link href="./css/member/openAccount.css" rel="stylesheet"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<%--    캘린더--%>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
     <title>회원가입</title>
 
 </head>
@@ -26,7 +32,10 @@
                 <!-- Step 1 content -->
                 <h3>Date of arrival in Korea</h3>
                 <label for="arrivalDate">Arrival Date</label>
-                <input type="date" name="arrivalDate" id="arrivalDate" onchange="checkArrivalDate()">
+                <div class="tbl_in">
+                <input type="text" name="arrivalDate" id="arrivalDate" onchange="checkArrivalDate()">
+                <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif" style="width: 25px; height: 25px" onclick="openCalendar('arrivalDate')">
+                </div>
                 <span id="arrivalDateMessage" style="color: red;"></span>
                 <button onclick="nextStep()">OK</button>
             </div>
@@ -61,9 +70,13 @@
             </div>
             <div class="step" id="step4">
                 <!-- Step 4 content -->
-                <h3>What is your date of birth?</h3>
+                <h3>What is your Date of Birth?</h3>
                 <label for="dob">BirthDate:</label>
-                <input type="date" name="dob" id="dob" onchange="checkDOB()">
+                <div class="tbl_in">
+                <input type="text" name="dob" id="dob" onchange="checkDOB()">
+                    <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
+                         alt="Start Date Calendar Tab" onclick="openCalendar('dob')">
+                </div>
                 <span id="dobMessage" style="color: red;"></span>
                 <button onclick="nextStep()">OK</button>
             </div>
@@ -243,6 +256,15 @@
         })
         .catch(error => console.error('Error fetching visa types:', error));
 
+
+    function openCalendar(id) {
+        let input = document.getElementById(id);
+        let picker = new Pikaday({
+            field: input,
+            format: 'YYYY-MM-DD',
+        });
+        picker.show();
+    }
     function checkArrivalDate() {
         let today = new Date();
         let arrivalDate = new Date(document.getElementById('arrivalDate').value);

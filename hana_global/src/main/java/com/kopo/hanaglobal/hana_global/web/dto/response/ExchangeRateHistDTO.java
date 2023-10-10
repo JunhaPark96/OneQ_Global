@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class ExchangeRateHistDTO {
+    private String round;
     private int curHistSeq;
     private String currencyCode;
     private Date rateDate;

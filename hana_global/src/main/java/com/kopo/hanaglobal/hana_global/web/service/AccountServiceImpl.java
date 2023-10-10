@@ -150,6 +150,9 @@ public class AccountServiceImpl implements AccountService{
         return accounts.isEmpty() ? null : accounts.get(0);  // 첫 번째 계좌를 반환
     }
 
-
-
+    @Override
+    public AccountHistoryResponseDTO lastTransactionDate(String acNo){
+        AccountHistoryResponseDTO accountHistoryResponseDTO = accountRepository.lastTransactionDate(acNo);
+        return accountHistoryResponseDTO;
+    }
 }

@@ -249,7 +249,7 @@
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 650px;
+    height: 750px;
     /*background-color: #f4f3ef;*/
     /*justify-content: space-between;*/
 }
@@ -575,10 +575,14 @@ tbody, td, tfoot, th, thead, tr {
     text-align: left;
     margin-top: 0px;
 }
-
+.card__price_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
 .card__price {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    /*justify-content: space-around;*/
     align-items: center;
     color: #232528;
     font-size: 20px;

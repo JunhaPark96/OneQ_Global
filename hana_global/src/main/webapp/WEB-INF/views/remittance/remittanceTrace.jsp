@@ -2,6 +2,7 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -33,7 +34,7 @@
 <body>
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
-    <div class="main-area">
+    <div class="main-area" style="margin-right: 10%;">
         <%@ include file="/WEB-INF/views/includes/navbar.jsp" %>
         <div class="main-body">
             <h2>Overseas Remittance</h2>
@@ -62,39 +63,38 @@
                         <th>Currency Code</th>
                         <th>Recipient</th>
                         <%--                            <th>Recipient Country</th>--%>
-                        <th>Remittance Amount (KRW)</th>
+                        <th>Remittance Amount</th>
                         <th>Issue Date</th>
                         <th>Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     <%--                    td: mtcn(임의로 생성된 9자리번호), sender, Korea Republic of, currencyCode, recipient, json에 통화코드와 매핑된 국가이름, status(승인상태),--%>
-                    <c:forEach var="remittance" items="${remittanceList}">
-                        <tr>
-                            <td><input type="radio" name="remittanceRadio" id="" value="${remittance.remitSeq}"/>
-                            </td>
-                                <%--                                <td>${remittance.remitSeq}</td>  --%>
-                            <td>${remittance.sender}</td>
-                            <td>${remittance.senderAc}</td>
-                                <%--                                ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}--%>
-                            <td>South of Korea</td>  <!-- 임의의 값 -->
-                            <td>${remittance.currencyCode}</td>
-                            <td>${remittance.recipient}</td>
-                            <td><fmt:formatNumber value="${remittance.remitAmount}" type="number"
-                                                  pattern="#,##0"/></td>
-                            <td>${remittance.tradeDate}</td>
-                                <%--                                <td class="recipient-country" data-currency-code="${remittance.currencyCode}">--%>
-                            </td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${remittance.status eq 'Y'}">Completed</c:when>
-                                    <c:when test="${remittance.status eq 'N'}">In Progress</c:when>
-                                    <c:when test="${remittance.status eq 'W'}">Awaiting Recipient</c:when>
-                                    <c:otherwise>Unknown</c:otherwise>
-                                </c:choose>
-                            </td>
-                        </tr>
+                    <c:forEach items="${walletList}" var="wallet">
+                        <c:forEach items="${remittanceMap[wallet.walletSeq]}" var="remittance">
+                            <tr>
+                                <td><input type="radio" name="remittanceRadio" id="" value="${remittance.remitSeq}"/></td>
+                                <td>${remittance.sender}</td>
+<%--                                <td>${wallet.walletSeq.substring(0,4)}-${wallet.walletSeq.substring(4,9)}</td>--%>
+                                <td>${fn:substring(String.valueOf(wallet.walletSeq), 0, 4)}-${fn:substring(String.valueOf(wallet.walletSeq), 4, 9)}</td>
+                                <td>South of Korea</td>  <!-- 임의의 값 -->
+                                <td>${wallet.currencyCode}</td>
+                                <td>${remittance.recipient}</td>
+                                <td><fmt:formatNumber value="${remittance.remitAmount}" type="number" pattern="#,##0"/></td>
+                                <!-- issueDate에서 시분초 제거 (단, 이 방법은 tradeDate가 'yyyy-MM-dd HH:mm:ss' 형식일 때만 유효함) -->
+                                <td>${remittance.tradeDate.split(" ")[0]}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${remittance.status eq 'Y'}">Completed</c:when>
+                                        <c:when test="${remittance.status eq 'N'}">In Progress</c:when>
+                                        <c:when test="${remittance.status eq 'W'}">Awaiting Recipient</c:when>
+                                        <c:otherwise>Unknown</c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </c:forEach>
+
                     </tbody>
                 </table>
 
@@ -139,21 +139,39 @@
 <script>
     let remittanceList = [];
 
-    <c:forEach var="data" items="${remittanceList}">
+<%--    <c:forEach var="data" items="${remittanceList}">--%>
+<%--    remittanceList.push({--%>
+<%--        remitSeq: "${data.remitSeq}",--%>
+<%--        walletSeq: "${data.walletSeq}",--%>
+<%--        sender: "${data.sender}",--%>
+<%--        recipient: "${data.recipient}",--%>
+<%--        senderAc: "${data.senderAc}",--%>
+<%--        remitAmount: "${data.remitAmount}",--%>
+<%--        receivableAmount: "${data.receivableAmount}",--%>
+<%--        currencyCode: "${data.currencyCode}",--%>
+<%--        address: "${data.address}",--%>
+<%--        tradeDate: "${data.tradeDate}",--%>
+<%--        status: "${data.status}"--%>
+<%--    });--%>
+<%--    </c:forEach>--%>
+    <c:forEach items="${walletList}" var="wallet">
+    <c:forEach items="${remittanceMap[wallet.walletSeq]}" var="remittance">
     remittanceList.push({
-        remitSeq: "${data.remitSeq}",
-        walletSeq: "${data.walletSeq}",
-        sender: "${data.sender}",
-        recipient: "${data.recipient}",
-        senderAc: "${data.senderAc}",
-        remitAmount: "${data.remitAmount}",
-        receivableAmount: "${data.receivableAmount}",
-        currencyCode: "${data.currencyCode}",
-        address: "${data.address}",
-        tradeDate: "${data.tradeDate}",
-        status: "${data.status}"
+        remitSeq: "${remittance.remitSeq}",
+        walletSeq: "${remittance.walletSeq}",
+        sender: "${remittance.sender}",
+        recipient: "${remittance.recipient}",
+        senderAc: "${remittance.senderAc}",
+        remitAmount: "${remittance.remitAmount}",
+        receivableAmount: "${remittance.receivableAmount}",
+        currencyCode: "${remittance.currencyCode}",
+        address: "${remittance.address}",
+        tradeDate: "${remittance.tradeDate}",
+        status: "${remittance.status}"
     });
     </c:forEach>
+    </c:forEach>
+
 
     console.log("송금정보는", remittanceList);
 
@@ -390,7 +408,7 @@
         $('.table').DataTable({
             "paging": true,
             "searching": false,
-            "ordering": false,
+            "ordering": true,
             "info": true
         });
     });

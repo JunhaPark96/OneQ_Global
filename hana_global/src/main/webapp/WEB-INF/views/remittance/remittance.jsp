@@ -250,24 +250,38 @@
                                                             </span>
                                         </td>
                                     </tr>
-<%--                                    <tr class="mb-5">--%>
-<%--                                        <th>Amount</th>--%>
-<%--                                        <td style="font-size: 11px; line-height: 12px;">--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
+                                    <%--                                    <tr class="mb-5">--%>
+                                    <%--                                        <th>Amount</th>--%>
+                                    <%--                                        <td style="font-size: 11px; line-height: 12px;">--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                    </tr>--%>
                                     <tr class="mb-5">
                                         <th>Estimated Fee</th>
                                         <td style="text-align: right"><span class="txt"><em>5,000 won</em></span></td>
                                     </tr>
                                     <tr class="mb-5">
                                         <th>Estimated Withdrawal Amount (Won)</th>
-                                        <td style="text-align: right"><span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px"><em
+                                        <td style="text-align: right"><span class="txt"
+                                                                            style="color: #016f73; font-weight: 700; font-size: 20px"><em
                                                 class="point" id="paymentAmount"></em></span></td>
                                     </tr>
+                                    <tr class="mb-5">
+                                        <th>Estimated Withdrawal Amount (<span id="targetCurrencyUnit"></span>)</th>
+                                        <td style="text-align: right">
+                                            <span class="txt" style="color: #016f73; font-weight: 700; font-size: 20px">
+                                                <em class="point" id="paymentAmountForeign"></em>
 
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="font-size: 13px; text-align: right; color: #888;">
+                                            The final withdrawal amount will be in the currency of the selected wallet. Please confirm the currency code before proceeding.
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th>Payment method</th>
-                                        <td >
+                                        <td>
                                             <span class="txt"></span>
                                             <%--                                                                                                        <select id="selectAccountForm" name="account" onchange="displayBalance()">--%>
                                             <%--                                                                                                            <option value="">-- Select an account --</option>--%>
@@ -278,7 +292,8 @@
                                             <%--                                                                                                            </c:forEach>--%>
                                             <%--                                                                                                        </select>--%>
                                             <select class="form-select border-3 w-60" name="senderAccountNo"
-                                                    id="selectAccountForm" onchange="displayBalance(); updateRateAndCurrencyInfo();"
+                                                    id="selectAccountForm"
+                                                    onchange="displayBalance(); updateRateAndCurrencyInfo();"
                                                     style="height: 45px;">
                                                 <option value="" selected disabled>Choose Payment Method</option>
 
@@ -311,19 +326,19 @@
                                     </tr>
                                     <%--                                    우대율에 따른 할인 금액--%>
                                     <%-- 우대율에 따른 할인 금액 --%>
-<%--                                    <tr id="anticipatedPrimeRow" style="display: none">--%>
-<%--                                        <th style="line-height: 22px;">Anticipated Prime<br/>--%>
-<%--                                            Amount--%>
-<%--                                        </th>--%>
-<%--                                        <td style="font-size: 14px; line-height: 15px; text-align: right">--%>
-<%--                                            <span class="txt"><em class="primeRate"></em></span><br/>--%>
-<%--                                            <span class="txt">Non-preferential exchange rate <em class="curCode"></em> </span><br/>--%>
-<%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span><br/>&ndash;%&gt;--%>
-<%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span>&ndash;%&gt;--%>
-<%--                                            <span class="txt">Preferential exchange rate <em class="curCode"></em><em class="preferentialRateValue"></em></span><br/>--%>
-<%--                                            <span class="txt"><em class="KRW"></em></span><br/>--%>
-<%--                                        </td>--%>
-<%--                                    </tr>--%>
+                                    <%--                                    <tr id="anticipatedPrimeRow" style="display: none">--%>
+                                    <%--                                        <th style="line-height: 22px;">Anticipated Prime<br/>--%>
+                                    <%--                                            Amount--%>
+                                    <%--                                        </th>--%>
+                                    <%--                                        <td style="font-size: 14px; line-height: 15px; text-align: right">--%>
+                                    <%--                                            <span class="txt"><em class="primeRate"></em></span><br/>--%>
+                                    <%--                                            <span class="txt">Non-preferential exchange rate <em class="curCode"></em> </span><br/>--%>
+                                    <%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span><br/>&ndash;%&gt;--%>
+                                    <%--&lt;%&ndash;                                            <span class="txt">Preferential exchange rate <em class="curCode"></em> </span>&ndash;%&gt;--%>
+                                    <%--                                            <span class="txt">Preferential exchange rate <em class="curCode"></em><em class="preferentialRateValue"></em></span><br/>--%>
+                                    <%--                                            <span class="txt"><em class="KRW"></em></span><br/>--%>
+                                    <%--                                        </td>--%>
+                                    <%--                                    </tr>--%>
 
                                     <tr style="display: none" id="balanceRow">
                                         <th>
@@ -344,7 +359,6 @@
                                 </table>
                             </div>
                         </div>
-
                     </div>
                     <%--        결제 정보 미리보기 끝    --%>
                     <%--                 다음/이전 버튼 시작 --%>
@@ -512,6 +526,36 @@
                                     locations</a>
                             </div>
 
+                            <div class="accordion mt-4" id="termsAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTerms">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTerms" aria-expanded="true" aria-controls="collapseTerms">
+                                            Overseas Remittance Agreement
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTerms" class="accordion-collapse collapse show" aria-labelledby="headingTerms" data-bs-parent="#termsAccordion">
+                                        <div class="accordion-body">
+                                            <p>By using Western Union's international money transfer service, you agree to the following terms and conditions:</p>
+                                            <ol>
+                                                <li>You must provide accurate and complete recipient information, including their full name and location.</li>
+                                                <li>Western Union is not responsible for any delays, errors, or losses that may occur during the transfer process.</li>
+                                                <li>The exchange rate used for the transfer will be determined at the time of processing and may differ from the rate displayed at the time of initiation.</li>
+                                                <li>Service fees and charges may apply, and these will be deducted from the transferred amount.</li>
+                                                <li>You acknowledge that the recipient may be required to provide identification and may incur additional fees imposed by their local Western Union agent.</li>
+                                                <li>Western Union reserves the right to verify your identity and source of funds for regulatory compliance.</li>
+                                                <li>Transfers may be subject to government regulations and restrictions, including sanctions and embargoes.</li>
+                                                <li>Western Union may disclose your information to regulatory authorities if required by law.</li>
+                                                <li>You agree to indemnify Western Union against any claims or losses arising from your use of the service.</li>
+                                                <li>This agreement is binding and governs all international money transfers made through Western Union's platform.</li>
+                                            </ol>
+                                            <p>Please carefully read and accept these terms and conditions before proceeding with your international money transfer through Western Union.</p>
+
+                                            <input type="checkbox" id="acceptTerms" name="acceptTerms">
+                                            <label for="acceptTerms">I agree to the above terms and conditions.</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="btn-area2 mt15 mb30 mt-4">
                                         <span class="btn-pack btn-type-3 ui-btn-pack-a ui-set-btn-pack ui-set-btn-pack-event">
@@ -547,10 +591,11 @@
                                         and you can track <br/>the real-time transfer status below. </p>
                                     <p class="card__email"></p>
                                 </div>
-
+                                <div class="card__price_wrapper">
                                 <p class="card__price">Transfer Amount <span></span></p>
                                 <p class="card__price">Recipient <span> </span></p>
                                 <p class="card__price">Recipient Country <span></span></p>
+                                </div>
                                 <button class="mb-4 remittanceTrace" onclick="remittanceTrace(event)">
                                     Trace Transfer
                                 </button>
@@ -722,12 +767,22 @@
         let selectedAccountOption = document.getElementById('selectAccountForm').selectedOptions[0];
         // let accountNo = document.getElementById('selectAccountForm').value;
         let password = document.getElementById('account_password').value;
-        let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
-        let paymentAmount = parseFloat(paymentAmountStr);
+        // let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        // let paymentAmount = parseFloat(paymentAmountStr);
         // let paymentAmount = parseFloat(document.getElementById('paymentAmount').innerText);
         // console.log(parseFloat(document.getElementById('paymentAmount').innerText));
+        let paymentAmountStr;
 
+        // 선택된 계좌의 통화를 확인
+        const selectedCurrency = selectedAccountOption.value;
+
+        if (selectedCurrency === "KRW") {
+            paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        } else {
+            paymentAmountStr = document.getElementById('paymentAmountForeign').innerText.replace(/,/g, ''); // 외화로 결제할 금액
+        }
         // let paymentAmount = document.getElementById('paymentAmount').innerText;
+        let paymentAmount = parseFloat(paymentAmountStr);
         let accountBalance = parseFloat(selectedAccountOption.getAttribute('data-balance'));
         let accountPassword = selectedAccountOption.getAttribute('data-password');
         // let walletBalance = parseFloat(selectedAccountOption)
@@ -950,6 +1005,18 @@
     //     const discountAmount = (primeRate / 100) * (baseRate - 1);
     //     return baseRate - discountAmount;
     // }
+
+</script>
+<script>
+    // 약관동의 아코디언
+    document.getElementById('acceptTerms').addEventListener('change', function() {
+        const btnComplete = document.getElementById('btnComplete');
+        if (this.checked) {
+            btnComplete.removeAttribute('disabled');
+        } else {
+            btnComplete.setAttribute('disabled', 'disabled');
+        }
+    });
 
 </script>
 </body>

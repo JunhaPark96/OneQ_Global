@@ -371,8 +371,11 @@ function calculateAndPreviewPayment() {
     const previewPayment = document.querySelector('.previewPayment');
     previewPayment.scrollIntoView({behavior: "smooth"});
     previewPayment.classList.add('focusArea');
-    // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
+    // Target 에서 계산된 금액. (금액의 콤마를 제거)
     const targetAmount = parseFloat(document.getElementById("ds_from_money").value.replace(/,/g, ""));
+
+    const estimatedFeeInForeignCurrency = 5000 / selectCurrency(targetCurrencyCode);
+    const totalAmountInForeignCurrency = sourceAmount + estimatedFeeInForeignCurrency;
 
     // 5000원의 수수료를 추가하고 10의 단위로 반올림
     // const finalAmountWithoutDecimal = Math.round(targetAmount);
@@ -389,7 +392,14 @@ function calculateAndPreviewPayment() {
     previewElem.querySelector("tr:nth-child(1) .txt em.currency").textContent = countryName + " " + targetCurrencyCode;
     previewElem.querySelector("tr:nth-child(1) .txt em.price").textContent = sourceAmount.toFixed(0);
     previewElem.querySelector("tr:nth-child(3) .txt em.point").textContent = finalAmount.toLocaleString();
-
+    // document.getElementById("targetCurrencyUnit").textContent = targetCurrencyCode;
+    // document.getElementById("paymentAmountForeign").textContent = totalAmountInForeignCurrency.toFixed(0);
+    document.getElementById("targetCurrencyUnit").textContent = targetCurrencyCode;
+    if (typeof totalAmountInForeignCurrency !== "undefined") {
+        document.getElementById("paymentAmountForeign").textContent = formatNumber(totalAmountInForeignCurrency.toFixed(0));
+    } else {
+        console.error("환율 계산 에러: totalAmountInForeignCurrency 값이 undefined입니다.");
+    }
     //  결제 방식을 동적으로 설정할 수 있는 로직을 추가
     const selectedOption = document.getElementById("selectAccountForm").value;
     const paymentMethodText = document.querySelector(".previewPayment .banking-cont table tbody tr:nth-child(4) .txt");
@@ -404,6 +414,7 @@ function calculateAndPreviewPayment() {
 function displayBalance() {
     let selectElement = document.getElementById('selectAccountForm');
     let selectedOption = selectElement.options[selectElement.selectedIndex];
+    let walletCurrency = selectedOption.value; // 월렛의 통화 코드
     console.log("선택된 계좌는 ", selectedOption);
     let balance = selectedOption.getAttribute('data-balance');
     // 숫자 포맷팅
@@ -420,8 +431,18 @@ function displayBalance() {
         balanceRow.style.display = '';
         passwordRow.style.display = '';
 
-        let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        // let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        // let paymentAmount = parseFloat(paymentAmountStr);
+        let paymentAmountStr;
+        if (walletCurrency == "KRW") {
+            paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
+        } else {
+            // 외화 월렛인 경우 'Foreign exchange application amount'로 결제 금액을 결정
+            paymentAmountStr = document.getElementById("paymentAmountForeign").innerText.replace(/,/g, '');
+            console.log("결제할 외화금액은 ", paymentAmountStr)
+        }
         let paymentAmount = parseFloat(paymentAmountStr);
+
 
         if (balanceNumber < paymentAmount) {
             balanceThElement.innerHTML = 'Available Withdrawal <img src="./images/red_warning_icon.png" alt="Warning Icon" style="vertical-align: middle; width: 27px; height: 27px;"><span style="color: red;">Insufficient Funds</span>';

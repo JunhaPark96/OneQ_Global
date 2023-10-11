@@ -56,7 +56,7 @@
                                 <button class="mb-4 transferTrace" onclick="location.href='${pageContext.request.contextPath}/account_transfer.jsp';">
                                     Make Another Transfer
                                 </button>
-                                <button class="mb-4 transferTrace" onclick="location.href='${pageContext.request.contextPath}/account_details';">
+                                <button class="mb-4 transferTrace" onclick="redirectToAccountDetail()">
                                     View Details
                                 </button>
                             </div>
@@ -72,7 +72,11 @@
 <footer>
 </footer>
 
-
+<script>
+    function redirectToAccountDetail() {
+        window.location.href = '${pageContext.request.contextPath}/accountDetail';
+    }
+</script>
 </body>
 
 </html>

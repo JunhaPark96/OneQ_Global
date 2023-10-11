@@ -1,14 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-15
-  Time: 오후 6:47
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
   <!-- Bootstrap 5 CSS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <!-- Stepper Styles -->
@@ -103,7 +99,7 @@
           <div class="titArea">
             <h2>Account Information</h2>
             <div class="title-area clearfix">
-              <h3 class="fleft">Set Quick Password</h3>
+              <h3 class="fleft">Set Account Password</h3>
               <div class="infor mt4">
                 <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>
               </div>

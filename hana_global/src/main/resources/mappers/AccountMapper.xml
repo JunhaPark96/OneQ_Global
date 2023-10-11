@@ -32,7 +32,7 @@
 <mapper namespace="com.kopo.hanaglobal.hana_global.web.repository.AccountRepository">
     <insert id="createNewAccount" parameterType="com.kopo.hanaglobal.hana_global.web.entity.Account">
         INSERT INTO CHECKING_ACCOUNT(AC_NO, AC_NAME, USER_SEQ, AC_PASSWD, STATUS)
-        VALUES (#{acNo}, '주계좌', #{userSeq}, #{acPasswd}, #{status})
+        VALUES (#{acNo}, 'Hana Demand', #{userSeq}, #{acPasswd}, #{status})
     </insert>
 
 <!-- 임시 계좌 생성-->

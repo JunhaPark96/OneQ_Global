@@ -2,6 +2,8 @@
 <html>
 <head>
     <!-- Bootstrap 5 CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- Stepper Styles -->
@@ -47,13 +49,14 @@
                             <td>
                                 <div class="idCardCerti" id="idCardCerti1">
                                     <div class="uniformImg"><img src="./images/alien_register.png" alt=""></div>
+                                    <div></div>
                                     <div class="form">
                                         <div class="uploadField">
                                             <label for="idCardImage">Upload Identification Image</label>
                                             <input type="file" id="idCardImage" name="idCardImage" accept="image/*"
                                                    onchange="previewImage(event)" style="display: none;">
                                             <label for="idCardImage" class="custom-file-label">Upload File</label>
-                                            <span class="txt">Please upload your identification image.</span>
+                                            <span class="txt">Please upload an image as shown in the example above, <br/>clearly displaying the foreigner registration number, name, and issue date on the identification card.</span>
                                         </div>
                                         <div class="btn_a" onclick="openModal()">
                                             <a id="certificateModalOpen">Authenticate</a>

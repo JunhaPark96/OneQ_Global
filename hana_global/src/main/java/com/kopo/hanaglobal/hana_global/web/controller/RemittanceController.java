@@ -32,6 +32,7 @@ public class RemittanceController {
     private WalletService walletService;
     private ExchangeService exchangeService;
     private EmailService emailService;
+
     @Autowired
     public RemittanceController(AccountService accountService, MemberService memberService, WalletService walletService, ExchangeService exchangeService, EmailService emailService) {
         this.accountService = accountService;
@@ -73,7 +74,7 @@ public class RemittanceController {
 
     @PostMapping("selectCountryAndPayment")
     public ResponseEntity<Map<String, String>> selectCountryAndPayment
-            (@RequestParam("selectedCountry") String country, @RequestParam("selectedPaymentMethod") String payment){
+            (@RequestParam("selectedCountry") String country, @RequestParam("selectedPaymentMethod") String payment) {
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("selectedCountry", country);
         responseMap.put("selectedPaymentMethod", payment);
@@ -81,7 +82,7 @@ public class RemittanceController {
         return ResponseEntity.ok().body(responseMap);
     }
 
-//    @PostMapping("/verifyAccount")
+    //    @PostMapping("/verifyAccount")
 //    public ResponseEntity<Map<String, Object>> verifyAccount(
 //            @RequestParam("account_password") String accountPassword,
 //            @RequestParam("account_no") String accountNo,
@@ -106,7 +107,7 @@ public class RemittanceController {
             @RequestParam("selectedCountry") String country) {
 
         String address = remittanceDTO.getAddress();
-        String bankCode= remittanceDTO.getBankCode();
+        String bankCode = remittanceDTO.getBankCode();
         String currencyCode = remittanceDTO.getCurrencyCode();
         Integer receivableAmount = remittanceDTO.getReceivableAmount();
         String recipient = remittanceDTO.getRecipient();
@@ -117,9 +118,9 @@ public class RemittanceController {
         int walletSeq = remittanceDTO.getWalletSeq();
 
         System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
-                + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
+                + currencyCode + " 보낸외화금액은 " + receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
-        + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
+                + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq);
 
 
         // html 요소에 보여줄 데이터
@@ -147,15 +148,15 @@ public class RemittanceController {
         Integer receivableAmount = remittanceDTO.getReceivableAmount();
         String address = remittanceDTO.getAddress();
         String currencyCode = remittanceDTO.getCurrencyCode();
-        String bankCode= remittanceDTO.getBankCode();
+        String bankCode = remittanceDTO.getBankCode();
         String countryName = remittanceDTO.getCountryName();
         String paymentPlace = remittanceDTO.getPaymentPlace();
 
         System.out.println("주소는 " + address + " 은행코드는 " + bankCode + " 통화코드는 "
-                + currencyCode + " 보낸외화금액은 "+ receivableAmount + " 수령인은 "
+                + currencyCode + " 보낸외화금액은 " + receivableAmount + " 수령인은 "
                 + recipient + " 수령인계좌번호는 " + recipientAc
                 + " 보낸송금원화금액은 " + remitAmount + " 송금인은 " + sender + " 송금계좌는 " + senderAc + " 월렛번호는 " + walletSeq
-        + " 나라이름은 " + countryName + " 수취장소는 " + paymentPlace);
+                + " 나라이름은 " + countryName + " 수취장소는 " + paymentPlace);
 
         // 선택한 월렛에서 금액 차감
         // 해외송금 데이터 넣기
@@ -176,16 +177,21 @@ public class RemittanceController {
     }
 
     @GetMapping("/remittanceTrace")
-    public String remittanceTrance(@ModelAttribute("currentMember") Member member, Model model){
-        Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
-        System.out.println(wallet.toString());
-        List<RemittanceDTO> remittanceDTOList = walletService.getRemittanceListByWalletSeq(wallet.getWalletSeq());
-        for (RemittanceDTO r : remittanceDTOList){
-            System.out.println(r.toString());
+    public String remittanceTrance(@ModelAttribute("currentMember") Member member, Model model) {
+        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
+        Map<Integer, List<RemittanceDTO>> remittanceMap = new HashMap<>();
+
+        for (Wallet e : walletList) {
+            List<RemittanceDTO> remittanceDTOList = walletService.getRemittanceListByWalletSeq(e.getWalletSeq());
+            remittanceMap.put(e.getWalletSeq(), remittanceDTOList);
         }
-        model.addAttribute("remittanceList", remittanceDTOList);
+
+        model.addAttribute("walletList", walletList);
+        model.addAttribute("remittanceMap", remittanceMap);
+
         return "/remittance/remittanceTrace";
     }
+
 
     @PostMapping("/send-email")
     public String sendEmail(@RequestBody EmailDTO emailRequest) {

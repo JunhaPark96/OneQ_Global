@@ -19,6 +19,8 @@
     <link href="./css/profile.css" rel="stylesheet">
     <link href="./css/wallet/flags.css" rel="stylesheet">
     <script src="./js/main.js"></script>
+    <link href="./css/member/completeAccount.css" rel="stylesheet"/>
+
 </head>
 <body>
 <div class="main-container">
@@ -35,7 +37,7 @@
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="./images/mike.jpg" style="margin-bottom: 0px">
+                                <img class="avatar border-gray" src="./images/person.png" style="margin-bottom: 0px">
                                 <h5 class="title" style="margin-bottom: 5px">${currentMember.name}</h5>
                             </a>
                             <p class="description" style="margin-bottom: 0px">
@@ -240,6 +242,156 @@
                     </div>
 
                 </c:if>
+<%--                <c:if test="${currentMember.status == 'N'}">--%>
+<%--                    <div style="grid-column: span 2">--%>
+<%--                        <!-- start ob-section-banner -->--%>
+<%--                        <div class="ob-section unselectable" id="ob-section-banner"--%>
+<%--                             back-img="https://static.my.commbank.com.au/static/cmxAssets/MigrantOrigination/migrant-confirmation-bp5.jpg">--%>
+<%--                            &nbsp;--%>
+<%--                        </div>--%>
+<%--                        <!-- end ob-section-banner -->--%>
+<%--                        <!-- start ob-section-header -->--%>
+<%--                        <div class="ob-section unselectable" id="ob-section-header" unselectable="on">--%>
+<%--                            <div class="p-grid">--%>
+<%--                                <div class="p-grid-row">--%>
+<%--                                    <div class="p-1">--%>
+<%--                                        <p id="last-logon">--%>
+<%--                                <span data-ng-bind-html="pageData.FirstTimeLogon ? '' : (content.salutationText | formatString:pageData.FirstName)"--%>
+<%--                                      class="ng-binding"></span>--%>
+<%--                                            <span></span>--%>
+<%--                                        </p>--%>
+<%--                                        <div data-ng-bind-html="content.welcomeText" class="welcome-text ng-binding"--%>
+<%--                                             id="welcome-text" test-and-target="" tat-campaign-code="CB-EO-SA-MIG-PAGE2-COPY"--%>
+<%--                                             tat-product-code-name="productCode"><h3>Thanks for choosing to bank with us. We've--%>
+<%--                                            created your Everyday Smart Access Account. Here are your next steps</h3></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <!-- end ob-section-header -->--%>
+<%--                        <br/>--%>
+<%--                        <!-- start ob-section-body -->--%>
+<%--                        <div class="ob-section" id="ob-section-body">--%>
+<%--                            <div class="p-grid">--%>
+<%--                                <div class="p-grid-row" id="welcome-letter-wrapper"--%>
+<%--                                     style="display: grid; grid-template-columns: 1fr 1fr;">--%>
+<%--                                    <div class="p-1-2 bp3-1">--%>
+<%--                                        <!-- start welcome-letter-step1 -->--%>
+<%--                                        <div class="welcome-letter-step" id="welcome-letter-step1">--%>
+<%--                                            <div data-ng-bind-html="content.beforeArrivalBody | formatString:pageData.NetbankId"--%>
+<%--                                                 id="welcome-info" test-and-target="" tat-campaign-code="CB-EO-SA-MIG-PAGE2-COPY2"--%>
+<%--                                                 tat-product-code-name="productCode" class="ng-binding"><h5>Please read and print--%>
+<%--                                                your welcome letter</h5>--%>
+<%--                                                <div class="subtitle"></div>--%>
+<%--                                                <p>It has all your account details and the information you need to get your account--%>
+<%--                                                    up and running or to <a--%>
+<%--                                                            href="https://www.commbank.com.au/moving-to-australia/international-banking-team.html"--%>
+<%--                                                            target="_blank">contact us</a>.</p>--%>
+<%--                                                <br>--%>
+<%--                                                Make sure you keep a record of your new account details if you don’t have a printer.--%>
+<%--                                                You’ll be able to use your account after you complete step 2.--%>
+<%--                                            </div>--%>
+
+<%--                                            <div class="row-spacer"></div>--%>
+
+<%--                                            <a href="#" id="ctl00_BodyPlaceHolder_readAndPrintButton"--%>
+<%--                                               class="button secondary ng-binding" data-popup="" data-popup-width="1140"--%>
+<%--                                               data-popup-height="800" data-popup-title="Welcome"--%>
+<%--                                               data-ng-bind-html="content.readAndPrintButtonText"--%>
+<%--                                               data-ng-popup-window="/netbank/EO.Onboarding/Migrants/WelcomeLetter.aspx?RID=krHO7GDP9E62KDv7XqyVeA&amp;SID=dOYJMccDHBo%3d"--%>
+<%--                                               target="Welcome">--%>
+<%--                                                    &lt;%&ndash;                                    Read and print&ndash;%&gt;--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <!-- end welcome-letter-step1 -->--%>
+<%--                                    </div>--%>
+
+<%--                                    <div class="p-1-2 bp3-1" style="border-left: 4px solid #b1aeae; padding-left: 20px;">--%>
+<%--                                        <!-- start welcome-letter-step2 -->--%>
+<%--                                        <div class="welcome-letter-step" id="welcome-letter-step2">--%>
+<%--                                            <div data-ng-bind-html="content.arrivalBody" id="arrival-info" class="ng-binding"><h5>--%>
+<%--                                                When you--%>
+<%--                                                arrive in Korea</h5> <!-- 나라 이름 변경 -->--%>
+<%--                                                <div class="subtitle">Visit your chosen branch to identify yourself for full access--%>
+<%--                                                    to your--%>
+<%--                                                    account.<br><br>Please bring the following documents and information with you:--%>
+<%--                                                </div>--%>
+<%--                                                <ul>--%>
+<%--                                                    <li>Passport (original document required)</li>--%>
+<%--                                                    <li>Tax residency details</li>--%>
+<%--                                                    <li>Your welcome letter</li>--%>
+<%--                                                    <li>Student ID or enrollment letter, if you are a student</li>--%>
+<%--                                                </ul>--%>
+<%--                                                <br>You'll need to provide your ID for verification within 20 days of opening your--%>
+<%--                                                account,--%>
+<%--                                                or your account may automatically close. You can reapply at any CommBank branch.--%>
+<%--                                            </div>--%>
+<%--                                        </div> <!-- end welcome-letter-step2 -->--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <br/>--%>
+<%--                            <!-- start portfolio-wrapper -->--%>
+<%--                            <div class="p-grid-row portfolio-grid">--%>
+<%--                                <div class="column" id="account-type-cell">--%>
+<%--                                    <div id="account-type-icon"></div>--%>
+<%--                                    <div id="account-type-wrapper">--%>
+<%--                                        <div class="portfolio-cell-label ng-binding"--%>
+<%--                                             data-ng-bind-html="content.accountTypeLabel"--%>
+<%--                                             aria-hidden="true">Account type--%>
+<%--                                        </div>--%>
+<%--                                        <div class="portfolio-cell-data">--%>
+<%--                                            <span class="visually-hidden ng-binding">Account type</span>--%>
+<%--                                                ${account.acName}--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="column" id="bsb-cell">--%>
+<%--                                    <div class="portfolio-cell-label ng-binding" data-ng-bind-html="content.bsbLabel"--%>
+<%--                                         aria-hidden="true">SWIFT BIC--%>
+<%--                                    </div>--%>
+<%--                                    <div class="portfolio-cell-data">--%>
+<%--                                <span class="visually-hidden ng-binding"--%>
+<%--                                      data-ng-bind-html="content.bsbLabel">SWIFT BIC</span>--%>
+<%--                                        KOEXKRSE--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="column" id="account-no-cell">--%>
+<%--                                    <div class="portfolio-cell-label ng-binding" data-ng-bind-html="content.accountNumberLabel"--%>
+<%--                                         aria-hidden="true">Account number--%>
+<%--                                    </div>--%>
+<%--                                    <div class="portfolio-cell-data">--%>
+<%--                                        <span class="visually-hidden ng-binding" data-ng-bind-html="content.accountNumberLabel">Account number</span>--%>
+<%--                                            ${account.acNo.substring(0, 3)}-${account.acNo.substring(3,9)}-${account.acNo.substring(9,14)}--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                                <div class="column text-right" id="balance-cell">--%>
+<%--                                    <div class="portfolio-cell-label ng-binding" data-ng-bind-html="content.balanceLabel"--%>
+<%--                                         aria-hidden="true">Balance--%>
+<%--                                    </div>--%>
+<%--                                    <div class="portfolio-cell-data">--%>
+<%--                                        <span class="visually-hidden ng-binding" data-ng-bind-html="content.balanceLabel">Balance</span>--%>
+<%--                                        <fmt:formatNumber value="${account.balance}" type="number" pattern="#,##0"/> Won--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <!-- end portfolio-wrapper-->--%>
+<%--                            <div class="p-grid-row alert" style="border-radius: 2rem; border: 1px solid black; box-shadow: #018085; background-color: whitesmoke;">--%>
+<%--                                <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>--%>
+<%--                                <div class="alert-text ng-binding"  style="color: black; line-height: 25px; ">--%>
+<%--                                    In case you are unable to enter Korea, please <a href="${pageContext.request.contextPath}/refund" style="text-decoration: underline">apply for a refund</a>. <br/>Fees for currency exchange and remittance will be applied for refunds.--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="p-grid-row alert">--%>
+<%--                                <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>--%>
+<%--                                <div class="alert-text ng-binding" id="portfolio-footer-alert" style="color: black">Your HANA--%>
+<%--                                    GLOBAL--%>
+<%--                                    client ID is  <span style="font-weight:bold; text-decoration:underline;">${currentMember.id}</span>. You will need this to log back into HANA GLOBAL.--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </c:if>--%>
             </div>
         </div>
 
@@ -257,7 +409,7 @@
             data: {
                 aeSeq: aeSeq
             },
-            success: function(response) {
+            success: function (response) {
                 if (response.success) {
                     // 화면에서 해당 카드를 제거
                     $(`[data-aeSeq='${aeSeq}']`).remove();
@@ -268,7 +420,7 @@
                     alert(response.message);
                 }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
                 // 서버와의 통신에 실패한 경우 에러를 표시
                 alert("Error deleting the reservation.");
             }

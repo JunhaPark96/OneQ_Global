@@ -275,7 +275,7 @@ body {
 }
 
 .user-image {
-    background-image: url('https://img.freepik.com/free-photo/close-up-portrait-beautiful-young-brunette-woman_273609-37281.jpg?w=1060&t=st=1693132252~exp=1693132852~hmac=66052b02abd633e8ae20ad7226d3c9490ca8b78781cd828c7c49eca12b7dfdf3');
+    background-image: url('/images/smile-person2.jpg');
     /* 배경 이미지 설정 */
     background-size: cover;
     /* 이미지가 div를 꽉 채우도록 설정 */

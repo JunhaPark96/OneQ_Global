@@ -17,9 +17,6 @@
     <link href="./css/mem_sidebar.css" rel="stylesheet"/>
     <title>myPage sidebar</title>
     <style>
-        /*.sidebar {*/
-        /*    overflow-x: hidden; !* 애니메이션 중에 사이드바 내용이 외부로 나오지 않도록 설정 *!*/
-        /*}*/
         a::before, a::after {
             cursor: pointer;
         }
@@ -49,24 +46,30 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="active ">
-                <a href="${pageContext.request.contextPath}/profile">
-                    <i class="nc-icon nc-bank"></i>
-                    <p>DashBoard</p>
-                </a>
+                <c:choose>
+                    <c:when test="${currentMember.name != 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/profile">
+                        <i class="nc-icon nc-bank"></i>
+                        <p>DashBoard</p>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                    </c:otherwise>
+                </c:choose>
             </li>
             <li>
                 <c:choose>
                     <c:when test="${currentMember.name == 'ADMIN'}">
                         <a href="${pageContext.request.contextPath}/userManagement">
                             <i class="nc-icon nc-single-02"></i>
-                            <p>Manage Users</p>
+                            <p>회원 관리</p>
                         </a>
                     </c:when>
                     <c:otherwise>
-                        <a href="./user.html">
-                            <i class="nc-icon nc-single-02"></i>
-                            <p>Edit Profile</p>
-                        </a>
+<%--                        <a href="./user.html">--%>
+<%--                            <i class="nc-icon nc-single-02"></i>--%>
+<%--                            <p>Edit Profile</p>--%>
+<%--                        </a>--%>
                     </c:otherwise>
                 </c:choose>
             </li>
@@ -83,17 +86,27 @@
                 </c:choose>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/branch">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>Branch</p>
-                </a>
+                <c:choose>
+                    <c:when test="${currentMember.name != 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/branch">
+                            <i class="nc-icon nc-pin-3"></i>
+                            <p>Branch</p>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/branch">
+                            <i class="nc-icon nc-pin-3"></i>
+                            <p>지점</p>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </li>
             <li>
                 <c:choose>
-                    <c:when test="${not currentMember.name == 'ADMIN'}">
-                        <a href="./notifications.html">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>송금예약</p>
+                    <c:when test="${currentMember.name != 'ADMIN'}">
+                        <a href="${pageContext.request.contextPath}/refundAccount">
+                            <i class="nc-icon nc-pin-3"></i>
+                            <p>Reimbursement</p>
                         </a>
                     </c:when>
                     <c:otherwise>

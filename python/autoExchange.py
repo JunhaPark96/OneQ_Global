@@ -12,7 +12,7 @@ import logging
 from decimal import Decimal
 
 class WalletService:
-    def __init__(self, connection):  
+    def __init__(self, connection):
         self.connection = connection
     # 환전 진행
     def do_exchange(self, wallet_seq, currency_code, password, krw_amount, foreign_amount, source_currency_name):
@@ -38,13 +38,13 @@ class WalletService:
             self.add_wallet_new_cur(from_wallet, currency_code, source_currency_name, foreign_amount)
         # 해당 외화가 wallet에 있을 시
         else:
-            cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE+:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE=:3", 
-                                (foreign_amount, from_wallet[1], currency_code))
+            cursor.execute("SELECT * FROM HANA_WALLET WHERE USER_SEQ=:1 AND CURRENCY_CODE=:2 FOR UPDATE", (from_wallet[1], currency_code))
+        
+            cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE+:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE=:3",(foreign_amount, from_wallet[1], currency_code))
 
         # 환전 입금 내역 transaction
         deposit_dto = self.create_deposit_dto(target_wallet if target_wallet else from_wallet, currency_code, foreign_amount, source_currency_name)
-        cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, DEPOSIT_CUR, DEPOSIT_NAME) VALUES (EXCHANGE_HISTORY_SEQ.NEXTVAL, :1, :2, :3, 'E', :4, :5)",
-                            deposit_dto)
+        cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, DEPOSIT_CUR, DEPOSIT_NAME) VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, :1, :2, :3, 'E', :4, :5)", deposit_dto)
         # print("환전 입금 내역 추가:", deposit_dto)
 
     # 환전 입금 내역 추가
@@ -62,21 +62,19 @@ class WalletService:
         if Decimal(from_wallet[4]) < Decimal(krw_amount):  # from_wallet[4] = balance
             shortage = Decimal(krw_amount) - Decimal(from_wallet[4])
             self.deduct_from_account(account, int(shortage))
-            cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE+:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE='KRW'", 
+            cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE+:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE='KRW'",
                             (shortage, from_wallet[1]))
 
-        cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE-:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE='KRW'", 
+        cursor.execute("UPDATE HANA_WALLET SET BALANCE=BALANCE-:1 WHERE USER_SEQ=:2 AND CURRENCY_CODE='KRW'",
                             (krw_amount, from_wallet[1]))
 
         withdraw_dto = self.create_withdraw_dto(from_wallet, krw_amount)
-        cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, WITHDRAW_CUR, WITHDRAW_NAME) VALUES (EXCHANGE_HISTORY_SEQ.NEXTVAL, :1, :2, :3, 'E', 'KRW', 'won')",
-                            withdraw_dto)
+        cursor.execute("INSERT INTO HANA_WALLET_HIST (WALLET_TRANS_NO, WALLET_SEQ, BALANCE, TRANSACTION_AMOUNT, TRANSACTION_TYPE, WITHDRAW_CUR, WITHDRAW_NAME) VALUES (HANA_WALLET_HIST_SEQ.NEXTVAL, :1, :2, :3, 'E', 'KRW', 'won')", withdraw_dto)
         # print("환전 출금 내역 추가:", withdraw_dto)
-
     def create_withdraw_dto(self, from_wallet, krw_amount):
         return (
             from_wallet[0],
-            Decimal(from_wallet[4]) - Decimal(krw_amount), 
+            Decimal(from_wallet[4]) - Decimal(krw_amount),
             krw_amount
         )
 
@@ -87,19 +85,19 @@ class WalletService:
         cursor.execute("SELECT BALANCE FROM CHECKING_ACCOUNT WHERE AC_NO=:1", (ac_no,))
         # account_balance = self.cursor.fetchone()[0]
         account_balance = account[4]
-        
+
         # 출금하려는 금액이 현재 잔액보다 많으면 예외를 발생.
         if account_balance < amount:
             raise ValueError("계좌 잔액이 부족합니다.")
-        
+
         # 충분한 잔액이 있으면, 해당 금액을 계좌에서 차감.
         cursor.execute("UPDATE CHECKING_ACCOUNT SET BALANCE = BALANCE - :1 WHERE AC_NO=:2", (amount, ac_no))
-        
+
         print(f"{amount} 금액이 계좌 {ac_no}에서 차감되었습니다.")
         self.connection.commit()
 
 
-    
+
     def add_wallet_new_cur(self, wallet, currency_code, source_currency_name, foreign_amount):
         cursor = self.connection.cursor()
         new_wallet_currency_dto = (
@@ -136,8 +134,6 @@ class WalletService:
         result = cursor.fetchone()
         cursor.close()
         return result
-
-
 class AutoExchange:
     def __init__(self, connection):
         self.connection = connection
@@ -145,10 +141,10 @@ class AutoExchange:
     def connect_to_oracle(self):
         logging.info("Connecting to Oracle database...")
         # oracledb.init_oracle_client(lib_dir=r"C:\Users\kopo\exchange\instantclient_19_20")
-        oracledb.init_oracle_client(lib_dir=r"C:/home/ubuntu/instantclient_19_20")
+        oracledb.init_oracle_client(lib_dir=r"/home/ubuntu/instantclient_19_20")
         self.connection = oracledb.connect(user='ADMIN', password='@Pasdf658215', dsn='junha_high')
         logging.info("Connected to Oracle database")
-    
+
     def close_oracle_connection(self):
         if self.connection is not None:
             self.connection.close()
@@ -158,7 +154,7 @@ class AutoExchange:
         total_with_fee = exchanged_amount * 1.01  # 1%의 수수료를 더합니다.
         return round(total_with_fee)  # 반올림하여 정수로 변환
 
-    
+
     def _get_latest_exchange_rates(self):
         cursor = self.connection.cursor()
         sql = "SELECT CURRENCY_CODE, BASE_RATE FROM EXCHANGE_RATE"
@@ -167,18 +163,17 @@ class AutoExchange:
         rates = {row[0]: row[1] for row in result}
         cursor.close()
         return rates
-    
+
     def get_waiting_auto_exchanges(self):
         cursor = self.connection.cursor()
         sql = "SELECT * FROM AUTO_EXCHANGE WHERE status = 'W'"
         result = cursor.execute(sql).fetchall()
         cursor.close()
         return result
-    
     def get_wallet_by_auto_exchange_seq(self, ae_seq):
         cursor = self.connection.cursor()
         sql = """
-        SELECT W.* 
+        SELECT W.*
         FROM HANA_WALLET W
         JOIN AUTO_EXCHANGE AE ON W.WALLET_SEQ = AE.WALLET_SEQ
         WHERE AE.AE_SEQ = :1
@@ -192,19 +187,18 @@ class AutoExchange:
     def get_wallet_by_user_and_currency(self, user_seq):
         cursor = self.connection.cursor()
         sql = """
-        SELECT * 
-        FROM HANA_WALLET 
+        SELECT *
+        FROM HANA_WALLET
         WHERE USER_SEQ = :1 AND CURRENCY_CODE = :2
         """
         cursor.execute(sql, (user_seq, "KRW"))
         result = cursor.fetchone()
         cursor.close()
         return result
-
-    
     def check_and_exchange(self):
         self.connect_to_oracle()
         exchange_rates = self._get_latest_exchange_rates()
+        print(exchange_rates)
         pending_requests = self.get_waiting_auto_exchanges()
 
         if pending_requests is None:
@@ -231,11 +225,11 @@ class AutoExchange:
             if exchange_date.date() <= datetime.today().date():
                 self.update_status(ae_seq, 'F')
                 continue
-            
+
             target_rate = lower_bound
             # print("환율정보 총: ", exchange_rates)
             # print("환율은 ", exchange_rates[target_cur_code])
-            if target_cur_code in exchange_rates and exchange_rates[target_cur_code]:
+            if target_cur_code in exchange_rates and exchange_rates[target_cur_code] <= target_rate:
                 # print(target_cur_code)
                 exchanged_amount = self.perform_exchange(exchange_amount, exchange_rates[target_cur_code])
                 # print("환전할 금액은 ", exchanged_amount)
@@ -262,8 +256,8 @@ def main():
     # auto_exchange.connect_to_oracle()
 
     # 스케줄러에 5분마다 실행되도록 작업을 추가합니다.
-    schedule.every(5).minutes.do(auto_exchange.check_and_exchange)
-
+    #schedule.every(5).minutes.do(auto_exchange.check_and_exchange)
+    schedule.every(3).seconds.do(auto_exchange.check_and_exchange)
     try:
         while True:
             schedule.run_pending()

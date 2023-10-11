@@ -28,6 +28,14 @@
     Locale currentLocale = localeResolver.resolveLocale(request);
     String currentLang  = currentLocale.getLanguage();
 %>
+<%
+    Member currentMember = (Member) session.getAttribute("currentMember");
+
+    if (currentMember != null && "admin".equals(currentMember.getId())) {
+        localeResolver.setLocale(request, response, new Locale("ko"));
+    }
+%>
+
 <div class="header">
     <div class="logo">
         <a href="/">

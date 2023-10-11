@@ -205,4 +205,34 @@ public class MemberController {
 
         return "/member/completeAccount";
     }
+
+    @GetMapping("/refundAccount")
+    public String refundAccount(@ModelAttribute("currentMember") Member member, Model model){
+        Account account = accountService.findAccountByUserSeq(member.getUserSeq());
+
+        model.addAttribute("member", member);
+        model.addAttribute("account", account);
+        return "/member/refundAccount";
+    }
+
+    @GetMapping("/getRefund")
+    public String getRefund(@ModelAttribute("currentMember") Member member, Model model){
+        Account account = accountService.findAccountByUserSeq(member.getUserSeq());
+        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
+        model.addAttribute("member", member);
+        model.addAttribute("account", account);
+        model.addAttribute("accountList", accountList);
+        return "member/refund";
+
+    }
+
+    @GetMapping("/refundDetail")
+    public String refundDetail(@ModelAttribute("currentMember") Member member, Model model){
+        Account account = accountService.findAccountByUserSeq(member.getUserSeq());
+        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
+        model.addAttribute("member", member);
+        model.addAttribute("account", account);
+        model.addAttribute("accountList", accountList);
+        return "member/refundDetail";
+    }
 }

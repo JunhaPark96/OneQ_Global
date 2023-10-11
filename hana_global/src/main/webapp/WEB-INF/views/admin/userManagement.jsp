@@ -9,10 +9,11 @@
     <title>회원관리</title>
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
-    <link href="./css/header.css" rel="stylesheet"/>
+    <link href="./css/headerAdmin.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/profile.css" rel="stylesheet">
     <link href="./css/app-modern.min.css" rel="stylesheet">
+
     <script src="./js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -55,9 +56,9 @@
 </head>
 <body>
 <div class="main-container">
-    <%@ include file="/WEB-INF/views/includes/header.jsp" %>
-    <div class="main-area">
-        <%@ include file="/WEB-INF/views/includes/mem_sidebar.jsp" %>
+    <%@ include file="/WEB-INF/views/admin/headerAdmin.jsp" %>
+    <div class="main-area" >
+        <%@ include file="/WEB-INF/views/admin/sidebarAdmin.jsp" %>
         <div class="main-body">
             <div class="col-lg-12">
                 <div class="card">
@@ -65,7 +66,7 @@
                     grid-template-areas: 'div-header div-header'
                     'div-left div-right'; margin-top: 0px; column-gap: 50px">
                         <div class="div-header" style="grid-area: div-header; grid-column: span 2">
-                            <h4 class="header-title">국가별 회원 수</h4>
+                            <h4 class="header-title" style="margin-bottom: 0px; margin-top: 0px;">국가별 회원 수</h4>
                             <div class="dropdown float-right">
                                 <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
                                    aria-expanded="false">
@@ -116,16 +117,16 @@
 
 
             <div class="user-info">
-                <h2>User Management</h2>
+                <h2>회원 관리</h2>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr style="text-align: center">
-                        <th>Select</th>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Account Number</th>
-                        <th>Country</th>
-                        <th>Application Date</th>
+                        <th>선택</th>
+                        <th>회원 ID</th>
+                        <th>이름</th>
+                        <th>계좌번호</th>
+                        <th>국가</th>
+                        <th>신청일</th>
 <%--                        <th>승인상태</th>--%>
                         <th id="statusHeader" class="sort-header">승인상태</th>
                     </tr>
@@ -135,7 +136,7 @@
                         <c:if test="${member.id != 'admin'}">
 
                             <tr>
-                                <td><input style="text-align: center" type="radio" name="selectedMember" value="${member.userSeq}"></td>
+                                <td style="text-align: center"><input type="radio" name="selectedMember" value="${member.userSeq}"></td>
                                 <td>${member.id}</td>
                                 <td>${member.name}</td>
                                 <td>${firstAccountForMembers[member.userSeq].acNo}</td>

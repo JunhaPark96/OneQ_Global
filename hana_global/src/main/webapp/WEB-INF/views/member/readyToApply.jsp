@@ -28,7 +28,7 @@
                         <p></p><p>Make sure you:</p>
                         <ul>
                             <li>Are aged 14 years and over</li>
-                            <li>Will arrive in Korea in the next 14 days or;</li>
+                            <li>Will arrive in Korea in the next 14 days</li>
                             <li>Have arrived in Korea in the past three months</li>
                         </ul>
                         <p><b>Please ensure your travel plans have been confirmed before you open an account. For more information, please visit <a data-tracker-type="richtext" href="https://www.kebhana.com/cont/util/util04/util0401/index.jsp" style="color: #018085">hanabank.com/movingtokorea</a>.</b></p>

@@ -2,6 +2,8 @@
 <html>
 <head>
     <!-- Bootstrap 5 CSS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- Stepper Styles -->
@@ -52,8 +54,7 @@
                         <%--                        </td>--%>
                         <td class="th">
                             We are assessing the authenticity of the documents you submitted.<br>
-                            Please await administrative approval. This process may take 1 to 3 days.<br>
-                            The status of your approval will be sent to the email and contact number provided.
+                            Please await administrative approval. This process may take 1 to 3 minutes.<br>
                         </td>
                     </tr>
 

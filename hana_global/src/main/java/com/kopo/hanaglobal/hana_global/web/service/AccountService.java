@@ -31,4 +31,5 @@ public interface AccountService {
 
     public AccountHistoryResponseDTO lastTransactionDate(String acNo);
 
+    public List<Account> getAccountAll();
 }

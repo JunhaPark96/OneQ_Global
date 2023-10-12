@@ -91,4 +91,10 @@
         ) WHERE ROWNUM &lt;= 1
     </select>
 
+
+    <select id="getAccountAll" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account"
+            parameterType="int">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT
+    </select>
 </mapper>

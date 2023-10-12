@@ -51,7 +51,7 @@
                     <tbody>
                     <%--                            기간 조회--%>
                     <tr>
-                        <th scope="row" class="text-center align-middle">&nbsp;&nbsp;조회기간</th>
+                        <th scope="row" class="text-center align-middle">&nbsp;&nbsp;Search Period</th>
                         <td class="tbl_left">
                             <div class="tbl_in">
                                 <input type="text" id="inqDt" name="inqDt">
@@ -87,7 +87,7 @@
                     </tbody>
                 </table>
                 <div class="btnArea justify-content-center" id="acc_trans_inquiry">
-                    <input type="button" id="btnNext" class="btn_p" value="조회">
+                    <input type="button" id="btnNext" class="btn_p" value="Inquiry">
                 </div>
             </div>
             <%--            환율 조회 테이블--%>

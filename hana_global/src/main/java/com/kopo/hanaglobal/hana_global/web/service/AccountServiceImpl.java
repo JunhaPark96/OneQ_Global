@@ -155,4 +155,10 @@ public class AccountServiceImpl implements AccountService{
         AccountHistoryResponseDTO accountHistoryResponseDTO = accountRepository.lastTransactionDate(acNo);
         return accountHistoryResponseDTO;
     }
+
+    @Override
+    public List<Account> getAccountAll(){
+        List<Account> accountList = accountRepository.getAccountAll();
+        return accountList;
+    }
 }

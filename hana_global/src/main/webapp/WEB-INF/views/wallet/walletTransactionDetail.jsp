@@ -130,7 +130,7 @@
                         <div class="col-sm-12 col-xl-12 p-0">
                             <div class="col-12 p-3 ms-0 d-flex row mb-4 " id="radio_Group"
                                  style="background-color: #eceff1">
-                                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                                <div id="carouselExample" class="carousel slide">
                                     <div class="carousel-inner">
                                         <c:forEach items="${walletList}" var="wallet" varStatus="status">
                                             <c:choose>
@@ -209,13 +209,6 @@
                                         onclick="click_exchange_hist()">
                                     Auto Exchange History
                                 </button>
-
-                                <%--                            <button id="remittance_hist" type="button"--%>
-                                <%--                                    class="col-4 text-center border-0 pt-3 pb-3 fs-5"--%>
-                                <%--                                    style="font-family: hanaM; color: #8d8d8d; border-radius: 0px 10px 0px 0px"--%>
-                                <%--                                    onclick="click_remittance_hist()">--%>
-                                <%--                                송금내역--%>
-                                <%--                            </button>--%>
                             </div>
                             <div class="col-12 bg-white mt-0 " id="div_whole_history"
                                  style="min-height: 350px; border-radius: 0px 0px 10px 10px">
@@ -286,19 +279,6 @@
             div_exchange_hist.classList.remove('d-none');
             // div_remittance_hist.classList.add('d-none');
         }
-
-        // 송금내역 클릭 색 변경
-        // function click_remittance_hist() {
-        //     whole_history.classList.remove('bg-hanagreen')
-        //     exchange_hist.classList.remove('bg-hanagreen');
-        //     remittance_hist.classList.add('bg-hanagreen');
-        //     whole_history.style.color = '#8d8d8d'
-        //     exchange_hist.style.color = '#8d8d8d'
-        //     remittance_hist.style.color = '#ffffff'
-        //     div_whole_history.classList.add('d-none');
-        //     div_exchange_hist.classList.add('d-none');
-        //     div_remittance_hist.classList.remove('d-none');
-        // }
 
         $(document).on('click', '#radio_Group', function () {
             ajax_whole_history();
@@ -418,7 +398,6 @@
                 const startIndex = (currentPage - 1) * itemsPerPage;
                 const endIndex = startIndex + itemsPerPage;
                 const displayData = data.slice(startIndex, endIndex);
-
                 displayData.forEach(function (history) {
                     str += '<tr class="border-1 border-start-0 border-end-0 text-center bg-white" style="border-color: #c7c7c7">';
                     str += '<td class="text-hanagreen border-1 border-start-0 text-black-50 fs-5 align-middle" style="border-color: #c7c7c7;font-family: hanaM">';
@@ -442,8 +421,10 @@
                     str += '<td class="text-black-50 align-middle" style="font-family: hanaM">';
                     str += history.withdrawCur ? history.withdrawCur : history.depositCur;
                     str += '</td>';
-                    str += '<td class="border-1 align-middle" style="font-family: hanaM; border-color: #c7c7c7">'; // New column for tradeDate
-                    str += history.tradeDate;
+                    var tradeDate = new Date(history.tradeDate);
+                    var formattedDate = tradeDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 변환
+                    str += '<td class="border-1 align-middle" style="font-family: hanaM; border-color: #c7c7c7">';
+                    str += formattedDate;
                     str += '</td>';
                     str += '</tr>';
                 });
@@ -538,11 +519,11 @@
         }
 
     </script>
-<%--    자동환전 삭제--%>
+    <%--    자동환전 삭제--%>
     <script>
         function getSelectedAeSeqs() {
             let selectedAeSeqs = [];
-            $('.rowCheckbox:checked').each(function() {
+            $('.rowCheckbox:checked').each(function () {
                 // let aeSeq = $(this).closest('tr').data('aeSeq');
                 let aeSeq = $(this).closest('tr').data('aeSeq');
 
@@ -552,7 +533,7 @@
         }
 
         function attachRowDeleteEventListener() {
-            $('#div_exchange_hist').on('click', '.deleteRowBtn', function() {
+            $('#div_exchange_hist').on('click', '.deleteRowBtn', function () {
                 console.log("Clicked row:", $(this).closest('tr'));
                 // let aeSeq = $(this).closest('tr').data('aeSeq');
                 let aeSeq = $(this).closest('tr').attr('data-aeSeq');
@@ -564,7 +545,7 @@
                     data: {
                         aeSeq: aeSeq
                     },
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             alert("Delete Complete");
                             location.reload();
@@ -572,7 +553,7 @@
                             alert(response.message);
                         }
                     },
-                    error: function() {
+                    error: function () {
                         alert("Error deleting the reservation.");
                     }
                 });

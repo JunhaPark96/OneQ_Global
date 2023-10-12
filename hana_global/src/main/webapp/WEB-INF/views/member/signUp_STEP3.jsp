@@ -145,7 +145,7 @@
                                 <div class="iptWrap">
                                     <input type="text" id="phoneCode" name="phoneCode" class="ipt uiAct"
                                            maxlength="6" title="인증번호 입력">
-                                    <button id="phoneCodeSubmitButton" name="phoneCodeSubmitButton" class="btn_p" hidden>인증확인</button>
+                                    <button id="phoneCodeSubmitButton" name="phoneCodeSubmitButton" class="btn_p" hidden>Confirm</button>
                                 </div>
                                 <div id="InvalidPhoneNumber" class="error-message" hidden>Invalid mobile number.</div>
                                 <div id="InvalidCode" class="error-message" hidden>Invalid authentication code.</div>

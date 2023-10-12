@@ -35,4 +35,6 @@ public interface AccountRepository {
     public void createTemporaryAccount(Account account);
 
     public AccountHistoryResponseDTO lastTransactionDate(String acNo);
+
+    public List<Account> getAccountAll();
 }

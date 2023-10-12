@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -68,7 +65,8 @@ public class AdminController {
 //        for (Member m : memberList){
 //            System.out.println(m.toString());
 //        }
-
+        List<Account> accountList = accountService.getAccountAll();
+        model.addAttribute("accountList", accountList);
         model.addAttribute("memberList", memberList);
         model.addAttribute("firstAccountForMembers", firstAccountForMembers);
         model.addAttribute("countryMemberCounts", countryMemberCounts);  // 국가별 회원 수를 모델에 추가

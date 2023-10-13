@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
-<%--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
+    <%--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
     <link href="./css/header.css" rel="stylesheet"/>
 
     <!-- App css -->
@@ -26,7 +26,7 @@
     WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(application);
     LocaleResolver localeResolver = wac.getBean(LocaleResolver.class);
     Locale currentLocale = localeResolver.resolveLocale(request);
-    String currentLang  = currentLocale.getLanguage();
+    String currentLang = currentLocale.getLanguage();
 %>
 <%
     Member currentMember = (Member) session.getAttribute("currentMember");
@@ -46,31 +46,44 @@
     <div class="language">
         <ul class="dropdown"> <!-- "dropdown" 클래스 추가 -->
             <li class="dropdown">
-                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
+                <a id="" class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
                    role="button" aria-haspopup="true" aria-expanded="false">
                 </a>
-<%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
-<%--                   role="button" aria-haspopup="true" aria-expanded="false">--%>
-<%--                    <img id="flagImage" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span--%>
-<%--                        class="align-middle"><spring:message code="label.language" text="English"/></span>--%>
-<%--                </a>--%>
+                <%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
+                <%--                   role="button" aria-haspopup="true" aria-expanded="false" id="currentLanguage">--%>
+                <%--                    <img id="currentFlag" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12">--%>
+                <%--                    <span id="currentLanguageText" class="align-middle">--%>
+                <%--                        <spring:message code="label.language" text="English"/>--%>
+                <%--                    </span>--%>
+                <%--                </a>--%>
+                <%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
+                <%--                   role="button" aria-haspopup="true" aria-expanded="false">--%>
+                <%--                    <img id="flagImage" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span--%>
+                <%--                        class="align-middle"><spring:message code="label.language" text="English"/></span>--%>
+                <%--                </a>--%>
                 <ul class="dropdown-menu"> <!-- "dropdown-menu" 클래스 추가 -->
                     <!-- 기본으로 보이는 "English" 항목 -->
                     <li>
-                        <a href="?lang=ko" class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
+                        <a href="?lang=ko" class="dropdown-item" style="cursor: pointer"
+                           onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'"
+                           onmouseout="this.style.backgroundColor=''; this.style.color=''">
                             <img src="./images/flags/kr.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="align-middle">Korean</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?lang=en" class="dropdown-item notify-item selected" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
-                            <img src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span
-                                class="">English</span>
+                        <a href="?lang=en" class="dropdown-item notify-item selected" style="cursor: pointer"
+                           onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'"
+                           onmouseout="this.style.backgroundColor=''; this.style.color=''">
+                            <img src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12">
+                            <span class="">English</span>
                         </a>
                     </li>
                     <!-- 나머지 언어 항목들 -->
                     <li>
-                        <a href="?lang=de" class="dropdown-item notify-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
+                        <a href="?lang=de" class="dropdown-item notify-item" style="cursor: pointer"
+                           onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'"
+                           onmouseout="this.style.backgroundColor=''; this.style.color=''">
                             <img src="./images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span
                                 class="align-middle">German</span>
                         </a>
@@ -139,12 +152,15 @@
                 code="link.account" text="default text"/></a>
         </div>
         <div class="st"><a
-                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/walletInfo</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message code="link.wallet" text="default text" /></a></div>
+                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/walletInfo</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message
+                code="link.wallet" text="default text"/></a></div>
         <div class="st"><a
-                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/exchange</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message code="link.exchange" text="default text" /></a>
+                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/exchange</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message
+                code="link.exchange" text="default text"/></a>
         </div>
         <div class="st"><a
-                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/remittance</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message code="link.remittance" text="default text" /></a>
+                href="<c:choose><c:when test="${not empty currentMember}">${pageContext.request.contextPath}/remittance</c:when><c:otherwise>${pageContext.request.contextPath}/signin</c:otherwise></c:choose>"><spring:message
+                code="link.remittance" text="default text"/></a>
         </div>
     </div>
 
@@ -188,11 +204,22 @@
             document.querySelector(".dropdown-toggle").innerHTML = '<img src="' + selectedImg + '" alt="user-image" class="mr-1" height="12"> <span class="align-middle">' + selectedText + '</span>';
         });
     });
-
-
-
 </script>
 
+<script>
+    $(document).ready(function () {
+        // Korean 선택 시
+        $('a[href="?lang=ko"]').click(function () {
+            $('#currentFlag').attr('src', './images/flags/kr.jpg');
+            $('#currentLanguageText').text('Korean');
+        });
 
+        // English 선택 시
+        $('a[href="?lang=en"]').click(function () {
+            $('#currentFlag').attr('src', './images/flags/us.jpg');
+            $('#currentLanguageText').text('English');
+        });
+    });
+</script>
 </body>
 </html>

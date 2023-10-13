@@ -29,6 +29,9 @@
             padding: 20px;
             border-radius: 5px;
             margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
         }
 
         .refund-info-header {
@@ -36,10 +39,7 @@
             margin-bottom: 15px;
         }
 
-        .refund-info-header h4 {
-            font-size: 18px;
-            color: #333;
-        }
+
 
         .refund-info-content ul {
             list-style-type: disc;
@@ -77,11 +77,11 @@
                             <div data-ng-bind-html="content.welcomeText" class="welcome-text ng-binding"
                                  id="welcome-text" test-and-target="" tat-campaign-code="CB-EO-SA-MIG-PAGE2-COPY"
                                  tat-product-code-name="productCode">
-                                <h3 style="margin-bottom: 0px;">Refund is in progress. Thank you for using our services.</h3>
+                                <h3 class="mb-3" style="margin-bottom: 0px;">Refund is in progress. Thank you for using our services.</h3>
                                 <!-- Refund Information -->
                                 <div class="refund-info">
                                     <div class="refund-info-header">
-                                        <h4>Account Closure Notification</h4>
+                                        <h4 style="margin-top: 0px;">Account Closure Notification</h4>
                                     </div>
                                     <div class="refund-info-content">
                                         <p>We would like to inform you that your account will be closed once the reimbursement process is successfully completed. Please read the following important information:</p>

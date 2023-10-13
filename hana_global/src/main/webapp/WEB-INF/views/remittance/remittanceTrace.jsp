@@ -100,6 +100,7 @@
 
                 <div class="btnWrapper">
                     <button onclick="showRemittanceDetails()">Notify Recipient</button>
+                    <button id="reserveButton" data-context-path="${pageContext.request.contextPath}">Reserve Delivery</button>
                 </div>
             </div>
         </div>
@@ -375,6 +376,7 @@
                     "<div class='modal-details-content'>" +
                     "<p><span class='modal-details-key'>Recipient:</span> <span class='modal-details-value'>" + details.recipient + "</span></p>" +
                     "<p><span class='modal-details-key'>Recipient's Country:</span> <span class='modal-details-value'>" + (countryName || 'Unknown') + "</span></p>" +
+                    "<p><a href='http://localhost:8080/deliveryService'>Go to Delivery Service</a></p>" +
                     "</div>" +
                     '</div>' +
                     '</div>' +
@@ -413,5 +415,17 @@
         });
     });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const applyButton = document.getElementById('reserveButton');
+        const contextPath = applyButton.getAttribute('data-context-path'); // 수정된 부분
+
+        applyButton.addEventListener("click", function(){
+            window.location.href = contextPath + '/deliveryService';
+        });
+    });
+</script>
+
+
 </body>
 </html>

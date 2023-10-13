@@ -57,7 +57,7 @@ button:hover {
 
 .btnWrapper{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 /*!* 기본 라디오 버튼 숨기기 *!*/
 /*input[type="radio"] {*/

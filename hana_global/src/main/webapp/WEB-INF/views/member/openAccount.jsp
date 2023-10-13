@@ -33,8 +33,8 @@
                 <h3>Date of arrival in Korea</h3>
                 <label for="arrivalDate">Arrival Date</label>
                 <div class="tbl_in">
-                <input type="text" name="arrivalDate" id="arrivalDate" onchange="checkArrivalDate()">
-                <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif" style="width: 25px; height: 25px" onclick="openCalendar('arrivalDate')">
+                    <input type="text" name="arrivalDate" id="arrivalDate" onchange="checkArrivalDate()">
+                    <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif" style="width: 25px; height: 25px" onclick="openCalendar('arrivalDate')">
                 </div>
                 <span id="arrivalDateMessage" style="color: red;"></span>
                 <button onclick="nextStep()">OK</button>

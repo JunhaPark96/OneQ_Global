@@ -42,6 +42,7 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/remittance">Immediate Remittance</a></li>
                     <li><a href="${pageContext.request.contextPath}/remittanceTrace">Remittance Trace</a></li>
+                    <li><a href="${pageContext.request.contextPath}/deliveryService">Remittance Delivery</a></li>
                 </ul>
             </li>
         </ul>

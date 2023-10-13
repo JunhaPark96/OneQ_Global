@@ -198,4 +198,14 @@ public class RemittanceController {
         emailService.sendEmail(emailRequest.getTo(), emailRequest.getSubject(), emailRequest.getContent());
         return "/remittance/remittanceTrace";
     }
+
+    @GetMapping("/deliveryService")
+    public String deliveryService(){
+        return "/remittance/deliveryService";
+    }
+
+    @GetMapping("/deliveryComplete")
+    public String deliveryComplete(){
+        return "/remittance/deliveryComplete";
+    }
 }

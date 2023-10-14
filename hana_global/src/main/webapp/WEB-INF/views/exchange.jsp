@@ -90,6 +90,13 @@
                     <input type="button" id="btnNext" class="btn_p" value="Inquiry">
                 </div>
             </div>
+            <%--            검색 통화 그래프 --%>
+            <div class="mt-5">
+                <canvas id="exchangeRateChart" width="400" height="200"></canvas>
+                <%--                <button id="reset_zoom">Reset Zoom</button>--%>
+                <%--                <button id="disable_zoom">Disable Zoom</button>--%>
+                <%--                <button id="enable_zoom">Enable Zoom</button>--%>
+            </div>
             <%--            환율 조회 테이블--%>
             <div class="exchange_rate_hist mt-5">
                 <table id="exchange_rate_tbl" class="table table-striped table-hover table-bordered">
@@ -110,13 +117,6 @@
                     <tbody>
                     </tbody>
                 </table>
-            </div>
-            <%--            검색 통화 그래프 --%>
-            <div class="mt-5">
-                <canvas id="exchangeRateChart" width="400" height="200"></canvas>
-<%--                <button id="reset_zoom">Reset Zoom</button>--%>
-<%--                <button id="disable_zoom">Disable Zoom</button>--%>
-<%--                <button id="enable_zoom">Enable Zoom</button>--%>
             </div>
 
 
@@ -149,8 +149,19 @@
                     $('#exchange_rate_tbl thead').show(); // 클릭 시 보이기
                     $('#exchange_rate_tbl tbody').empty();
 
+                    // Initialize a variable to keep track of the previous round number
+                    let prevRound = null;
+
                     // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
+                        // If the round number is the same as the previous one, skip this iteration
+                        if (data[i].round === prevRound) {
+                            continue;
+                        }
+
+                        // Update the previous round number
+                        prevRound = data[i].round;
+
                         let rawDate = data[i].rateDate;
                         let dateObj = new Date(rawDate);
                         let hours = String(dateObj.getHours()).padStart(2, '0');

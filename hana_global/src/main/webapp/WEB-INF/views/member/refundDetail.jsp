@@ -121,9 +121,9 @@
                                 <tbody>
                                 <!-- Example rows (replace with actual data) -->
                                 <tr>
-                                    <td>2023-10-10</td>
-                                    <td>1234-5678-9012</td>
-                                    <td>5,000,000 Won</td>
+                                    <td>2023-10-19</td>
+                                    <td>182-676438-34847</td>
+                                    <td>10,000,000 Won</td>
                                     <td>HANA KIM</td>
                                     <td>In Progress</td>
                                 </tr>

@@ -238,6 +238,11 @@
                                         </c:when>
                                         <c:when test="${account.status == 1}">
                                             <button class="btn btn-danger"
+                                                    onclick="approveClosure(${account.userSeq}, this)">진행중
+                                            </button>
+                                        </c:when>
+                                        <c:when test="${account.status == 2}">
+                                            <button class="btn btn-danger"
                                                     onclick="approveClosure(${account.userSeq}, this)">계좌 종료
                                             </button>
                                         </c:when>
@@ -273,13 +278,13 @@
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;이름</th>
                                         <td>
-                                            <p id="applicantNameCheck">HANA KIM</p>
+                                            <p id="applicantNameCheck">Sam Smith</p>
                                         </td>
                                     </tr>
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;이메일</th>
                                         <td class="align-middle">
-                                            <p id="applicantEmailCheck">2360340009@kopo.ac.kr</p>
+                                            <p id="applicantEmailCheck">Sam0090@gmail.com</p>
                                         </td>
                                     </tr>
                                     <tr class="">
@@ -309,7 +314,7 @@
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;신청 금액</th>
                                         <td class="text-start align-middle">
-                                            <p style="margin-bottom: 0px;" id="applicationAmountCheck">3,000,000원</p>
+                                            <p style="margin-bottom: 0px;" id="applicationAmountCheck">5,000,000원</p>
                                         </td>
                                     </tr>
                                     <tr class="">
@@ -321,7 +326,7 @@
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;최종 입금 금액</th>
                                         <td class="text-start align-middle">
-                                            <p style="margin-bottom: 0px;" id="depositAmount">2,995,000원</p>
+                                            <p style="margin-bottom: 0px;" id="depositAmount">4,995,000원</p>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -412,7 +417,8 @@
 <script>
 
     function approveMember(userSeq, btnElement) {
-        let isApproved = confirm("Do you want to activate this member's account?");
+        // let isApproved = confirm("Do you want to activate this member's account?");
+        let isApproved = confirm("이 회원의 계정을 활성화하시겠습니까?");
         if (isApproved) {
             $.post("/approveMember", {userSeq: userSeq}, function (response) {
                 if (response.success === "true") {

@@ -79,7 +79,8 @@ public class AdminController {
         try {
             memberService.approveMember(userSeq);
             response.put("success", "true");
-            response.put("message", "Successfully approved!");
+//            response.put("message", "Successfully approved!");
+            response.put("message", "성공적으로 승인되었습니다!");
             // 권한을 승인하면 월렛도 자동생성
             Account account = accountService.findAccountByUserSeq(userSeq);
             walletService.createNewWallet(userSeq, account.getAcNo(), "123456");
@@ -87,7 +88,8 @@ public class AdminController {
             System.out.println("월렛정보는: " + wallet.toString());
         } catch (Exception e){
             response.put("success", "false");
-            response.put("message", "Failed to approve due to an exception.");
+//            response.put("message", "Failed to approve due to an exception.");
+            response.put("message", "승인에 실패했습니다.");
         }
         return ResponseEntity.ok(response);
     }

@@ -170,6 +170,11 @@
                             client ID is  <span style="font-weight:bold; text-decoration:underline;">${member.id}</span>. You will need this to log back into HANA GLOBAL.
                         </div>
                     </div>
+                <div style="display: flex; justify-content: center; width: 100%;">
+                <div class="signin">
+                    <a href="${pageContext.request.contextPath}/signin">Sign In</a>
+                </div>
+                </div>
                 </div>
             </div>
             <!-- end ob-section-body -->

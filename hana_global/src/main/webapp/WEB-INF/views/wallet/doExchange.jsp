@@ -260,7 +260,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            Preferential rate is 100% with Hana Money!
+                            Preferential rate is 100% with Hana Wallet!
                         </div>
                     </div>
                 </div>
@@ -392,17 +392,25 @@
         document.getElementById("hiddenFinalAmount").value = finalAmount; // 원화 결제할 금액
     }
 
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     function changeBalance() {
         const selectElem = document.getElementById("selectAccountForm");
         const selectedOption = selectElem.options[selectElem.selectedIndex];
         const selectedValue = selectedOption.value;
-        const selectedBalance = selectedOption.getAttribute("data-balance");
+        let selectedBalance = selectedOption.getAttribute("data-balance");
+
+        // 콤마 추가
+        selectedBalance = numberWithCommas(selectedBalance);
 
         // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
         // document.getElementById("selectedAccountInfo").value = selectedValue;
         // 잔액 정보 업데이트
         document.getElementById("accountBalance").textContent = selectedBalance;
     }
+
 
     console.log(document.getElementById("sourceCurrencyCode").value);
     document.addEventListener("DOMContentLoaded", function () {

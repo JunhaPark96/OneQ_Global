@@ -33,6 +33,8 @@
 
     if (currentMember != null && "admin".equals(currentMember.getId())) {
         localeResolver.setLocale(request, response, new Locale("ko"));
+    } else if (currentMember != null && !(currentMember.getId().equals("admin"))) {
+        localeResolver.setLocale(request, response, new Locale("en"));
     }
 %>
 

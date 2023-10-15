@@ -1,5 +1,7 @@
 package com.kopo.hanaglobal.hana_global.web.controller;
 
+import com.kopo.hanaglobal.hana_global.web.Util.EmailService;
+import com.kopo.hanaglobal.hana_global.web.dto.request.EmailDTO;
 import com.kopo.hanaglobal.hana_global.web.entity.Account;
 import com.kopo.hanaglobal.hana_global.web.entity.Member;
 import com.kopo.hanaglobal.hana_global.web.entity.Wallet;
@@ -8,6 +10,7 @@ import com.kopo.hanaglobal.hana_global.web.service.ExchangeService;
 import com.kopo.hanaglobal.hana_global.web.service.MemberService;
 import com.kopo.hanaglobal.hana_global.web.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,13 +27,15 @@ public class AdminController {
     private AccountService accountService;
     private WalletService walletService;
     private ExchangeService exchangeService;
+    private EmailService emailService;
 
     @Autowired
-    public AdminController(MemberService memberService, AccountService accountService, WalletService walletService, ExchangeService exchangeService) {
+    public AdminController(MemberService memberService, AccountService accountService, WalletService walletService, ExchangeService exchangeService, EmailService emailService) {
         this.memberService = memberService;
         this.accountService = accountService;
         this.walletService = walletService;
         this.exchangeService = exchangeService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/userManagement")
@@ -83,6 +88,7 @@ public class AdminController {
             response.put("message", "성공적으로 승인되었습니다!");
             // 권한을 승인하면 월렛도 자동생성
             Account account = accountService.findAccountByUserSeq(userSeq);
+            accountService.updateAccountStatus(account.getAcNo());
             walletService.createNewWallet(userSeq, account.getAcNo(), "123456");
             Wallet wallet = walletService.findWalletByUserSeqAndCurrencyCode(userSeq, "KRW");
             System.out.println("월렛정보는: " + wallet.toString());
@@ -93,5 +99,24 @@ public class AdminController {
         }
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/approveRefundAndSendEmail")
+    public ResponseEntity<String> approveRefundAndSendEmail(@RequestBody Map<String, String> payload) {
+        String accountNumber = payload.get("accountNumber");
+        String email = payload.get("email");
+        String emailContent = payload.get("emailContent");
+        String emailSubject = payload.get("emailSubject");
+        System.out.println("계좌번호 " + accountNumber + "이메일" + email + "내용" + emailContent);
+        accountService.updateAccountStatus2(accountNumber);
+        Account account = accountService.getAccountByAcNo(accountNumber);
+        System.out.println(account.toString());
+        try {
+            emailService.sendEmail(email, emailSubject, emailContent);
+            return ResponseEntity.ok("환불 요청 및 이메일 전송을 성공적으로 수행했습니다.");
+        } catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to approve refund or send email.");
+        }
+    }
+
 
 }

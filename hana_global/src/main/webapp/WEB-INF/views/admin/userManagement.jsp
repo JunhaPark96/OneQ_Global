@@ -36,11 +36,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <%--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
-    <%--    DataTables --%>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-
+    <%--   data tables--%>
     <style>
         #world-map-markers > div > svg {
             width: 600px;
@@ -177,8 +173,11 @@
                                     <td>${member.id}</td>
                                     <td>${member.name}</td>
                                         <%--                                <td>${firstAccountForMembers[member.userSeq].acNo.substring(0, 3)}-${firstAccountForMembers[member.userSeq].acNo.substring(3, 9)}-${firstAccountForMembers[member.userSeq].acNo.substring(9, 14)}</td>--%>
+<%--                                    <td>--%>
+<%--                                            ${firstAccountForMembers[member.userSeq].acNo}--%>
+<%--                                    </td>--%>
                                     <td>
-                                            ${firstAccountForMembers[member.userSeq].acNo}
+                                            ${fn:substring(firstAccountForMembers[member.userSeq].acNo, 0, 3)}-${fn:substring(firstAccountForMembers[member.userSeq].acNo, 3, 8)}-${fn:substring(firstAccountForMembers[member.userSeq].acNo, 8, 14)}
                                     </td>
                                     <td>${member.nationality}</td>
                                         <%--                                <td>${member.signupDate}</td>--%>
@@ -190,11 +189,11 @@
                                         <c:choose>
                                             <c:when test="${member.status == 'N'}">
                                                 <button class="btn btn-warning"
-                                                        onclick="approveMember(${member.userSeq}, this)">Pending
+                                                        onclick="approveMember(${member.userSeq}, this)">대기
                                                 </button>
                                             </c:when>
                                             <c:when test="${member.status == 'Y'}">
-                                                <button class="btn btn-success" disabled>Complete</button>
+                                                <button class="btn btn-success" disabled>승인완료</button>
                                             </c:when>
                                         </c:choose>
                                     </td>
@@ -214,42 +213,34 @@
                             <th>계좌생성날짜</th>
                             <th>계좌번호</th>
                             <th>계좌타입</th>
-                            <th>잔액</th>
-                            <th id="" class="sort-header">처리요청상태</th>
+                            <th>잔액(원)</th>
+                            <th id="requestStatusHeader" class="sort-header">처리요청상태</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="account" items="${accountList}">
-                            <tr>
-                                <td style="text-align: center"><input type="radio" name="selectedAccount"
-                                                                      value="${account.userSeq}"></td>
-                                    <%--                                <td>${account.openDate}</td> <!-- 가정: account 객체에 연결된 member 객체가 있고, 해당 member의 id를 가져올 수 있다. -->--%>
-                                <td>${fn:substring(account.openDate, 0, 4)}${fn:substring(account.openDate, 4, 7)}${fn:substring(account.openDate, 7, 10)}</td>
-                                <td>${account.acNo}</td>
-                                <!-- 가정: account 객체에 연결된 member 객체가 있고, 해당 member의 name를 가져올 수 있다. -->
-                                <td>${account.acName}</td>
-                                <td>${account.balance}</td>
-                                <!-- 가정: account 객체에 연결된 member 객체가 있고, 해당 member의 nationality를 가져올 수 있다. -->
-                                <td style="text-align: center">
-                                    <c:choose>
-                                        <c:when test="${account.status == 0}">
-                                            <button class="btn btn-warning" onclick="showRefundModal()">환불 요청</button>
-
-                                        </c:when>
-                                        <c:when test="${account.status == 1}">
-                                            <button class="btn btn-danger"
-                                                    onclick="approveClosure(${account.userSeq}, this)">진행중
-                                            </button>
-                                        </c:when>
-                                        <c:when test="${account.status == 2}">
-                                            <button class="btn btn-danger"
-                                                    onclick="approveClosure(${account.userSeq}, this)">계좌 종료
-                                            </button>
-                                        </c:when>
-                                    </c:choose>
-                                </td>
-                            </tr>
+                            <c:if test="${account.status != 1}">
+                                <tr>
+                                    <td style="text-align: center"><input type="radio" name="selectedAccount"
+                                                                          value="${account.userSeq}"></td>
+                                    <td>${fn:substring(account.openDate, 0, 4)}${fn:substring(account.openDate, 4, 7)}${fn:substring(account.openDate, 7, 10)}</td>
+                                    <td>${fn:substring(account.acNo, 0, 3)}-${fn:substring(account.acNo, 3, 8)}-${fn:substring(account.acNo, 8, 14)}</td>
+                                    <td>${account.acName}</td>
+                                    <td><fmt:formatNumber value="${account.balance}" type="number" pattern="#,##0"/></td>
+                                    <td style="text-align: center">
+                                        <c:choose>
+                                            <c:when test="${account.status == 0}">
+                                                <button class="btn btn-warning" onclick="showRefundModal()">승인 대기</button>
+                                            </c:when>
+                                            <c:when test="${account.status == 2}">
+                                                <button class="btn btn-success" onclick="approveClosure(${account.userSeq}, this)">승인 완료</button>
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
@@ -284,25 +275,31 @@
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;이메일</th>
                                         <td class="align-middle">
-                                            <p id="applicantEmailCheck">Sam0090@gmail.com</p>
+                                            <p id="applicantEmailCheck">njk116@gmail.com</p>
                                         </td>
                                     </tr>
                                     <tr class="">
-                                        <th scope="row" class="text-start align-middle">&nbsp;&nbsp;계좌 번호</th>
+                                        <th scope="row" class="text-start align-middle">&nbsp;&nbsp;하나 계좌 번호</th>
                                         <td>
-                                            <p id="applicantAccountCheck">329-293-8960-3249</p>
+                                            <p id="applicantAccount">477-38836-521864</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <th scope="row" class="text-start align-middle">&nbsp;&nbsp;입금 계좌 번호</th>
+                                        <td>
+                                            <p id="applicantAccountCheck">128-709338-84148</p>
                                         </td>
                                     </tr>
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;신청 금액</th>
                                         <td class="text-start align-middle">
-                                            <p style="margin-bottom: 0px;" id="applicationAmount">3,000,000원</p>
+                                            <p style="margin-bottom: 0px;" id="applicationAmount">5,000,000원</p>
                                         </td>
                                     </tr>
                                     <tr class="">
                                         <th scope="row" class="text-start align-middle">&nbsp;&nbsp;신청일</th>
                                         <td class="text-start align-middle">
-                                            <p style="margin-bottom: 0px;" id="applicationDate">2023-10-12</p>
+                                            <p style="margin-bottom: 0px;" id="applicationDate">2023-10-15</p>
                                         </td>
                                     </tr>
                                     <!-- 입금 정보 -->
@@ -335,7 +332,7 @@
                         </div>
                     </div>
                     <div class="modal-footer" style="width: 100%; justify-content: center">
-                        <button type="button" class="btn btn-primary" onclick="redirectToRefundDetail()">승인</button>
+                        <button type="button" class="btn btn-primary" onclick="approveRefund()">승인</button>
                     </div>
                 </div>
             </div>
@@ -435,20 +432,32 @@
         }
     }
 
-    document.getElementById('statusHeader').addEventListener('click', function () {
-        let currentDirection = this.getAttribute("data-direction");
-        if (currentDirection === "asc") {
-            this.setAttribute("data-direction", "desc");
-            this.classList.remove("ascending");
-            this.classList.add("descending");
-            sortTable(6, "desc");
-        } else {
-            this.setAttribute("data-direction", "asc");
-            this.classList.remove("descending");
-            this.classList.add("ascending");
-            sortTable(6, "asc");
-        }
+    document.addEventListener("DOMContentLoaded", function(){
+        document.getElementById('statusHeader').addEventListener('click', function () {
+            sortTableWithDirectionToggle(this, 6);
+        });
+
+        document.getElementById('requestStatusHeader').addEventListener('click', function () {
+            console.log('Request Status Header Clicked!');
+            sortTableWithDirectionToggle(this, 5);
+        });
     });
+
+    function sortTableWithDirectionToggle(element, columnIndex) {
+        let currentDirection = element.getAttribute("data-direction");
+        if (currentDirection === "asc") {
+            element.setAttribute("data-direction", "desc");
+            element.classList.remove("ascending");
+            element.classList.add("descending");
+            sortTable(columnIndex, "desc");
+        } else {
+            element.setAttribute("data-direction", "asc");
+            element.classList.remove("descending");
+            element.classList.add("ascending");
+            sortTable(columnIndex, "asc");
+        }
+    }
+
 
     function sortTable(n, dir) {
         let table, rows, switching, i, x, y, shouldSwitch;
@@ -482,6 +491,91 @@
     }
 
 
+</script>
+
+<link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    function approveRefund() {
+        let accountNumber = $("#applicantAccount").text().trim();
+        let email = $("#applicantEmailCheck").text().trim();
+        let applicationAmount = $("#applicationAmount").text().trim();
+        let applicationDate = $("#applicationDate").text().trim();
+        let refundFee = $("#refundFee").text().trim();
+        let depositAmount = $("#depositAmount").text().trim();
+        console.log($("#applicantAccount").length); // 1 이면 요소가 존재, 0 이면 요소가 없음
+
+        // '-' 문자를 제거
+        let processedAccountNumber = accountNumber.replace(/-/g, '');
+        console.log("계좌번호는 ", processedAccountNumber);
+        let emailContent =
+            '<html>' +
+            '<head>' +
+            '</head>' +
+            '<body>' +
+            '<div class="email-content">' +
+            '<h1>Refund Approved</h1>' +
+            '<p>Dear Customer,</p>' +
+            '<p>We are pleased to inform you that your refund request, initially submitted on ' + applicationDate + ', has been approved.</p>' +
+            '<p>Here are the details of your refund:</p>' +
+            '<ul>' +
+            '<li>Requested Amount: ' + applicationAmount + '</li>' +
+            '<li>Refund Fee: ' + refundFee + '</li>' +
+            '<li>Total Refund Amount: ' + depositAmount + '</li>' +
+            '</ul>' +
+            '<p>The refund will be processed shortly and will be deposited into the following account:</p>' +
+            '<p>Account Number: ' + processedAccountNumber + '</p>' +
+            '<p>Thank you for choosing us. We apologize for any inconvenience caused and appreciate your understanding.</p>' +
+            '<p>Sincerely,<br>The Hana Global Team</p>' +
+            '</div>' +
+            '</body>' +
+            '</html>';
+
+        $.ajax({
+            type: "POST",
+            url: "/approveRefundAndSendEmail",
+            contentType: "application/json",
+            data: JSON.stringify({
+                "accountNumber": processedAccountNumber, // 수정된 accountNumber 사용
+                "email": email,
+                "emailContent": emailContent,
+                "emailSubject": "[Hana Global] Refund Approved"
+            }),
+            success: function(response) {
+                alert("환불이 승인되고 이메일이 전송되었습니다.");
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert("환불 승인 및 이메일 전송에 실패하였습니다.");
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('.table').DataTable({
+            searching: true, //검색 여부
+            language: { //언어 설정
+                searching: {
+                  search: "검색"
+                },
+                paginate: {
+                    previous: "이전",
+                    next: "다음"
+                },
+                zeroRecords: "검색 결과가 없습니다.",
+                info: "전체 거래내역 _TOTAL_개 중에서 _START_ 번부터 _END_ 번까지의 결과",
+                lengthMenu: "_MENU_ 행까지 조회"
+            }
+            , columnDefs: [
+                {
+                    targets: -1,
+                    className: 'dt-body-center'
+                },
+
+            ]
+
+        });
+    });
 </script>
 
 </body>

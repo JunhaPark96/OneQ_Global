@@ -113,9 +113,29 @@
         }
 
     </style>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        #loadingDiv {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            z-index: 99;
+        }
+    </style>
     <title>월렛 확인</title>
 </head>
 <body>
+<div id="loadingDiv">
+    <lottie-player src="./json/timepassing.json" background="#FFFFFF" speed="1"
+                   style="width: 800px; height: 800px;" loop autoplay></lottie-player>
+</div>
+
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
@@ -507,7 +527,11 @@
                     str += '<td class="border-1 text-black-50 align-middle" style="font-family: hanaM; border-color: #c7c7c7">';
                     str += exchange.status == 'S' ? 'Completed' : exchange.status == 'W' ? 'Pending' : 'Failed';
                     str += '</td>';
-                    str += '<td><button class="deleteRowBtn" style="background-color: #e74c3c; color: #ffffff; border: none; border-radius: 5px; padding: 5px 10px;">Delete</button></td>';
+                    if (exchange.status != 'S') {
+                        str += '<td><button class="deleteRowBtn" style="background-color: #e74c3c; color: #ffffff; border: none; border-radius: 5px; padding: 5px 10px;">Delete</button></td>';
+                    } else {
+                        str += '<td><button class="deleteRowBtn" style="background-color: #06914b; color: #ffffff; border: none; border-radius: 5px; padding: 5px 10px;">Success</button></td>';
+                    }
                     str += '</tr>';
                 });
                 str += '</tbody>';
@@ -578,6 +602,22 @@
                 $('.country-image').css('background-image', `url(${imagePath})`);  // 국가 이미지 변경
             });
         });
+    </script>
+
+    <script>
+        $(window).on('load', function () {
+            setTimeout(removeLoader, 1800);
+        });
+
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function () {
+                $("#loadingDiv").remove();
+                let containerElement = document.getElementById("container");
+                if (containerElement) { // Check if the element is not null
+                    containerElement.classList.remove("d-none");
+                }
+            });
+        }
     </script>
 </body>
 </html>

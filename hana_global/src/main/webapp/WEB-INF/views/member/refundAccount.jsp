@@ -166,13 +166,13 @@
                         In case you are unable to enter Korea, please <a href="${pageContext.request.contextPath}/getRefund" style="text-decoration: underline">apply for a Reimbursement</a>. <br/>Fees for currency exchange and remittance will be applied for refunds.
                     </div>
                 </div>
-                <div class="p-grid-row alert">
-                    <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>
-                    <div class="alert-text ng-binding" id="portfolio-footer-alert" style="color: black">Your HANA
-                        GLOBAL
-                        client ID is  <span style="font-weight:bold; text-decoration:underline;">${member.id}</span>. You will need this to log back into HANA GLOBAL.
-                    </div>
-                </div>
+<%--                <div class="p-grid-row alert">--%>
+<%--                    <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>--%>
+<%--                    <div class="alert-text ng-binding" id="portfolio-footer-alert" style="color: black">Your HANA--%>
+<%--                        GLOBAL--%>
+<%--                        client ID is  <span style="font-weight:bold; text-decoration:underline;">${member.id}</span>. You will need this to log back into HANA GLOBAL.--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
         </div>
         <!-- end ob-section-body -->

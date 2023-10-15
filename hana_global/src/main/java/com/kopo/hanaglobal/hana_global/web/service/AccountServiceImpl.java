@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService{
         for (Account account : accountList) {
             MemberAccDTO memberAccDTO = new MemberAccDTO();
             memberAccDTO.setName(member.getName());
-            memberAccDTO.setSignupDate(member.getSignupDate());
+            memberAccDTO.setSignupDate(account.getOpenDate());
             memberAccDTO.setAcNo(account.getAcNo());
             memberAccDTO.setBalance(account.getBalance());
             memberAccDTO.setAcName(account.getAcName());
@@ -160,5 +160,14 @@ public class AccountServiceImpl implements AccountService{
     public List<Account> getAccountAll(){
         List<Account> accountList = accountRepository.getAccountAll();
         return accountList;
+    }
+
+    @Override
+    public void updateAccountStatus(String acNo){
+        accountRepository.updateAccountStatus(acNo);
+    }
+    @Override
+    public void updateAccountStatus2(String acNo){
+        accountRepository.updateAccountStatus2(acNo);
     }
 }

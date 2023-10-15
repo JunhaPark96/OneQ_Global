@@ -97,4 +97,12 @@
         SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
         FROM CHECKING_ACCOUNT
     </select>
+
+    <update id="updateAccountStatus">
+        UPDATE CHECKING_ACCOUNT SET status = 1 WHERE ac_no = #{acNo}
+    </update>
+
+    <update id="updateAccountStatus2">
+        UPDATE CHECKING_ACCOUNT SET status = 2 WHERE ac_no = #{acNo}
+    </update>
 </mapper>

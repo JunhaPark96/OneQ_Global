@@ -128,26 +128,27 @@
                                                 <h4>View Account Information</h4>
                                             </div>
                                             <div class="col-6">
-                                                <h5><string>Account Type</string> &nbsp;&nbsp;
-                                                        <span class="text-bold">
-                                                        ${account.acName}</span>
+                                                <h5>
+                                                    <string>Account Type</string> &nbsp;&nbsp;
+                                                    <span class="text-bold">
+                                                            ${account.acName}</span>
                                                 </h5>
 
-<%--                                                <p class="text-muted" style="font-size:22px">--%>
-<%--                                                        ${account.acName}</p>--%>
+                                                    <%--                                                <p class="text-muted" style="font-size:22px">--%>
+                                                    <%--                                                        ${account.acName}</p>--%>
                                             </div>
                                         </div>
                                         <hr class="mt-0 mb-3">
-<%--                                        <div class="col pt-1 text-end ">--%>
-<%--                                            <div class="col-6">--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-6 text-end">--%>
-<%--                                                <h4 class="text-start">마지막 거래 날짜</h4>--%>
-<%--                                                <p class="text-muted p-border" style="font-size:22px">--%>
-<%--                                                    2023-08-19--%>
-<%--                                                        &lt;%&ndash;${account.getLastTransactionDate()}&ndash;%&gt;</p>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
+                                            <%--                                        <div class="col pt-1 text-end ">--%>
+                                            <%--                                            <div class="col-6">--%>
+                                            <%--                                            </div>--%>
+                                            <%--                                            <div class="col-6 text-end">--%>
+                                            <%--                                                <h4 class="text-start">마지막 거래 날짜</h4>--%>
+                                            <%--                                                <p class="text-muted p-border" style="font-size:22px">--%>
+                                            <%--                                                    2023-08-19--%>
+                                            <%--                                                        &lt;%&ndash;${account.getLastTransactionDate()}&ndash;%&gt;</p>--%>
+                                            <%--                                            </div>--%>
+                                            <%--                                        </div>--%>
                                         <div class="col-grid">
                                             <div class="grid-left">
                                                 <div class="row pt-1" style="height: 50px">
@@ -155,54 +156,63 @@
                                                         <h3>Account Holder Name <br/>
                                                             <span class="text-bold"> ${account.name}</span>
                                                         </h3>
-<%--                                                        <p class="text-muted" style="font-size:22px">--%>
-<%--                                                                ${account.name}--%>
-<%--                                                        </p>--%>
+                                                            <%--                                                        <p class="text-muted" style="font-size:22px">--%>
+                                                            <%--                                                                ${account.name}--%>
+                                                            <%--                                                        </p>--%>
                                                     </div>
                                                 </div>
                                                 <div class="account-image">
-                                                <div class="myAccount"></div>
+                                                    <div class="myAccount"></div>
                                                 </div>
 
                                             </div>
-                                        <div class="col pt-1 grid-right">
-                                            <div class="col">
-                                                <h4 class="test-start"> Account Opening Date</h4>
-                                                <p class="text-muted text-end p-border" style="font-size:22px">
-                                                        ${account.signupDate} </p>
-                                            </div>
-                                            <div class="col text-end">
-                                                <h4 class="text-start">Last Transaction Date</h4>
-                                                <p class="text-muted p-border" style="font-size:22px">
-                                                    <c:choose>
-                                                        <c:when test="${not empty accountHist.tradeDate}">
-                                                            ${accountHist.tradeDate}
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            -
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </p>
-                                            </div>
+                                            <div class="col pt-1 grid-right">
+                                                <div class="col">
+                                                    <h4 class="test-start"> Account Opening Date</h4>
+                                                    <p class="text-muted text-end p-border signupDate" name="signupDate" style="font-size:22px">
+                                                            ${account.signupDate}
+                                                            <%--                                                        <fmt:formatDate value="${account.signupDate}"--%>
+                                                            <%--                                                                        pattern="yyyy-MM-dd"/>--%>
+                                                    </p>
+                                                </div>
+                                                    <%--                                                <div class="col">--%>
+                                                    <%--                                                    <h4 class="test-start"> Account Opening Date</h4>--%>
+                                                    <%--                                                    <p class="text-muted text-end p-border" style="font-size:22px"--%>
+                                                    <%--                                                       id="signupDate"></p>--%>
+                                                    <%--                                                </div>--%>
+                                                <div class="col text-end">
+                                                    <h4 class="text-start">Last Transaction Date</h4>
+                                                    <p class="text-muted p-border lastTransactionDate" style="font-size:22px">
+                                                        <c:choose>
+                                                            <c:when test="${not empty accountHist.tradeDate}">
+                                                                ${accountHist.tradeDate}
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                -
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </p>
+                                                </div>
 
-                                            <div class="col text-end">
-                                                <h4 class="text-start">Account Number</h4>
-                                                <p class="text-muted p-border" style="font-size:22px">
-                                                        ${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)}</p>
-                                            </div>
-                                            <div class="col">
-                                                <h4 class="text-start">Balance</h4>
-                                                <p class="text-muted text-end p-border" style="font-size:20px">
-                                                    <fmt:formatNumber value="${account.balance}" type="number"
-                                                                      pattern="#,##0"/> Won</p>
-                                            </div>
-                                            <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
-                                                    <%--                                            <input style="margin-top:-30px;margin-left: 30px !important;"--%>
-                                                    <%--                                                   class="form-check-input ms-auto" type="checkbox" id="navbarFixed"--%>
-                                                    <%--                                                   onclick="navbarFixed(this)" checked="checked">--%>
+
+                                                <div class="col text-end">
+                                                    <h4 class="text-start">Account Number</h4>
+                                                    <p class="text-muted p-border" style="font-size:22px">
+                                                            ${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4 class="text-start">Balance</h4>
+                                                    <p class="text-muted text-end p-border" style="font-size:20px">
+                                                        <fmt:formatNumber value="${account.balance}" type="number"
+                                                                          pattern="#,##0"/> Won</p>
+                                                </div>
+                                                <div class="col-6 form-check form-switch ps-0 ms-auto my-auto">
+                                                        <%--                                            <input style="margin-top:-30px;margin-left: 30px !important;"--%>
+                                                        <%--                                                   class="form-check-input ms-auto" type="checkbox" id="navbarFixed"--%>
+                                                        <%--                                                   onclick="navbarFixed(this)" checked="checked">--%>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                         <hr>
 
                                         <section class="certContain">
@@ -236,5 +246,43 @@
     </footer>
 </div>
 </body>
+<script type="text/javascript">
+    function updateDateFormat() {
+        updateDateByClass(".signupDate");
+        updateDateByClass(".lastTransactionDate");
+    }
+
+    function updateDateByClass(className) {
+        // 클래스 이름으로 요소를 선택합니다.
+        var dateElements = document.querySelectorAll(".carousel-item.active " + className);
+        dateElements.forEach(function(dateElement) {
+            if (dateElement) {
+                // 텍스트를 가져와서 슬라이스하고, 하이픈을 추가합니다.
+                let originalDate = dateElement.textContent.trim();
+                console.log("포맷전 날짜는 ", originalDate);
+                let formattedDate = originalDate.slice(0, 10);
+
+                // 변환한 결과를 다시 요소에 설정합니다.
+                dateElement.textContent = formattedDate;
+            } else {
+                console.log("Element not found");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        updateDateFormat();
+        var carouselEl = document.getElementById('carouselExample');
+        if (carouselEl) {
+            var carousel = new bootstrap.Carousel(carouselEl);
+            carouselEl.addEventListener('slid.bs.carousel', function () {
+                updateDateFormat();
+            });
+        }
+    });
+
+
+</script>
+
 
 </html>

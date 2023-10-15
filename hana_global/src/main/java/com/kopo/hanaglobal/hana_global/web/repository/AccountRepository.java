@@ -37,4 +37,8 @@ public interface AccountRepository {
     public AccountHistoryResponseDTO lastTransactionDate(String acNo);
 
     public List<Account> getAccountAll();
+
+    public void updateAccountStatus(String acNo);
+
+    public void updateAccountStatus2(String acNo);
 }

@@ -35,12 +35,15 @@ public class AccountController {
     public String AccountInfo(@ModelAttribute("currentMember") Member member, Model model) {
         System.out.println("현재 멤버는 " + member.toString());
         List<MemberAccDTO> memberAccDTOList = accountService.findMemberAccounts(member.getUserSeq());
+        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
         for (MemberAccDTO a : memberAccDTOList) {
             System.out.println("멤버의 계좌 정보는 " + a.toString());
             AccountHistoryResponseDTO accountHistoryResponse = accountService.lastTransactionDate(a.getAcNo());
+//            System.out.println("마지막 거래날짜 " + accountHistoryResponse.toString());
             model.addAttribute("accountHist", accountHistoryResponse);
         }
         model.addAttribute("memberAccDTO", memberAccDTOList);
+        model.addAttribute("accountList", accountList);
         return "myAccount";
     }
 

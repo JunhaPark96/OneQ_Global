@@ -54,7 +54,7 @@
                                             &nbsp;&nbsp;MTCN <br/>(Money Transfer <br/>Control Number)
                                         </th>
                                         <td style="padding-left: 20px; vertical-align: middle">
-                                            <input class="form-control " type="text" value="643066128"
+                                            <input class="form-control " type="text" value="486439619"
                                                    name="mtcn" style="width: 45%; padding: 10px 5px 10px 15px; font-size: 17px; color: black">
                                         </td>
                                     </tr>
@@ -84,7 +84,7 @@
                                         <td style="padding-left: 20px;">
                                             <div style="display: flex; gap: 20px;">
                                                 <input class="form-control" type="text" value="CAD" name="appliedCurrency" readonly style="width: 45%; padding: 10px 5px 10px 15px; font-size: 17px; color: black">
-                                                <input class="form-control" type="text" value="2500" name="availableBalance" readonly style="width: 45%; padding: 10px 5px 10px 15px; font-size: 17px; color: black">
+                                                <input class="form-control" type="text" value="499" name="availableBalance" readonly style="width: 45%; padding: 10px 5px 10px 15px; font-size: 17px; color: black">
                                             </div>
                                         </td>
                                     </tr>
@@ -97,33 +97,33 @@
                                             100
                                             <select name="quantity_100" class="form-control pe-2" style="display: inline-block; width: 70px; ">
                                                 <!-- Quantities -->
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="0">0</option>
                                             </select>
                                             50
                                             <select name="quantity_50" class="form-control" style="display: inline-block; width: 70px;">
                                                 <!-- Quantities -->
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="0">0</option>
                                             </select>
                                             20
                                             <select name="quantity_20" class="form-control mb-2" style="display: inline-block; width: 70px;">
                                                 <!-- Quantities -->
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="0">0</option>
                                             </select>
                                             <br/>
                                             10
                                             <select name="quantity_10" class="form-control" style="display: inline-block; width: 70px;">
                                                 <!-- Quantities -->
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="0">0</option>
                                             </select>
                                             5
                                             <select name="quantity_5" class="form-control" style="display: inline-block; width: 70px;">
                                                 <!-- Quantities -->
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
+                                                <option value="0">0</option>
+                                            </select>
+                                            1
+                                            <select name="quantity_1" class="form-control" style="display: inline-block; width: 70px;">
+                                                <!-- Quantities -->
+                                                <option value="0">0</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -356,9 +356,25 @@
         function updateBillSelectionOptions() {
             let availableBalance = parseFloat(availableBalanceInput.value.replace(/[^\d.-]/g, ''));
 
-            billSelections.forEach((selectElement) => {
+            billSelections.forEach((selectElement, index) => {
+                let totalChosenAmount = 0;
+
+                // Calculate the totalChosenAmount excluding the current denomination
+                for (let i = 0; i < billSelections.length; i++) {
+                    if (i !== index) {  // Exclude the current denomination
+                        const denomination = parseInt(billSelections[i].name.replace(/[^\d.-]/g, ''));
+                        const quantity = parseInt(billSelections[i].value);
+                        totalChosenAmount += denomination * quantity;
+                    }
+                }
+
+                const remainingBalance = availableBalance - totalChosenAmount;
                 const denomination = parseInt(selectElement.name.replace(/[^\d.-]/g, ''));
-                const maxQuantity = Math.floor(availableBalance / denomination);
+                let maxQuantity = Math.floor(remainingBalance / denomination);
+                const currentChosenQuantity = parseInt(selectElement.value);
+
+                // Ensure maxQuantity does not allow exceeding the available balance
+                maxQuantity = Math.max(0, Math.min(maxQuantity, Math.floor((remainingBalance + denomination * currentChosenQuantity) / denomination)));
 
                 selectElement.innerHTML = "";
 
@@ -368,8 +384,13 @@
                     option.textContent = i;
                     selectElement.appendChild(option);
                 }
+                // Revert the selection to previous value
+                selectElement.value = currentChosenQuantity;
             });
         }
+
+
+
 
         function validateTotalAmount() {
             let totalAmount = parseFloat(totalAmountInput.value.replace(/[^\d.-]/g, ''));

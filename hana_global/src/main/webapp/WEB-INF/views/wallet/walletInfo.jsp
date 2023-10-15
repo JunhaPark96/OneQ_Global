@@ -249,7 +249,7 @@
                         </div>
                 </div>
                 <div class="modal-footer" style="width: 100%">
-                    <button type="button" class="btn btn-primary" id="confirmPayment" style="background-color: #018085">확인</button>
+                    <button type="button" class="btn btn-primary" id="confirmPayment" style="background-color: #018085">Next</button>
                 </div>
             </div>
         </div>
@@ -272,7 +272,7 @@
             let currentPasswordVal = $('#paymentPassword').val();
 
             if (currentPasswordVal.length !== 6) {
-                alert("6자리 비밀번호를 모두 입력해주세요.");
+                alert("Please enter your 6-digit PIN");
                 return;
             }
             // 첫 번째 입력인 경우

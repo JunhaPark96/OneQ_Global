@@ -98,7 +98,11 @@ public class MainController {
         System.out.println("signUp step3 get 페이지");
         return "member/signUp_STEP3";
     }
-
+    @GetMapping("/error_page")
+    public String error_page() {
+        System.out.println("error_page get 페이지");
+        return "error_page";
+    }
     //      CoolSMS 이용 SMS 인증번호 요청
     @GetMapping("/sms")
     public ResponseEntity sendSMS(@RequestParam("phone") String phone, HttpSession session) {

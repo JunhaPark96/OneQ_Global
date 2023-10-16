@@ -105,4 +105,14 @@
     <update id="updateAccountStatus2">
         UPDATE CHECKING_ACCOUNT SET status = 2 WHERE ac_no = #{acNo}
     </update>
+    
+    <delete id="deleteAccountByAcNo">
+        DELETE FROM CHECKING_ACCOUNT WHERE AC_NO = #{acNo}
+    </delete>
+
+    <select id="findApprovedRefundsOlderThanTwoWeeks" resultType="com.kopo.hanaglobal.hana_global.web.entity.Account">
+        SELECT ac_no as acNo, user_seq as userSeq, ac_name as acName, ac_passwd as acPasswd, balance, open_date as openDate, status
+        FROM CHECKING_ACCOUNT
+        where status = 2
+    </select>
 </mapper>

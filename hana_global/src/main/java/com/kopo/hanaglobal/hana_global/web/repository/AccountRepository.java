@@ -41,4 +41,8 @@ public interface AccountRepository {
     public void updateAccountStatus(String acNo);
 
     public void updateAccountStatus2(String acNo);
+
+    public void deleteAccountByAcNo(String acNo);
+
+    public List<String> findApprovedRefundsOlderThanTwoWeeks();
 }

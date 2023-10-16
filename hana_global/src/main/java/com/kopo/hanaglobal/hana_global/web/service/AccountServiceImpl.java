@@ -170,4 +170,15 @@ public class AccountServiceImpl implements AccountService{
     public void updateAccountStatus2(String acNo){
         accountRepository.updateAccountStatus2(acNo);
     }
+
+    @Override
+    public void deleteAccountByAcNo(String acNo){
+        accountRepository.deleteAccountByAcNo(acNo);
+    }
+
+    @Override
+    public List<String> findApprovedRefundsOlderThanTwoWeeks() {
+        return accountRepository.findApprovedRefundsOlderThanTwoWeeks();
+    }
+
 }

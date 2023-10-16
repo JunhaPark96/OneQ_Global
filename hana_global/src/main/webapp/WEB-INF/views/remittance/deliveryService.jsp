@@ -371,10 +371,6 @@
                 const remainingBalance = availableBalance - totalChosenAmount;
                 const denomination = parseInt(selectElement.name.replace(/[^\d.-]/g, ''));
                 let maxQuantity = Math.floor(remainingBalance / denomination);
-                const currentChosenQuantity = parseInt(selectElement.value);
-
-                // Ensure maxQuantity does not allow exceeding the available balance
-                maxQuantity = Math.max(0, Math.min(maxQuantity, Math.floor((remainingBalance + denomination * currentChosenQuantity) / denomination)));
 
                 selectElement.innerHTML = "";
 
@@ -384,12 +380,11 @@
                     option.textContent = i;
                     selectElement.appendChild(option);
                 }
+
                 // Revert the selection to previous value
-                selectElement.value = currentChosenQuantity;
+                selectElement.value = Math.min(maxQuantity, parseInt(selectElement.value));
             });
         }
-
-
 
 
         function validateTotalAmount() {

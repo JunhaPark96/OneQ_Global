@@ -80,7 +80,7 @@
                                              style="width: 100px; height: 90px">
                                     </div>
                                     <div class="fs-5 text-black-50">
-                                        Canada CAD <span style="color: #018085">2,500</span>
+                                        Canada CAD <span style="color: #018085">499</span>
                                     </div>
                                 </div>
                                 <div class="mt-2 text-black-50">
@@ -122,7 +122,7 @@
                                     Expected Delivery Date
                                 </div>
                                 <div class="text-start ps-0  fs-5">
-                                    2023-10-17
+                                    2023-10-25
                                 </div>
                             </div>
                             <hr>

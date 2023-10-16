@@ -1,5 +1,6 @@
 package com.kopo.hanaglobal.hana_global.web.config;
 
+import com.kopo.hanaglobal.hana_global.web.interceptor.LoginInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,12 @@ import java.util.Locale;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
+    private final LoginInterceptor loginInterceptor;
+
+    public WebMvcConfig(LoginInterceptor loginInterceptor) { // 생성자 주입 방식
+        this.loginInterceptor = loginInterceptor;
+    }
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -37,11 +44,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
         registry.addInterceptor(localeChangeInterceptor());
+        registry.addInterceptor(loginInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/", "/signin", "/error_page", "/resources/**", "/images/**", "/css/**");
     }
-
 }

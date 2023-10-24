@@ -61,13 +61,13 @@
 
 
 ## 4. 발표 ppt
-[발표 PPT 보기](외국인도원큐_이정민.pdf)
+[발표 PPT 보기](외국인도원큐_박준하.pdf)
 
 ## 5. 본인소개
 
 <table>
     <tr>
-        <th style="width: 150px;">항목</th>
+        <th style="width: 160px;">항목</th>
         <th style="width: 400px;">내용</th>
         <th></th>
     </tr>

@@ -67,7 +67,7 @@
 
 <table>
     <tr>
-        <th style="width: 150px;">항목</th>
+        <th style="width: 160px;">항목</th>
         <th style="width: 400px;">내용</th>
         <th></th>
     </tr>

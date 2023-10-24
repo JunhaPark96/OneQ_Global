@@ -1,6 +1,6 @@
 # 외국인도원큐 - Hana Global
 
-<img src="image1.png"/>
+<img src="./readme/image1.png"/>
 
 ## 1.프로젝트 개요
 ### 1.1 제안 배경

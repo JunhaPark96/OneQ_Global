@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 계좌에 충전금액이 부족할 경우
     @ExceptionHandler(WalletServiceImpl.InsufficientBalanceException.class)
     public String handleInsufficientBalanceException(WalletServiceImpl.InsufficientBalanceException ex, Model model) {
         model.addAttribute("errorMessage", ex.getMessage());

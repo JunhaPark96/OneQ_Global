@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Hana2.0+B&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Hana2.0+H&display=swap" rel="stylesheet"/>
-    <!-- Bootstrap 5 CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <!-- Stepper Styles -->
     <link rel="stylesheet" href="./css/step-box.css">
     <link rel="stylesheet" href="./css/terms.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
@@ -759,30 +757,9 @@ If you have further questions about the privacy and security of your information
 
 </div>
 
-<%--<script>--%>
-<%--    const progress = document.querySelector('#progress');--%>
-<%--    const stepButtons = document.querySelectorAll('.step-button');--%>
-
-<%--    Array.from(stepButtons).forEach((button, index) => {--%>
-<%--        button.addEventListener('click', () => {--%>
-<%--            progress.setAttribute('value', index * 100 / (stepButtons.length - 1)); // 5단계로 확장--%>
-
-<%--            stepButtons.forEach((item, secindex) => {--%>
-<%--                if (index >= secindex) {--%>
-<%--                    item.classList.add('done');--%>
-<%--                }--%>
-<%--                if (index < secindex) {--%>
-<%--                    item.classList.remove('done');--%>
-<%--                }--%>
-<%--            })--%>
-<%--        })--%>
-<%--    })--%>
-
-<%--</script>--%>
 
 <script>
     <%--    약관 체크--%>
-
     function chkAgree() {
         let agreeBox = document.getElementById('p6');
         let agreeInput = document.getElementById('agreeYN');
@@ -796,7 +773,7 @@ If you have further questions about the privacy and security of your information
                 agreeInput.value = "Y";
                 return true;
             } else {
-                return false; // Form submission is cancelled.
+                return false;
             }
         }
     }

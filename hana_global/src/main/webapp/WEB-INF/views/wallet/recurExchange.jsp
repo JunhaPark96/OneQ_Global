@@ -90,59 +90,6 @@
             <%--            월렛 카드 구역 끝   --%>
             <%--         사용자에게 제공하는 정보 시작   --%>
             <div class="showBalance">
-                <%--                <div class="balanceInfo col pt-1">--%>
-                <%--                    <div class="walletBalance">--%>
-                <%--                        Hana Wallet Balance (${walletKRW.currency})--%>
-                <%--                        <fmt:formatNumber value="${walletKRW.balance}" type="number" pattern="#,##0"/>--%>
-                <%--                    </div>--%>
-                <%--                    <div class="usdBalance">--%>
-                <%--                        USD Converted Balance--%>
-                <%--                    </div>--%>
-                <%--                    <div class="conversionOption">--%>
-                <%--                        option: 해당국적의 환율로도 보여주기--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
-                <%--&lt;%&ndash;                계좌 구역 시작&ndash;%&gt;--%>
-                <%--                <div class="row justify-content-start">--%>
-                <%--                    <div class="col-md-4 gradient-custom text-center text-black">--%>
-                <%--                    </div>--%>
-
-                <%--                    <div class="col-md-8 ">--%>
-                <%--                        <div class="card-body pe-5">--%>
-                <%--                            <div class="row">--%>
-                <%--                                <div class="col-5">--%>
-                <%--                                    <h6>Linked Account</h6>--%>
-                <%--                                    <h6>Hana Bank</h6>--%>
-                <%--                                </div>--%>
-                <%--                                <div class="account-image">--%>
-                <%--                                    <div class="myAccount"></div>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                            <hr class="mt-0 mb-3">--%>
-                <%--                            <div class="col-grid">--%>
-                <%--                                <div class="grid-left">--%>
-                <%--                                    <div class="row" style="height: 50px">--%>
-                <%--                                        <div class="col d-flex">--%>
-                <%--                                            <h6>Depositor name <br>--%>
-                <%--                                                <span class="text-bold"> Jane Smith</span>--%>
-                <%--                                            </h6>--%>
-                <%--                                        </div>--%>
-                <%--                                    </div>--%>
-
-                <%--                                </div>--%>
-                <%--                                <div class="col grid-right">--%>
-                <%--                                    <div class="col">--%>
-                <%--                                        <h6 class="text-start">Account Number</h6>--%>
-                <%--                                        <p class="text-muted">${selectedWallet.acNo}</p>--%>
-                <%--                                        <div class="locRight">--%>
-                <%--                                            Modify--%>
-                <%--                                        </div>--%>
-                <%--                                    </div>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
                 <canvas id="exchangeRateChart" width="400" height="300"></canvas>
             </div>
             <%--                계좌 구역 끝--%>
@@ -151,19 +98,12 @@
             <div class="col pt-1 settingRecurring">
                 <form action="${pageContext.request.contextPath}/autoExchange" method="post">
                     <table class="table table-hover mb-3 border-light">
-                        <%--                        <tbody>--%>
-                        <%--                        <tr>--%>
-                        <%--                            <th scope="col" class="h5 text-black-50 border-light" style="width: 35%"></th>--%>
-                        <%--                            <th scope="col" class="h5 text-dark border-light" style="width: 75%"></th>--%>
-                        <%--                        </tr>--%>
-                        <%--                        </tbody>--%>
+
                         <tbody>
                         <tr>
                             <th scope="row" class="text-start align-middle">Set End Date</th>
                             <td>
                                 <div class="btnArea text-start align-middle">
-                                    <%--                                    <input type="text" name="endDate" id="endDate"--%>
-                                    <%--                                           placeholder="종료 날짜">--%>
                                     <input type="text" id="endDate" name="exchangeDate" readonly>
                                     <img src="https://image.kebhana.com/pbk/easyone/resource/img/btn/btn_calendar.gif"
                                          alt="Start Date Calendar Tab" onclick="openCalendar('endDate')">
@@ -205,7 +145,6 @@
                                         Enter Manually: <input type="text" id="customRateInput"
                                                                onkeyup="copyCustomValueToHidden()">
                                     </div>
-                                    <!-- Hidden Inputs -->
                                     <input type="hidden" id="selectedRate" name="lowerBound" value="">
                                 </div>
                             </td>
@@ -246,11 +185,10 @@
     let myChart;
     let currencyCode = "${currencyCode.currencyCode}";
     $(document).ready(function () {
-        initializeChart();  // 페이지 로드 시 차트를 초기화합니다.
+        initializeChart();
 
         function initializeChart() {
             let currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜
-            // let currency = document.getElementById('selectCurrency').value;  // 선택된 통화 코드
             let currency = currencyCode;
             console.log("현재날짜", currentDate);
             console.log("선택된 통화", currency);
@@ -386,7 +324,7 @@
     }
 
     $(document).ready(function () {
-        updateHiddenInput(); // 페이지 로딩 시 함수 호출하여 초기값 설정
+        updateHiddenInput();
     });
 
 </script>

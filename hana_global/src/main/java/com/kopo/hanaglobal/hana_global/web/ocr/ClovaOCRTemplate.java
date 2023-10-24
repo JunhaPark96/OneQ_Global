@@ -12,9 +12,6 @@ import java.util.UUID;
 
 public class ClovaOCRTemplate {
 
-    private static final String API_URL = "https://75lxzie5tu.apigw.ntruss.com/custom/v1/24714/f52153948b58e22fc533542f479da17377be025c1643c7b46f18440820bfc188/infer";
-    private static final String SECRET_KEY = "SEVBTmJpTXpWZ3dJV0ZZeHNhV2lXZHJLZFNJYUlYQkE=";
-
     public static Map<String, String> extractText(String imageFile) {
         Map<String, String> result = new HashMap<>();
 

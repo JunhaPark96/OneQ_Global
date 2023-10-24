@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <!-- Bootstrap 5 CSS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <!-- Stepper Styles -->
     <link rel="stylesheet" href="./css/step-box.css">
     <link rel="stylesheet" href="./css/terms.css">
     <link rel="stylesheet" href="./css/step3.css">
@@ -25,33 +23,7 @@
     <title>본인 확인</title>
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script>
-        // function authorize() {
-        //
-        //     event.preventDefault();
-        //     let url = "https://testapi.openbanking.or.kr/oauth/2.0/authorize?"
-        //         +"response_type=code"
-        //         +"&client_id=53b902d1-c485-49ec-bfaa-034c00aeb53e"
-        //         +"&redirect_uri=http://localhost:8080/signUp_STEP3"
-        //         +"&scope=login inquiry transfer"
-        //         +"&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY"
-        //         +"&auth_type=0";
-        //
-        //     window.open(url, "width=1200,height=900,scrollbars=yes,resizable=yes");
-        //
-        // }
-        //
-        // $(document).on("ready", function(){
-        //     callbackURL = window.parent.document.URL;
-        //     //alert(callbackURL)
-        //     console.log(callbackURL)
-        //
-        //     if(callbackURL.indexOf('callback') == -1){
-        //         window.close();
-        //     }
-        //
-        // });
-    </script>
+
 </head>
 <body>
 <div class="main-container">
@@ -108,7 +80,6 @@
                         <%--                        휴대폰 번호 시작--%>
                         <tr>
                             <td class="th">Carrier</td>
-                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
                                     <select class="ipt notDel uiAct" title="휴대폰 앞 3자리 선택" id="mobile_carrier"
@@ -124,11 +95,8 @@
                             </td>
                         </tr>
 
-                        <%--                        TODO: 시간되면 휴대폰 인증 따로 빼기--%>
-                        <%--                        휴대폰 번호 시작--%>
                         <tr>
                             <td class="th">Mobile No.</td>
-                            <%--                            <th scope="row"><label for="mobile01">휴대폰 번호</label><em>*</em></th>--%>
                             <td>
                                 <div class="iptWrap setPhone">
                                     <input type="text" id="mobileDigit" name="mobileDigit" class="ipt notDel uiAct"
@@ -137,7 +105,6 @@
                                 </div>
                             </td>
                         </tr>
-                        <%--                        휴대폰 번호 끝--%>
 <%--                       coolsms 문자 인증 시작--%>
                         <tr id="phoneCodeInput" hidden>
                             <td class="th">Authenticate</td>
@@ -159,13 +126,10 @@
 
                 <section>
                     <div class="titArea">
-<%--                        <h2>고객정보 변경을 위한 기본 정보 입력</h2>--%>
                         <h2>Basic Information for Customer Details</h2>
-<%--                        <h3 class="titH3">신청인 정보</h3>--%>
                         <h3 class="titH3">Applicant Information</h3>
                         <div class="title-area clearfix">
                             <div class="infor mt4">
-<%--                                <span class="asterisk">*필수입력항목 표시가 있는 항목은 필수 입력사항입니다.</span>--%>
                                 <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>
                             </div>
                         </div>
@@ -179,7 +143,6 @@
                         <tbody>
 <%--                        이메일 시작--%>
                         <tr>
-<%--                            <td class="th">이메일</td>--%>
                             <td class="th">Email*</td>
                             <td>
                                 <div class="iptWrap">
@@ -192,42 +155,9 @@
 
                         <!-- 국적 -->
                         <tr>
-<%--                            <td class="th">국적</td>--%>
                             <td class="th">Nationality*</td>
                             <td>
                                 <div class="iptWrap">
-<%--                                    <select class="ipt uiAct" title="국가선택" id="nationality" name="nationality"--%>
-<%--                                            onchange="changeCountryCode()">--%>
-<%--                                        <option value="KOR">대한민국 (Republic of Korea)</option>--%>
-<%--                                        <option value="CHN">中国 (China)</option>--%>
-<%--                                        <option value="TWN">台灣 (Taiwan)</option>--%>
-<%--                                        <option value="JPN">日本 (Japan)</option>--%>
-<%--                                        <option value="THA">ประเทศไทย (Thailand)</option>--%>
-<%--                                        <option value="BGR">България (Bulgaria)</option>--%>
-<%--                                        <option value="CZE">Česko (Czech Republic)</option>--%>
-<%--                                        <option value="DNK">Danmark (Denmark)</option>--%>
-<%--                                        <option value="DEU">Deutschland (Germany)</option>--%>
-<%--                                        <option value="ESP">España (Spain)</option>--%>
-<%--                                        <option value="LAM">América Latina (Latin America)</option>--%>
-<%--                                        <option value="GRC">Ελλάδα (Greece)</option>--%>
-<%--                                        <option value="FRA">France (France)</option>--%>
-<%--                                        <option value="ITA">Italia (Italy)</option>--%>
-<%--                                        <option value="IDN">Indonesia (Indonesia)</option>--%>
-<%--                                        <option value="HUN">Magyarország (Hungary)</option>--%>
-<%--                                        <option value="NLD">Nederland (Netherlands)</option>--%>
-<%--                                        <option value="NOR">Norge (Norway)</option>--%>
-<%--                                        <option value="POL">Polska (Poland)</option>--%>
-<%--                                        <option value="PRT">Portugal (Portugal)</option>--%>
-<%--                                        <option value="BRA">Brasil (Brazil)</option>--%>
-<%--                                        <option value="ROU">România (Romania)</option>--%>
-<%--                                        <option value="RUS">Россия (Russia)</option>--%>
-<%--                                        <option value="FIN">Suomi (Finland)</option>--%>
-<%--                                        <option value="SWE">Sverige (Sweden)</option>--%>
-<%--                                        <option value="TUR">Türkiye (Turkey)</option>--%>
-<%--                                        <option value="VNM">Việt Nam (Vietnam)</option>--%>
-<%--                                        <option value="UKR">Україна (Ukraine)</option>--%>
-
-<%--                                    </select>--%>
     <input type="text" value="${sessionScope.country}" class="ipt uiAct" title="국적" id="nationality" name="nationality" readonly>
                                 </div>
                             </td>
@@ -235,7 +165,6 @@
 
                         <!-- 국가코드 -->
                         <tr>
-<%--                            <td class="th">국가코드</td>--%>
                             <td class="th">Country Code*</td>
                             <td>
                                 <div class="iptWrap">
@@ -285,40 +214,6 @@
 </div>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     // 페이지가 로드될 때 기본으로 한국어와 한국 코드를 선택
-    //     document.getElementById('nationality').value = 'KOR';
-    //     document.getElementById('countryCode').value = 'KOR';
-    // });
-    //
-    // // 국적과 국가코드 연결
-    // function changeCountryCode() {
-    //     let nationality = document.getElementById('nationality').value;
-    //     document.getElementById('countryCode').value = nationality;
-    // }
-    //
-    // // function changeCountryCode() {
-    // //     let nationality = document.getElementById("nationality");
-    // //     let countryCode = document.getElementById("countryCode");
-    // //     let selectedNationality = nationality.value;
-    // //
-    // //     countryCode.value = selectedNationality;
-    // // }
-    // // 국적 선택 시 국가코드 자동 연결
-    // function changeCountryCode() {
-    //     let nationalitySelect = document.getElementById("nationality");
-    //     let countryCode = document.getElementById("countryCode");
-    //     let selectedNationalityValue = nationalitySelect.value;
-    //     // let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.split(" ")[0];
-    //     // 괄호안에 텍스트 가져오기
-    //     let selectedNationalityText = nationalitySelect.options[nationalitySelect.selectedIndex].text.match(/\(([^)]+)\)/)[1];
-    //
-    //     // 선택된 국적에 따라 국가 코드 변경
-    //     countryCode.value = selectedNationalityValue;
-    //     nationalitySelect.value = selectedNationalityText;
-    // }
-
-
     // 국적과 국가코드 자동 입력
     document.addEventListener('DOMContentLoaded', function () {
         const countryFromSession = "${sessionScope.country}";  // 여기서 세션의 'country' 값을 가져와야 합니다.

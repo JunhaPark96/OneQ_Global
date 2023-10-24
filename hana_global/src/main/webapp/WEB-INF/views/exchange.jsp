@@ -93,9 +93,6 @@
             <%--            검색 통화 그래프 --%>
             <div class="mt-5">
                 <canvas id="exchangeRateChart" width="400" height="200"></canvas>
-                <%--                <button id="reset_zoom">Reset Zoom</button>--%>
-                <%--                <button id="disable_zoom">Disable Zoom</button>--%>
-                <%--                <button id="enable_zoom">Enable Zoom</button>--%>
             </div>
             <%--            환율 조회 테이블--%>
             <div class="exchange_rate_hist mt-5">
@@ -129,7 +126,7 @@
 <script>
     let myChart;
     $(document).ready(function () {
-        $('#exchange_rate_tbl thead').hide(); // 처음엔 숨기기
+        $('#exchange_rate_tbl thead').hide();
 
         $('#btnNext').click(function () {
             let inqStrDt = document.getElementById('inqDt').value;
@@ -145,21 +142,14 @@
                     currency: currency
                 }),
                 success: function (data) {
-                    // Empty the table body
-                    $('#exchange_rate_tbl thead').show(); // 클릭 시 보이기
+                    $('#exchange_rate_tbl thead').show();
                     $('#exchange_rate_tbl tbody').empty();
-
-                    // Initialize a variable to keep track of the previous round number
                     let prevRound = null;
 
-                    // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
-                        // If the round number is the same as the previous one, skip this iteration
                         if (data[i].round === prevRound) {
                             continue;
                         }
-
-                        // Update the previous round number
                         prevRound = data[i].round;
 
                         let rawDate = data[i].rateDate;
@@ -189,7 +179,7 @@
                 }
             });
 
-            // 2. 최근 6개월 동안의 해당 통화의 환율 정보를 가져옵니다.
+            // 2. 최근 6개월 동안의 해당 통화의 환율 정보를 가져옴
             $.ajax({
                 url: '${pageContext.request.contextPath}/exchange/lastSixMonths',
                 method: 'post',
@@ -209,7 +199,7 @@
 
                     let ctx = document.getElementById('exchangeRateChart').getContext('2d');
                     if (myChart) {
-                        myChart.destroy(); // 이전 차트 인스턴스 제거
+                        myChart.destroy();
                     }
                     myChart = new Chart(ctx, {
                         type: 'line',
@@ -221,9 +211,9 @@
                                 borderColor: 'rgb(75, 192, 192)',
                                 borderWidth: 1,
                                 fill: true,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)', // fill 색상 설정. 0.2는 투명도를 나타냅니다.
-                                pointRadius: 0, // 점의 크기를 0으로 설정하여 점을 안보이게 합니다.
-                                pointHitRadius: 10 // line 위에 커서를 올렸을 때 값이 보이도록 설정합니다.
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                pointRadius: 0,
+                                pointHitRadius: 10
                             }]
                         },
                         options: {
@@ -237,14 +227,14 @@
                             zoom: {
                                 pan: {
                                     enabled: true,
-                                    mode: 'xy', // 'x'와 'y' 축 모두를 패닝하도록 설정
+                                    mode: 'xy',
                                     speed: 0.1,
                                     threshold: 10
                                 },
                                 zoom: {
                                     enabled: true,
-                                    drag: true, // 사용자가 드래그하여 확대할 수 있도록 설정
-                                    mode: 'xy', // 'x'와 'y' 축 모두를 확대하도록 설정
+                                    drag: true,
+                                    mode: 'xy',
                                     speed: 0.1,
                                     threshold: 2,
                                     sensitivity: 3
@@ -264,27 +254,6 @@
             });
         });
     });
-    // $('#reset_zoom').click(function () {
-    //     if (myChart) {
-    //         myChart.resetZoom();
-    //     }
-    // });
-    //
-    // $('#disable_zoom').click(function () {
-    //     if (myChart) {
-    //         myChart.options.plugins.zoom.zoom.enabled = false;
-    //         myChart.options.plugins.zoom.pan.enabled = false;
-    //         myChart.update(); // 차트 설정 업데이트
-    //     }
-    // });
-    //
-    // $('#enable_zoom').click(function () {
-    //     if (myChart) {
-    //         myChart.options.plugins.zoom.zoom.enabled = true;
-    //         myChart.options.plugins.zoom.pan.enabled = true;
-    //         myChart.update(); // 차트 설정 업데이트
-    //     }
-    // });
 
 </script>
 </body>

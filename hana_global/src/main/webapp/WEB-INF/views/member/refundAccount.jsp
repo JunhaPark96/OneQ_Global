@@ -1,5 +1,3 @@
-<%@ page import="com.kopo.hanaglobal.hana_global.web.entity.Member" %>
-<%@ page import="com.kopo.hanaglobal.hana_global.web.Util.DateUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -28,13 +26,10 @@
     <div class="main-area" style="margin-left: 10%; margin-right: 10%;">
         <%@ include file="/WEB-INF/views/includes/mem_sidebar.jsp" %>
         <div>
-            <!-- start ob-section-banner -->
             <div class="ob-section unselectable" id="ob-section-banner"
                  back-img="https://static.my.commbank.com.au/static/cmxAssets/MigrantOrigination/migrant-confirmation-bp5.jpg">
                 &nbsp;
             </div>
-            <!-- end ob-section-banner -->
-            <!-- start ob-section-header -->
             <div class="ob-section unselectable" id="ob-section-header" unselectable="on">
                 <div class="p-grid">
                     <div class="p-grid-row">
@@ -52,15 +47,12 @@
                     </div>
                 </div>
             </div>
-            <!-- end ob-section-header -->
             <br/>
-            <!-- start ob-section-body -->
             <div class="ob-section" id="ob-section-body">
                 <div class="p-grid">
                     <div class="p-grid-row" id="welcome-letter-wrapper"
                          style="display: grid; grid-template-columns: 1fr 1fr;">
                         <div class="p-1-2 bp3-1">
-                            <!-- start welcome-letter-step1 -->
                             <div class="welcome-letter-step" id="welcome-letter-step1">
                                 <div data-ng-bind-html="content.beforeArrivalBody | formatString:pageData.NetbankId"
                                      id="welcome-info" test-and-target="" tat-campaign-code="CB-EO-SA-MIG-PAGE2-COPY2"
@@ -84,18 +76,15 @@
                                    data-ng-bind-html="content.readAndPrintButtonText"
                                    data-ng-popup-window="/netbank/EO.Onboarding/Migrants/WelcomeLetter.aspx?RID=krHO7GDP9E62KDv7XqyVeA&amp;SID=dOYJMccDHBo%3d"
                                    target="Welcome">
-                                    <%--                                    Read and print--%>
                                 </a>
                             </div>
-                            <!-- end welcome-letter-step1 -->
                         </div>
 
                         <div class="p-1-2 bp3-1" style="border-left: 4px solid #b1aeae; padding-left: 20px;">
-                            <!-- start welcome-letter-step2 -->
                             <div class="welcome-letter-step" id="welcome-letter-step2">
                                 <div data-ng-bind-html="content.arrivalBody" id="arrival-info" class="ng-binding"><h5>
                                     When you
-                                    arrive in Korea</h5> <!-- 나라 이름 변경 -->
+                                    arrive in Korea</h5>
                                     <div class="subtitle">Visit your chosen branch to identify yourself for full access
                                         to your
                                         account.<br><br>Please bring the following documents and information with you:
@@ -110,12 +99,11 @@
                                     account,
                                     or your account may automatically close. You can reapply at any CommBank branch.
                                 </div>
-                            </div> <!-- end welcome-letter-step2 -->
+                            </div>
                         </div>
                     </div>
                 </div>
                 <br/>
-                <!-- start portfolio-wrapper -->
                 <div class="p-grid-row portfolio-grid">
                     <div class="column" id="account-type-cell">
                         <div id="account-type-icon"></div>
@@ -159,23 +147,14 @@
                         </div>
                     </div>
                 </div>
-                <!-- end portfolio-wrapper-->
                 <div class="p-grid-row alert" style="border-radius: 2rem; border: 1px solid black; box-shadow: #018085; background-color: whitesmoke;">
                     <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>
                     <div class="alert-text ng-binding"  style="color: black; line-height: 25px; ">
                         In case you are unable to enter Korea, please <a href="${pageContext.request.contextPath}/getRefund" style="text-decoration: underline">apply for a Reimbursement</a>. <br/>Fees for currency exchange and remittance will be applied for refunds.
                     </div>
                 </div>
-<%--                <div class="p-grid-row alert">--%>
-<%--                    <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>--%>
-<%--                    <div class="alert-text ng-binding" id="portfolio-footer-alert" style="color: black">Your HANA--%>
-<%--                        GLOBAL--%>
-<%--                        client ID is  <span style="font-weight:bold; text-decoration:underline;">${member.id}</span>. You will need this to log back into HANA GLOBAL.--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </div>
         </div>
-        <!-- end ob-section-body -->
     </div>
 </div>
 <footer>

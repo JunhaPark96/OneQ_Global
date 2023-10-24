@@ -51,7 +51,6 @@
                                                     (${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)})
                                                 </option>
                                             </c:forEach>
-                                            <%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
                                             <!-- 임의의 계좌 추가 -->
                                         </select>
                                     </td>
@@ -77,8 +76,6 @@
                                 <tr class="border-light">
                                     <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Transfer Amount</th>
                                     <td>
-                                        <%--                                    TODO: 계좌 연결, 금액 입력 받기--%>
-                                        <%--                                    <input type="hidden" name="transfer_amount" id="transfer_amount" value="">--%>
                                         <div class="btn-amount">
 
                                             <button type="button"
@@ -218,13 +215,6 @@
                                 </tbody>
                             </table>
 
-                            <%--                        <div class="btnArea justify-content-center " id="acc_trans_inquiry">--%>
-                            <%--                            &lt;%&ndash;                TODO: 계좌 거래내역 조회 기능&ndash;%&gt;--%>
-                            <%--                            <a href="${pageContext.request.contextPath}/accountTransfer" id="doTransfer" class="btn_p">송금 하기</a>--%>
-                            <%--                                <input type="submit" id="btnNext" class="btn_p" value="송금 하기">--%>
-                            <%--                        </div>--%>
-
-                            <!-- ... 기타 입력 필드 ... -->
                             <div class="btnArea justify-content-center " id="acc_trans_inquiry">
                                 <input type="submit" id="btnNext" class="btn_p" value="Send Money">
                             </div>
@@ -237,11 +227,6 @@
 </footer>
 
 <script>
-    // function fetchReceiverName() {
-    //     // For demonstration purposes, let's assume "박준하" is the name associated with the given account number.
-    //     // In a real-world scenario, you would make an AJAX request to a server to fetch the actual account holder's name.
-    //     document.getElementById('receiverName').textContent = "Danniel O'Laery";
-    // }
     function fetchReceiverName() {
         const accountNo = $("#recipientAccountNo").val();
         console.log("계좌번호는", accountNo);

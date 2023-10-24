@@ -12,13 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css"/>
-    <%--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
     <link href="./css/header.css" rel="stylesheet"/>
-
-    <!-- App css -->
-    <%--    <link href="./css/bootstrap/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />--%>
-    <%--    <link href="./css/bootstrap/app-modern-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />--%>
-    <!-- Bootstrap 5 CSS -->
 
 </head>
 <body>
@@ -46,25 +40,12 @@
     </div>
     <%--언어 설정--%>
     <div class="language">
-        <ul class="dropdown"> <!-- "dropdown" 클래스 추가 -->
+        <ul class="dropdown">
             <li class="dropdown">
                 <a id="" class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
                    role="button" aria-haspopup="true" aria-expanded="false">
                 </a>
-                <%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
-                <%--                   role="button" aria-haspopup="true" aria-expanded="false" id="currentLanguage">--%>
-                <%--                    <img id="currentFlag" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12">--%>
-                <%--                    <span id="currentLanguageText" class="align-middle">--%>
-                <%--                        <spring:message code="label.language" text="English"/>--%>
-                <%--                    </span>--%>
-                <%--                </a>--%>
-                <%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
-                <%--                   role="button" aria-haspopup="true" aria-expanded="false">--%>
-                <%--                    <img id="flagImage" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span--%>
-                <%--                        class="align-middle"><spring:message code="label.language" text="English"/></span>--%>
-                <%--                </a>--%>
-                <ul class="dropdown-menu"> <!-- "dropdown-menu" 클래스 추가 -->
-                    <!-- 기본으로 보이는 "English" 항목 -->
+                <ul class="dropdown-menu">
                     <li>
                         <a href="?lang=ko" class="dropdown-item" style="cursor: pointer"
                            onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'"

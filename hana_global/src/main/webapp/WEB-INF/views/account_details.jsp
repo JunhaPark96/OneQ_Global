@@ -1,11 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %><%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-21
-  Time: 오전 9:01
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -156,7 +150,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#transactionHistoryTable thead').hide(); // 처음엔 숨기기
+        $('#transactionHistoryTable thead').hide();
 
         $('#btnNext').click(function () {
 
@@ -175,11 +169,9 @@
                     withdrawAccountNo: withdrawAccountNo
                 },
                 success: function (data) {
-                    // Empty the table body
                     $('#transactionHistoryTable thead').show(); // 클릭 시 보이기
                     $('#transactionHistoryTable tbody').empty();
 
-                    // Fill the table with response data
                     for (let i = 0; i < data.length; i++) {
                         let transactionTypeText = data[i].transactionType == '0' ? 'Deposit' : 'Withdrawal';
                         $('#transactionHistoryTable tbody').append('<tr>' +

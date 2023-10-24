@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
@@ -15,18 +14,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <%--    스와이퍼--%>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <%--    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>--%>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.2/esm/ionicons.min.js" integrity="sha512-2ySmquu6HK3CAvwLllh0R8K8buFPMZsUwWLZIlB7WW8c8ilUtoNyhsmEsQn2U0IV1USr2Oc/9DJzlr4cxAbuxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--%>
     <script src="https://cdn.jsdelivr.net/npm/ionicons@5.0.0/dist/ionicons.js"></script>
 
-    <%--    <script src="./js/wallet.js"></script>--%>
     <link href="./css/service-main.css" rel="stylesheet"/>
     <link href="./css/nav.css" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
-    <%--    <link href="./css/exchange/doExchange.css" rel="stylesheet"/>--%>
     <link href="./css/wallet/flags.css" rel="stylesheet"/>
     <link href="./css/remittance/immediateRemittance.css" rel="stylesheet"/>
     <title>월렛 확인</title>
@@ -127,7 +122,6 @@
 
                             </div>
 
-                            <!-- Add Arrows -->
                             <div class="swiper-button-next" style="right: 1px"></div>
                             <div class="swiper-button-prev" style="left: 1px"></div>
                         </div>
@@ -232,7 +226,6 @@
                             <br/>
                             <div class="banking-cont">
                                 <table class="mb-5" summary="환전신청금액,결제하실 금액(원),결제방법(으)로 이루어진 결제정보1 테이블입니다.">
-                                    <%--                                <caption>결제정보1</caption>--%>
                                     <colgroup>
                                         <col style="width: 400px"/>
                                     </colgroup>
@@ -250,11 +243,6 @@
                                                             </span>
                                         </td>
                                     </tr>
-                                    <%--                                    <tr class="mb-5">--%>
-                                    <%--                                        <th>Amount</th>--%>
-                                    <%--                                        <td style="font-size: 11px; line-height: 12px;">--%>
-                                    <%--                                        </td>--%>
-                                    <%--                                    </tr>--%>
                                     <tr class="mb-5">
                                         <th>Estimated Fee</th>
                                         <td style="text-align: right"><span class="txt"><em>5,000 won</em></span></td>
@@ -283,30 +271,11 @@
                                         <th>Payment method</th>
                                         <td>
                                             <span class="txt"></span>
-                                            <%--                                                                                                        <select id="selectAccountForm" name="account" onchange="displayBalance()">--%>
-                                            <%--                                                                                                            <option value="">-- Select an account --</option>--%>
-                                            <%--                                                                                                            <!-- JSTL을 사용하여 accountList를 반복하고 각 계좌에 대한 옵션을 생성합니다 -->--%>
-                                            <%--                                                                                                            <c:forEach var="account" items="${accountList}">--%>
-                                            <%--                                                                                                                <option value="${account.acNo}"--%>
-                                            <%--                                                                                                                        data-balance="${account.balance}">${account.acNo} ${account.acName}</option>--%>
-                                            <%--                                                                                                            </c:forEach>--%>
-                                            <%--                                                                                                        </select>--%>
                                             <select class="form-select border-3 w-60" name="senderAccountNo"
                                                     id="selectAccountForm"
                                                     onchange="displayBalance(); updateRateAndCurrencyInfo();"
                                                     style="height: 45px;">
                                                 <option value="" selected disabled>Choose Payment Method</option>
-
-                                                <%--                                                <optgroup label="Accounts">--%>
-                                                <%--                                                    <c:forEach items="${accountList}" var="account">--%>
-                                                <%--                                                        <option value="${account.acNo}" data-account="${account}"--%>
-                                                <%--                                                                data-balance="${account.balance}"--%>
-                                                <%--                                                                data-password="${account.acPasswd}"--%>
-                                                <%--                                                                data-acNo="${account.acNo}">--%>
-                                                <%--                                                                ${account.acNo}--%>
-                                                <%--                                                        </option>--%>
-                                                <%--                                                    </c:forEach>--%>
-                                                <%--                                                </optgroup>--%>
 
                                                 <optgroup label="Hana Wallet">
                                                     <c:forEach items="${walletList}" var="wallet">
@@ -374,7 +343,6 @@
                 </div>
 
                 <%--          환전 계산 끝 --%>
-
                 <%--         수취인 정보 입력   --%>
                 <div class="recipientDiv" id="recipientDiv" style="display: none">
                     <div class="fs-5 mt-2" style="color: #bdbdbd">Remittance / <strong style="color: #000000">Recipient
@@ -383,7 +351,6 @@
                         <div class="card-body pe-5 ps-3">
                             <table class="table">
                                 <tbody style="border-style: none">
-                                <!-- Recipient's Name -->
                                 <tr class="border-white">
                                     <th colspan="2">
                                         <div class="fs-5" style="color: #000000">Bene's Name <strong
@@ -454,7 +421,6 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <!-- Recipient's Bank Account Information -->
                             <div id="bankAccountInfo" style="display: none">
                                 <table class="table" style="background-color: #f4f3ef;">
                                     <tbody style="border-style: none">
@@ -569,7 +535,6 @@
                 </div>
 
                 <%--         수취인 정보 입력 끝 --%>
-
                 <%--                송금 완료창 시작--%>
                 <div class="remittance-complete" style="display: none">
                     <div class="bg">
@@ -630,7 +595,6 @@
 </div>
 
 <script src="./js/remittance.js"></script>
-<%--<script src="./js/exchange.js"></script>--%>
 <script>
     // 환율 정보 저장
     let exchangeRates = {};
@@ -645,7 +609,6 @@
         sellRate: ${rate.sellRate}
     };
     </c:forEach>
-    // console.log("통화코드는 ", exchangeRates["VND"].currencyCode);
     let walletInfoList = {};
     <c:forEach var="wallet" items="${walletList}">
     walletInfoList["${wallet.currencyCode}"] = {
@@ -674,8 +637,7 @@
     };
     </c:forEach>
 
-    console.log(exchangeRates);  // 테스트: 월렛 정보를 콘솔에 출력
-    // 1 단계: 나라선택 및 결제방식 선택
+    console.log(exchangeRates);
     let countriesInfo;
     fetch('./json/country.json')
         .then(response => response.json())
@@ -707,7 +669,6 @@
                     selectedPaymentMethod: selectedPaymentMethod
                 },
                 success: function (data) {
-                    // document.getElementById('countryName').textContent = data.selectedCountry;
                     // json의 국가코드와 일치하면 데이터 가져오기
                     if (data.selectedCountry) {
                         const countryInfo = countriesInfo.find(country => country.countrySP === data.selectedCountry);
@@ -726,9 +687,6 @@
                     } else if (data.selectedPaymentMethod == 'selectWesternUnion') {
                         document.querySelector('.compare_area').style.display = 'block';
                         document.querySelector('.selectCurAndPayment').style.display = 'none';
-                        // document.getElementById('currencyName').textContent = 'USD';
-                        // document.getElementById('countryName').textContent = 'United States';
-                        // document.querySelector('.nation').src = './images/walletIcon_USD.png';
                     }
                     console.log("선택된 송금 방식은 ", selectedPaymentMethod);
                 },
@@ -765,12 +723,7 @@
     function nextStep(event) {
         event.preventDefault();
         let selectedAccountOption = document.getElementById('selectAccountForm').selectedOptions[0];
-        // let accountNo = document.getElementById('selectAccountForm').value;
         let password = document.getElementById('account_password').value;
-        // let paymentAmountStr = document.getElementById('paymentAmount').innerText.replace(/,/g, '');
-        // let paymentAmount = parseFloat(paymentAmountStr);
-        // let paymentAmount = parseFloat(document.getElementById('paymentAmount').innerText);
-        // console.log(parseFloat(document.getElementById('paymentAmount').innerText));
         let paymentAmountStr;
 
         // 선택된 계좌의 통화를 확인
@@ -781,13 +734,10 @@
         } else {
             paymentAmountStr = document.getElementById('paymentAmountForeign').innerText.replace(/,/g, ''); // 외화로 결제할 금액
         }
-        // let paymentAmount = document.getElementById('paymentAmount').innerText;
         let paymentAmount = parseFloat(paymentAmountStr);
         let accountBalance = parseFloat(selectedAccountOption.getAttribute('data-balance'));
         let accountPassword = selectedAccountOption.getAttribute('data-password');
-        // let walletBalance = parseFloat(selectedAccountOption)
         console.log("선택된 계좌는 ", selectedAccountOption);
-        // console.log("선택된 월렛 번호는 ", accountNo);
         console.log("입력한 비밀번호는 ", password);
         console.log("지불할금액은 ", paymentAmount);
         console.log("계좌잔액 ", accountBalance);
@@ -924,25 +874,6 @@
         window.location.href = '${pageContext.request.contextPath}/remittanceTrace';
     }
 
-
-    <%--$.ajax({--%>
-    <%--    url: '${pageContext.request.contextPath}/verifyAccount',  // URL을 변경하여 실제 서버 경로를 반영하십시오.--%>
-    <%--    type: 'POST',--%>
-    <%--    data: data,--%>
-    <%--    success: function(response) {--%>
-    <%--        if (response.success) {--%>
-    <%--            // 비밀번호와 계좌 잔액이 올바른 경우 다음 단계로 진행합니다.--%>
-    <%--            proceedToNextStep();--%>
-    <%--        } else {--%>
-    <%--            // 에러 메시지를 사용자에게 표시합니다.--%>
-    <%--            alert(response.errorMessage);--%>
-    <%--        }--%>
-    <%--    },--%>
-    <%--    error: function(jqXHR, status, error) {--%>
-    <%--        console.error(error);--%>
-    <%--        alert('An error occurred while verifying the account.');--%>
-    <%--    }--%>
-    <%--});--%>
 </script>
 <script>
     // 우대율 계산

@@ -70,24 +70,6 @@
                     </div>
                 </div>
             </div>
-<%--            <div class="account">--%>
-<%--                <div class="accountWrap">--%>
-<%--                    <div class="account-header">--%>
-<%--                        연결계좌--%>
-<%--                    </div>--%>
-<%--                    <div class="account-content">--%>
-<%--                        <h4>하나은행</h4>--%>
-<%--                    </div>--%>
-<%--                    <div class="account-footer">--%>
-<%--                        <div class="accountNo">--%>
-<%--                            ${walletList[0].acNo}--%>
-<%--                        </div>--%>
-<%--                        <div class="locRight">--%>
-<%--                            변경--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
             <!-- 원화 (KRW) 월렛 구역 -->
             <c:if test="${walletList[0].currencyCode eq 'KRW'}">
                 <div class="walletCell" data-currency="KRW" style="grid-row: 3;">
@@ -212,11 +194,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="passwordModalLabel">Set New Password</h5>
-                    <!-- 모달 닫기 버튼 제거
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    -->
+
                 </div>
                 <h6 id="passwordPrompt">To use wallet services, you need to set a password for the first time.</h6>
 
@@ -293,7 +271,7 @@
                         },
                         success: function(response) {
                             // 서버에서 성공 응답을 받았을 때 수행할 코드
-                            $("#passwordModal").modal('hide');  // 모달 창 닫기
+                            $("#passwordModal").modal('hide');
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             // 서버에서 에러 응답을 받았을 때 수행할 코드
@@ -301,12 +279,12 @@
                         }
                     });
                     alert("Password setting is complete.");
-                    $("#passwordModal").modal('hide');  // 모달 창 닫기
+                    $("#passwordModal").modal('hide');
                 } else {
                     alert("Passwords do not match. Please enter again.");
                     tempPassword = "";  // 임시 저장된 비밀번호 초기화
                     $('#paymentPassword').val('');  // 입력 필드 초기화
-                    updateDots('');  // dot도 초기화
+                    updateDots('');
                 }
             }
         });
@@ -387,10 +365,8 @@
         let loadAmount = document.getElementById('loadAmount').value;
         const walletPasswd = document.getElementById('walletPasswd').value;
 
-        // loadAmount를 정수로 변환
         loadAmount = parseInt(loadAmount, 10);
 
-        // NaN 확인 (parseInt에서 유효하지 않은 값이 입력되면 NaN을 반환합니다)
         if (isNaN(loadAmount)) {
             alert("Please Check Load Amount again.");
             return;
@@ -400,14 +376,14 @@
             url: "/loadWallet",
             method: "POST",
             data: {
-                loadAmount: loadAmount, // 이제 loadAmount는 정수
+                loadAmount: loadAmount,
                 walletPasswd: walletPasswd,
-                walletSeq: walletSeq  // 추가된 월렛 ID
+                walletSeq: walletSeq
             },
             success: function(response) {
-                alert(response); // "충전 성공!" 또는 서버에서 반환된 다른 메시지를 표시
+                alert(response);
                 closeModal();
-                location.reload(); // 월렛 정보를 업데이트하기 위해 페이지를 다시 로드.
+                location.reload();
             },
             error: function(jqXHR) {
                 alert(jqXHR.responseText); // 서버에서 반환된 에러 메시지를 표시

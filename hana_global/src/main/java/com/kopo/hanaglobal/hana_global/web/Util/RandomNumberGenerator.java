@@ -8,7 +8,6 @@ public class RandomNumberGenerator {
         StringBuilder randomNumber = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
-            // Generates a random digit between 0 and 9
             int digit = random.nextInt(10);
             randomNumber.append(digit);
         }

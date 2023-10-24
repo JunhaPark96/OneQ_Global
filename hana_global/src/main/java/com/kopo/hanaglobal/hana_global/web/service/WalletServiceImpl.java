@@ -120,11 +120,6 @@ public class WalletServiceImpl implements WalletService {
 
     public Wallet getWalletByUserAndCurrency(Wallet fromWallet, String currencyCode) {
         return walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
-//        Wallet wallet = walletRepository.findWalletByUserSeqAndCurrencyCode(fromWallet.getUserSeq(), currencyCode);
-//        if (wallet == null) {
-//            throw new NoSuchElementException("No wallet found with the given currency code.");
-//        }
-//        return wallet;
     }
 
     public void processForeignAddition(Wallet fromWallet, Wallet targetWallet, String currencyCode, Integer foreignAmount, String sourceCurrencyName) {

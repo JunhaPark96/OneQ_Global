@@ -44,13 +44,8 @@
         <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"
            role="button" aria-haspopup="true" aria-expanded="false">
         </a>
-        <%--                <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown"--%>
-        <%--                   role="button" aria-haspopup="true" aria-expanded="false">--%>
-        <%--                    <img id="flagImage" src="./images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span--%>
-        <%--                        class="align-middle"><spring:message code="label.language" text="English"/></span>--%>
-        <%--                </a>--%>
-        <ul class="dropdown-menu"> <!-- "dropdown-menu" 클래스 추가 -->
-          <!-- 기본으로 보이는 "English" 항목 -->
+        <ul class="dropdown-menu">
+          <!-- 기본으로 보이는 English -->
           <li>
             <a href="?lang=ko" class="dropdown-item" style="cursor: pointer" onmouseover="this.style.backgroundColor='#018085'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor=''; this.style.color=''">
               <img src="./images/flags/kr.jpg" alt="user-image" class="mr-1" height="12"> <span

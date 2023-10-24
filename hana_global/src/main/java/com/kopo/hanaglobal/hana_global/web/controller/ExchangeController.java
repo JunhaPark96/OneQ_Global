@@ -87,8 +87,6 @@ public class ExchangeController {
 
 
     // myWallet 페이지에서 특정 통화클릭 후 페이지 이동 시
-
-
     // 원화에서 다른나라 통화로 환전
     @PostMapping("/walletInfo")
     public String fromKRWtoFCExchange(@ModelAttribute("currentMember") Member member,

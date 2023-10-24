@@ -13,8 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-<%--          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">--%>
 
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
@@ -346,7 +344,6 @@
                 const denomination = parseInt(selectElement.name.replace(/[^\d.-]/g, ''));
                 const quantity = parseInt(selectElement.value);
                 totalAmount += denomination * quantity;
-                // Store the current value for future validation
                 previousValues[selectElement.name] = selectElement.value;
             });
 
@@ -359,7 +356,6 @@
             billSelections.forEach((selectElement, index) => {
                 let totalChosenAmount = 0;
 
-                // Calculate the totalChosenAmount excluding the current denomination
                 for (let i = 0; i < billSelections.length; i++) {
                     if (i !== index) {  // Exclude the current denomination
                         const denomination = parseInt(billSelections[i].name.replace(/[^\d.-]/g, ''));
@@ -381,7 +377,6 @@
                     selectElement.appendChild(option);
                 }
 
-                // Revert the selection to previous value
                 selectElement.value = Math.min(maxQuantity, parseInt(selectElement.value));
             });
         }

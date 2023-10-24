@@ -60,9 +60,6 @@
             content: "↓";
         }
 
-        /*#world-map-markers > div > svg > g{*/
-        /*    transform: scale(0.5763475444023498) translate(118.3202837962236, 0);*/
-        /*}*/
         p {
             margin-bottom: 0px;
         }
@@ -110,14 +107,6 @@
                                     </div>
                                 </div>
                             </c:forEach>
-                            <%--                            <h5 class="mb-1 mt-0 font-weight-normal">New York</h5>--%>
-                            <%--                            <div class="progress-w-percent">--%>
-                            <%--                                <span class="progress-value font-weight-bold">72k </span>--%>
-                            <%--                                <div class="progress progress-sm">--%>
-                            <%--                                    <div class="progress-bar" role="progressbar" style="width: 72%;" aria-valuenow="72"--%>
-                            <%--                                         aria-valuemin="0" aria-valuemax="100"></div>--%>
-                            <%--                                </div>--%>
-                            <%--                            </div>--%>
 
                         </div>
                         <div class="div-right" style="display: grid; grid-area: div-right; ">
@@ -126,9 +115,9 @@
                             </div>
                         </div>
 
-                    </div> <!-- end card-body-->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
+                    </div>
+                </div>
+            </div>
 
 
             <div class="user-info">
@@ -172,10 +161,6 @@
                                                                           value="${member.userSeq}"></td>
                                     <td>${member.id}</td>
                                     <td>${member.name}</td>
-                                        <%--                                <td>${firstAccountForMembers[member.userSeq].acNo.substring(0, 3)}-${firstAccountForMembers[member.userSeq].acNo.substring(3, 9)}-${firstAccountForMembers[member.userSeq].acNo.substring(9, 14)}</td>--%>
-<%--                                    <td>--%>
-<%--                                            ${firstAccountForMembers[member.userSeq].acNo}--%>
-<%--                                    </td>--%>
                                     <td>
                                             ${fn:substring(firstAccountForMembers[member.userSeq].acNo, 0, 3)}-${fn:substring(firstAccountForMembers[member.userSeq].acNo, 3, 8)}-${fn:substring(firstAccountForMembers[member.userSeq].acNo, 8, 14)}
                                     </td>

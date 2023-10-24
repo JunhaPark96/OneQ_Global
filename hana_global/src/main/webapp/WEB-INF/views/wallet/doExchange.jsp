@@ -153,11 +153,6 @@
 
                 <%--        결제 정보 미리보기 시작    --%>
                 <div class="col previewPayment" style="display: none">
-                    <%--                    <div class="btnArea text-start align-middle">--%>
-                    <%--                        <p>Check Hana Bank's announced exchange rate every 5 minutes<br/> and proceed with automatic--%>
-                    <%--                            charging if it is lower or equal to the set exchange rate</p>--%>
-                    <%--                    </div>--%>
-
                     <div class="banking-wrap input-focus-wrap">
                         <div class="title-cont">
                             <h5>Confirm the amount before topping up</h5>
@@ -311,7 +306,6 @@
     document.addEventListener("DOMContentLoaded", function () {
         // 기본 통화를 USD로 설정
         currencySelected("USD", true); // Source를 USD로 설정
-        // currencySelected("KRW", false); // 이렇게 해서 대상 통화도 초기 설정할 수 있습니다.
     });
 
 </script>
@@ -325,10 +319,6 @@
         document.getElementById("calExchange").addEventListener("click", function () {
             calculateAndPreviewPayment();
         });
-        // 결제 방식 선택박스에 이벤트 리스너 추가
-        // document.getElementById("selectAccountForm").addEventListener("change", function () {
-        //     updatePaymentMethod();
-        // });
     });
 
     function getSelectedAccountObject() {
@@ -405,7 +395,6 @@
         selectedBalance = numberWithCommas(selectedBalance);
 
         // 선택한 계좌 번호 또는 Wallet 이름을 hidden input에 저장
-        // document.getElementById("selectedAccountInfo").value = selectedValue;
         // 잔액 정보 업데이트
         document.getElementById("accountBalance").textContent = selectedBalance;
     }
@@ -419,12 +408,7 @@
         // console.log(document.getElementById("selectedAccountInfo").value);
     });
 
-    <%--window.onload = function() {--%>
-    <%--    const defaultCurrency = "${defaultCurrency}";--%>
-    <%--    if(defaultCurrency) {--%>
-    <%--        currencySelected(defaultCurrency, true);--%>
-    <%--    }--%>
-    <%--}--%>
+
     document.addEventListener("DOMContentLoaded", function () {
         // 사용자의 국적에 따른 기본 통화와 선택한 통화를 반영
         let defaultCurrency = "${defaultCurrencyCode}";
@@ -453,66 +437,10 @@
     }
 </script>
 
-<script>
-    // 페이지 로드 시 compare_area에 배경색 추가 및 나머지 영역을 회색 처리
-    // let colors = [
-    //     '#F2B705',
-    //     '#F25C05',
-    //     '#0388A6',
-    //     '#0E5929',
-    //     '#F272A1',
-    // ];
-    //
-    // let container = document.querySelector('.main-area');
-    // // let sections = [document.querySelector('.compare_area'), document.querySelector('.showExchangeRate'), document.querySelector('.previewPayment'), document.querySelector('.Authenticate')];
-    // let sections = [
-    //     document.querySelector('.compare_area').parentNode,
-    //     document.querySelector('.previewPayment').parentNode,
-    //     document.querySelector('.Authenticate').parentNode
-    // ];
-    // let colorIndex = 0;
-    // let scrollValue = 0;
-    // let dateNow = Date.now();
-    //
-    // container.onwheel = changeBgColor;
-    //
-    // function changeBgColor(e) {
-    //     scrollValue += e.deltaY * 0.01;
-    //
-    //     timePassed = Date.now() - dateNow;
-    //     if (scrollValue > 10 && timePassed > 500) {
-    //         dateNow = Date.now();
-    //         colorIndex += 1;
-    //         if (colorIndex > colors.length-1) colorIndex = 0;
-    //         setSectionStyles();
-    //         scrollValue = 0;
-    //     }
-    //
-    //     if (scrollValue < -10 && timePassed > 500) {
-    //         dateNow = Date.now();
-    //         colorIndex -= 1;
-    //         if (colorIndex < 0) colorIndex = colors.length-1;
-    //         setSectionStyles();
-    //         scrollValue = 0;
-    //     }
-    //     e.preventDefault(); // 실제 스크롤을 비활성화
-    // }
-    //
-    // function setSectionStyles() {
-    //     for (let i = 0; i < sections.length; i++) {
-    //         if (i === colorIndex) {
-    //             sections[i].classList.add('highlighted');
-    //             sections[i].classList.remove('dimmed');
-    //         } else {
-    //             sections[i].classList.remove('highlighted');
-    //             sections[i].classList.add('dimmed');
-    //         }
-    //     }
-    // }
 
 
 
-</script>
+
 
 </body>
 </html>

@@ -1,17 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JUNHA
-  Date: 2023-08-12
-  Time: 오후 7:11
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<!-- Stepper 부트스트랩 시작 -->
 <div class="container">
   <div class="accordion" id="accordionExample">
     <div class="steps">
@@ -78,10 +70,8 @@
   // URL에서 현재 단계를 추출
   const currentStep = parseInt(location.pathname.split("signUp_STEP")[1] - 1);
 
-  // 진행률을 설정합니다. (예: 2단계면 2/5 * 100 = 40%)
   progress.setAttribute('value', currentStep * 100 / (stepButtons.length - 1));
 
-  // 현재 단계까지의 버튼에 'done' 클래스를 추가합니다.
   for (let i = 0; i <= currentStep; i++) {
     stepButtons[i].classList.add('done');
   }

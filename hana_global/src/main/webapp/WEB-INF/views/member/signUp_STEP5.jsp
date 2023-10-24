@@ -31,11 +31,8 @@
         <%--  단계 --%>
         <%@ include file="/WEB-INF/views/includes/stepper.jsp" %>
         <div class="content">
-            <%--    1002962104821--%>
             <section>
                 <div class="titArea">
-                    <%--                        <h1>회원가입 완료!</h1>--%>
-                    <%--                        <h2>하나 올인원 뱅킹 서비스에 가입하신것을 환영합니다</h2>--%>
                     <h1>Registration Complete!</h1>
                     <h2>Welcome to Hana All-in-One Banking Service</h2>
                 </div>
@@ -47,11 +44,6 @@
                     </colgroup>
                     <tbody>
                     <tr>
-                        <%--                        <td class="th">--%>
-                        <%--                            제출하신 문서의 위변조를 판단합니다.<br>--%>
-                        <%--                            관리자의 승인을 기다려 주십시오. 약 1 ~ 3일 소요 됩니다.<br>--%>
-                        <%--                            제출하신 이메일과 연락처로 승인여부가 전송됩니다--%>
-                        <%--                        </td>--%>
                         <td class="th">
                             We are assessing the authenticity of the documents you submitted.<br>
                             Please await administrative approval. This process may take 1 to 3 minutes.<br>

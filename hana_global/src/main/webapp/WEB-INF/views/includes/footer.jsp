@@ -13,13 +13,13 @@
         202-81-14695<br>Customer Support 1599-6111 Overseas: 82-42-520-2500 (ext. 8 for foreign languages)</p>
     <div class="f_down">
         <ul class="crop-area">
-            <li><a href="javascript:goToUrl('/co/aq/coaq013s01');" title="More">Hana Global</a></li><!-- 캐나다 하나은행11 -->
-            <li><a href="javascript:goToUrl('/co/aq/coaq010s01');" title="More">Contact</a></li><!-- 연락처 -->
-            <li><a href="javascript:goToUrl('/co/aq/coaq015m01');" title="More">Publications</a></li><!-- 경영공시 -->
-            <li><a href="javascript:goToUrl('/co/fo/cofo001s01');" title="More">Sitemap</a></li><!-- 사이트맵 -->
-            <li><a href="javascript:goToUrl('/co/aq/coaq016s01');" title="More">Policy</a></li><!-- 약관 -->
-            <li><a href="javascript:goToUrl('/co/aq/coaq018s01');" title="More">Privacy</a></li><!-- 프라이버시 -->
-            <li><a href="javascript:goToUrl('/co/aq/coaq019s01');" title="More">Security policy</a></li><!-- 보안정책 -->
+            <li><a href="javascript:goToUrl('/co/aq/coaq013s01');" title="More">Hana Global</a></li>
+            <li><a href="javascript:goToUrl('/co/aq/coaq010s01');" title="More">Contact</a></li>
+            <li><a href="javascript:goToUrl('/co/aq/coaq015m01');" title="More">Publications</a></li>
+            <li><a href="javascript:goToUrl('/co/fo/cofo001s01');" title="More">Sitemap</a></li>
+            <li><a href="javascript:goToUrl('/co/aq/coaq016s01');" title="More">Policy</a></li>
+            <li><a href="javascript:goToUrl('/co/aq/coaq018s01');" title="More">Privacy</a></li>
+            <li><a href="javascript:goToUrl('/co/aq/coaq019s01');" title="More">Security policy</a></li>
         </ul>
     </div>
 </div>

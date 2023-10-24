@@ -2,12 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <!-- Bootstrap 5 CSS -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <!-- Stepper Styles -->
   <link rel="stylesheet" href="./css/step-box.css">
   <link rel="stylesheet" href="./css/terms.css">
   <link rel="stylesheet" href="./css/step3.css">
@@ -44,10 +42,8 @@
         <input type="hidden" id="detailAddress" name="detailAddress" value="${sessionScope.detailAddress}">
         <section>
           <div class="titArea">
-<%--            <h2>로그인 정보 입력</h2>--%>
             <h2>Enter Login Details</h2>
             <div class="title-area clearfix">
-<%--              <h3 class="fleft">이메일 패스워드</h3>--%>
               <h3 class="fleft">ID & Password</h3>
               <div class="infor mt4">
                 <span class="asterisk">*Fields marked with an asterisk are mandatory.</span>

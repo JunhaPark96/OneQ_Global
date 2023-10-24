@@ -75,21 +75,6 @@
                     <div class="loginButton">
                         <input type="submit"  value="<spring:message code='login.loginButton' text='Login'/>" class="loginBtn">
                     </div>
-<%--                <div class="loginId">--%>
-<%--                    <label for="id">User ID</label>--%>
-<%--                    <form:input path="id"/>--%>
-<%--                    <form:errors path="id"/>--%>
-<%--                </div>--%>
-<%--                <div class="loginPw">--%>
-<%--                    &lt;%&ndash;<label for="password">Password</label>--%>
-<%--                    <input type="password" name="password" id="password" placeholder="Password" required>&ndash;%&gt;--%>
-<%--                        <label for="passwd">Password</label>--%>
-<%--                        <form:input path="passwd"/>--%>
-<%--                        <form:errors path="passwd"/>--%>
-<%--                </div>--%>
-<%--                <div class="loginButton">--%>
-<%--                    <input type="submit" value="Login" class="loginBtn">--%>
-<%--                </div>--%>
                 </div>
                 <div class="login-option">
                     <div>

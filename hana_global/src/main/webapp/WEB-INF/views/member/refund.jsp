@@ -13,12 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
             crossorigin="anonymous"></script>
-    <%--  <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
     <link href="./css/bootstrap/paper-dashboard.css?v=2.0.1" rel="stylesheet"/>
     <link href="./css/header.css" rel="stylesheet"/>
     <link href="./css/TTF.css" rel="stylesheet"/>
@@ -28,33 +26,30 @@
     <link href="./css/member/completeAccount.css" rel="stylesheet"/>
     <link href="./css/remittance/immediateRemittance.css" rel="stylesheet"/>
 
-    <style>
-        /*.table {*/
-        /*    --bs-table-bg: #f4f3ef;*/
-        /*}*/
-        .table tr {
-            border: solid 1px #ccc;
-        }
-
-        .table th {
-            text-align: center;
-        }
-        .refund-information {
-            background-color: #f7f7f7; /* 배경색 설정 */
-            padding: 15px; /* 내부 여백 설정 */
-            border: 1px solid #dcdcdc; /* 테두리 설정 */
-            border-radius: 5px; /* 테두리 둥글게 설정 */
-            margin-top: 20px; /* 위쪽 여백 설정 */
-            font-size: 16px; /* 글꼴 크기 설정 */
-            line-height: 1.6; /* 줄간격 설정 */
-        }
-
-        .refund-information p {
-            margin-bottom: 0; /* 단락 사이 여백 제거 */
-        }
-
-    </style>
 </head>
+<style>
+    .table tr {
+        border: solid 1px #ccc;
+    }
+
+    .table th {
+        text-align: center;
+    }
+    .refund-information {
+        background-color: #f7f7f7;
+        padding: 15px;
+        border: 1px solid #dcdcdc;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .refund-information p {
+        margin-bottom: 0;
+    }
+
+</style>
 <body>
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
@@ -69,7 +64,6 @@
                         <div class="card-body pe-3 ps-3">
                             <table class="table" style="background-color: #f4f3ef;">
                                 <tbody style="border-style: none">
-                                <!-- Applicant's Name -->
                                 <tr class="" style="background-color: #f4f3ef;">
                                     <th colspan="2">
                                         <div class="fs-5" style="color: #000000">Applicant's Info <strong
@@ -102,30 +96,15 @@
                                                     (${account.acNo.substring(0, 3)}-${account.acNo.substring(3, 9)}-${account.acNo.substring(9, 14)})
                                                 </option>
                                             </c:forEach>
-                                            <%--                                        <option value="123456789">1234-5678-9 (Example Account)</option>--%>
-                                            <!-- 임의의 계좌 추가 -->
                                         </select>
                                     </td>
                                 </tr>
                                 <tr class="">
                                     <th scope="row" class="text-start align-middle">&nbsp;&nbsp;Balance</th>
                                     <td class="text-start align-middle">
-                                        <%--                                        <input type="text" name="" id="accountBalance" placeholder=""/>--%>
                                         <p style="margin-bottom: 0px;" id="accountBalance"></p>
                                     </td>
                                 </tr>
-                                <%--                                <tr>--%>
-                                <%--                                    <th scope="row" class="text-start align-middle" style="color: red">--%>
-                                <%--                                        &nbsp;&nbsp;--%>
-                                <%--                                    </th>--%>
-                                <%--                                    <td>--%>
-                                <%--                                        <div>--%>
-                                <%--                    <span class="fs-5"> <strong style="color: #000000; font-size: 14px"><span--%>
-                                <%--                            style="color: red">Note </span> Please specify the exact name as written in your passport</strong></span>--%>
-                                <%--                                        </div>--%>
-                                <%--                                    </td>--%>
-                                <%--                                </tr>--%>
-
                                 <!-- Deposit Information -->
                                 <tr class="">
                                     <th colspan="2">
@@ -264,7 +243,6 @@
 
             </div>
         </div>
-        <!-- end ob-section-body -->
     </div>
 </div>
 <footer>

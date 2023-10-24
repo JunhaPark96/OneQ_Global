@@ -13,8 +13,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-    <%--          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">--%>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
             integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
@@ -26,21 +24,20 @@
     <link href="./css/TTF.css" rel="stylesheet"/>
     <link href="./css/bootstrap/bootstrap2.min.css" rel="stylesheet"/>
     <link href="./css/wallet/walletTransactionDetail.css" rel="stylesheet"/>
-    <%--    <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
     <style>
         .btn-link.dropdown-toggle::after {
-            color: #2d9646; /* 부트스트랩의 기본 초록색 */
+            color: #2d9646;
         }
 
         .dropdown-item:focus, .dropdown-item:hover {
-            background-color: #018085; /* 원하는 색상으로 변경 */
+            background-color: #018085;
         }
 
         .paginationWrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0; /* 상하 여백 추가 */
+            margin: 20px 0;
         }
 
         .page-number {
@@ -72,16 +69,16 @@
 
         /*    월렛*/
         .wallet-card {
-            background-color: #f6f6f6; /* 약간의 회색 톤으로 배경을 설정 */
+            background-color: #f6f6f6;
             border: 1px solid #f61212;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
-            border-radius: 15px; /* 모서리를 라운드 처리 */
-            transition: transform .3s, box-shadow .3s; /* 호버 효과를 위한 전환 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: transform .3s, box-shadow .3s;
         }
 
         .wallet-card:hover {
-            transform: translateY(-5px); /* 호버시 약간 위로 이동 */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 그림자 강조 */
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .wallet-card .border-bottom {
@@ -89,7 +86,7 @@
         }
 
         .wallet-card .fa-link {
-            color: #2c3e50; /* 아이콘의 색상을 변경 */
+            color: #2c3e50;
         }
 
         .wallet-card h5, .wallet-card div {
@@ -97,19 +94,18 @@
         }
 
         .wallet-card .country-icon {
-            position: absolute; /* 절대 위치 설정 */
-            top: 3px; /* 오른쪽 상단에 위치하도록 설정 */
+            position: absolute;
+            top: 3px;
             right: 10px;
-            width: 40px; /* 아이콘 크기 설정. 필요에 따라 조정 가능 */
+            width: 40px;
             height: 40px;
-            border-radius: 50%; /* 원형으로 만들기 위한 설정 */
-            /*overflow: hidden; !* 이미지가 원 밖으로 나가지 않게 설정 *!*/
+            border-radius: 50%;
         }
 
         .wallet-card .country-icon img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* 이미지를 적절히 잘라내어 표시 */
+            object-fit: cover;
         }
 
     </style>
@@ -241,10 +237,6 @@
                             <div class="paginationWrapper">
                                 <div id="pagination"></div>
                             </div>
-                            <%--                        <div class="col-12 bg-white mt-0 mb-4 d-none" id="div_remittance_hist"--%>
-                            <%--                             style="min-height: 350px; border-radius: 0px 0px 10px 10px">--%>
-
-                            <%--                        </div>--%>
                             <%--				예약신청을 위한 숨겨진 form--%>
                             <form class="d-none" id="deliveryForm" action="/postDeliveryForm" method="post">
                                 <input type="text" id="delivery_walletNo" name="walletNo" value="">
@@ -268,36 +260,28 @@
 
         const whole_history = document.getElementById('whole_history');
         const exchange_hist = document.getElementById('exchange_hist');
-        // const remittance_hist = document.getElementById('remittance_hist');
 
         const div_whole_history = document.getElementById('div_whole_history');
         const div_exchange_hist = document.getElementById('div_exchange_hist');
-        // const div_remittance_hist = document.getElementById('div_remittance_hist');
 
         // 전체내역 클릭 색 변경
         function click_whole_history() {
             whole_history.classList.add('bg-hanagreen')
             exchange_hist.classList.remove('bg-hanagreen');
-            // remittance_hist.classList.remove('bg-hanagreen');
             whole_history.style.color = '#ffffff'
             exchange_hist.style.color = '#8d8d8d'
-            // remittance_hist.style.color = '#8d8d8d'
             div_whole_history.classList.remove('d-none');
             div_exchange_hist.classList.add('d-none');
-            // div_remittance_hist.classList.add('d-none');
         }
 
         // 환전내역 클릭 색 변경
         function click_exchange_hist() {
             whole_history.classList.remove('bg-hanagreen')
             exchange_hist.classList.add('bg-hanagreen');
-            // remittance_hist.classList.remove('bg-hanagreen');
             whole_history.style.color = '#8d8d8d'
             exchange_hist.style.color = '#ffffff'
-            // remittance_hist.style.color = '#8d8d8d'
             div_whole_history.classList.add('d-none');
             div_exchange_hist.classList.remove('d-none');
-            // div_remittance_hist.classList.add('d-none');
         }
 
         $(document).on('click', '#radio_Group', function () {
@@ -307,14 +291,13 @@
             let r_walletNo = $('#radio_Group input:radio:checked').val();
             document.getElementById('delivery_walletNo').setAttribute('value', r_walletNo);
         })
-        let currentPage = 1; // 기본적으로 첫 페이지
-        const itemsPerPage = 10; // 한 페이지에 보여줄 항목 수
+        let currentPage = 1;
+        const itemsPerPage = 10;
         // 전체내역
         function ajax_whole_history() {
             let r_walletNo = $('#radio_Group input:radio:checked').val();
             console.log("선택된 월렛 번호는 ", r_walletNo);
 
-            // 추가: 페이지 정보를 함께 보냄
             $.ajax({
                 url: '${pageContext.request.contextPath}/getWholeWalletHistory',
                 method: 'post',
@@ -355,9 +338,9 @@
 
         let currentFilterType = '';  // 기본적으로 모든 거래를 보기
 
-        function filterByTransactionType(selectedType) { // <-- 파라미터를 추가
+        function filterByTransactionType(selectedType) {
             currentFilterType = selectedType;
-            ajax_whole_history();  // 필터링.
+            ajax_whole_history();
         }
 
         function getTransactionTypeName(type) {
@@ -369,7 +352,7 @@
                 case 'T':
                     return 'Remittance';
                 default:
-                    return type;  // 기본값 (만약 알 수 없는 transactionType이 들어올 경우를 대비)
+                    return type;
             }
         }
 
@@ -410,9 +393,6 @@
                 str += '</thead>';
                 str += '<tbody>';
 
-// (나머지 코드는 그대로 유지)
-
-
                 data = data.filter(history => !currentFilterType || history.transactionType === currentFilterType);
 
                 const startIndex = (currentPage - 1) * itemsPerPage;
@@ -423,9 +403,6 @@
                     str += '<td class="text-hanagreen border-1 border-start-0 text-black-50 fs-5 align-middle" style="border-color: #c7c7c7;font-family: hanaM">';
                     str += history.walletTransNo;
                     str += '</td>';
-                    // str += '<td class="border-1 text-dark align-middle fs-5 text-black-50" style="font-family: hanaM; border-color: #c7c7c7">';
-                    // str += history.transactionAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-                    // str += '</td>';
                     str += '<td class="border-1 text-danger align-middle fs-5 " style="font-family: hanaM; border-color: #c7c7c7;">'; // Display in red
                     str += history.withdrawCur ? history.transactionAmount.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") : "-";
                     str += '</td>';
@@ -473,8 +450,8 @@
             $.ajax({
                 url: '${pageContext.request.contextPath}/getExchangeHist',
                 method: 'post',
-                contentType: "application/json",  // 추가
-                data: JSON.stringify({            // 수정
+                contentType: "application/json",
+                data: JSON.stringify({
                     walletNo: r_walletNo
                 }),
                 success: function (data) {
@@ -559,7 +536,6 @@
         function attachRowDeleteEventListener() {
             $('#div_exchange_hist').on('click', '.deleteRowBtn', function () {
                 console.log("Clicked row:", $(this).closest('tr'));
-                // let aeSeq = $(this).closest('tr').data('aeSeq');
                 let aeSeq = $(this).closest('tr').attr('data-aeSeq');
                 console.log("Clicked row's aeSeq:", aeSeq);
                 console.log("Deleting aeSeq:", aeSeq);
@@ -594,12 +570,12 @@
 
                 // 각 통화 코드에 따른 국가 이미지 경로 설정
                 const countryImages = {
-                    'USD': './images/flags/us.jpg',  // 예제 경로
+                    'USD': './images/flags/us.jpg',
                     'KRW': './images/flags/kr.jpg',
                 };
 
-                const imagePath = countryImages[currencyCode] || '';  // 해당 통화 코드에 맞는 이미지 경로 가져오기
-                $('.country-image').css('background-image', `url(${imagePath})`);  // 국가 이미지 변경
+                const imagePath = countryImages[currencyCode] || '';
+                $('.country-image').css('background-image', `url(${imagePath})`);
             });
         });
     </script>
@@ -613,7 +589,7 @@
             $("#loadingDiv").fadeOut(500, function () {
                 $("#loadingDiv").remove();
                 let containerElement = document.getElementById("container");
-                if (containerElement) { // Check if the element is not null
+                if (containerElement) {
                     containerElement.classList.remove("d-none");
                 }
             });

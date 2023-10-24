@@ -10,9 +10,6 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<%--        <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet"/>--%>
-
-<%--    <link href="css/header.css" rel="stylesheet"/>--%>
     <link href="css/TTF.css" rel="stylesheet"/>
     <link href="css/main.css" rel="stylesheet">
 
@@ -31,11 +28,6 @@
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area">
         <div class="main-top">
-            <%--<h1>All-In-One Banking System</h1>
-            <p style=" margin-top: 0px; margin-bottom: 0px;">
-            <h3>Global Digital Lounge</h3>
-            An extensive global network reaching the world market
-            </p>--%>
         </div>
         <div class="main-body">
 
@@ -43,7 +35,6 @@
                 <div class="main-info">
                     <div class="main-image"></div>
                     <div class="main-text">
-<%--                        <h3>All-In-One <br>Banking System</h3> <br>--%>
                         <h3><spring:message code="allInOneBankingSystem"  /></h3>
                     </div>
                 </div>
@@ -54,17 +45,10 @@
                                 <p class="text-header"><spring:message code="link.account"/></p>
                                 <p class="card-text">
                                     <spring:message code="easyOnePackAccount"/>
-<%--                                    Easy-One Pack <br>--%>
-<%--                                    Account--%>
                                 </p>
                             </div>
                             <div class="card-image card-image1" alt="계좌"></div>
                         </div>
-                        <%--<div class="card-text-border">
-                            <p class="card-text">
-                            Account
-                            </p>
-                        </div>--%>
                     </a>
                 </div>
                 <div class="card card2">
@@ -74,17 +58,9 @@
                                 <p class="text-header"><spring:message code="exchange"/></p>
                                 <p class="card-text">
                                     <spring:message code="exchangeDesc"/>
-<%--                                    Enjoy excellent <br>--%>
-<%--                                    exchange rates <br>--%>
-<%--                                    for 29 currencies</p>--%>
                             </div>
                             <div class="card-image card-image2" alt="환전"></div>
                         </div>
-                        <%--<div class="card-text-border">
-                            <p class="card-text">
-                            Exchange
-                            </p>
-                        </div>--%>
                     </a>
                 </div>
             </div>
@@ -99,9 +75,6 @@
                                 <p class="text-header"><spring:message code="hanaWallet"/></p>
                                 <p class="card-text">
                                     <spring:message code="hanaWalletDesc"/>
-<%--                                    Experience an easier <br>--%>
-<%--                                    banking system <br>--%>
-<%--                                    with Hana Wallet--%>
                                 </p>
                             </div>
                             <div class="card-image card-image3" alt="하나월렛"></div>
@@ -115,9 +88,6 @@
                                 <p class="text-header"><spring:message code="remittance"/></p>
                                 <p class="card-text">
                                     <spring:message code="remittanceDesc"/>
-<%--                                    Hana Bank supports<br>--%>
-<%--                                    your overseas<br>--%>
-<%--                                    remittance--%>
                                 </p>
                             </div>
                             <div class="card-image card-image4" alt="송금"></div>
@@ -131,7 +101,6 @@
                     <div class="user-image"></div>
                     <div class="user-text">
                         <h3><spring:message code="openAccount"/></h3>
-<%--                        Open a Hana Bank account up to 14 days before you arrive in Korea, or up to three months after you arrive.--%>
                         <spring:message code="openAccountDesc"/>
                     </div>
                 </a>

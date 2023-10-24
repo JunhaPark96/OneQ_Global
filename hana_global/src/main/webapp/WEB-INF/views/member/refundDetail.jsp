@@ -61,10 +61,8 @@
 <div class="main-container">
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area" style="margin-left: 10%; margin-right: 10%;">
-        <!-- Include your sidebar here -->
         <%@ include file="/WEB-INF/views/includes/mem_sidebar.jsp" %>
         <div>
-            <!-- Start ob-section-header -->
             <div class="ob-section unselectable" id="ob-section-header" unselectable="on">
                 <div class="p-grid">
                     <div class="p-grid-row">
@@ -100,14 +98,11 @@
                     </div>
                 </div>
             </div>
-            <!-- End ob-section-header -->
             <br/>
-            <!-- Start ob-section-body -->
             <div class="ob-section" id="ob-section-body">
                 <div class="p-grid">
                     <div class="p-grid-row" id="welcome-letter-wrapper">
                         <div style="grid-column: span 2;">
-                            <!-- Refund Table -->
                             <table id="refundTable" class="display" style="width: 100%; margin-top: 20px;">
                                 <thead>
                                 <tr>
@@ -119,7 +114,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <!-- Example rows (replace with actual data) -->
                                 <tr>
                                     <td>2023-10-16</td>
                                     <td>128-709338-84148</td>
@@ -127,10 +121,8 @@
                                     <td>Sam Smith</td>
                                     <td>In Progress</td>
                                 </tr>
-                                <!-- End of rows -->
                                 </tbody>
                             </table>
-                            <!-- End Refund Table -->
                         </div>
                     </div>
                 </div>
@@ -179,9 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- End portfolio-wrapper-->
             </div>
-            <!-- End ob-section-body -->
         </div>
     </div>
 <footer>

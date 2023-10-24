@@ -27,13 +27,10 @@
     <%@ include file="/WEB-INF/views/includes/header.jsp" %>
     <div class="main-area" style="margin-left: 15%; margin-right: 15%;">
         <div>
-            <!-- start ob-section-banner -->
             <div class="ob-section unselectable" id="ob-section-banner"
                  back-img="https://static.my.commbank.com.au/static/cmxAssets/MigrantOrigination/migrant-confirmation-bp5.jpg">
                 &nbsp;
             </div>
-            <!-- end ob-section-banner -->
-            <!-- start ob-section-header -->
             <div class="ob-section unselectable" id="ob-section-header" unselectable="on">
                 <div class="p-grid">
                     <div class="p-grid-row">
@@ -51,15 +48,12 @@
                     </div>
                 </div>
             </div>
-            <!-- end ob-section-header -->
             <br/>
-            <!-- start ob-section-body -->
             <div class="ob-section" id="ob-section-body">
                 <div class="p-grid">
                     <div class="p-grid-row" id="welcome-letter-wrapper"
                          style="display: grid; grid-template-columns: 1fr 1fr;">
                         <div class="p-1-2 bp3-1">
-                            <!-- start welcome-letter-step1 -->
                             <div class="welcome-letter-step" id="welcome-letter-step1">
                                 <div data-ng-bind-html="content.beforeArrivalBody | formatString:pageData.NetbankId"
                                      id="welcome-info" test-and-target="" tat-campaign-code="CB-EO-SA-MIG-PAGE2-COPY2"
@@ -83,14 +77,11 @@
                                    data-ng-bind-html="content.readAndPrintButtonText"
                                    data-ng-popup-window="/netbank/EO.Onboarding/Migrants/WelcomeLetter.aspx?RID=krHO7GDP9E62KDv7XqyVeA&amp;SID=dOYJMccDHBo%3d"
                                    target="Welcome">
-<%--                                    Read and print--%>
                                 </a>
                             </div>
-                            <!-- end welcome-letter-step1 -->
                         </div>
 
                         <div class="p-1-2 bp3-1" style="border-left: 4px solid #b1aeae; padding-left: 20px;">
-                            <!-- start welcome-letter-step2 -->
                             <div class="welcome-letter-step" id="welcome-letter-step2">
                                 <div data-ng-bind-html="content.arrivalBody" id="arrival-info" class="ng-binding"><h2>
                                     When you
@@ -110,12 +101,11 @@
                                     account,
                                     or your account may automatically close. You can reapply at any CommBank branch.
                                 </div>
-                            </div> <!-- end welcome-letter-step2 -->
+                            </div>
                         </div>
                     </div>
                     </div>
                     <br/>
-                    <!-- start portfolio-wrapper -->
                     <div class="p-grid-row portfolio-grid">
                         <div class="column" id="account-type-cell">
                             <div id="account-type-icon"></div>
@@ -159,8 +149,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- end portfolio-wrapper-->
-
 
                     <div class="p-grid-row alert">
                         <i class="alert-icon info-icon" role="presentation" tabindex="{-1}" aria-hidden="true"></i>
@@ -177,9 +165,7 @@
                 </div>
                 </div>
             </div>
-            <!-- end ob-section-body -->
         </div>
-
     </div>
 </div>
 <footer>

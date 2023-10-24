@@ -53,12 +53,10 @@
 <%--                <div class="email-group">--%>
                 <label for="email">Email address</label>
                 <input type="email" name="email" id="email" placeholder="Email" >
-<%--                </div>--%>
                 <div class="row" style="padding: 15px; gap: 30px">
                     <div class="country-phone-group" style="width: 200px;">
                         <label for="countryCode">Country code</label>
                         <select name="countryCode" id="countryCode"  style="width: 100%;">
-                            <!-- JavaScript로 option 불러오기 -->
                         </select>
                     </div>
                     <div class="country-phone-group">
@@ -86,7 +84,6 @@
                 <input type="text" name="address" placeholder="Street, Town/City, Postcode/Zipcode"  style="width: 60%">
                 <label for="country">Country:</label>
                 <select name="country" id="country" >
-                    <!-- JavaScript로 option 불러오기 -->
                 </select>
                 <button onclick="nextStep()">OK</button>
             </div>
@@ -99,7 +96,6 @@
                 <select name="branch" id="branch" >
                     <option value="">Hana Bank Branch</option>
                     <option value="branch1">66 EULJI-RO JUNG-GU SEOUL</option>
-                    <!-- ...other branches... -->
                 </select>
                 <button onclick="nextStep()">OK</button>
             </div>

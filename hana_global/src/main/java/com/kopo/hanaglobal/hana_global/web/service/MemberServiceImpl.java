@@ -84,10 +84,7 @@ public class MemberServiceImpl implements MemberService {
     public void getSmsCertificationNumber(String phoneNumber, HttpSession session){
         try {
             Random random = new Random();
-            String smsApiKey = "NCSOMB62T3GUKWR3";
-            String smsApiSecret = "BPIN24PCFSFWVZUOFL0QJ6HXZDTZI9EL";
-            Message coolsms = new Message(smsApiKey, smsApiSecret);
-            String myPhone = "01099692958";
+
             // 인증번호 생성
             String numStr = "";
             for (int i = 0; i < 6; i++) {

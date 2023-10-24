@@ -49,8 +49,6 @@ public class AccountController {
 
     @GetMapping("/accountDetail")
     public String AccountDetail(@ModelAttribute("currentMember") Member member, Model model) {
-//        Member member = (Member)session.getAttribute("currentMember");
-//        System.out.println("현재 멤버는 " + member.toString());
         List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
         for (Account account : accountList) {
             System.out.println(account.toString());
@@ -67,10 +65,8 @@ public class AccountController {
             @RequestParam("transactionType") String transactionType,
             @RequestParam("withdrawAccountNo") String withdrawAccountNo) {
 
-        // Get the transaction history
         List<AccountHistoryResponseDTO> accHistoryList = accountService.getTransactionHistoryByAcNo(withdrawAccountNo);
 
-        // Filter the transaction history by inqStrDt, inqEndDt and transactionType
         List<AccountHistoryResponseDTO> filteredList = new ArrayList<>();
         System.out.println(inqStrDt);
         System.out.println(inqEndDt);
@@ -87,8 +83,6 @@ public class AccountController {
                 }
             }
         }
-
-        // Return the filtered transaction history
         return filteredList;
     }
 
@@ -135,11 +129,6 @@ public class AccountController {
         System.out.println("transfer 완료 페이지");
         return "transferComplete";
     }
-
-//    @PostMapping("transferComplete")
-//    public ResponseEntity<Map<String, String>> transferComplete(){
-//
-//    }
 
     @PostMapping("/getReceiverName")
     public ResponseEntity<Map<String, String>> getReceiverName(@RequestParam("accountNo") String acNo) {

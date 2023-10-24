@@ -21,10 +21,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
     private AccountRepository accountRepository;
-//    @Value("${NCSOMB62T3GUKWR3}")
-//    private String smsApiKey;
-//    @Value("${BPIN24PCFSFWVZUOFL0QJ6HXZDTZI9EL}")
-//    private String smsApiSecret;
 
 
     // 생성자 주입
@@ -71,10 +67,6 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.signUp(member);
     }
 
-//    @Override
-//    public void signUp(Member member) {
-//        memberRepository.signUp(member);
-//    }
 
     @Override
     public Member findMemberById(int memberId) {

@@ -67,9 +67,6 @@ public class AdminController {
         for (Map.Entry<String, Integer> entry : countryMemberCounts.entrySet()) {
             System.out.println("Country: " + entry.getKey() + ", Members: " + entry.getValue());
         }
-//        for (Member m : memberList){
-//            System.out.println(m.toString());
-//        }
         List<Account> accountList = accountService.getAccountAll();
         model.addAttribute("accountList", accountList);
         model.addAttribute("memberList", memberList);

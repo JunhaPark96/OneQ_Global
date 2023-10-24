@@ -81,16 +81,8 @@ public class MemberController {
         return ResponseEntity.ok(extractedData);
     }
 
-
-    // Extract the necessary information from the OCR API response
     private Map<String, String> processResponse(String response) {
         Map<String, String> extractedData = new HashMap<>();
-        // TODO: Extract the necessary information from the response and populate the extractedData map
-        // For example:
-        // extractedData.put("name", ...);
-        // extractedData.put("id", ...);
-        // extractedData.put("status", ...);
-        // extractedData.put("issueDate", ...);
         return extractedData;
     }
 
@@ -130,7 +122,6 @@ public class MemberController {
     public String getProfile(@ModelAttribute("currentMember") Member member, Model model) {
         // 임시회원 체크
         if ("N".equals(member.getStatus())) {
-            // 임시회원인 경우 처리 로직 (예: 에러 메시지를 모델에 추가)
             model.addAttribute("error", "Temporary members cannot access wallet information.");
             Account account = accountService.findAccountByUserSeq(member.getUserSeq());
             model.addAttribute("account", account);

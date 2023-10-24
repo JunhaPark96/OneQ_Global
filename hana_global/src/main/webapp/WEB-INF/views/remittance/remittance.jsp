@@ -740,7 +740,7 @@
 
         document.querySelectorAll('.swiper-slide').forEach(function (slide) {
             slide.addEventListener('click', function () {
-                selectCountry(slide.id);  // 이 id는 각 나라의 id와 일치해야 합니다.
+                selectCountry(slide.id);
             });
         });
 

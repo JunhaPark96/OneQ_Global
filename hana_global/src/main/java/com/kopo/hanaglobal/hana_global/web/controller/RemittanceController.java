@@ -60,7 +60,6 @@ public class RemittanceController {
 
         model.addAttribute("defaultCurrencyCode", defaultCurrencyCode);
 
-//        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
         List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
         model.addAttribute("walletList", walletList);
 
@@ -82,25 +81,6 @@ public class RemittanceController {
         return ResponseEntity.ok().body(responseMap);
     }
 
-    //    @PostMapping("/verifyAccount")
-//    public ResponseEntity<Map<String, Object>> verifyAccount(
-//            @RequestParam("account_password") String accountPassword,
-//            @RequestParam("account_no") String accountNo,
-//            @RequestParam("account_balance") String balance) {
-//
-//        Map<String, Object> response = new HashMap<>();
-//        // ... 비밀번호와 계좌 잔액 확인 로직
-//        boolean isPasswordCorrect = ...;  // 비밀번호 확인 로직
-//        boolean isBalanceSufficient = ...;  // 계좌 잔액 확인 로직
-//
-//        if (isPasswordCorrect && isBalanceSufficient) {
-//            response.put("success", true);
-//        } else {
-//            response.put("success", false);
-//            response.put("errorMessage", "The password is incorrect or the account balance is insufficient.");
-//        }
-//        return ResponseEntity.ok().body(response);
-//    }
     @PostMapping("/selectAccountInfo")
     public ResponseEntity<Map<String, String>> selectAccountInfo(
             @ModelAttribute RemittanceDTO remittanceDTO,
@@ -162,7 +142,6 @@ public class RemittanceController {
         // 해외송금 데이터 넣기
         walletService.doRemittance(remittanceDTO);
 
-        // html 요소에 보여줄 데이터
         Map<String, String> responseMap = new HashMap<>();
         responseMap.put("success", "true");
         responseMap.put("currencyCode", remittanceDTO.getCurrencyCode());

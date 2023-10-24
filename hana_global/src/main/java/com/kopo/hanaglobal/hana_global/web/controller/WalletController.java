@@ -166,26 +166,6 @@ public class WalletController {
         return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/removeAutoExchanges")
-//    public ResponseEntity<Map<String, Object>> removeAutoExchanges(
-//            @ModelAttribute("currentMember") Member member, @RequestBody List<Integer> aeSeqs) {
-//        Map<String, Object> response = new HashMap<>();
-//
-//        try {
-//            for (int aeSeq : aeSeqs) {
-//                walletService.removeAutoExchange(aeSeq);
-//            }
-//            response.put("success", true);
-//            response.put("message", "Successfully removed the auto exchanges.");
-//        } catch (Exception e) {
-//            response.put("success", false);
-//            response.put("message", "Failed to remove the auto exchanges.");
-//        }
-//
-//        return ResponseEntity.ok(response);
-//    }
-
-
     @PostMapping("/changeWalletPassword")
     public ResponseEntity<Map<String, String>> changeWalletPassword(
             @ModelAttribute("currentMember") Member member, @RequestParam("walletPw") String walletPw){

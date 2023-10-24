@@ -56,30 +56,7 @@ public class ExchangeController {
 //        }
         return exchangeRateHistList;
     }
-    //    navbar에서 환전 페이지 이동 시
-//    @GetMapping("/doExchange")
-//    public String doExchange(@ModelAttribute("currentMember") Member member, @RequestParam("currency") String currencyCode, Model model) {
-//        List<Account> accountList = accountService.findAccountByMemberId(member.getUserSeq());
-//        model.addAttribute("accountList", accountList);
-//        model.addAttribute("defaultCurrency", currencyCode);
-////        for (Account account : accountList){
-////            System.out.println(account.toString());
-////        }
-//
-////        List<Wallet> walletList = walletService.findWalletByMemberId(member.getUserSeq());
-//        // 원화 통화 가져오기
-//        Wallet walletKRW = walletService.findWalletByUserSeqAndCurrencyCode(member.getUserSeq(), "KRW");
-//        model.addAttribute("walletKRW", walletKRW);
-//        System.out.println(walletKRW.toString());
-//
-//        // 최신 환율 불러오기
-//        List<ExchangeRate> exchangeRateList = exchangeService.getExchangeRate();
-//        model.addAttribute("exchangeList", exchangeRateList);
-////        for (ExchangeRate e : exchangeRateList){
-////            System.out.println(e.toString());
-////        }
-//        return "/wallet/doExchange";
-//    }
+
     @GetMapping("/doExchange")
     public String doExchange(
             @ModelAttribute("currentMember") Member member,

@@ -42,48 +42,6 @@ public class ExchangeServiceImpl implements ExchangeService {
         return exchangeRateHistList;
     }
 
-//    // 3개월간 최저 환율 조회
-//    @Override
-//    public ExchangeRateHistDTO getExchangeRateForLastThreeMonths(CurrencyRequestDTO requestDTO) {
-//        String endDate = LocalDate.now().toString();
-//        String startDate = LocalDate.now().minusMonths(3).toString();
-//        requestDTO.setEndDate(endDate);
-//        requestDTO.setStartDate(startDate);
-//        requestDTO.getEndDate().replace("-", "/");
-//        requestDTO.getStartDate().replace("-", "/");
-//
-//        ExchangeRateHistDTO lowestBaseRate = exchangeRepository.getLowestBaseRateForDates(requestDTO);
-//
-//        return lowestBaseRate;
-//    }
-//    // 1개월간 최저 환율 조회
-//    @Override
-//    public ExchangeRateHistDTO getExchangeRateForLastMonth(CurrencyRequestDTO requestDTO) {
-//        String endDate = LocalDate.now().toString();
-//        String startDate = LocalDate.now().minusMonths(1).toString();
-//        requestDTO.setEndDate(endDate);
-//        requestDTO.setStartDate(startDate);
-//        requestDTO.getEndDate().replace("-", "/");
-//        requestDTO.getStartDate().replace("-", "/");
-//
-//        ExchangeRateHistDTO lowestBaseRate = exchangeRepository.getLowestBaseRateForDates(requestDTO);
-//
-//        return lowestBaseRate;
-//    }
-//    // 1주일간 최저 환율 조회
-//    @Override
-//    public ExchangeRateHistDTO getExchangeRateForLastWeek(CurrencyRequestDTO requestDTO) {
-//        String endDate = LocalDate.now().toString();
-//        String startDate = LocalDate.now().minusWeeks(1).toString();
-//        requestDTO.setEndDate(endDate);
-//        requestDTO.setStartDate(startDate);
-//        requestDTO.getEndDate().replace("-", "/");
-//        requestDTO.getStartDate().replace("-", "/");
-//
-//        ExchangeRateHistDTO lowestBaseRate = exchangeRepository.getLowestBaseRateForDates(requestDTO);
-//
-//        return lowestBaseRate;
-//    }
     // 공통 로직을 별도의 메서드로 추출
     // 특정 기간 환율 정보
     public ExchangeRateHistDTO getExchangeRateForPeriod(CurrencyRequestDTO requestDTO, Period period) {

@@ -348,7 +348,6 @@
         console.log(selectedAccount);
     });
 
-
     // 결제 창 보이기 및 환전금액 계산
     function calculateAndPreviewPayment() {
         // Source에서 입력된 금액 및 통화를 가져옵니다.
@@ -360,7 +359,7 @@
         const previewPayment = document.querySelector('.previewPayment');
         previewPayment.scrollIntoView({behavior: "smooth"});
         previewPayment.classList.add('focusArea');
-        // Target에서의 계산된 금액을 가져옵니다. (금액의 콤마를 제거)
+
         const targetAmount = parseFloat(document.getElementById("ds_to_money").value.replace(/,/g, ""));
 
         // 1% 수수료를 추가하고 10의 단위로 반올림

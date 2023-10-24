@@ -344,19 +344,6 @@ public class WalletServiceImpl implements WalletService {
     }
 
     // 송금기능
-//    @Transactional
-//    public void doRemittance(RemittanceDTO remittanceDTO) {
-//        Wallet wallet = walletRepository.findWalletByWalletNo(remittanceDTO.getWalletSeq());
-//        Account account = accountRepository.getAccountByAcNo(remittanceDTO.getSenderAc());
-//        Integer amount = remittanceDTO.getRemitAmount();
-//        // 월렛 돈 차감
-//        processKrwDeduction(wallet, account, amount, "T");
-//
-//        //해외송금내역 추가
-//        remittanceDTO.setRemitSeq(generateRandomNumber(9));
-//        walletRepository.insertRemittance(remittanceDTO);
-//        // 일일한도 감소
-//    }
     @Transactional
     public void doRemittance(RemittanceDTO remittanceDTO) {
         Wallet wallet = walletRepository.findWalletByWalletNo(remittanceDTO.getWalletSeq());

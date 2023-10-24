@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final LoginInterceptor loginInterceptor;
 
-    public WebMvcConfig(LoginInterceptor loginInterceptor) { // 생성자 주입 방식
+    public WebMvcConfig(LoginInterceptor loginInterceptor) {
         this.loginInterceptor = loginInterceptor;
     }
 
@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");  // query parameter name to switch the locale
+        localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
 
